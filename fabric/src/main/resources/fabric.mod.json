@@ -12,7 +12,7 @@
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
   "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "icon": "assets/missions/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -20,8 +20,8 @@
     ]
   },
   "mixins": [
-    "examplemod.mixins.json",
-    "examplemod-common.mixins.json"
+    "missions.mixins.json",
+    "missions-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",
