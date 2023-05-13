@@ -1,11 +1,11 @@
 package com.kryeit.fabric;
 
-import com.kryeit.ExampleMod;
+import com.kryeit.Main;
 import net.fabricmc.api.ModInitializer;
 
-public class ExampleModFabric implements ModInitializer {
+public class MainFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        ExampleMod.init();
+        Main.init();
     }
 }

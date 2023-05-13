@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kryeit.fabric.ExampleModFabric"
+      "com.kryeit.fabric.MainFabric"
     ]
   },
   "mixins": [
