@@ -18,7 +18,6 @@ public class ClientEntryPoint implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (missionGuiKey.isDown()) {
-                client.player.sendMessage(,client.player.getUUID());
 
             }
         });

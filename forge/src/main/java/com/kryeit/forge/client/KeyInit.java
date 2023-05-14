@@ -12,7 +12,7 @@ public final class KeyInit {
     }
 
     public static void init() {
-        missionGuiKey = registerKey("mission_gui", KeyMapping.CATEGORY_GAMEPLAY, InputConstants.KEY_H);
+        missionGuiKey = registerKey("mission_gui", "key.category.missions", InputConstants.KEY_H);
     }
 
     private static KeyMapping registerKey(String name, String category, int keycode) {
