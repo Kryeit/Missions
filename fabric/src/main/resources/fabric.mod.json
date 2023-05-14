@@ -17,6 +17,9 @@
   "entrypoints": {
     "main": [
       "com.kryeit.fabric.MainFabric"
+    ],
+    "client": [
+      "com.kryeit.fabric.client.ClientEntryPoint"
     ]
   },
   "mixins": [

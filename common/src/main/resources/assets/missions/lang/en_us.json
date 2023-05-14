@@ -1,3 +1,5 @@
 {
-  "item.examplemod.example_item": "Example Item"
+  "item.examplemod.example_item": "Example Item",
+  "key.mission_gui": "Open mission GUI",
+  "key.category.missions": "Missions mod"
 }
