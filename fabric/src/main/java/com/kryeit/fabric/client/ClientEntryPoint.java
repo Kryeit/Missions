@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import org.lwjgl.glfw.GLFW;
 
 
@@ -17,8 +18,8 @@ public class ClientEntryPoint implements ClientModInitializer {
         KeyMapping missionGuiKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.mission_gui",  GLFW.GLFW_KEY_H, "key.category.missions"));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (missionGuiKey.isDown()) {
-
+            if(missionGuiKey.isDown()) {
+                client.player.sendMessage(new TranslatableComponent("test"),client.player.getUUID());
             }
         });
     }
