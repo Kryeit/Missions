@@ -1,14 +1,20 @@
 package com.kryeit.fabric.screen;
 
 
+import com.kryeit.Main;
+import com.kryeit.fabric.screen.button.MissionButton;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 
 import static com.kryeit.fabric.client.ClientEntryPoint.missionGuiKey;
+import static com.kryeit.fabric.screen.button.MissionButton.BUTTON_TEXTURE;
 
 public class TestScreen extends Screen {
     private Button myButton;
@@ -21,14 +27,26 @@ public class TestScreen extends Screen {
     protected void init() {
         super.init();
 
-        int x = (this.width - 200) / 2;
-        int y = (this.height - 20) / 2;
+        int buttonWidth = 200;
+        int buttonHeight = 20;
+        int spacing = 5; // Space between buttons
 
-        this.myButton = this.addWidget(new Button(x, y, 200, 20, new TranslatableComponent("test"), button -> {
-            // Button clicked
-            Minecraft.getInstance().player.sendMessage(new TranslatableComponent("test"), Util.NIL_UUID);
-        }));
+        int leftX = (this.width / 2 - buttonWidth - spacing);
+        int rightX = (this.width / 2 + spacing);
+
+        for(int i = 0; i < 5; i++) {
+            int y = (this.height - (5 * buttonHeight + 4 * spacing)) / 2 + i * (buttonHeight + spacing);
+
+            this.myButton = this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, new TranslatableComponent("test"), button -> {
+                // Button clicked
+            }));
+
+            this.myButton = this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, new TranslatableComponent("test"), button -> {
+                // Button clicked
+            }));
+        }
     }
+
 
     @Override
     public void tick() {
@@ -38,8 +56,8 @@ public class TestScreen extends Screen {
     @Override
     public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
 
+        super.render(matrices, mouseX, mouseY, delta);
         drawCenteredString(matrices, Minecraft.getInstance().font, this.title, this.width / 2, 40, 0xFFFFFF);
     }
 
