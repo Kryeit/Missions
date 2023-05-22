@@ -1,17 +1,19 @@
 package com.kryeit.missions;
 
+import net.minecraft.world.item.ItemStack;
+
 public class ActiveMission {
     private final int requiredAmount;
-    private final String item;
+    private final ItemStack itemStack;
     private boolean isCompleted = true;
 
-    public ActiveMission(int requiredAmount, String item) {
+    public ActiveMission(int requiredAmount, ItemStack itemStack) {
         this.requiredAmount = requiredAmount;
-        this.item = item;
+        this.itemStack = itemStack();
     }
 
-    public String item() {
-        return item;
+    public ItemStack itemStack() {
+        return itemStack;
     }
 
     public int requiredAmount() {

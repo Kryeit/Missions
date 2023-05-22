@@ -37,8 +37,13 @@ public class MissionScreen extends Screen {
         // Get the active missions
         List<ActiveMission> activeMissions = getActiveMissions(Minecraft.getInstance().player.getUUID());
 
-        // Calculate the number of missions for each column
-        int missionsPerColumn = (int) Math.ceil((double) activeMissions.size() / 2);
+        if(activeMissions.size() != 10) {
+            Minecraft.getInstance().player.sendMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"), Minecraft.getInstance().player.getUUID());
+            return;
+        }
+
+        // Number of missions for each column
+        int missionsPerColumn = 5;
 
         for (int i = 0; i < missionsPerColumn; i++) {
             int y = (this.height - (missionsPerColumn * buttonHeight + (missionsPerColumn - 1) * spacing)) / 2 + i * (buttonHeight + spacing);
