@@ -2,5 +2,6 @@
   "item.examplemod.example_item": "Example Item",
   "key.mission_gui": "Open mission GUI",
   "key.category.missions": "Missions",
-  "test": "Mission WIP"
+  "test": "Mission WIP",
+  "key.mission_gui.close": "Close"
 }
