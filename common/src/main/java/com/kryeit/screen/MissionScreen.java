@@ -35,7 +35,7 @@ public class MissionScreen extends Screen {
         int rightX = (this.width / 2 + spacing);
 
         // Get the active missions
-        List<ActiveMission> activeMissions = getActiveMissions((Player) Minecraft.getInstance().player); // You'll need to provide the player instance here
+        List<ActiveMission> activeMissions = getActiveMissions(Minecraft.getInstance().player.getUUID());
 
         // Calculate the number of missions for each column
         int missionsPerColumn = (int) Math.ceil((double) activeMissions.size() / 2);
@@ -90,13 +90,13 @@ public class MissionScreen extends Screen {
 
     public void closeButton() {
         int buttonWidth = 160;
-        int buttonHeight = 45;
-        int bottomPadding = 10;
+        int buttonHeight = 20;
+        int bottomPadding = 20;
         int centerX = this.width / 2 - buttonWidth / 2; // Center of the screen, minus half the button's width
         int centerY = this.height - buttonHeight - bottomPadding; // 10 pixels from the bottom
 
         this.addRenderableWidget(new Button(centerX, centerY, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"), button -> {
-            // Button clicked
+            Minecraft.getInstance().setScreen(null);
         }));
     }
 

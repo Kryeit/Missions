@@ -4,6 +4,7 @@ import com.kryeit.missions.wrappers.Player;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 public class MissionManager {
     public static void checkReward(MissionType type, Player player) {
@@ -20,7 +21,7 @@ public class MissionManager {
         }
     }
 
-    public static List<ActiveMission> getActiveMissions(Player player) {
+    public static List<ActiveMission> getActiveMissions(UUID playerId) {
         return List.of();
     }
 
