@@ -1,6 +1,6 @@
 package com.kryeit.fabric.client;
 
-import com.kryeit.fabric.screen.TestScreen;
+import com.kryeit.screen.MissionScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -18,7 +18,7 @@ public class ClientEntryPoint implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (missionGuiKey.isDown()) {
-                client.setScreen(new TestScreen(new TranslatableComponent("test")));
+                client.setScreen(new MissionScreen());
             }
         });
     }

@@ -1,9 +1,8 @@
-package com.kryeit.fabric.screen;
+package com.kryeit.screen;
 
-
-import com.kryeit.fabric.screen.button.MissionButton;
 import com.kryeit.missions.ActiveMission;
 import com.kryeit.missions.wrappers.Player;
+import com.kryeit.screen.button.MissionButton;
 import com.kryeit.screen.button.RewardsButton;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -16,12 +15,12 @@ import java.util.List;
 
 import static com.kryeit.missions.MissionManager.getActiveMissions;
 
-public class TestScreen extends Screen {
+public class MissionScreen extends Screen {
     private Button myButton;
     private Button rewardButton;
 
-    public TestScreen(TranslatableComponent title) {
-        super(title);
+    public MissionScreen() {
+        super(new TextComponent("Mission GUI"));
     }
 
     @Override
@@ -114,4 +113,3 @@ public class TestScreen extends Screen {
         }));
     }
 }
-

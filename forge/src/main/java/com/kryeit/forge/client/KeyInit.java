@@ -1,7 +1,7 @@
 package com.kryeit.forge.client;
 
 import com.kryeit.Main;
-import com.kryeit.forge.screen.TestScreen;
+import com.kryeit.screen.MissionScreen;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -30,7 +30,7 @@ public final class KeyInit {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.KeyInputEvent event) {
         if (missionGuiKey.isDown()) {
-            Minecraft.getInstance().setScreen(new TestScreen());
+            Minecraft.getInstance().setScreen(new MissionScreen());
         }
     }
 
