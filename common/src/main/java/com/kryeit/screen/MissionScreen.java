@@ -50,20 +50,20 @@ public class MissionScreen extends Screen {
 
             // Use the mission's item as the button's title
             ActiveMission leftColumnMission = activeMissions.get(i);
-            TranslatableComponent leftColumnTitle = new TranslatableComponent(leftColumnMission.item());
+            String leftColumnTitle = leftColumnMission.missionString();
 
             // Left column
-            this.myButton = this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, button -> {
+            this.myButton = this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, new TextComponent(leftColumnTitle), button -> {
                 // Button clicked
             }));
 
             if (i + missionsPerColumn < activeMissions.size()) {
                 // There's a mission for the right column
                 ActiveMission rightColumnMission = activeMissions.get(i + missionsPerColumn);
-                TranslatableComponent rightColumnTitle = new TranslatableComponent(rightColumnMission.item());
+                String rightColumnTitle = rightColumnMission.missionString();
 
                 // Right column
-                this.myButton = this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, button -> {
+                this.myButton = this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, new TextComponent(rightColumnTitle), button -> {
                     // Button clicked
                 }));
             }
