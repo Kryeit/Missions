@@ -30,6 +30,7 @@
     "fabric": "*",
     "fabric-key-binding-api-v1": "*",
     "minecraft": ">=1.18.2",
-    "create": "*"
+    "create": "*",
+    "fabric-networking-api-v1": "*"
   }
 }
