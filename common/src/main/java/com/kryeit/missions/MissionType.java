@@ -1,16 +1,17 @@
 package com.kryeit.missions;
 
-import com.kryeit.missions.wrappers.Player;
-import com.kryeit.missions.wrappers.PlayerData;
+import net.minecraft.nbt.CompoundTag;
+
+import java.util.UUID;
 
 public interface MissionType {
     String id();
 
-    int getProgress(Player player, String item);
+    int getProgress(UUID player, String item);
 
-    void reset(Player player);
+    void reset(UUID player);
 
-    default PlayerData getData(Player player) {
-        return DataStorage.INSTANCE.getData(id(), player);
+    default CompoundTag getData(UUID player) {
+        return DataStorage.INSTANCE.getMissionData(id(), player);
     }
 }

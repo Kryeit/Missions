@@ -1,7 +1,6 @@
 package com.kryeit.screen;
 
 import com.kryeit.missions.ActiveMission;
-import com.kryeit.missions.wrappers.Player;
 import com.kryeit.screen.button.MissionButton;
 import com.kryeit.screen.button.RewardsButton;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -12,8 +11,6 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.List;
-
-import static com.kryeit.missions.MissionManager.getActiveMissions;
 
 public class MissionScreen extends Screen {
     private Button myButton;
@@ -35,9 +32,11 @@ public class MissionScreen extends Screen {
         int rightX = (this.width / 2 + spacing);
 
         // Get the active missions
-        List<ActiveMission> activeMissions = getActiveMissions(Minecraft.getInstance().player.getUUID());
+        // TODO replace this with with the packet data. Active missions are stored serverside. This method does not work on the client.
+//        List<ActiveMission> activeMissions = getActiveMissions(Minecraft.getInstance().player.getUUID());
+        List<ActiveMission> activeMissions = List.of();
 
-        if(activeMissions.size() != 10) {
+        if (activeMissions.size() != 10) {
             Minecraft.getInstance().player.sendMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"), Minecraft.getInstance().player.getUUID());
             return;
         }
