@@ -10,7 +10,7 @@ public class MissionManager {
         if (activeMission == null || activeMission.isCompleted()) return;
 
         if (type.getProgress(player, activeMission.item()) >= activeMission.requiredAmount()) {
-            Config.Mission mission = gibConfig().getMissions().get(type);
+            ConfigReader.Mission mission = gibConfig().getMissions().get(type);
             int rewardAmount = mission.rewardAmount().getRandomValue();
             String item = mission.rewardItem();
 
@@ -33,9 +33,9 @@ public class MissionManager {
         return null;
     }
 
-    public static Config gibConfig() {
+    public static ConfigReader gibConfig() {
         try {
-            return Config.readFile(null);
+            return ConfigReader.readFile(null);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

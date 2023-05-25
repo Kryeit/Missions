@@ -9,14 +9,14 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Config {
+public class ConfigReader {
     private final Map<MissionType, Mission> missions;
 
-    public Config(Map<MissionType, Mission> missions) {
+    public ConfigReader(Map<MissionType, Mission> missions) {
         this.missions = missions;
     }
 
-    public static Config readFile(Path file) throws IOException {
+    public static ConfigReader readFile(Path file) throws IOException {
         Map<MissionType, Mission> missions = new HashMap<>();
         String string = Files.readString(file);
         JSONObject object = new JSONObject(string);
@@ -34,7 +34,7 @@ public class Config {
             );
             missions.put(missionType, mission);
         }
-        return new Config(missions);
+        return new ConfigReader(missions);
     }
 
     private static Map<String, Range> getItems(JSONObject items) {

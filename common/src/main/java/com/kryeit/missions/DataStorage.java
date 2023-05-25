@@ -92,13 +92,13 @@ public class DataStorage {
         }
     }
 
-    public void reassignActiveMissions(Map<MissionType, Config.Mission> missions, UUID player) {
+    public void reassignActiveMissions(Map<MissionType, ConfigReader.Mission> missions, UUID player) {
         ListTag list = getActiveMissionsTag(player);
         list.clear();
 
         for (int i = 0; i < 10; i++) {
             CompoundTag tag = new CompoundTag();
-            Config.Mission randomEntry = Utils.getRandomEntry(missions.values());
+            ConfigReader.Mission randomEntry = Utils.getRandomEntry(missions.values());
             Map.Entry<String, Range> item = Utils.getRandomEntry(randomEntry.items().entrySet());
 
             tag.putString("item", item.getKey());

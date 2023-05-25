@@ -1,4 +1,4 @@
-package com.kryeit.missions;
+package com.kryeit.screen;
 
 import net.minecraft.world.item.ItemStack;
 

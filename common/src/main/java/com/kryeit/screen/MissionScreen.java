@@ -1,6 +1,5 @@
 package com.kryeit.screen;
 
-import com.kryeit.missions.ActiveMission;
 import com.kryeit.screen.button.MissionButton;
 import com.kryeit.screen.button.RewardsButton;
 import com.mojang.blaze3d.vertex.PoseStack;
