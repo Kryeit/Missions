@@ -1,7 +1,7 @@
 package com.kryeit.missions;
 
+import com.kryeit.Utils;
 import com.kryeit.missions.utils.Range;
-import com.kryeit.missions.utils.Utils;
 import net.minecraft.nbt.*;
 
 import java.io.File;
@@ -26,6 +26,12 @@ public class DataStorage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static <T> T getRandomEntry(Collection<T> collection) {
+        int num = (int) (Math.random() * collection.size());
+        for(T t: collection) if (--num < 0) return t;
+        throw new AssertionError();
     }
 
     public void save() {
@@ -98,8 +104,8 @@ public class DataStorage {
 
         for (int i = 0; i < 10; i++) {
             CompoundTag tag = new CompoundTag();
-            ConfigReader.Mission randomEntry = Utils.getRandomEntry(missions.values());
-            Map.Entry<String, Range> item = Utils.getRandomEntry(randomEntry.items().entrySet());
+            ConfigReader.Mission randomEntry = getRandomEntry(missions.values());
+            Map.Entry<String, Range> item = getRandomEntry(randomEntry.items().entrySet());
 
             tag.putString("item", item.getKey());
             tag.putBoolean("completed", false);
@@ -110,13 +116,29 @@ public class DataStorage {
         }
     }
 
+    public int getLastAssignedDay(UUID player) {
+        CompoundTag lastAssigned = data.getCompound("last_assigned");
+        if (!data.contains("last_assigned")) data.put("last_assigned", lastAssigned);
+        return lastAssigned.getInt(player.toString());
+    }
+
+    public void setLastAssignedDay(UUID player) {
+        setLastAssignedDay(player, Utils.getDay());
+    }
+
+    public void setLastAssignedDay(UUID player, int day) {
+        CompoundTag lastAssigned = data.getCompound("last_assigned");
+        if (!data.contains("last_assigned")) data.put("last_assigned", lastAssigned);
+        lastAssigned.putInt(player.toString(), day);
+    }
+
     public void addReward(UUID player, String item, int amount) {
         CompoundTag rewards = data.getCompound("rewards");
         if (!data.contains("rewards")) data.put("rewards", rewards);
 
         CompoundTag playerRewards = rewards.getCompound(player.toString());
         if (!data.contains("rewards")) data.put("rewards", rewards);
-        playerRewards.putInt(item, amount);
+        playerRewards.putInt(item, playerRewards.getInt(item) + amount);
     }
 
     public Map<String, Integer> getUnclaimedRewards(UUID player) {
