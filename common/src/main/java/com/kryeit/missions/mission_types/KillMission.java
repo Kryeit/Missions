@@ -1,5 +1,6 @@
 package com.kryeit.missions.mission_types;
 
+import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
 import net.minecraft.nbt.CompoundTag;
 
@@ -27,5 +28,7 @@ public class KillMission implements MissionType {
     public void handleKill(UUID player, String item) {
         CompoundTag data = getData(player);
         data.putInt(item, data.getInt(item) + 1);
+
+        MissionManager.checkReward(this, player);
     }
 }
