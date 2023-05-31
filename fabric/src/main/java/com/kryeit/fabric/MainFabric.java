@@ -1,7 +1,6 @@
 package com.kryeit.fabric;
 
 import com.kryeit.Main;
-import com.kryeit.fabric.packet.ActiveMissionProviderImpl;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
 

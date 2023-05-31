@@ -3,6 +3,7 @@ package com.kryeit.missions;
 import com.kryeit.Utils;
 import com.kryeit.missions.utils.Range;
 import net.minecraft.nbt.*;
+import net.minecraft.resources.ResourceLocation;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,7 +75,7 @@ public class DataStorage {
         List<ActiveMission> output = new ArrayList<>();
         for (Tag tag : list) {
             CompoundTag compound = (CompoundTag) tag;
-            String item = compound.getString("item");
+            ResourceLocation item = new ResourceLocation(compound.getString("item"));
             boolean isCompleted = compound.getBoolean("completed");
             String missionID = compound.getString("mission_id");
             int requiredAmount = compound.getInt("required_amount");
@@ -83,15 +84,10 @@ public class DataStorage {
         return output;
     }
 
-    public void completeMission(UUID player, String item, String missionTypeID, String rewardItem, int rewardAmount) {
-        ListTag list = getActiveMissionsTag(player);
-        for (Tag tag : list) {
+    public void completeMission(UUID player, ResourceLocation item, String missionTypeID) {
+        for (Tag tag : getActiveMissionsTag(player)) {
             CompoundTag compound = (CompoundTag) tag;
-            if (compound.getString("item").equals(item) && compound.getString("mission_id").equals(missionTypeID)) {
-                if (!compound.getBoolean("completed")) {
-                    addReward(player, rewardItem, rewardAmount);
-                }
-
+            if (new ResourceLocation(compound.getString("item")).equals(item) && compound.getString("mission_id").equals(missionTypeID)) {
                 compound.putBoolean("completed", true);
                 break;
             }
@@ -137,7 +133,7 @@ public class DataStorage {
         if (!data.contains("rewards")) data.put("rewards", rewards);
 
         CompoundTag playerRewards = rewards.getCompound(player.toString());
-        if (!data.contains("rewards")) data.put("rewards", rewards);
+        if (!rewards.contains(player.toString())) rewards.put(player.toString(), playerRewards);
         playerRewards.putInt(item, playerRewards.getInt(item) + amount);
     }
 
@@ -148,7 +144,7 @@ public class DataStorage {
         Map<String, Integer> output = new HashMap<>();
         CompoundTag playerRewards = rewards.getCompound(player.toString());
         for (String key : playerRewards.getAllKeys()) {
-            output.put(key, rewards.getInt(key));
+            output.put(key, playerRewards.getInt(key));
         }
         return output;
     }
@@ -163,12 +159,12 @@ public class DataStorage {
     }
 
     public static class ActiveMission {
-        private final String item;
+        private final ResourceLocation item;
         private final boolean isCompleted;
         private final String missionID;
         private final int requiredAmount;
 
-        private ActiveMission(String item, boolean isCompleted, String missionID, int requiredAmount) {
+        private ActiveMission(ResourceLocation item, boolean isCompleted, String missionID, int requiredAmount) {
             this.item = item;
             this.isCompleted = isCompleted;
             this.missionID = missionID;
@@ -187,7 +183,7 @@ public class DataStorage {
             return isCompleted;
         }
 
-        public String item() {
+        public ResourceLocation item() {
             return item;
         }
     }

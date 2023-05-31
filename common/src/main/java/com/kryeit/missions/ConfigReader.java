@@ -12,11 +12,15 @@ import java.util.Map;
 public class ConfigReader {
     private final Map<MissionType, Mission> missions;
 
-    public ConfigReader(Map<MissionType, Mission> missions) {
+    private ConfigReader(Map<MissionType, Mission> missions) {
         this.missions = missions;
     }
 
     public static ConfigReader readFile(Path file) throws IOException {
+        if (!file.toFile().exists()) {
+            file.toFile().createNewFile();
+        }
+
         Map<MissionType, Mission> missions = new HashMap<>();
         String string = Files.readString(file);
         JSONObject object = new JSONObject(string);
@@ -30,7 +34,7 @@ public class ConfigReader {
                     Range.fromString(reward.getString("amount")),
                     reward.getString("item"),
                     missionType,
-                    getItems(value.getJSONObject("com/kryeit/missions"))
+                    getItems(value.getJSONObject("missions"))
             );
             missions.put(missionType, mission);
         }

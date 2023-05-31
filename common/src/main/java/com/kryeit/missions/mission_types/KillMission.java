@@ -3,6 +3,7 @@ package com.kryeit.missions.mission_types;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.UUID;
 
@@ -13,8 +14,8 @@ public class KillMission implements MissionType {
     }
 
     @Override
-    public int getProgress(UUID player, String item) {
-        return getData(player).getInt(item);
+    public int getProgress(UUID player, ResourceLocation item) {
+        return getData(player).getInt(item.toString());
     }
 
     @Override
@@ -25,10 +26,13 @@ public class KillMission implements MissionType {
         }
     }
 
-    public void handleKill(UUID player, String item) {
-        CompoundTag data = getData(player);
-        data.putInt(item, data.getInt(item) + 1);
+    public void handleKill(UUID player, ResourceLocation item) {
+        if (MissionManager.countItem(id(), player, item)) {
+            CompoundTag data = getData(player);
+            String itemString = item.toString();
+            data.putInt(itemString, data.getInt(itemString) + 1);
 
-        MissionManager.checkReward(this, player);
+            MissionManager.checkReward(this, player, item);
+        }
     }
 }

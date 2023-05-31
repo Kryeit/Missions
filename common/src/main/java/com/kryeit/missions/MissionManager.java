@@ -1,5 +1,6 @@
 package com.kryeit.missions;
 
+import com.kryeit.Main;
 import com.kryeit.Utils;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -9,23 +10,23 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public class MissionManager {
-    public static void checkReward(MissionType type, UUID player) {
-        DataStorage.ActiveMission activeMission = getActiveMission(type.id(), player);
-        if (activeMission == null || activeMission.isCompleted()) return;
+    public static void checkReward(MissionType type, UUID player, ResourceLocation item) {
+        DataStorage.ActiveMission activeMission = getActiveMission(type.id(), item, player);
+        if (activeMission == null) return; // TODO maybe throw an exception
 
         if (type.getProgress(player, activeMission.item()) >= activeMission.requiredAmount()) {
-            ConfigReader.Mission mission = gibConfig().getMissions().get(type);
+            ConfigReader.Mission mission = Main.getConfig().getMissions().get(type);
             int rewardAmount = mission.rewardAmount().getRandomValue();
-            String item = mission.rewardItem();
+            String rewardItem = mission.rewardItem();
 
             type.reset(player);
-            DataStorage.INSTANCE.addReward(player, item, rewardAmount);
+            DataStorage.INSTANCE.addReward(player, rewardItem, rewardAmount);
+            DataStorage.INSTANCE.completeMission(player, item, type.id());
         }
     }
 
@@ -44,7 +45,7 @@ public class MissionManager {
         int lastSunday = Utils.getDay() - Utils.getDayOfWeek();
         int assignedDay = DataStorage.INSTANCE.getLastAssignedDay(player);
         if (assignedDay < lastSunday) {
-            DataStorage.INSTANCE.reassignActiveMissions(gibConfig().getMissions(), player);
+            DataStorage.INSTANCE.reassignActiveMissions(Main.getConfig().getMissions(), player);
             DataStorage.INSTANCE.setLastAssignedDay(player);
             return true;
         }
@@ -83,21 +84,18 @@ public class MissionManager {
         return DataStorage.INSTANCE.getActiveMissions(playerId);
     }
 
-    public static DataStorage.ActiveMission getActiveMission(String id, UUID player) {
+    public static boolean countItem(String missionTypeID, UUID player, ResourceLocation item) {
+        DataStorage.ActiveMission activeMission = getActiveMission(missionTypeID, item, player);
+        return activeMission != null && !activeMission.isCompleted();
+    }
+
+    public static DataStorage.ActiveMission getActiveMission(String id, ResourceLocation item, UUID player) {
         List<DataStorage.ActiveMission> missions = DataStorage.INSTANCE.getActiveMissions(player);
         for (DataStorage.ActiveMission mission : missions) {
-            if (mission.missionID().equals(id)) {
+            if (mission.missionID().equals(id) && mission.item().equals(item)) {
                 return mission;
             }
         }
         return null;
-    }
-
-    public static ConfigReader gibConfig() {
-        try {
-            return ConfigReader.readFile(null);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
