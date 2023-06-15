@@ -1,4 +1,4 @@
-package com.kryeit.screen.button;
+package com.kryeit.client.screen.button;
 
 import com.kryeit.Main;
 import com.mojang.blaze3d.systems.RenderSystem;

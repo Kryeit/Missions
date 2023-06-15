@@ -1,11 +1,14 @@
-package com.kryeit.screen;
+package com.kryeit.client.screen;
 
-import com.kryeit.screen.button.MissionButton;
-import com.kryeit.screen.button.RewardsButton;
+import com.kryeit.client.ClientsideActiveMission;
+import com.kryeit.client.ClientsideMissionPacketUtils;
+import com.kryeit.client.screen.button.MissionButton;
+import com.kryeit.client.screen.button.RewardsButton;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 
@@ -30,10 +33,7 @@ public class MissionScreen extends Screen {
         int leftX = (this.width / 2 - buttonWidth - spacing);
         int rightX = (this.width / 2 + spacing);
 
-        // Get the active missions
-        // TODO replace this with with the packet data. Active missions are stored serverside. This method does not work on the client.
-//        List<ActiveMission> activeMissions = getActiveMissions(Minecraft.getInstance().player.getUUID());
-        List<ActiveMission> activeMissions = List.of();
+        List<ClientsideActiveMission> activeMissions = ClientsideMissionPacketUtils.getMissions();
 
         if (activeMissions.size() != 10) {
             Minecraft.getInstance().player.sendMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"), Minecraft.getInstance().player.getUUID());
@@ -47,21 +47,21 @@ public class MissionScreen extends Screen {
             int y = (this.height - (missionsPerColumn * buttonHeight + (missionsPerColumn - 1) * spacing)) / 2 + i * (buttonHeight + spacing);
 
             // Use the mission's item as the button's title
-            ActiveMission leftColumnMission = activeMissions.get(i);
-            String leftColumnTitle = leftColumnMission.missionString();
+            ClientsideActiveMission leftColumnMission = activeMissions.get(i);
+            Component leftColumnTitle = leftColumnMission.missionString();
 
             // Left column
-            this.myButton = this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, new TextComponent(leftColumnTitle), button -> {
+            this.myButton = this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, button -> {
                 // Button clicked
             }));
 
             if (i + missionsPerColumn < activeMissions.size()) {
                 // There's a mission for the right column
-                ActiveMission rightColumnMission = activeMissions.get(i + missionsPerColumn);
-                String rightColumnTitle = rightColumnMission.missionString();
+                ClientsideActiveMission rightColumnMission = activeMissions.get(i + missionsPerColumn);
+                Component rightColumnTitle = rightColumnMission.missionString();
 
                 // Right column
-                this.myButton = this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, new TextComponent(rightColumnTitle), button -> {
+                this.myButton = this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, button -> {
                     // Button clicked
                 }));
             }

@@ -1,9 +1,14 @@
 package com.kryeit.missions;
 
 import com.kryeit.Utils;
+import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.missions.utils.Range;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +36,7 @@ public class DataStorage {
 
     public static <T> T getRandomEntry(Collection<T> collection) {
         int num = (int) (Math.random() * collection.size());
-        for(T t: collection) if (--num < 0) return t;
+        for (T t : collection) if (--num < 0) return t;
         throw new AssertionError();
     }
 
@@ -84,11 +89,11 @@ public class DataStorage {
         return output;
     }
 
-    public void completeMission(UUID player, ResourceLocation item, String missionTypeID) {
+    public void setCompleted(UUID player, ResourceLocation item, String missionTypeID, boolean completed) {
         for (Tag tag : getActiveMissionsTag(player)) {
             CompoundTag compound = (CompoundTag) tag;
             if (new ResourceLocation(compound.getString("item")).equals(item) && compound.getString("mission_id").equals(missionTypeID)) {
-                compound.putBoolean("completed", true);
+                compound.putBoolean("completed", completed);
                 break;
             }
         }
@@ -151,6 +156,7 @@ public class DataStorage {
 
     /**
      * Claims the player's rewards. Does NOT move the rewards into the player's inventory!
+     *
      * @param player The player whose rewards to claim
      */
     public void claimRewards(UUID player) {
@@ -185,6 +191,16 @@ public class DataStorage {
 
         public ResourceLocation item() {
             return item;
+        }
+
+        public ClientsideActiveMission toClientMission(String language, UUID player) {
+            MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
+            ItemStack itemStack = Utils.getItem(item());
+            return new ClientsideActiveMission(requiredAmount(),
+                    itemStack,
+                    type.taskString(language, type.getProgress(player, item()), itemStack.getDisplayName()),
+                    isCompleted()
+            );
         }
     }
 }

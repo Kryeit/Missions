@@ -1,7 +1,7 @@
 package com.kryeit.forge.client;
 
 import com.kryeit.Main;
-import com.kryeit.screen.MissionScreen;
+import com.kryeit.client.screen.MissionScreen;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;

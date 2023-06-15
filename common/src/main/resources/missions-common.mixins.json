@@ -4,9 +4,9 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
-    "MixinTitleScreen"
   ],
   "mixins": [
+    "MixinCustomPayloadPlugin",
   ],
   "injectors": {
     "defaultRequire": 1

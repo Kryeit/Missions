@@ -2,14 +2,20 @@ package com.kryeit.missions;
 
 import com.kryeit.Main;
 import com.kryeit.Utils;
+import com.kryeit.client.ClientsideActiveMission;
+import com.kryeit.client.ClientsideMissionPacketUtils;
 import net.minecraft.core.Registry;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -17,7 +23,7 @@ import java.util.UUID;
 public class MissionManager {
     public static void checkReward(MissionType type, UUID player, ResourceLocation item) {
         DataStorage.ActiveMission activeMission = getActiveMission(type.id(), item, player);
-        if (activeMission == null) return; // TODO maybe throw an exception
+        if (activeMission == null) return; // TODO maybe throw an exceptio
 
         if (type.getProgress(player, activeMission.item()) >= activeMission.requiredAmount()) {
             ConfigReader.Mission mission = Main.getConfig().getMissions().get(type);
@@ -26,7 +32,7 @@ public class MissionManager {
 
             type.reset(player);
             DataStorage.INSTANCE.addReward(player, rewardItem, rewardAmount);
-            DataStorage.INSTANCE.completeMission(player, item, type.id());
+            DataStorage.INSTANCE.setCompleted(player, item, type.id(), true);
         }
     }
 
@@ -34,7 +40,7 @@ public class MissionManager {
         UUID uuid = player.getUUID();
         Map<String, Integer> rewards = DataStorage.INSTANCE.getUnclaimedRewards(uuid);
         for (Map.Entry<String, Integer> entry : rewards.entrySet()) {
-            ItemStack itemStack = Registry.ITEM.get(new ResourceLocation(entry.getKey())).getDefaultInstance();
+            ItemStack itemStack = Utils.getItem(new ResourceLocation(entry.getKey()));
             itemStack.setCount(entry.getValue());
             giveItem(itemStack, player);
         }
@@ -97,5 +103,18 @@ public class MissionManager {
             }
         }
         return null;
+    }
+
+    public static void updateMissions(ServerPlayer player) {
+        List<ClientsideActiveMission> clientMissions = new ArrayList<>();
+        for (DataStorage.ActiveMission mission : getActiveMissions(player.getUUID())) {
+            clientMissions.add(mission.toClientMission("", player.getUUID()));
+        }
+
+        ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(
+                ClientsideMissionPacketUtils.IDENTIFIER,
+                ClientsideMissionPacketUtils.serialize(clientMissions)
+        );
+        player.connection.send(packet);
     }
 }

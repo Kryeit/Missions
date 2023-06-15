@@ -1,11 +1,10 @@
 package com.kryeit.fabric.client;
 
-import com.kryeit.screen.MissionScreen;
+import com.kryeit.client.screen.MissionScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.network.chat.TranslatableComponent;
 import org.lwjgl.glfw.GLFW;
 
 
