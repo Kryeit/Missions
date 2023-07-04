@@ -1,0 +1,12 @@
+{
+  "type": "missions:exchange_atm",
+  "ingredients": [
+    {
+      "item": "createdeco:gold_coin"
+    }
+  ],
+  "output": {
+    "item": "createdeco:copper_coin",
+    "amount": "64"
+  }
+}

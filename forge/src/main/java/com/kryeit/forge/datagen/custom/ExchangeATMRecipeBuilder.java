@@ -98,7 +98,7 @@ public class ExchangeATMRecipeBuilder implements RecipeBuilder {
         @Override
         public ResourceLocation getId() {
             return new ResourceLocation(Main.MOD_ID,
-                    ForgeRegistries.ITEMS.getKey(this.result).getPath() + "_from_gem_cutting");
+                    ForgeRegistries.ITEMS.getKey(this.result).getPath() + "_from_exchange_atm");
         }
 
         @Override

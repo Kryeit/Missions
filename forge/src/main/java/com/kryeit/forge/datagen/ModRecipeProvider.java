@@ -17,8 +17,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
-        new ExchangeATMRecipeBuilder(Coins.goldCoin(), Coins.copperCoin(), 64);
+        new ExchangeATMRecipeBuilder(Coins.goldCoin(), Coins.copperCoin(), 64)
+                .save(pFinishedRecipeConsumer);
 
-        new ExchangeATMRecipeBuilder(Coins.copperCoin(), Coins.ironCoin(), 64);
+        new ExchangeATMRecipeBuilder(Coins.copperCoin(), Coins.ironCoin(), 64)
+                .save(pFinishedRecipeConsumer);
     }
 }

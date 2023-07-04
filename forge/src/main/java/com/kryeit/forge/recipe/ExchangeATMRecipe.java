@@ -72,13 +72,13 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
     public static class Type implements RecipeType<ExchangeATMRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "gem_cutting";
+        public static final String ID = "exchange_atm";
     }
 
     public static class Serializer implements RecipeSerializer<ExchangeATMRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(Main.MOD_ID,"gem_cutting");
+                new ResourceLocation(Main.MOD_ID,"exchange_atm");
 
         @Override
         public ExchangeATMRecipe fromJson(ResourceLocation id, JsonObject json) {
