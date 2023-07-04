@@ -29,12 +29,13 @@ public class MainForge {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         eventBus.register(new MissionHandler());
-        eventBus.addListener((Consumer<PlayerEvent.PlayerLoggedInEvent>) event -> {
-            boolean reassigned = MissionManager.reassignMissionsIfNecessary(event.getPlayer().getUUID());
-            if (reassigned) {
-                // send a message, I don't know?
-            }
-        });
+        //TODO: THIS DOESNT WORK, THE LISTENER IS WRONG ARGUMENT OR SOMETHING
+        //eventBus.addListener((Consumer<PlayerEvent.PlayerLoggedInEvent>) event -> {
+        //    boolean reassigned = MissionManager.reassignMissionsIfNecessary(event.getPlayer().getUUID());
+        //    if (reassigned) {
+        //        // send a message, I don't know?
+        //    }
+        //});
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
