@@ -1,7 +1,7 @@
 package com.kryeit.missions;
 
 import com.kryeit.missions.utils.Range;
-import org.json.JSONObject;
+import com.kryeit.JSONObject;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,15 +26,15 @@ public class ConfigReader {
         JSONObject object = new JSONObject(string);
 
         for (String key : object.keySet()) {
-            JSONObject value = object.getJSONObject(key);
-            JSONObject reward = value.getJSONObject("reward");
+            JSONObject value = object.getObject(key);
+            JSONObject reward = value.getObject("reward");
 
             MissionType missionType = MissionTypeRegistry.INSTANCE.getType(key);
             Mission mission = new Mission(
                     Range.fromString(reward.getString("amount")),
                     reward.getString("item"),
                     missionType,
-                    getItems(value.getJSONObject("missions"))
+                    getItems(value.getObject("missions"))
             );
             missions.put(missionType, mission);
         }
