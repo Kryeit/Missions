@@ -22,10 +22,12 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new VoteMission());
 
         System.out.println(ExampleExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
-        try {
-            configReader = ConfigReader.readFile(Path.of("missions/config.json"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (!PlatformSpecific.isClient()) {
+            try {
+                configReader = ConfigReader.readFile(Path.of("missions/config.json"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         Runtime.getRuntime().addShutdownHook(new Thread(DataStorage.INSTANCE::save));
     }
