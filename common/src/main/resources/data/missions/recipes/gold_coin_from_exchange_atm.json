@@ -1,5 +1,5 @@
 {
-  "type": "missions:exchange_atm",
+  "type": "missions:exchange",
   "ingredients": [
     {
       "item": "createdeco:gold_coin"
@@ -7,6 +7,6 @@
   ],
   "output": {
     "item": "createdeco:copper_coin",
-    "amount": "64"
+    "count": 64
   }
 }

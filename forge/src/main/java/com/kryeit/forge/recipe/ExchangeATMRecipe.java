@@ -27,10 +27,6 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        if(pLevel.isClientSide()) {
-            return false;
-        }
-
         return recipeItems.get(0).test(pContainer.getItem(1));
     }
 
@@ -72,13 +68,14 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
     public static class Type implements RecipeType<ExchangeATMRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "exchange_atm";
+        public static final String ID = "exchange";
     }
 
     public static class Serializer implements RecipeSerializer<ExchangeATMRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID =
-                new ResourceLocation(Main.MOD_ID,"exchange_atm");
+        public static final ResourceLocation ID = new ResourceLocation(Main.MOD_ID,"exchange");
+        private ResourceLocation registryName;
+
 
         @Override
         public ExchangeATMRecipe fromJson(ResourceLocation id, JsonObject json) {
@@ -115,25 +112,26 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
             buf.writeItemStack(recipe.getResultItem(), false);
         }
 
-        @SuppressWarnings("unchecked") // Need this wrapper, because generics
-        private static <G> Class<G> castClass(Class<?> cls) {
-            return (Class<G>)cls;
-        }
-
         @Override
-        public RecipeSerializer<?> setRegistryName(ResourceLocation arg) {
-            return null;
+        public Serializer setRegistryName(ResourceLocation name) {
+            this.registryName = name;
+            return this;
         }
 
         @Nullable
         @Override
         public ResourceLocation getRegistryName() {
-            return null;
+            return this.registryName;
         }
 
         @Override
         public Class<RecipeSerializer<?>> getRegistryType() {
-            return null;
+            return Serializer.castClass(RecipeSerializer.class);
+        }
+
+        @SuppressWarnings("unchecked") // Need this wrapper, because generics
+        private static <G> Class<G> castClass(Class<?> cls) {
+            return (Class<G>)cls;
         }
     }
 }

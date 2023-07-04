@@ -16,7 +16,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -87,7 +86,7 @@ public class ExchangeATMRecipeBuilder implements RecipeBuilder {
 
             pJson.add("ingredients", jsonarray);
             JsonObject jsonobject = new JsonObject();
-            jsonobject.addProperty("item", ForgeRegistries.ITEMS.getKey(this.result).toString());
+            jsonobject.addProperty("item", this.result.getRegistryName().toString());
             if (this.count > 1) {
                 jsonobject.addProperty("count", this.count);
             }
@@ -97,8 +96,9 @@ public class ExchangeATMRecipeBuilder implements RecipeBuilder {
 
         @Override
         public ResourceLocation getId() {
+            Main.LOGGER.info("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+this.result.getRegistryName().getPath() + "_from_exchange_atm");
             return new ResourceLocation(Main.MOD_ID,
-                    ForgeRegistries.ITEMS.getKey(this.result).getPath() + "_from_exchange_atm");
+                    this.result.getRegistryName().getPath() + "_from_exchange_atm");
         }
 
         @Override
