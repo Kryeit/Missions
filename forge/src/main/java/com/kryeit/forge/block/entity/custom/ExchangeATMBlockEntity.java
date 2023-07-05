@@ -21,6 +21,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -54,8 +55,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     private int progress = 0;
     private int maxProgress = 64;
 
-    public ExchangeATMBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntities.EXCHANGE_ATM_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
+    public ExchangeATMBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pWorldPosition, BlockState pBlockState) {
+        super(blockEntityType, pWorldPosition, pBlockState);
 
         this.data = new ContainerData() {
             public int get(int index) {

@@ -113,7 +113,7 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ExchangeATMBlockEntity(pPos, pState);
+        return new ExchangeATMBlockEntity(ModBlockEntities.EXCHANGE_ATM_BLOCK_ENTITY.get(), pPos, pState);
     }
     @Nullable
     @Override

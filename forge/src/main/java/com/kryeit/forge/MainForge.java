@@ -7,6 +7,8 @@ import com.kryeit.forge.client.KeyInit;
 import com.kryeit.forge.item.ModItems;
 import com.kryeit.forge.recipe.ModRecipes;
 import com.kryeit.forge.screen.ModMenuTypes;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.Registrate;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -14,6 +16,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(Main.MOD_ID)
 public class MainForge {
+
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(Main.MOD_ID);
+
 
     public MainForge() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();

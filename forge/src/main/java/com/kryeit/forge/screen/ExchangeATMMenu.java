@@ -106,7 +106,7 @@ public class ExchangeATMMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.EXCHANGE_ATM.get());
+                pPlayer, ModBlocks.EXCHANGE_ATM_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
