@@ -23,11 +23,12 @@ public class MainForge {
     public MainForge() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModBlockEntities.register(eventBus);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
-        ModBlockEntities.register(eventBus);
         ModRecipes.register(eventBus);
         ModMenuTypes.register(eventBus);
+
         Main.init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
