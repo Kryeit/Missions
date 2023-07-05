@@ -11,7 +11,8 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
@@ -19,7 +20,7 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> recipeItems;
 
     public ExchangeATMRecipe(ResourceLocation id, ItemStack output,
-                             NonNullList<Ingredient> recipeItems) {
+                                   NonNullList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -27,7 +28,7 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        return recipeItems.get(0).test(pContainer.getItem(1));
+        return recipeItems.get(0).test(pContainer.getItem(0));
     }
 
     @Override
@@ -73,9 +74,8 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
 
     public static class Serializer implements RecipeSerializer<ExchangeATMRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = new ResourceLocation(Main.MOD_ID,"exchange");
-        private ResourceLocation registryName;
-
+        public static final ResourceLocation ID =
+                new ResourceLocation(Main.MOD_ID,"exchange");
 
         @Override
         public ExchangeATMRecipe fromJson(ResourceLocation id, JsonObject json) {
@@ -113,15 +113,14 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
         }
 
         @Override
-        public Serializer setRegistryName(ResourceLocation name) {
-            this.registryName = name;
-            return this;
+        public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
+            return INSTANCE;
         }
 
         @Nullable
         @Override
         public ResourceLocation getRegistryName() {
-            return this.registryName;
+            return ID;
         }
 
         @Override

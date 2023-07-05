@@ -44,7 +44,7 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 72;
+    private int maxProgress = 64;
 
     public ExchangeATMBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.EXCHANGE_ATM_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
@@ -85,11 +85,25 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @javax.annotation.Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return lazyItemHandler.cast();
+            if (side == Direction.DOWN) {
+                return LazyOptional.of(() -> new ItemStackHandler() {
+                    @Override
+                    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+                        if (slot == 0) {
+                            return ItemStack.EMPTY; // Prevent extraction from slot 0
+                        }
+                        // Delegate the extraction to the parent handler for all other slots
+                        return super.extractItem(slot, amount, simulate);
+                    }
+                }).cast();
+            } else {
+                return lazyItemHandler.cast();
+            }
         }
 
         return super.getCapability(cap, side);
     }
+
 
     @Override
     public void onLoad() {
@@ -150,12 +164,7 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
                 .getRecipeFor(ExchangeATMRecipe.Type.INSTANCE, inventory, level);
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())
-                && hasWaterInWaterSlot(entity);
-    }
-
-    private static boolean hasWaterInWaterSlot(ExchangeATMBlockEntity entity) {
-        return PotionUtils.getPotion(entity.itemHandler.getStackInSlot(0)) == Potions.WATER;
+                && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
     }
 
     private static void craftItem(ExchangeATMBlockEntity entity) {
