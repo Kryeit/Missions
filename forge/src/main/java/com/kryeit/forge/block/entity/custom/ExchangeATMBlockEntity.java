@@ -3,6 +3,7 @@ package com.kryeit.forge.block.entity.custom;
 import com.kryeit.forge.block.entity.ModBlockEntities;
 import com.kryeit.forge.recipe.ExchangeATMRecipe;
 import com.kryeit.forge.screen.ExchangeATMMenu;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -32,13 +34,19 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider {
+public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
         }
     };
+
+    protected Mode mode;
+
+    enum Mode {
+        SMALL_EXCHANGE, BIG_EXCHANGE
+    }
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
@@ -48,6 +56,7 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
 
     public ExchangeATMBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.EXCHANGE_ATM_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
+
         this.data = new ContainerData() {
             public int get(int index) {
                 switch (index) {
@@ -85,20 +94,7 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @javax.annotation.Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            if (side == Direction.DOWN) {
-                return LazyOptional.of(() -> new ItemStackHandler() {
-                    @Override
-                    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                        if (slot == 0) {
-                            return ItemStack.EMPTY; // Prevent extraction from slot 0
-                        }
-                        // Delegate the extraction to the parent handler for all other slots
-                        return super.extractItem(slot, amount, simulate);
-                    }
-                }).cast();
-            } else {
-                return lazyItemHandler.cast();
-            }
+            return lazyItemHandler.cast();
         }
 
         return super.getCapability(cap, side);
@@ -118,18 +114,23 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        tag.put("inventory", itemHandler.serializeNBT());
-        tag.putInt("exchange_atm.progress", progress);
-        super.saveAdditional(tag);
+    public void write(CompoundTag tag, boolean clientPacket) {
+        if (!clientPacket) {
+            tag.put("inventory", itemHandler.serializeNBT());
+            tag.putInt("exchange_atm.progress", progress);
+        }
+        super.write(tag, clientPacket);
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-        progress = nbt.getInt("exchange_atm.progress");
+    public void read(CompoundTag tag, boolean clientPacket) {
+        if (!clientPacket) {
+            itemHandler.deserializeNBT(tag.getCompound("inventory"));
+            progress = tag.getInt("exchange_atm.progress");
+        }
+        super.read(tag, clientPacket);
     }
+
 
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
@@ -140,7 +141,7 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ExchangeATMBlockEntity pBlockEntity) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState, ExchangeATMBlockEntity pBlockEntity) {
         if(hasRecipe(pBlockEntity)) {
             pBlockEntity.progress++;
             setChanged(pLevel, pPos, pState);

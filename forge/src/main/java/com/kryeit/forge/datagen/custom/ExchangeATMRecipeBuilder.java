@@ -96,7 +96,6 @@ public class ExchangeATMRecipeBuilder implements RecipeBuilder {
 
         @Override
         public ResourceLocation getId() {
-            Main.LOGGER.info("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+this.result.getRegistryName().getPath() + "_from_exchange_atm");
             return new ResourceLocation(Main.MOD_ID,
                     this.result.getRegistryName().getPath() + "_from_exchange_atm");
         }

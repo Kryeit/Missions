@@ -2,10 +2,10 @@
   "type": "missions:exchange",
   "ingredients": [
     {
-      "item": "createdeco:gold_coin"
+      "item": "createdeco:copper_coin"
     }
   ],
   "output": {
-    "item": "createdeco:copper_coin"
+    "item": "createdeco:iron_coin"
   }
 }
