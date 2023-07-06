@@ -3,6 +3,7 @@ package com.kryeit.forge.block.entity.custom;
 import com.kryeit.forge.block.entity.ModBlockEntities;
 import com.kryeit.forge.recipe.ExchangeATMRecipe;
 import com.kryeit.forge.screen.ExchangeATMMenu;
+import com.kryeit.forge.screen.ModMenuTypes;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -88,7 +89,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return new ExchangeATMMenu(pContainerId, pInventory, this, this.data);
+        return new ExchangeATMMenu(ModMenuTypes.EXCHANGE_ATM_MENU.get(), pContainerId, pInventory, this, this.data);
     }
 
     @Nonnull

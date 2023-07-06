@@ -17,18 +17,12 @@ import static com.kryeit.forge.MainForge.REGISTRATE;
 
 
 public class ModBlockEntities {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Main.MOD_ID);
-
-
-
     public static final BlockEntityEntry<ExchangeATMBlockEntity> EXCHANGE_ATM_BLOCK_ENTITY = REGISTRATE.blockEntity("exchange_atm", ExchangeATMBlockEntity::new)
             .instance(() -> ExchangeATMInstance::new, false)
             .validBlocks(ModBlocks.EXCHANGE_ATM_BLOCK)
             .renderer(() -> ExchangeATMRenderer::new)
             .register();
 
-    public static void register(IEventBus eventBus) {
-        BLOCK_ENTITIES.register(eventBus);
-    }
+    public static void register() {}
+
 }
