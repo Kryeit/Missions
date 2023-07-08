@@ -1,7 +1,8 @@
 package com.kryeit.forge.screen;
 
-import com.kryeit.forge.block.ModBlocks;
+import com.kryeit.forge.init.ModBlocks;
 import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
+import com.kryeit.forge.init.ModMenuTypes;
 import com.kryeit.forge.screen.slot.ModResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ExchangeATMMenu extends AbstractContainerMenu {
+public class    ExchangeATMMenu extends AbstractContainerMenu {
     private final ExchangeATMBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
@@ -37,6 +38,10 @@ public class ExchangeATMMenu extends AbstractContainerMenu {
         });
 
         addDataSlots(data);
+    }
+
+    public static ExchangeATMMenu create(int id, Inventory inv, ExchangeATMBlockEntity be, ContainerData data) {
+        return new ExchangeATMMenu(ModMenuTypes.EXCHANGE_ATM_MENU.get(), id, inv, be, data);
     }
 
     public boolean isCrafting() {

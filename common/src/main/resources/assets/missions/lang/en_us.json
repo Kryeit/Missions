@@ -3,5 +3,6 @@
   "key.category.missions": "Missions",
   "test": "Mission WIP",
   "key.mission_gui.close": "Close",
-  "block.missions.exchange_atm": "Exchange ATM"
+  "block.missions.exchange_atm": "Exchange ATM",
+  "itemGroup.missions.base": "Missions"
 }

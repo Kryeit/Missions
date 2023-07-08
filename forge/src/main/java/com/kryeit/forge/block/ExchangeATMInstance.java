@@ -10,6 +10,7 @@ import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 
 public class ExchangeATMInstance extends KineticBlockEntityInstance<ExchangeATMBlockEntity> {
@@ -23,7 +24,7 @@ public class ExchangeATMInstance extends KineticBlockEntityInstance<ExchangeATMB
     public ExchangeATMInstance(MaterialManager materialManager, ExchangeATMBlockEntity blockEntity) {
         super(materialManager, blockEntity);
 
-        direction = blockState.getValue(FACING);
+        direction = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
         opposite = direction.getOpposite();
         shaft = getRotatingMaterial().getModel(AllPartialModels.SHAFT_HALF, blockState, opposite).createInstance();
 

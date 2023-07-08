@@ -67,9 +67,9 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
     }
 
     public static class Type implements RecipeType<ExchangeATMRecipe> {
-        private Type() { }
+        private Type() {}
         public static final Type INSTANCE = new Type();
-        public static final String ID = "exchange";
+        public static final String ID = "missions:exchange";
     }
 
     public static class Serializer implements RecipeSerializer<ExchangeATMRecipe> {

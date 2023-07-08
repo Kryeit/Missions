@@ -1,6 +1,7 @@
-package com.kryeit.forge.recipe;
+package com.kryeit.forge.item;
 
 import com.kryeit.Main;
+import com.kryeit.forge.recipe.ExchangeATMRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,7 +13,7 @@ public class ModRecipes {
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Main.MOD_ID);
 
     public static final RegistryObject<RecipeSerializer<ExchangeATMRecipe>> EXCHANGE_SERIALIZER =
-            SERIALIZERS.register("exchange", () -> ExchangeATMRecipe.Serializer.INSTANCE);
+            SERIALIZERS.register("exchange", () -> new ExchangeATMRecipe.Serializer());
 
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);

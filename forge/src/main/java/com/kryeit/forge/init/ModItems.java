@@ -1,4 +1,4 @@
-package com.kryeit.forge.item;
+package com.kryeit.forge.init;
 
 import com.kryeit.Main;
 import net.minecraft.world.item.Item;

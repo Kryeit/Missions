@@ -1,7 +1,9 @@
-package com.kryeit.forge.screen;
+package com.kryeit.forge.init;
 
 import com.kryeit.Main;
 import com.kryeit.forge.MainForge;
+import com.kryeit.forge.screen.ExchangeATMMenu;
+import com.kryeit.forge.screen.ExchangeATMScreen;
 import com.tterrag.registrate.builders.MenuBuilder;
 import com.tterrag.registrate.util.entry.MenuEntry;
 import net.minecraft.client.gui.screens.Screen;

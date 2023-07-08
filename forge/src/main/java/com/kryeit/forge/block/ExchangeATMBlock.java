@@ -1,9 +1,8 @@
 package com.kryeit.forge.block;
 
-import com.kryeit.forge.block.entity.ModBlockEntities;
+import com.kryeit.forge.init.ModBlockEntities;
 import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
-import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
