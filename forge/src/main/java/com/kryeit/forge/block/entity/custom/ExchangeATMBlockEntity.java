@@ -41,7 +41,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     protected Mode mode;
 
     enum Mode {
-        SMALL_EXCHANGE, BIG_EXCHANGE
+        TO_SMALLER, TO_BIGGER, OFF
     }
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
@@ -52,6 +52,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
     public ExchangeATMBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pWorldPosition, BlockState pBlockState) {
         super(blockEntityType, pWorldPosition, pBlockState);
+
+        this.mode = Mode.OFF;
 
         this.data = new ContainerData() {
             public int get(int index) {
@@ -77,7 +79,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Exchange ATM");
+
+        return new TextComponent("Exchange ATM - Mode: " + mode);
     }
 
     @Nullable
@@ -138,6 +141,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState, ExchangeATMBlockEntity pBlockEntity) {
+        updateMode();
         if(hasRecipe(pBlockEntity)) {
             pBlockEntity.progress++;
             setChanged(pLevel, pPos, pState);
@@ -194,4 +198,12 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
         return inventory.getItem(1).getMaxStackSize() > inventory.getItem(1).getCount();
     }
+
+    public void updateMode() {
+        if(getSpeed() == 0) mode = Mode.OFF;
+        if(getSpeed() > 0) mode = Mode.TO_BIGGER;
+        if(getSpeed() < 0) mode = Mode.TO_SMALLER;
+    }
+
+
 }
