@@ -1,5 +1,5 @@
 {
-  "type": "missions:exchange",
+  "type": "missions:smaller_exchange",
   "ingredients": [
     {
       "item": "createdeco:gold_coin"

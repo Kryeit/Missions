@@ -14,13 +14,13 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
+public class SmallerExchangeRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
-    public ExchangeATMRecipe(ResourceLocation id, ItemStack output,
-                                   NonNullList<Ingredient> recipeItems) {
+    public SmallerExchangeRecipe(ResourceLocation id, ItemStack output,
+                                NonNullList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -66,19 +66,19 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<ExchangeATMRecipe> {
+    public static class Type implements RecipeType<SmallerExchangeRecipe> {
         private Type() {}
         public static final Type INSTANCE = new Type();
-        public static final String ID = "missions:exchange";
+        public static final String ID = Main.MOD_ID + ":smaller_exchange";
     }
 
-    public static class Serializer implements RecipeSerializer<ExchangeATMRecipe> {
-        public static final Serializer INSTANCE = new Serializer();
+    public static class Serializer implements RecipeSerializer<SmallerExchangeRecipe> {
+        public static final SmallerExchangeRecipe.Serializer INSTANCE = new SmallerExchangeRecipe.Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(Main.MOD_ID,"exchange");
+                new ResourceLocation(Main.MOD_ID,"bigger_exchange");
 
         @Override
-        public ExchangeATMRecipe fromJson(ResourceLocation id, JsonObject json) {
+        public SmallerExchangeRecipe fromJson(ResourceLocation id, JsonObject json) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
@@ -88,11 +88,11 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new ExchangeATMRecipe(id, output, inputs);
+            return new SmallerExchangeRecipe(id, output, inputs);
         }
 
         @Override
-        public ExchangeATMRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public SmallerExchangeRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
@@ -100,11 +100,11 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
             }
 
             ItemStack output = buf.readItem();
-            return new ExchangeATMRecipe(id, output, inputs);
+            return new SmallerExchangeRecipe(id, output, inputs);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, ExchangeATMRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, SmallerExchangeRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
@@ -125,7 +125,7 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public Class<RecipeSerializer<?>> getRegistryType() {
-            return Serializer.castClass(RecipeSerializer.class);
+            return SmallerExchangeRecipe.Serializer.castClass(RecipeSerializer.class);
         }
 
         @SuppressWarnings("unchecked") // Need this wrapper, because generics
@@ -134,3 +134,4 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
         }
     }
 }
+

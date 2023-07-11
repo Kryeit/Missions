@@ -1,0 +1,11 @@
+{
+  "type": "missions:bigger_exchange",
+  "ingredients": [
+    {
+      "item": "createdeco:iron_coin"
+    }
+  ],
+  "output": {
+    "item": "createdeco:copper_coin"
+  }
+}

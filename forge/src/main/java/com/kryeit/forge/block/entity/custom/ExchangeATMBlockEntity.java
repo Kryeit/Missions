@@ -1,6 +1,6 @@
 package com.kryeit.forge.block.entity.custom;
 
-import com.kryeit.forge.recipe.ExchangeATMRecipe;
+import com.kryeit.forge.recipe.BiggerExchangeRecipe;
 import com.kryeit.forge.screen.ExchangeATMMenu;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -57,17 +57,17 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
         this.data = new ContainerData() {
             public int get(int index) {
-                switch (index) {
-                    case 0: return ExchangeATMBlockEntity.this.progress;
-                    case 1: return ExchangeATMBlockEntity.this.maxProgress;
-                    default: return 0;
-                }
+                return switch (index) {
+                    case 0 -> ExchangeATMBlockEntity.this.progress;
+                    case 1 -> ExchangeATMBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
             }
 
             public void set(int index, int value) {
-                switch(index) {
-                    case 0: ExchangeATMBlockEntity.this.progress = value; break;
-                    case 1: ExchangeATMBlockEntity.this.maxProgress = value; break;
+                switch (index) {
+                    case 0 -> ExchangeATMBlockEntity.this.progress = value;
+                    case 1 -> ExchangeATMBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -161,8 +161,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<ExchangeATMRecipe> match = level.getRecipeManager()
-                .getRecipeFor(ExchangeATMRecipe.Type.INSTANCE, inventory, level);
+        Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
+                .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
                 && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
@@ -175,8 +175,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<ExchangeATMRecipe> match = level.getRecipeManager()
-                .getRecipeFor(ExchangeATMRecipe.Type.INSTANCE, inventory, level);
+        Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
+                .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
 
         if(match.isPresent()) {
             entity.itemHandler.extractItem(0,1, false);
