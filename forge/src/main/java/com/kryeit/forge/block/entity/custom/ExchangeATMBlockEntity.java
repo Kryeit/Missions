@@ -1,6 +1,7 @@
 package com.kryeit.forge.block.entity.custom;
 
 import com.kryeit.forge.recipe.BiggerExchangeRecipe;
+import com.kryeit.forge.recipe.SmallerExchangeRecipe;
 import com.kryeit.forge.screen.ExchangeATMMenu;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -154,37 +155,64 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
         }
     }
 
-    private static boolean hasRecipe(ExchangeATMBlockEntity entity) {
+    private boolean hasRecipe(ExchangeATMBlockEntity entity) {
         Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
-                .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
+        if(this.mode == Mode.TO_BIGGER) {
+            Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
 
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
+            return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                    && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
+        } else if(this.mode == Mode.TO_SMALLER) {
+            Optional<SmallerExchangeRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(SmallerExchangeRecipe.Type.INSTANCE, inventory, level);
+
+            return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                    && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
+        }
+
+        return false;
     }
 
-    private static void craftItem(ExchangeATMBlockEntity entity) {
+    private void craftItem(ExchangeATMBlockEntity entity) {
         Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
-                .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
+        if(this.mode == Mode.TO_BIGGER) {
+            Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
 
-        if(match.isPresent()) {
-            entity.itemHandler.extractItem(0,1, false);
-            entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
-                    entity.itemHandler.getStackInSlot(1).getCount() + 1));
+            if(match.isPresent()) {
+                entity.itemHandler.extractItem(0,1, false);
+                entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
+                        entity.itemHandler.getStackInSlot(1).getCount() + 1));
 
-            entity.resetProgress();
+                entity.resetProgress();
+            }
+
+        } else if(this.mode == Mode.TO_SMALLER) {
+            Optional<SmallerExchangeRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(SmallerExchangeRecipe.Type.INSTANCE, inventory, level);
+
+            if(match.isPresent()) {
+                entity.itemHandler.extractItem(0,1, false);
+                entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
+                        entity.itemHandler.getStackInSlot(1).getCount() + 1));
+
+                entity.resetProgress();
+            }
+
         }
+
+
     }
 
     private void resetProgress() {
@@ -203,6 +231,10 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
         if(getSpeed() == 0) mode = Mode.OFF;
         if(getSpeed() > 0) mode = Mode.TO_BIGGER;
         if(getSpeed() < 0) mode = Mode.TO_SMALLER;
+    }
+
+    public Mode getMode() {
+        return this.mode;
     }
 
 
