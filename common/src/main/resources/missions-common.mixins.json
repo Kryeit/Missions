@@ -6,7 +6,7 @@
   "client": [
   ],
   "mixins": [
-    "MixinCustomPayloadPlugin",
+    "ClientboundCustomPayloadMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -4,15 +4,12 @@ import com.kryeit.Main;
 import com.kryeit.Utils;
 import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
-import net.minecraft.core.Registry;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ import java.util.UUID;
 public class MissionManager {
     public static void checkReward(MissionType type, UUID player, ResourceLocation item) {
         DataStorage.ActiveMission activeMission = getActiveMission(type.id(), item, player);
-        if (activeMission == null) return; // TODO maybe throw an exceptio
+        if (activeMission == null) return; // TODO maybe throw an exception
 
         if (type.getProgress(player, activeMission.item()) >= activeMission.requiredAmount()) {
             ConfigReader.Mission mission = Main.getConfig().getMissions().get(type);
@@ -105,7 +102,7 @@ public class MissionManager {
         return null;
     }
 
-    public static void updateMissions(ServerPlayer player) {
+    public static void sendMissions(ServerPlayer player) {
         List<ClientsideActiveMission> clientMissions = new ArrayList<>();
         for (DataStorage.ActiveMission mission : getActiveMissions(player.getUUID())) {
             clientMissions.add(mission.toClientMission("", player.getUUID()));

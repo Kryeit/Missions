@@ -4,6 +4,7 @@ import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
+import com.kryeit.missions.MissionManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -15,8 +16,6 @@ import net.minecraft.network.chat.TranslatableComponent;
 import java.util.List;
 
 public class MissionScreen extends Screen {
-    private Button myButton;
-    private Button rewardButton;
 
     public MissionScreen() {
         super(new TextComponent("Mission GUI"));
@@ -26,14 +25,19 @@ public class MissionScreen extends Screen {
     protected void init() {
         super.init();
 
+        ClientsideMissionPacketUtils.setMissionUpdateHandler(this::addMissions);
+        ClientsideMissionPacketUtils.requestMissions();
+
+        closeButton();
+    }
+
+    private void addMissions(List<ClientsideActiveMission> activeMissions) {
         int buttonWidth = 200;
         int buttonHeight = 20;
         int spacing = 5; // Space between buttons
 
         int leftX = (this.width / 2 - buttonWidth - spacing);
         int rightX = (this.width / 2 + spacing);
-
-        List<ClientsideActiveMission> activeMissions = ClientsideMissionPacketUtils.getMissions();
 
         if (activeMissions.size() != 10) {
             Minecraft.getInstance().player.sendMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"), Minecraft.getInstance().player.getUUID());
@@ -51,7 +55,7 @@ public class MissionScreen extends Screen {
             Component leftColumnTitle = leftColumnMission.missionString();
 
             // Left column
-            this.myButton = this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, button -> {
+            this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, button -> {
                 // Button clicked
             }));
 
@@ -61,17 +65,14 @@ public class MissionScreen extends Screen {
                 Component rightColumnTitle = rightColumnMission.missionString();
 
                 // Right column
-                this.myButton = this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, button -> {
+                this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, button -> {
                     // Button clicked
                 }));
             }
         }
 
-
-        closeButton();
         rewardButton();
     }
-
 
     @Override
     public void tick() {
@@ -104,15 +105,13 @@ public class MissionScreen extends Screen {
     }
 
     public void rewardButton() {
-// Add the new button at the bottom right
+        // Add the reward button at the bottom right
         int buttonSize = 20;
         int rightPadding = 50;
         int bottomPadding = 20;
         int x = this.width - buttonSize - rightPadding;
         int y = this.height - buttonSize - bottomPadding;
 
-        this.rewardButton = this.addRenderableWidget(new RewardsButton(x, y, buttonSize, buttonSize, new TextComponent(""), button -> {
-            // Button clicked
-        }));
+        this.addRenderableWidget(new RewardsButton(x, y, buttonSize, buttonSize, new TextComponent(""), button -> ClientsideMissionPacketUtils.requestPayout()));
     }
 }
