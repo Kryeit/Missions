@@ -99,8 +99,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
         return super.getCapability(cap, side);
     }
-
-
+    
     @Override
     public void onLoad() {
         super.onLoad();
@@ -167,12 +166,13 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
                     .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
 
             return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                    && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
+                    && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())
+                    && inventory.getItem(0).getCount() == 64;
         } else if(this.mode == Mode.TO_SMALLER) {
             Optional<SmallerExchangeRecipe> match = level.getRecipeManager()
                     .getRecipeFor(SmallerExchangeRecipe.Type.INSTANCE, inventory, level);
 
-            return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+            return match.isPresent() && inventory.getItem(1).getCount() == 0
                     && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
         }
 
@@ -191,7 +191,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
                     .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
 
             if(match.isPresent()) {
-                entity.itemHandler.extractItem(0,1, false);
+                entity.itemHandler.extractItem(0,64, false);
                 entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
                         entity.itemHandler.getStackInSlot(1).getCount() + 1));
 
@@ -205,14 +205,11 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
             if(match.isPresent()) {
                 entity.itemHandler.extractItem(0,1, false);
                 entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
-                        entity.itemHandler.getStackInSlot(1).getCount() + 1));
+                        64));
 
                 entity.resetProgress();
             }
-
         }
-
-
     }
 
     private void resetProgress() {
