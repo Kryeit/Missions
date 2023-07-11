@@ -14,10 +14,10 @@ public class ModRecipes {
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Main.MOD_ID);
 
     public static final RegistryObject<RecipeSerializer<BiggerExchangeRecipe>> BIGGER_EXCHANGE_SERIALIZER =
-            SERIALIZERS.register("bigger_exchange", () -> new BiggerExchangeRecipe.Serializer());
+            SERIALIZERS.register("bigger_exchange", BiggerExchangeRecipe.Serializer::new);
 
     public static final RegistryObject<RecipeSerializer<SmallerExchangeRecipe>> SMALLER_EXCHANGE_SERIALIZER =
-            SERIALIZERS.register("smaller_exchange", () -> new SmallerExchangeRecipe.Serializer());
+            SERIALIZERS.register("smaller_exchange", SmallerExchangeRecipe.Serializer::new);
 
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);

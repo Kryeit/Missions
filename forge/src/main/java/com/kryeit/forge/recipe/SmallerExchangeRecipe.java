@@ -75,7 +75,7 @@ public class SmallerExchangeRecipe implements Recipe<SimpleContainer> {
     public static class Serializer implements RecipeSerializer<SmallerExchangeRecipe> {
         public static final SmallerExchangeRecipe.Serializer INSTANCE = new SmallerExchangeRecipe.Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(Main.MOD_ID,"bigger_exchange");
+                new ResourceLocation(Main.MOD_ID,"smaller_exchange");
 
         @Override
         public SmallerExchangeRecipe fromJson(ResourceLocation id, JsonObject json) {
