@@ -1,8 +1,10 @@
 package com.kryeit.forge.init;
 
 import com.kryeit.forge.block.ExchangeATMBlock;
+import com.kryeit.forge.item.ExchangeATMItem;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
@@ -14,10 +16,9 @@ public class ModBlocks {
 
     public static final BlockEntry<ExchangeATMBlock> EXCHANGE_ATM_BLOCK = REGISTRATE.block("exchange_atm", ExchangeATMBlock::new)
             .initialProperties(SharedProperties::softMetal)
-            .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
-            .transform(BlockStressDefaults.setCapacity(8.0))
+            .transform(BlockStressDefaults.setImpact(32.0))
             .transform(axeOrPickaxe())
-            .simpleItem()
+            .blockstate(BlockStateGen.horizontalBlockProvider(true))
             .register();
 
     public static void register() {}

@@ -30,7 +30,7 @@ public class MainForge {
         REGISTRATE.registerEventListeners(modEventBus);
         CreativeModeTabs.init();
         ModBlocks.register();
-        ModItems.register(forgeEventBus);
+        ModItems.register();
         ModMenuTypes.register();
         ModBlockEntities.register();
         ModRecipes.register(modEventBus);

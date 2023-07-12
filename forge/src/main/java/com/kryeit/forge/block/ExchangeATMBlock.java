@@ -77,8 +77,8 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof ExchangeATMBlockEntity) {
-                ((ExchangeATMBlockEntity) blockEntity).drops();
+            if (blockEntity instanceof ExchangeATMBlockEntity atmBlockEntity) {
+                atmBlockEntity.drops();
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
@@ -118,10 +118,10 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         if (level.isClientSide) {
-            return null; // return null on the client side if your block entity doesn't need to do anything on the client
+            return null;
         }
         return (level1, blockPos, blockState, t) -> {
-            if (t instanceof ExchangeATMBlockEntity be) { // replace this with your block entity
+            if (t instanceof ExchangeATMBlockEntity be) {
                 be.tick(level1, blockPos, blockState, be);
             }
         };
@@ -137,6 +137,11 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
     public Axis getRotationAxis(BlockState state) {
         return state.getValue(FACING)
                 .getAxis();
+    }
+
+    @Override
+    public SpeedLevel getMinimumRequiredSpeedLevel() {
+        return SpeedLevel.FAST;
     }
 }
 
