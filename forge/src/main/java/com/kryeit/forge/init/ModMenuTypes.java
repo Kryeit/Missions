@@ -1,22 +1,14 @@
 package com.kryeit.forge.init;
 
-import com.kryeit.Main;
 import com.kryeit.forge.MainForge;
 import com.kryeit.forge.screen.ExchangeATMMenu;
 import com.kryeit.forge.screen.ExchangeATMScreen;
 import com.tterrag.registrate.builders.MenuBuilder;
 import com.tterrag.registrate.util.entry.MenuEntry;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.network.IContainerFactory;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 public class ModMenuTypes {
 

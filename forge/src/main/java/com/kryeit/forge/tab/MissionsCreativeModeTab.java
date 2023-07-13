@@ -11,7 +11,7 @@ public class MissionsCreativeModeTab extends MissionsCreativeTabs {
 
     @Override
     public ItemStack makeIcon() {
-        return ModBlocks.EXCHANGE_ATM_BLOCK.asStack();
+        return ModBlocks.EXCHANGE_ATM.asStack();
     }
 
 }

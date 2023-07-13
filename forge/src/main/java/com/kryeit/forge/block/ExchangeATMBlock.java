@@ -1,12 +1,12 @@
 package com.kryeit.forge.block;
 
-import com.kryeit.forge.init.ModBlockEntities;
 import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
+import com.kryeit.forge.init.ModBlockEntities;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -15,7 +15,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -112,7 +115,7 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ExchangeATMBlockEntity(ModBlockEntities.EXCHANGE_ATM_BLOCK_ENTITY.get(), pPos, pState);
+        return new ExchangeATMBlockEntity(ModBlockEntities.EXCHANGE_ATM.get(), pPos, pState);
     }
     @Nullable
     @Override

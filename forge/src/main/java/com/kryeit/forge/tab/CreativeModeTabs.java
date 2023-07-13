@@ -1,6 +1,5 @@
 package com.kryeit.forge.tab;
 
-import com.kryeit.forge.tab.MissionsCreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab;
 
 public class CreativeModeTabs {

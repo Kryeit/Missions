@@ -1,13 +1,10 @@
 package com.kryeit.forge.block;
 
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
-
 import com.jozufozu.flywheel.api.MaterialManager;
 import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;

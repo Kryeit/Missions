@@ -1,7 +1,7 @@
 package com.kryeit.forge.screen;
 
-import com.kryeit.forge.init.ModBlocks;
 import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
+import com.kryeit.forge.init.ModBlocks;
 import com.kryeit.forge.init.ModMenuTypes;
 import com.kryeit.forge.screen.slot.ModResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
@@ -110,7 +110,7 @@ public class    ExchangeATMMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.EXCHANGE_ATM_BLOCK.get());
+                pPlayer, ModBlocks.EXCHANGE_ATM.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

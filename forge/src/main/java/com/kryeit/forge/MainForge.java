@@ -1,12 +1,7 @@
 package com.kryeit.forge;
 
 import com.kryeit.Main;
-import com.kryeit.forge.init.ModBlocks;
-import com.kryeit.forge.init.ModBlockEntities;
-import com.kryeit.forge.init.KeyInit;
-import com.kryeit.forge.init.ModItems;
-import com.kryeit.forge.init.ModRecipes;
-import com.kryeit.forge.init.ModMenuTypes;
+import com.kryeit.forge.init.*;
 import com.kryeit.forge.tab.CreativeModeTabs;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraftforge.common.MinecraftForge;
