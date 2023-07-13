@@ -227,7 +227,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements IHaveG
     }
 
     public void updateMode() {
-        if(getSpeed() == 0 || getSpeed() < 100) mode = Mode.OFF;
+        if(getSpeed() == 0 || Math.abs(getSpeed()) < 100) mode = Mode.OFF;
         if(getSpeed() > 0) mode = Mode.TO_BIGGER;
         if(getSpeed() < 0) mode = Mode.TO_SMALLER;
     }
