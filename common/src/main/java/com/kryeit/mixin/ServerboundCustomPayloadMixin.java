@@ -1,6 +1,6 @@
 package com.kryeit.mixin;
 
-import com.kryeit.Main;
+import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.missions.MissionManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ServerGamePacketListener;
@@ -17,8 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerboundCustomPayloadPacket.class)
 public abstract class ServerboundCustomPayloadMixin {
-    public static final ResourceLocation PAYOUT_IDENTIFIER = new ResourceLocation(Main.MOD_ID, "payout");
-    private static final ResourceLocation REQUEST_MISSIONS_IDENTIFIER = new ResourceLocation(Main.MOD_ID, "request_missions");
     @Shadow
     @Final
     private FriendlyByteBuf data;
@@ -32,12 +30,12 @@ public abstract class ServerboundCustomPayloadMixin {
         if (!(serverGamePacketListener instanceof ServerGamePacketListenerImpl packetListener)) return;
         ServerPlayer player = packetListener.getPlayer();
 
-        if (identifier.equals(PAYOUT_IDENTIFIER)) {
+        if (identifier.equals(ClientsideMissionPacketUtils.PAYOUT_IDENTIFIER)) {
             MissionManager.giveReward(player);
 
             data.release();
             ci.cancel();
-        } else if (identifier.equals(REQUEST_MISSIONS_IDENTIFIER)) {
+        } else if (identifier.equals(ClientsideMissionPacketUtils.REQUEST_MISSIONS)) {
             MissionManager.sendMissions(player);
 
             data.release();

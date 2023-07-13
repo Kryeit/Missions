@@ -4,11 +4,11 @@ import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
-import com.kryeit.missions.MissionManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -40,7 +40,9 @@ public class MissionScreen extends Screen {
         int rightX = (this.width / 2 + spacing);
 
         if (activeMissions.size() != 10) {
-            Minecraft.getInstance().player.sendMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"), Minecraft.getInstance().player.getUUID());
+            LocalPlayer player = Minecraft.getInstance().player;
+            if (player == null) return; // this should not be possible, I guess
+            player.sendMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"), player.getUUID());
             return;
         }
 
@@ -99,9 +101,8 @@ public class MissionScreen extends Screen {
         int centerX = this.width / 2 - buttonWidth / 2; // Center of the screen, minus half the button's width
         int centerY = this.height - buttonHeight - bottomPadding; // 10 pixels from the bottom
 
-        this.addRenderableWidget(new Button(centerX, centerY, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"), button -> {
-            Minecraft.getInstance().setScreen(null);
-        }));
+        this.addRenderableWidget(new Button(centerX, centerY, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"),
+                button -> Minecraft.getInstance().setScreen(null)));
     }
 
     public void rewardButton() {
@@ -112,6 +113,7 @@ public class MissionScreen extends Screen {
         int x = this.width - buttonSize - rightPadding;
         int y = this.height - buttonSize - bottomPadding;
 
-        this.addRenderableWidget(new RewardsButton(x, y, buttonSize, buttonSize, new TextComponent(""), button -> ClientsideMissionPacketUtils.requestPayout()));
+        this.addRenderableWidget(new RewardsButton(x, y, buttonSize, buttonSize, new TextComponent(""),
+                button -> ClientsideMissionPacketUtils.requestPayout()));
     }
 }

@@ -1,6 +1,6 @@
 package com.kryeit.client;
 
-import com.kryeit.mixin.ServerboundCustomPayloadMixin;
+import com.kryeit.Main;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -14,6 +14,8 @@ import java.util.function.Consumer;
 
 public class ClientsideMissionPacketUtils {
     public static final ResourceLocation IDENTIFIER = new ResourceLocation("missions", "active_missions");
+    public static final ResourceLocation PAYOUT_IDENTIFIER = new ResourceLocation(Main.MOD_ID, "payout");
+    public static final ResourceLocation REQUEST_MISSIONS = new ResourceLocation(Main.MOD_ID, "request_missions");
     private static Consumer<List<ClientsideActiveMission>> updateHandler;
 
     public static void handlePacket(FriendlyByteBuf buf) {
@@ -35,7 +37,7 @@ public class ClientsideMissionPacketUtils {
 
     public static void requestPayout() {
         ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(
-                ServerboundCustomPayloadMixin.PAYOUT_IDENTIFIER,
+                PAYOUT_IDENTIFIER,
                 new FriendlyByteBuf(Unpooled.buffer(0))
         );
         ClientPacketListener connection = Minecraft.getInstance().getConnection();
