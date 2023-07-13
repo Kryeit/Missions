@@ -1,13 +1,20 @@
 package com.kryeit.forge.block.entity.custom;
 
-import com.kryeit.forge.block.entity.ModBlockEntities;
-import com.kryeit.forge.recipe.ExchangeATMRecipe;
+import com.kryeit.forge.recipe.BiggerExchangeRecipe;
+import com.kryeit.forge.recipe.SmallerExchangeRecipe;
 import com.kryeit.forge.screen.ExchangeATMMenu;
+import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.kinetics.base.IRotate;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.foundation.utility.Lang;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -16,23 +23,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Optional;
 
-public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider {
+public class ExchangeATMBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation, MenuProvider {
+
     private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -40,27 +46,36 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
         }
     };
 
+    protected Mode mode;
+
+    enum Mode {
+        TO_SMALLER, TO_BIGGER, OFF
+    }
+
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 72;
+    private int maxProgress = 64;
 
-    public ExchangeATMBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntities.EXCHANGE_ATM_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
+    public ExchangeATMBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pWorldPosition, BlockState pBlockState) {
+        super(blockEntityType, pWorldPosition, pBlockState);
+
+        this.mode = Mode.OFF;
+
         this.data = new ContainerData() {
             public int get(int index) {
-                switch (index) {
-                    case 0: return ExchangeATMBlockEntity.this.progress;
-                    case 1: return ExchangeATMBlockEntity.this.maxProgress;
-                    default: return 0;
-                }
+                return switch (index) {
+                    case 0 -> ExchangeATMBlockEntity.this.progress;
+                    case 1 -> ExchangeATMBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
             }
 
             public void set(int index, int value) {
-                switch(index) {
-                    case 0: ExchangeATMBlockEntity.this.progress = value; break;
-                    case 1: ExchangeATMBlockEntity.this.maxProgress = value; break;
+                switch (index) {
+                    case 0 -> ExchangeATMBlockEntity.this.progress = value;
+                    case 1 -> ExchangeATMBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -70,15 +85,17 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
         };
     }
 
+    @Nonnull
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Exchange ATM");
+
+        return new TextComponent("Exchange ATM - Mode: " + mode);
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return new ExchangeATMMenu(pContainerId, pInventory, this, this.data);
+        return ExchangeATMMenu.create(pContainerId, pInventory, this, data);
     }
 
     @Nonnull
@@ -104,18 +121,23 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        tag.put("inventory", itemHandler.serializeNBT());
-        tag.putInt("exchange_atm.progress", progress);
-        super.saveAdditional(tag);
+    public void write(CompoundTag tag, boolean clientPacket) {
+        if (!clientPacket) {
+            tag.put("inventory", itemHandler.serializeNBT());
+            tag.putInt("exchange_atm.progress", progress);
+        }
+        super.write(tag, clientPacket);
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-        progress = nbt.getInt("exchange_atm.progress");
+    public void read(CompoundTag tag, boolean clientPacket) {
+        if (!clientPacket) {
+            itemHandler.deserializeNBT(tag.getCompound("inventory"));
+            progress = tag.getInt("exchange_atm.progress");
+        }
+        super.read(tag, clientPacket);
     }
+
 
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
@@ -126,7 +148,8 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ExchangeATMBlockEntity pBlockEntity) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState, ExchangeATMBlockEntity pBlockEntity) {
+        updateMode();
         if(hasRecipe(pBlockEntity)) {
             pBlockEntity.progress++;
             setChanged(pLevel, pPos, pState);
@@ -139,41 +162,61 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
         }
     }
 
-    private static boolean hasRecipe(ExchangeATMBlockEntity entity) {
+    private boolean hasRecipe(ExchangeATMBlockEntity entity) {
         Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<ExchangeATMRecipe> match = level.getRecipeManager()
-                .getRecipeFor(ExchangeATMRecipe.Type.INSTANCE, inventory, level);
+        if(this.mode == Mode.TO_BIGGER) {
+            Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
 
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())
-                && hasWaterInWaterSlot(entity);
+            return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                    && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())
+                    && inventory.getItem(0).getCount() == 64;
+        } else if(this.mode == Mode.TO_SMALLER) {
+            Optional<SmallerExchangeRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(SmallerExchangeRecipe.Type.INSTANCE, inventory, level);
+
+            return match.isPresent() && inventory.getItem(1).getCount() == 0
+                    && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
+        }
+
+        return false;
     }
 
-    private static boolean hasWaterInWaterSlot(ExchangeATMBlockEntity entity) {
-        return PotionUtils.getPotion(entity.itemHandler.getStackInSlot(0)) == Potions.WATER;
-    }
-
-    private static void craftItem(ExchangeATMBlockEntity entity) {
+    private void craftItem(ExchangeATMBlockEntity entity) {
         Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<ExchangeATMRecipe> match = level.getRecipeManager()
-                .getRecipeFor(ExchangeATMRecipe.Type.INSTANCE, inventory, level);
+        if(this.mode == Mode.TO_BIGGER) {
+            Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
 
-        if(match.isPresent()) {
-            entity.itemHandler.extractItem(0,1, false);
-            entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
-                    entity.itemHandler.getStackInSlot(1).getCount() + 1));
+            if(match.isPresent()) {
+                entity.itemHandler.extractItem(0,64, false);
+                entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
+                        entity.itemHandler.getStackInSlot(1).getCount() + 1));
 
-            entity.resetProgress();
+                entity.resetProgress();
+            }
+
+        } else if(this.mode == Mode.TO_SMALLER) {
+            Optional<SmallerExchangeRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(SmallerExchangeRecipe.Type.INSTANCE, inventory, level);
+
+            if(match.isPresent()) {
+                entity.itemHandler.extractItem(0,1, false);
+                entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
+                        64));
+
+                entity.resetProgress();
+            }
         }
     }
 
@@ -188,4 +231,11 @@ public class ExchangeATMBlockEntity extends BlockEntity implements MenuProvider 
     private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
         return inventory.getItem(1).getMaxStackSize() > inventory.getItem(1).getCount();
     }
+
+    public void updateMode() {
+        if(getSpeed() == 0) mode = Mode.OFF;
+        if(getSpeed() > 0) mode = Mode.TO_BIGGER;
+        if(getSpeed() < 0) mode = Mode.TO_SMALLER;
+    }
+
 }

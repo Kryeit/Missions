@@ -6,6 +6,8 @@ import com.kryeit.missions.ConfigReader;
 import com.kryeit.missions.DataStorage;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.missions.mission_types.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,6 +15,9 @@ import java.nio.file.Path;
 public class Main {
     public static final String MOD_ID = "missions";
     private static ConfigReader configReader;
+
+    public static final Logger LOGGER = LogManager.getLogger();
+
 
     public static void init() {
         MissionTypeRegistry.INSTANCE.register(new BreakMission());

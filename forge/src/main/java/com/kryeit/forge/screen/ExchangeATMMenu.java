@@ -1,7 +1,8 @@
 package com.kryeit.forge.screen;
 
-import com.kryeit.forge.block.ModBlocks;
+import com.kryeit.forge.init.ModBlocks;
 import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
+import com.kryeit.forge.init.ModMenuTypes;
 import com.kryeit.forge.screen.slot.ModResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,16 +14,15 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ExchangeATMMenu extends AbstractContainerMenu {
+public class    ExchangeATMMenu extends AbstractContainerMenu {
     private final ExchangeATMBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public ExchangeATMMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+    public ExchangeATMMenu(MenuType<?> type, int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+        this(type, pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
-
-    public ExchangeATMMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+    public ExchangeATMMenu(MenuType<?> type, int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.EXCHANGE_ATM_MENU.get(), pContainerId);
         checkContainerSize(inv, 2);
         blockEntity = ((ExchangeATMBlockEntity) entity);
@@ -38,6 +38,10 @@ public class ExchangeATMMenu extends AbstractContainerMenu {
         });
 
         addDataSlots(data);
+    }
+
+    public static ExchangeATMMenu create(int id, Inventory inv, ExchangeATMBlockEntity be, ContainerData data) {
+        return new ExchangeATMMenu(ModMenuTypes.EXCHANGE_ATM_MENU.get(), id, inv, be, data);
     }
 
     public boolean isCrafting() {
@@ -106,7 +110,7 @@ public class ExchangeATMMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.EXCHANGE_ATM.get());
+                pPlayer, ModBlocks.EXCHANGE_ATM_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

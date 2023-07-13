@@ -11,15 +11,16 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
-public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
+import javax.annotation.Nullable;
+
+public class SmallerExchangeRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
-    public ExchangeATMRecipe(ResourceLocation id, ItemStack output,
-                             NonNullList<Ingredient> recipeItems) {
+    public SmallerExchangeRecipe(ResourceLocation id, ItemStack output,
+                                NonNullList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -27,11 +28,7 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        if(pLevel.isClientSide()) {
-            return false;
-        }
-
-        return recipeItems.get(0).test(pContainer.getItem(1));
+        return recipeItems.get(0).test(pContainer.getItem(0));
     }
 
     @Override
@@ -69,19 +66,19 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<ExchangeATMRecipe> {
-        private Type() { }
+    public static class Type implements RecipeType<SmallerExchangeRecipe> {
+        private Type() {}
         public static final Type INSTANCE = new Type();
-        public static final String ID = "exchange_atm";
+        public static final String ID = Main.MOD_ID + ":smaller_exchange";
     }
 
-    public static class Serializer implements RecipeSerializer<ExchangeATMRecipe> {
-        public static final Serializer INSTANCE = new Serializer();
+    public static class Serializer implements RecipeSerializer<SmallerExchangeRecipe> {
+        public static final SmallerExchangeRecipe.Serializer INSTANCE = new SmallerExchangeRecipe.Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(Main.MOD_ID,"exchange_atm");
+                new ResourceLocation(Main.MOD_ID,"smaller_exchange");
 
         @Override
-        public ExchangeATMRecipe fromJson(ResourceLocation id, JsonObject json) {
+        public SmallerExchangeRecipe fromJson(ResourceLocation id, JsonObject json) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
@@ -91,11 +88,11 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new ExchangeATMRecipe(id, output, inputs);
+            return new SmallerExchangeRecipe(id, output, inputs);
         }
 
         @Override
-        public ExchangeATMRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public SmallerExchangeRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
@@ -103,11 +100,11 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
             }
 
             ItemStack output = buf.readItem();
-            return new ExchangeATMRecipe(id, output, inputs);
+            return new SmallerExchangeRecipe(id, output, inputs);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, ExchangeATMRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, SmallerExchangeRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
@@ -115,25 +112,26 @@ public class ExchangeATMRecipe implements Recipe<SimpleContainer> {
             buf.writeItemStack(recipe.getResultItem(), false);
         }
 
-        @SuppressWarnings("unchecked") // Need this wrapper, because generics
-        private static <G> Class<G> castClass(Class<?> cls) {
-            return (Class<G>)cls;
-        }
-
         @Override
-        public RecipeSerializer<?> setRegistryName(ResourceLocation arg) {
-            return null;
+        public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
+            return INSTANCE;
         }
 
         @Nullable
         @Override
         public ResourceLocation getRegistryName() {
-            return null;
+            return ID;
         }
 
         @Override
         public Class<RecipeSerializer<?>> getRegistryType() {
-            return null;
+            return SmallerExchangeRecipe.Serializer.castClass(RecipeSerializer.class);
+        }
+
+        @SuppressWarnings("unchecked") // Need this wrapper, because generics
+        private static <G> Class<G> castClass(Class<?> cls) {
+            return (Class<G>)cls;
         }
     }
 }
+

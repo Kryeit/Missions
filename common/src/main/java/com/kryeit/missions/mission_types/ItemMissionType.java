@@ -4,7 +4,6 @@ import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import org.spongepowered.asm.util.perf.Profiler;
 
 import java.util.UUID;
 

@@ -1,22 +1,5 @@
 package com.kryeit.forge;
 
-import com.kryeit.missions.MissionTypeRegistry;
-import com.kryeit.missions.mission_types.BreakMission;
-import com.kryeit.missions.mission_types.CraftMission;
-import com.kryeit.missions.mission_types.EatMission;
-import com.kryeit.missions.mission_types.KillMission;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-
 public class MissionHandler {
     //TODO: THIS DOESNT WORK, SAME ISSUE AS IN THE PLAYER LOGIN, I THINK ONLY THE useItem() method IS WRONG
     //@SubscribeEvent
