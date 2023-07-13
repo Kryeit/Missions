@@ -1,8 +1,8 @@
-package com.kryeit.forge.init;
+package com.kryeit.forge.entry;
 
-import com.kryeit.forge.block.ExchangeATMInstance;
-import com.kryeit.forge.block.ExchangeATMRenderer;
-import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
+import com.kryeit.forge.content.block.ExchangeATMInstance;
+import com.kryeit.forge.content.block.ExchangeATMRenderer;
+import com.kryeit.forge.content.block.entity.custom.ExchangeATMBlockEntity;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
 import static com.kryeit.forge.MainForge.REGISTRATE;

@@ -1,7 +1,7 @@
-package com.kryeit.forge.block;
+package com.kryeit.forge.content.block;
 
 import com.jozufozu.flywheel.api.MaterialManager;
-import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
+import com.kryeit.forge.content.block.entity.custom.ExchangeATMBlockEntity;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;

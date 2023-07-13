@@ -1,7 +1,7 @@
-package com.kryeit.forge.block;
+package com.kryeit.forge.content.block;
 
 import com.jozufozu.flywheel.backend.Backend;
-import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
+import com.kryeit.forge.content.block.entity.custom.ExchangeATMBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllPartialModels;

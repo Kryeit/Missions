@@ -1,7 +1,7 @@
-package com.kryeit.forge.block;
+package com.kryeit.forge.content.block;
 
-import com.kryeit.forge.block.entity.custom.ExchangeATMBlockEntity;
-import com.kryeit.forge.init.ModBlockEntities;
+import com.kryeit.forge.content.block.entity.custom.ExchangeATMBlockEntity;
+import com.kryeit.forge.entry.ModBlockEntities;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;

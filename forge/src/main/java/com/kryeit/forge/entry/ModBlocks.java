@@ -1,6 +1,6 @@
-package com.kryeit.forge.init;
+package com.kryeit.forge.entry;
 
-import com.kryeit.forge.block.ExchangeATMBlock;
+import com.kryeit.forge.content.block.ExchangeATMBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;

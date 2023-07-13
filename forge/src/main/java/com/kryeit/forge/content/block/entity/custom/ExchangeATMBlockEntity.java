@@ -1,4 +1,4 @@
-package com.kryeit.forge.block.entity.custom;
+package com.kryeit.forge.content.block.entity.custom;
 
 import com.kryeit.forge.recipe.BiggerExchangeRecipe;
 import com.kryeit.forge.recipe.SmallerExchangeRecipe;
@@ -227,9 +227,10 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements IHaveG
     }
 
     public void updateMode() {
-        if(getSpeed() == 0 || Math.abs(getSpeed()) < 100) mode = Mode.OFF;
-        if(getSpeed() > 0) mode = Mode.TO_BIGGER;
-        if(getSpeed() < 0) mode = Mode.TO_SMALLER;
+        if(getSpeed() > 100) mode = Mode.TO_BIGGER;
+        else if(getSpeed() < -100) mode = Mode.TO_SMALLER;
+        else mode = Mode.OFF;
+
     }
 
 }

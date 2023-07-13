@@ -1,4 +1,4 @@
-package com.kryeit.forge.init;
+package com.kryeit.forge.entry;
 
 import com.kryeit.Main;
 import com.kryeit.forge.recipe.BiggerExchangeRecipe;
