@@ -1,20 +1,15 @@
-package com.kryeit.forge.block.entity.custom;
+package com.kryeit.forge.content.block.entity.custom;
 
 import com.kryeit.forge.recipe.BiggerExchangeRecipe;
 import com.kryeit.forge.recipe.SmallerExchangeRecipe;
 import com.kryeit.forge.screen.ExchangeATMMenu;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.foundation.utility.Lang;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -34,7 +29,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Optional;
 
 public class ExchangeATMBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation, MenuProvider {
@@ -233,9 +227,10 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements IHaveG
     }
 
     public void updateMode() {
-        if(getSpeed() == 0) mode = Mode.OFF;
-        if(getSpeed() > 0) mode = Mode.TO_BIGGER;
-        if(getSpeed() < 0) mode = Mode.TO_SMALLER;
+        if(getSpeed() > 100) mode = Mode.TO_BIGGER;
+        else if(getSpeed() < -100) mode = Mode.TO_SMALLER;
+        else mode = Mode.OFF;
+
     }
 
 }

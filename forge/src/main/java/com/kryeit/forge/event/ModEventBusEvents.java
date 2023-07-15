@@ -14,8 +14,6 @@ public class ModEventBusEvents {
 
     @SubscribeEvent
     public static void registerRecipeTypes(final RegistryEvent.Register<RecipeSerializer<?>> event) {
-        Registry.register(Registry.RECIPE_TYPE, BiggerExchangeRecipe.Type.ID, BiggerExchangeRecipe.Type.INSTANCE);
-        Registry.register(Registry.RECIPE_TYPE, SmallerExchangeRecipe.Type.ID, BiggerExchangeRecipe.Type.INSTANCE);
 
     }
 }
