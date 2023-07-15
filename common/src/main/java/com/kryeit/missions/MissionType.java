@@ -9,9 +9,7 @@ import java.util.UUID;
 public interface MissionType {
     String id();
 
-    default Component taskString(String language, int progress, Component itemName) {
-        return null;
-    }
+    Component taskString(String language, int progress, Component itemName);
 
     int getProgress(UUID player, ResourceLocation item);
 
