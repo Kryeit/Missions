@@ -1,9 +1,10 @@
 package com.kryeit.missions;
 
-import com.kryeit.missions.utils.Range;
 import com.kryeit.JSONObject;
+import com.kryeit.missions.utils.Range;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -16,13 +17,15 @@ public class ConfigReader {
         this.missions = missions;
     }
 
-    public static ConfigReader readFile(Path file) throws IOException {
-        if (!file.toFile().exists()) {
-            file.toFile().createNewFile();
+    public static ConfigReader readFile(Path path) throws IOException {
+        if (!path.toFile().exists()) {
+            InputStream stream = ConfigReader.class.getResourceAsStream("/example_config.json");
+            if (stream == null) throw new NullPointerException("Cannot find example config");
+            Files.copy(stream, path);
         }
 
         Map<MissionType, Mission> missions = new HashMap<>();
-        String string = Files.readString(file);
+        String string = Files.readString(path);
         JSONObject object = new JSONObject(string);
 
         for (String key : object.keySet()) {

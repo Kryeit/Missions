@@ -1,0 +1,13 @@
+{
+  "break": {
+    "reward": {
+      "amount": "10-20",
+      "item": "stone"
+    },
+    "missions": {
+      "stone": "10-20",
+      "grass_block": "30-40",
+      "minecraft:cobblestone": "50-60"
+    }
+  }
+}
