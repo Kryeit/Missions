@@ -8,7 +8,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -40,9 +39,7 @@ public class MissionScreen extends Screen {
         int rightX = (this.width / 2 + spacing);
 
         if (activeMissions.size() != 10) {
-            LocalPlayer player = Minecraft.getInstance().player;
-            if (player == null) return; // this should not be possible, I guess
-            player.sendMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"), player.getUUID());
+            Minecraft.getInstance().gui.getChat().addMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"));
             return;
         }
 
@@ -57,7 +54,7 @@ public class MissionScreen extends Screen {
             Component leftColumnTitle = leftColumnMission.missionString();
 
             // Left column
-            this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, button -> {
+            this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission.isCompleted(), button -> {
                 // Button clicked
             }));
 
@@ -67,7 +64,7 @@ public class MissionScreen extends Screen {
                 Component rightColumnTitle = rightColumnMission.missionString();
 
                 // Right column
-                this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, button -> {
+                this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission.isCompleted(), button -> {
                     // Button clicked
                 }));
             }
