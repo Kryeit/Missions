@@ -29,7 +29,7 @@ public class MissionManager {
 
             type.reset(player);
             DataStorage.INSTANCE.addReward(player, rewardItem, rewardAmount);
-            DataStorage.INSTANCE.setCompleted(player, item, type.id(), true);
+            DataStorage.INSTANCE.setCompleted(player, item, type.id());
         }
     }
 
@@ -89,13 +89,13 @@ public class MissionManager {
 
     public static boolean countItem(String missionTypeID, UUID player, ResourceLocation item) {
         DataStorage.ActiveMission activeMission = getActiveMission(missionTypeID, item, player);
-        return activeMission != null && !activeMission.isCompleted();
+        return activeMission != null;
     }
 
     public static DataStorage.ActiveMission getActiveMission(String id, ResourceLocation item, UUID player) {
         List<DataStorage.ActiveMission> missions = DataStorage.INSTANCE.getActiveMissions(player);
         for (DataStorage.ActiveMission mission : missions) {
-            if (mission.missionID().equals(id) && mission.item().equals(item)) {
+            if (mission.missionID().equals(id) && mission.item().equals(item) && !mission.isCompleted()) {
                 return mission;
             }
         }
