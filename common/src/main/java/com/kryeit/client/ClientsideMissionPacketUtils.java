@@ -5,7 +5,7 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
@@ -26,17 +26,17 @@ public class ClientsideMissionPacketUtils {
     public static FriendlyByteBuf serialize(List<ClientsideActiveMission> missions) {
         FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
 
-        for (ClientsideActiveMission mission : missions) {
+        buf.writeCollection(missions, (b, mission) -> {
             buf.writeInt(mission.requiredAmount());
             buf.writeItem(mission.itemStack());
             buf.writeComponent(mission.missionString());
             buf.writeBoolean(mission.isCompleted());
-        }
+        });
         return buf;
     }
 
     public static void requestPayout() {
-        ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(
+        ServerboundCustomPayloadPacket packet = new ServerboundCustomPayloadPacket(
                 PAYOUT_IDENTIFIER,
                 new FriendlyByteBuf(Unpooled.buffer(0))
         );
@@ -45,8 +45,8 @@ public class ClientsideMissionPacketUtils {
     }
 
     public static void requestMissions() {
-        ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(
-                ClientsideMissionPacketUtils.IDENTIFIER,
+        ServerboundCustomPayloadPacket packet = new ServerboundCustomPayloadPacket(
+                ClientsideMissionPacketUtils.REQUEST_MISSIONS,
                 new FriendlyByteBuf(Unpooled.buffer(0))
         );
         ClientPacketListener connection = Minecraft.getInstance().getConnection();
