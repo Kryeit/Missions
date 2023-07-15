@@ -15,10 +15,7 @@ public interface ItemMissionType extends MissionType {
 
     @Override
     default void reset(UUID player) {
-        CompoundTag data = getData(player);
-        for (String key : data.getAllKeys()) {
-            data.remove(key);
-        }
+        getData(player).getAllKeys().clear();
     }
 
     default void handleItem(UUID player, ResourceLocation item) {
