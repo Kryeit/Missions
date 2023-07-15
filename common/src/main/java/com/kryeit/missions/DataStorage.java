@@ -89,11 +89,11 @@ public class DataStorage {
         return output;
     }
 
-    public void setCompleted(UUID player, ResourceLocation item, String missionTypeID, boolean completed) {
+    public void setCompleted(UUID player, ResourceLocation item, String missionTypeID) {
         for (Tag tag : getActiveMissionsTag(player)) {
             CompoundTag compound = (CompoundTag) tag;
-            if (new ResourceLocation(compound.getString("item")).equals(item) && compound.getString("mission_id").equals(missionTypeID)) {
-                compound.putBoolean("completed", completed);
+            if (new ResourceLocation(compound.getString("item")).equals(item) && compound.getString("mission_id").equals(missionTypeID) && !compound.getBoolean("completed")) {
+                compound.putBoolean("completed", true);
                 break;
             }
         }
