@@ -3,6 +3,7 @@ package com.kryeit.missions.mission_types;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.UUID;
@@ -31,5 +32,10 @@ public class VoteMission implements MissionType {
 
             MissionManager.checkReward(this, player, IDENTIFIER_LOCATION);
         }
+    }
+
+    @Override
+    public Component taskString(String language, int progress, Component itemName) {
+        return Component.nullToEmpty("Break mission");
     }
 }
