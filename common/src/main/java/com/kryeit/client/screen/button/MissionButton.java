@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class MissionButton extends Button {
     public static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/mission_button.png");
-    private static final Font font = Minecraft.getInstance().font;
     private final boolean completed;
 
     public MissionButton(int x, int y, int width, int height, Component message, boolean completed, OnPress onPress) {
@@ -25,6 +24,7 @@ public class MissionButton extends Button {
     public void renderButton(@NotNull PoseStack matrices, int mouseX, int mouseY, float delta) {
         renderButtonTexture(matrices, isHovered);
         int color = completed ? 0x00FF00 : 0xFF0000;
+        Font font = Minecraft.getInstance().font;
         AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, color);
     }
 
