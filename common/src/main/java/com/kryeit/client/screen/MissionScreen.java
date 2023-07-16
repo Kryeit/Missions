@@ -56,6 +56,10 @@ public class MissionScreen extends Screen {
             // Left column
             this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission.isCompleted(), leftColumnMission.itemStack(), button -> {
                 // Button clicked
+            },  (button, poseStack, i1, j) -> {
+                // On tooltip - TODO: DOESNT WORK YET, IDK WHY
+                renderTooltip(poseStack, Component.nullToEmpty("your text"), i1, j);
+
             }));
 
             if (i + missionsPerColumn < activeMissions.size()) {
@@ -66,6 +70,10 @@ public class MissionScreen extends Screen {
                 // Right column
                 this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission.isCompleted(), rightColumnMission.itemStack(), button -> {
                     // Button clicked
+                },  (button, poseStack, i1, j) -> {
+                    // On tooltip - TODO: DOESNT WORK YET, IDK WHY
+                    renderTooltip(poseStack, Component.nullToEmpty("your text"), i1, j);
+
                 }));
             }
         }
