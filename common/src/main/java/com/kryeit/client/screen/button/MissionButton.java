@@ -31,7 +31,7 @@ public class MissionButton extends Button {
     public void renderButton(@NotNull PoseStack matrices, int mouseX, int mouseY, float delta) {
         renderButtonTexture(matrices);
         renderItem();
-        int color = completed ? 0x00FF00 : 0xFF0000;
+        int color = completed ? 0x00FF00 : 0xFFFFFF;
         AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, color);
     }
 
