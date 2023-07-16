@@ -20,7 +20,7 @@ public class RewardsButton extends Button {
         super.renderButton(matrices, mouseX, mouseY, delta);
 
         RenderSystem.setShaderTexture(0, CHEST_TEXTURE);
-        int textureX = x + width / 2 - 8; // Center of the button, minus half the size of the texture
+        int textureX = x + width / 2 - 36;
         int textureY = y + height / 2 - 8; // Center of the button, minus half the size of the texture
         blit(matrices, textureX, textureY, 0, 0, 16, 16, 16, 16);
     }

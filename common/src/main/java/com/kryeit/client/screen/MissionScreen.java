@@ -54,7 +54,7 @@ public class MissionScreen extends Screen {
             Component leftColumnTitle = leftColumnMission.missionString();
 
             // Left column
-            this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission.isCompleted(), button -> {
+            this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission.isCompleted(), leftColumnMission.itemStack(), button -> {
                 // Button clicked
             }));
 
@@ -64,7 +64,7 @@ public class MissionScreen extends Screen {
                 Component rightColumnTitle = rightColumnMission.missionString();
 
                 // Right column
-                this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission.isCompleted(), button -> {
+                this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission.isCompleted(), rightColumnMission.itemStack(), button -> {
                     // Button clicked
                 }));
             }
@@ -96,7 +96,7 @@ public class MissionScreen extends Screen {
         int buttonHeight = 20;
         int bottomPadding = 20;
         int centerX = this.width / 2 - buttonWidth / 2; // Center of the screen, minus half the button's width
-        int centerY = this.height - buttonHeight - bottomPadding; // 10 pixels from the bottom
+        int centerY = this.height - buttonHeight - bottomPadding;
 
         this.addRenderableWidget(new Button(centerX, centerY, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"),
                 button -> Minecraft.getInstance().setScreen(null)));
@@ -104,13 +104,14 @@ public class MissionScreen extends Screen {
 
     public void rewardButton() {
         // Add the reward button at the bottom right
-        int buttonSize = 20;
+        int buttonWidth = 80;
+        int buttonHeight = 20;
         int rightPadding = 50;
         int bottomPadding = 20;
-        int x = this.width - buttonSize - rightPadding;
-        int y = this.height - buttonSize - bottomPadding;
+        int x = this.width - buttonWidth - rightPadding;
+        int y = this.height - buttonHeight - bottomPadding;
 
-        this.addRenderableWidget(new RewardsButton(x, y, buttonSize, buttonSize, new TextComponent(""),
+        this.addRenderableWidget(new RewardsButton(x, y, buttonWidth, buttonHeight, new TextComponent("   Rewards"),
                 button -> ClientsideMissionPacketUtils.requestPayout()));
     }
 }
