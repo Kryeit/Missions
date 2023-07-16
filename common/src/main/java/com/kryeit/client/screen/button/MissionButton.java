@@ -11,17 +11,14 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class MissionButton extends Button {
     public static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/mission_button.png");
-    private static final Font font = Minecraft.getInstance().font;
     private final boolean completed;
     private final ItemStack item;
     protected final OnTooltip onTooltip;
@@ -39,6 +36,7 @@ public class MissionButton extends Button {
         renderItem();
         
         int color = completed ? 0x00FF00 : 0xFFFFFF;
+        Font font = Minecraft.getInstance().font;
         AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, color);
     }
     

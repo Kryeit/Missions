@@ -19,7 +19,7 @@ public class ClientsideMissionPacketUtils {
     private static Consumer<List<ClientsideActiveMission>> updateHandler;
 
     public static void handlePacket(FriendlyByteBuf buf) {
-        List<ClientsideActiveMission> missions = buf.readList(b -> new ClientsideActiveMission(buf.readInt(), buf.readItem(), buf.readComponent(), buf.readBoolean()));
+        List<ClientsideActiveMission> missions = buf.readList(ClientsideActiveMission::fromBuffer);
         updateHandler.accept(missions);
     }
 
@@ -27,10 +27,11 @@ public class ClientsideMissionPacketUtils {
         FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
 
         buf.writeCollection(missions, (b, mission) -> {
-            buf.writeInt(mission.requiredAmount());
-            buf.writeItem(mission.itemStack());
-            buf.writeComponent(mission.missionString());
-            buf.writeBoolean(mission.isCompleted());
+            b.writeInt(mission.requiredAmount());
+            b.writeInt(mission.progress());
+            b.writeItem(mission.itemStack());
+            b.writeComponent(mission.missionString());
+            b.writeBoolean(mission.isCompleted());
         });
         return buf;
     }
@@ -40,8 +41,7 @@ public class ClientsideMissionPacketUtils {
                 PAYOUT_IDENTIFIER,
                 new FriendlyByteBuf(Unpooled.buffer(0))
         );
-        ClientPacketListener connection = Minecraft.getInstance().getConnection();
-        Objects.requireNonNull(connection, "Connection may not be null").send(packet);
+        sendPacket(packet);
     }
 
     public static void requestMissions() {
@@ -49,11 +49,15 @@ public class ClientsideMissionPacketUtils {
                 ClientsideMissionPacketUtils.REQUEST_MISSIONS,
                 new FriendlyByteBuf(Unpooled.buffer(0))
         );
-        ClientPacketListener connection = Minecraft.getInstance().getConnection();
-        Objects.requireNonNull(connection, "Connection may not be null").send(packet);
+        sendPacket(packet);
     }
 
     public static void setMissionUpdateHandler(Consumer<List<ClientsideActiveMission>> handler) {
         updateHandler = handler;
+    }
+
+    private static void sendPacket(ServerboundCustomPayloadPacket packet) {
+        ClientPacketListener connection = Minecraft.getInstance().getConnection();
+        Objects.requireNonNull(connection, "Connection may not be null").send(packet);
     }
 }

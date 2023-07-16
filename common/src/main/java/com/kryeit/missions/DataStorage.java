@@ -197,6 +197,7 @@ public class DataStorage {
             MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
             ItemStack itemStack = Utils.getItem(item());
             return new ClientsideActiveMission(requiredAmount(),
+                    MissionTypeRegistry.INSTANCE.getType(missionID).getProgress(player, item),
                     itemStack,
                     type.taskString(language, type.getProgress(player, item()), itemStack.getDisplayName()),
                     isCompleted()
