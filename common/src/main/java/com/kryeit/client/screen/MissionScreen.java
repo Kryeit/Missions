@@ -54,7 +54,7 @@ public class MissionScreen extends Screen {
             Component leftColumnTitle = leftColumnMission.missionString();
 
             // Left column
-            this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission.isCompleted(), button -> {
+            this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission.isCompleted(), leftColumnMission.itemStack(), button -> {
                 // Button clicked
             }));
 
@@ -64,7 +64,7 @@ public class MissionScreen extends Screen {
                 Component rightColumnTitle = rightColumnMission.missionString();
 
                 // Right column
-                this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission.isCompleted(), button -> {
+                this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission.isCompleted(), rightColumnMission.itemStack(), button -> {
                     // Button clicked
                 }));
             }
