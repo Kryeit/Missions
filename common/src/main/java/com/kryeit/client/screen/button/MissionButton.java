@@ -29,13 +29,13 @@ public class MissionButton extends Button {
 
     @Override
     public void renderButton(@NotNull PoseStack matrices, int mouseX, int mouseY, float delta) {
-        renderButtonTexture(matrices, isHovered);
-        renderItem(matrices);
+        renderButtonTexture(matrices);
+        renderItem();
         int color = completed ? 0x00FF00 : 0xFF0000;
         AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, color);
     }
 
-    public void renderButtonTexture(PoseStack matrices, boolean isHovered) {
+    public void renderButtonTexture(PoseStack matrices) {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.getTextureManager().bindForSetup(BUTTON_TEXTURE);
 
@@ -49,9 +49,9 @@ public class MissionButton extends Button {
         blit(matrices, x, y, 0, 0, textureWidth, textureHeight);
     }
 
-    public void renderItem(PoseStack matrices) {
+    public void renderItem() {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        int textureX = x + width / 2 - 92;
+        int textureX = x + width / 2 - 94;
         int textureY = y + height / 2 - 8; // Center of the button, minus half the size of the texture
         itemRenderer.renderGuiItem(item, textureX, textureY);
     }
