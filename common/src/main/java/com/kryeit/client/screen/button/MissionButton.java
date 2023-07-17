@@ -15,7 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class MissionButton extends Button {
-    public static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/mission_button.png");
+    public static final ResourceLocation GUI_WIDGETS = new ResourceLocation("textures/gui/widgets.png");
+    public static final ResourceLocation ADVANCEMENT_WIDGETS = new ResourceLocation("textures/gui/advancements/widgets.png");
     private final boolean completed;
     private final ItemStack item;
     protected final OnTooltip onTooltip;
@@ -32,9 +33,8 @@ public class MissionButton extends Button {
 
     @Override
     public void renderButton(@NotNull PoseStack matrices, int mouseX, int mouseY, float delta) {
-        super.renderButton(matrices, mouseX, mouseY, delta);
         renderButtonTexture(matrices);
-        renderItem();
+        renderItem(matrices);
         int color = completed ? 0x00FF00 : 0xFFFFFF;
         Font font = Minecraft.getInstance().font;
         AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, color);
@@ -46,22 +46,59 @@ public class MissionButton extends Button {
 
     public void renderButtonTexture(PoseStack matrices) {
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindForSetup(BUTTON_TEXTURE);
+        minecraft.getTextureManager().bindForSetup(GUI_WIDGETS);
 
-        int textureWidth = 200;
-        int textureHeight = 20;
+        int textureWidth = 256;
+        int textureHeight = 256;
 
-        int x = this.x + (this.width - textureWidth) / 2;
-        int y = this.y + (this.height - textureHeight) / 2;
+        int u = 0;
+        int v = 66;
 
-        RenderSystem.setShaderTexture(0, BUTTON_TEXTURE);
-        blit(matrices, x, y, 0, 0, textureWidth, textureHeight);
+        if(isHovered) {
+            v = 86;
+        }
+
+        int buttonWidth = 200;
+        int buttonHeight = 20;
+
+        int x = this.x;
+        int y = this.y;
+
+        RenderSystem.setShaderTexture(0, GUI_WIDGETS);
+        blit(matrices, x, y, u, v, buttonWidth, buttonHeight, textureWidth, textureHeight);
     }
 
-    public void renderItem() {
+
+    public void renderItem(PoseStack matrices) {
+        renderBelowItem(matrices);
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        int textureX = x + width / 2 - 94;
+        int textureX = x + width / 2 - 92;
         int textureY = y + height / 2 - 8; // Center of the button, minus half the size of the texture
         itemRenderer.renderGuiItem(item, textureX, textureY);
+    }
+
+
+    public void renderBelowItem(PoseStack matrices) {
+        Minecraft minecraft = Minecraft.getInstance();
+        minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
+
+        int textureWidth = 256;
+        int textureHeight = 256;
+
+        int u = 0;
+        int v = 128;
+
+        if(isHovered) {
+            u = 26;
+        }
+
+        int buttonWidth = 26;
+        int buttonHeight = 26;
+
+        int x = this.x + 3;
+        int y = this.y - 3;
+
+        RenderSystem.setShaderTexture(0, ADVANCEMENT_WIDGETS);
+        blit(matrices, x, y, u, v, buttonWidth, buttonHeight, textureWidth, textureHeight);
     }
 }
