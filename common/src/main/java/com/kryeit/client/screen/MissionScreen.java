@@ -101,7 +101,7 @@ public class MissionScreen extends Screen {
 
     public List<Component> getTooltip(ClientsideActiveMission mission) {
         return List.of(new TextComponent("Mission: " + mission.missionString().getString()),
-                new TextComponent(mission.requiredAmount() + " of " + mission.item())
+                new TextComponent(mission.requiredAmount() + " of " + mission.itemStack().getItem())
                         .withStyle(ChatFormatting.DARK_PURPLE),
                 new TextComponent("Progress: " + mission.progress() + "/" + mission.requiredAmount()));
     }
