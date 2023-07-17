@@ -1,9 +1,6 @@
 package com.kryeit.forge.event;
 
 import com.kryeit.Main;
-import com.kryeit.forge.recipe.BiggerExchangeRecipe;
-import com.kryeit.forge.recipe.SmallerExchangeRecipe;
-import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

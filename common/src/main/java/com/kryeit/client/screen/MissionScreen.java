@@ -5,6 +5,7 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -12,9 +13,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MissionScreen extends Screen {
+
+    public final List<Runnable> tooltipRunnables = new ArrayList<>();
 
     public MissionScreen() {
         super(new TextComponent("Mission GUI"));
@@ -54,11 +59,10 @@ public class MissionScreen extends Screen {
             Component leftColumnTitle = leftColumnMission.missionString();
 
             // Left column
-            this.addRenderableWidget(new MissionButton(leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission.isCompleted(), leftColumnMission.itemStack(), button -> {
+            this.addRenderableWidget(new MissionButton(this, leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission.isCompleted(), leftColumnMission.itemStack(), button -> {
                 // Button clicked
-            },  (button, poseStack, i1, j) -> {
-                // On tooltip - TODO: DOESNT WORK YET, IDK WHY
-                renderTooltip(poseStack, Component.nullToEmpty("your text"), i1, j);
+            }, (button, poseStack, mouseX, mouseY) -> {
+                renderTooltip(poseStack, getTooltip(leftColumnMission), Optional.empty(), mouseX, mouseY);
 
             }));
 
@@ -68,17 +72,16 @@ public class MissionScreen extends Screen {
                 Component rightColumnTitle = rightColumnMission.missionString();
 
                 // Right column
-                this.addRenderableWidget(new MissionButton(rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission.isCompleted(), rightColumnMission.itemStack(), button -> {
+                this.addRenderableWidget(new MissionButton(this, rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission.isCompleted(), rightColumnMission.itemStack(), button -> {
                     // Button clicked
-                },  (button, poseStack, i1, j) -> {
-                    // On tooltip - TODO: DOESNT WORK YET, IDK WHY
-                    renderTooltip(poseStack, Component.nullToEmpty("your text"), i1, j);
-
+                },  (button, poseStack, mouseX, mouseY) -> {
+                    renderTooltip(poseStack, getTooltip(rightColumnMission), Optional.empty(), mouseX, mouseY);
                 }));
             }
         }
 
         rewardButton();
+
     }
 
     @Override
@@ -92,6 +95,15 @@ public class MissionScreen extends Screen {
 
         super.render(matrices, mouseX, mouseY, delta);
         drawCenteredString(matrices, Minecraft.getInstance().font, this.title, this.width / 2, 40, 0xFFFFFF);
+        tooltipRunnables.forEach(Runnable::run);
+        tooltipRunnables.clear();
+    }
+
+    public List<Component> getTooltip(ClientsideActiveMission mission) {
+        return List.of(new TextComponent("Mission: " + mission.missionString().getString()),
+                new TextComponent(mission.requiredAmount() + " of " + mission.item())
+                        .withStyle(ChatFormatting.DARK_PURPLE),
+                new TextComponent("Progress: " + mission.progress() + "/" + mission.requiredAmount()));
     }
 
     @Override
@@ -100,23 +112,23 @@ public class MissionScreen extends Screen {
     }
 
     public void closeButton() {
-        int buttonWidth = 160;
+        int spacing = 5;
+        int buttonWidth = 80;
         int buttonHeight = 20;
         int bottomPadding = 20;
-        int centerX = this.width / 2 - buttonWidth / 2; // Center of the screen, minus half the button's width
-        int centerY = this.height - buttonHeight - bottomPadding;
+        int x = (this.width / 2 - buttonWidth - spacing);
+        int y = this.height - buttonHeight - bottomPadding;
 
-        this.addRenderableWidget(new Button(centerX, centerY, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"),
+        this.addRenderableWidget(new Button(x, y, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"),
                 button -> Minecraft.getInstance().setScreen(null)));
     }
 
     public void rewardButton() {
-        // Add the reward button at the bottom right
+        int spacing = 5;
         int buttonWidth = 80;
         int buttonHeight = 20;
-        int rightPadding = 50;
         int bottomPadding = 20;
-        int x = this.width - buttonWidth - rightPadding;
+        int x = (this.width / 2 + spacing);
         int y = this.height - buttonHeight - bottomPadding;
 
         this.addRenderableWidget(new RewardsButton(x, y, buttonWidth, buttonHeight, new TextComponent("   Rewards"),
