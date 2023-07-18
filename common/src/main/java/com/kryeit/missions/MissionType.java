@@ -9,7 +9,11 @@ import java.util.UUID;
 public interface MissionType {
     String id();
 
+    String difficulty();
+
     Component taskString(String language, int progress, Component itemName);
+
+    Component titleString();
 
     int getProgress(UUID player, ResourceLocation item);
 

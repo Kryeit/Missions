@@ -2,6 +2,8 @@ package com.kryeit.missions;
 
 import com.kryeit.Utils;
 import com.kryeit.client.ClientsideActiveMission;
+import com.kryeit.client.screen.button.MissionButton;
+import com.kryeit.missions.mission_types.BreakMission;
 import com.kryeit.missions.utils.Range;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -196,7 +198,11 @@ public class DataStorage {
         public ClientsideActiveMission toClientMission(String language, UUID player) {
             MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
             ItemStack itemStack = Utils.getItem(item());
-            return new ClientsideActiveMission(requiredAmount(),
+            return new ClientsideActiveMission(
+
+                    type.titleString(),
+                    type.difficulty(),
+                    requiredAmount(),
                     MissionTypeRegistry.INSTANCE.getType(missionID).getProgress(player, item),
                     itemStack,
                     type.taskString(language, type.getProgress(player, item()), itemStack.getDisplayName()),

@@ -16,6 +16,11 @@ public class VoteMission implements MissionType {
     }
 
     @Override
+    public String difficulty() {
+        return "hard";
+    }
+
+    @Override
     public int getProgress(UUID player, ResourceLocation item) {
         return getData(player).getInt("votes");
     }
@@ -34,8 +39,12 @@ public class VoteMission implements MissionType {
         }
     }
 
+    public Component titleString() {
+        return Component.nullToEmpty("Vote in the same week");
+    }
+
     @Override
     public Component taskString(String language, int progress, Component itemName) {
-        return Component.nullToEmpty("Break mission");
+        return Component.nullToEmpty("Vote mission");
     }
 }

@@ -1,6 +1,7 @@
 package com.kryeit.client.screen.button;
 
 import com.kryeit.Main;
+import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.client.screen.MissionScreen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,6 +15,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class MissionButton extends Button {
     public static final ResourceLocation GUI_WIDGETS = new ResourceLocation("textures/gui/widgets.png");
     public static final ResourceLocation ADVANCEMENT_WIDGETS = new ResourceLocation("textures/gui/advancements/widgets.png");
@@ -21,24 +24,32 @@ public class MissionButton extends Button {
     private final ItemStack item;
     protected final OnTooltip onTooltip;
 
+    protected final ClientsideActiveMission mission;
     private final MissionScreen screen;
 
-    public MissionButton(MissionScreen screen, int x, int y, int width, int height, Component message, boolean completed, ItemStack item, OnPress onPress, OnTooltip onTooltip) {
+    public MissionButton(MissionScreen screen, int x, int y, int width, int height, Component message, ClientsideActiveMission mission, OnPress onPress, OnTooltip onTooltip) {
         super(x, y, width, height, message, onPress);
-        this.completed = completed;
-        this.item = item;
+        this.completed = mission.isCompleted();
+        this.item = mission.itemStack();
         this.onTooltip = onTooltip;
         this.screen = screen;
+        this.mission = mission;
     }
 
     @Override
     public void renderButton(@NotNull PoseStack matrices, int mouseX, int mouseY, float delta) {
         renderButtonTexture(matrices);
-        renderItem(matrices);
+        drawText(matrices);
+        tooltip(matrices, mouseX, mouseY);
+    }
+
+    public void drawText(PoseStack matrices) {
         int color = completed ? 0x00FF00 : 0xFFFFFF;
         Font font = Minecraft.getInstance().font;
-        AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, color);
+        AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2 + 8, this.y + (this.height - 8) / 2, color);
+    }
 
+    public void tooltip(PoseStack matrices, int mouseX, int mouseY) {
         if (this.isMouseOver(mouseX, mouseY)) {
             screen.tooltipRunnables.add(() -> this.onTooltip.onTooltip(this, matrices, mouseX, mouseY));
         }
@@ -48,14 +59,11 @@ public class MissionButton extends Button {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.getTextureManager().bindForSetup(GUI_WIDGETS);
 
-        int textureWidth = 256;
-        int textureHeight = 256;
-
         int u = 0;
         int v = 66;
 
         if(isHovered) {
-            v = 86;
+            v += 20;
         }
 
         int buttonWidth = 200;
@@ -65,7 +73,8 @@ public class MissionButton extends Button {
         int y = this.y;
 
         RenderSystem.setShaderTexture(0, GUI_WIDGETS);
-        blit(matrices, x, y, u, v, buttonWidth, buttonHeight, textureWidth, textureHeight);
+        blit(matrices, x, y, u, v, buttonWidth, buttonHeight, 256, 256);
+        renderItem(matrices);
     }
 
 
@@ -82,23 +91,27 @@ public class MissionButton extends Button {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
 
-        int textureWidth = 256;
-        int textureHeight = 256;
-
         int u = 0;
-        int v = 128;
+        int v = 154;
 
-        if(isHovered) {
+        if(isHovered || mission.isCompleted()) {
+            v -= 26;
+        }
+
+        if(Objects.equals(mission.difficulty(),"normal")) {
+            u = 26 * 2;
+        }
+
+        if(Objects.equals(mission.difficulty(), "hard")) {
             u = 26;
         }
 
-        int buttonWidth = 26;
-        int buttonHeight = 26;
+        int textureSize = 26;
 
         int x = this.x + 3;
         int y = this.y - 3;
 
         RenderSystem.setShaderTexture(0, ADVANCEMENT_WIDGETS);
-        blit(matrices, x, y, u, v, buttonWidth, buttonHeight, textureWidth, textureHeight);
+        blit(matrices, x, y, u, v, textureSize, textureSize, 256, 256);
     }
 }

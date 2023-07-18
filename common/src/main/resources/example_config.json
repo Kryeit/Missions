@@ -5,9 +5,34 @@
       "item": "stone"
     },
     "missions": {
-      "stone": "10-20",
-      "grass_block": "30-40",
-      "minecraft:cobblestone": "50-60"
+      "andesite": "50-60"
+    }
+  },
+  "eat": {
+    "reward": {
+      "amount": "30-60",
+      "item": "stone"
+    },
+    "missions": {
+      "create:honeyed_apple": "200-3000"
+    }
+  },
+  "craft": {
+    "reward": {
+      "amount": "30-60",
+      "item": "stone"
+    },
+    "missions": {
+      "create:gearshift": "200-3000"
+    }
+  },
+  "kill": {
+    "reward": {
+      "amount": "30-60",
+      "item": "stone"
+    },
+    "missions": {
+      "minecraft:zombie": "200-3000"
     }
   }
 }

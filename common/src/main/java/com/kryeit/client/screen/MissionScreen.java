@@ -56,10 +56,10 @@ public class MissionScreen extends Screen {
 
             // Use the mission's item as the button's title
             ClientsideActiveMission leftColumnMission = activeMissions.get(i);
-            Component leftColumnTitle = leftColumnMission.missionString();
+            Component leftColumnTitle = leftColumnMission.titleString();
 
             // Left column
-            this.addRenderableWidget(new MissionButton(this, leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission.isCompleted(), leftColumnMission.itemStack(), button -> {
+            this.addRenderableWidget(new MissionButton(this, leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission, button -> {
                 // Button clicked
             }, (button, poseStack, mouseX, mouseY) -> {
                 renderTooltip(poseStack, getTooltip(leftColumnMission), Optional.empty(), mouseX, mouseY);
@@ -69,10 +69,10 @@ public class MissionScreen extends Screen {
             if (i + missionsPerColumn < activeMissions.size()) {
                 // There's a mission for the right column
                 ClientsideActiveMission rightColumnMission = activeMissions.get(i + missionsPerColumn);
-                Component rightColumnTitle = rightColumnMission.missionString();
+                Component rightColumnTitle = rightColumnMission.titleString();
 
                 // Right column
-                this.addRenderableWidget(new MissionButton(this, rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission.isCompleted(), rightColumnMission.itemStack(), button -> {
+                this.addRenderableWidget(new MissionButton(this, rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission, button -> {
                     // Button clicked
                 },  (button, poseStack, mouseX, mouseY) -> {
                     renderTooltip(poseStack, getTooltip(rightColumnMission), Optional.empty(), mouseX, mouseY);
@@ -100,11 +100,24 @@ public class MissionScreen extends Screen {
     }
 
     public List<Component> getTooltip(ClientsideActiveMission mission) {
-        return List.of(new TextComponent("Mission: " + mission.missionString().getString()),
-                new TextComponent(mission.requiredAmount() + " of " + mission.itemStack().getItem())
-                        .withStyle(ChatFormatting.DARK_PURPLE),
-                new TextComponent("Progress: " + mission.progress() + "/" + mission.requiredAmount()));
+        return List.of(
+                new TextComponent("Mission Details")
+                        .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD),
+
+                new TextComponent("Task: " + mission.missionString().getString())
+                        .withStyle(ChatFormatting.WHITE),
+
+                new TextComponent("Item Required: " + mission.itemStack().getDisplayName().getString())
+                        .withStyle(ChatFormatting.BLUE),
+
+                new TextComponent("Amount Required: " + mission.requiredAmount())
+                        .withStyle(ChatFormatting.BLUE),
+
+                new TextComponent("Your Progress: " + mission.progress() + "/" + mission.requiredAmount())
+                        .withStyle(ChatFormatting.GREEN)
+        );
     }
+
 
     @Override
     public boolean isPauseScreen() {
