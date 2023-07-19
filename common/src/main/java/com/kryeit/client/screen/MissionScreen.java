@@ -2,6 +2,7 @@ package com.kryeit.client.screen;
 
 import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
+import com.kryeit.client.screen.button.InfoButton;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -80,6 +81,7 @@ public class MissionScreen extends Screen {
             }
         }
 
+        infoButton();
         rewardButton();
 
     }
@@ -134,6 +136,12 @@ public class MissionScreen extends Screen {
 
         this.addRenderableWidget(new Button(x, y, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"),
                 button -> Minecraft.getInstance().setScreen(null)));
+    }
+
+    public void infoButton() {
+        int x = (this.width / 2 - 120);
+        int y = this.height - 20 - 20;
+        this.addRenderableWidget(new InfoButton(x, y, 20, 20, new TextComponent("")));
     }
 
     public void rewardButton() {

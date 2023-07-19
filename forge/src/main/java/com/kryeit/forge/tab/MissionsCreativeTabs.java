@@ -15,6 +15,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Collection;
 
+import static com.kryeit.forge.MainForge.REGISTRATE;
+
 public abstract class MissionsCreativeTabs extends CreativeModeTab {
     public MissionsCreativeTabs(String id) {
         super(Main.MOD_ID + "." + id);
@@ -28,7 +30,7 @@ public abstract class MissionsCreativeTabs extends CreativeModeTab {
     }
 
     protected Collection<RegistryEntry<Item>> registeredItems() {
-        return Create.REGISTRATE.getAll(ForgeRegistries.ITEMS.getRegistryKey());
+        return REGISTRATE.getAll(ForgeRegistries.ITEMS.getRegistryKey());
     }
 
     public void addBlocks(NonNullList<ItemStack> items) {
