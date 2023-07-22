@@ -1,6 +1,5 @@
 package com.kryeit.client.screen.button;
 
-import com.kryeit.Utils;
 import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.client.screen.MissionScreen;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -42,7 +41,7 @@ public class MissionButton extends Button {
     }
 
     public void drawText(PoseStack matrices) {
-        int color = completed ? 0x00FF00 : Utils.getTitleColor(mission.difficulty());
+        int color = completed ? 0x00FF00 : mission.difficulty().color();
         Font font = Minecraft.getInstance().font;
         AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2 + 7, this.y + (this.height - 8) / 2, color);
     }
@@ -90,8 +89,8 @@ public class MissionButton extends Button {
         }
 
         int u = switch (mission.difficulty()) {
-            case "normal" -> 26 * 2;
-            case "hard" -> 26;
+            case NORMAL -> 26 * 2;
+            case HARD -> 26;
             default -> 0;
         };
 

@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface MissionType {
     String id();
 
-    String difficulty();
+    MissionDifficulty difficulty();
 
     Component taskString(String language, int progress, Component itemName);
 

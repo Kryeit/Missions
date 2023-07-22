@@ -1,5 +1,6 @@
 package com.kryeit.missions.mission_types;
 
+import com.kryeit.missions.MissionDifficulty;
 import net.minecraft.network.chat.Component;
 
 import java.util.Arrays;
@@ -22,8 +23,8 @@ public class CraftMission implements ItemMissionType {
     }
 
     @Override
-    public String difficulty() {
-        return "normal";
+    public MissionDifficulty difficulty() {
+        return MissionDifficulty.NORMAL;
     }
 
     public Component titleString() {

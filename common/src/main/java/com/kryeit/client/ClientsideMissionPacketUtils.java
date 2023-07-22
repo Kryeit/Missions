@@ -28,7 +28,7 @@ public class ClientsideMissionPacketUtils {
 
         buf.writeCollection(missions, (b, mission) -> {
             b.writeComponent(mission.titleString());
-            b.writeUtf(mission.difficulty());
+            b.writeEnum(mission.difficulty());
             b.writeInt(mission.requiredAmount());
             b.writeInt(mission.progress());
             b.writeItem(mission.itemStack());

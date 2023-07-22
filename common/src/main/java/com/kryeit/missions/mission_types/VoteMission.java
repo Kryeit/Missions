@@ -1,5 +1,6 @@
 package com.kryeit.missions.mission_types;
 
+import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
 import net.minecraft.nbt.CompoundTag;
@@ -16,8 +17,8 @@ public class VoteMission implements MissionType {
     }
 
     @Override
-    public String difficulty() {
-        return "hard";
+    public MissionDifficulty difficulty() {
+        return MissionDifficulty.HARD;
     }
 
     @Override

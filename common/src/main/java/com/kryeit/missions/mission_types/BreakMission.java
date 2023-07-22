@@ -1,5 +1,6 @@
 package com.kryeit.missions.mission_types;
 
+import com.kryeit.missions.MissionDifficulty;
 import net.minecraft.network.chat.Component;
 
 import java.util.Arrays;
@@ -22,8 +23,8 @@ public class BreakMission implements ItemMissionType {
     }
 
     @Override
-    public String difficulty() {
-        return "easy";
+    public MissionDifficulty difficulty() {
+        return MissionDifficulty.EASY;
     }
 
     public Component titleString() {
