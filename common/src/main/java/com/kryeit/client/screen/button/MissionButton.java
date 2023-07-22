@@ -1,6 +1,5 @@
 package com.kryeit.client.screen.button;
 
-import com.kryeit.Main;
 import com.kryeit.Utils;
 import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.client.screen.MissionScreen;
@@ -16,23 +15,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class MissionButton extends Button {
     public static final ResourceLocation GUI_WIDGETS = new ResourceLocation("textures/gui/widgets.png");
     public static final ResourceLocation ADVANCEMENT_WIDGETS = new ResourceLocation("textures/gui/advancements/widgets.png");
     private final boolean completed;
     private final ItemStack item;
-    protected final OnTooltip onTooltip;
 
     protected final ClientsideActiveMission mission;
     private final MissionScreen screen;
 
-    public MissionButton(MissionScreen screen, int x, int y, int width, int height, Component message, ClientsideActiveMission mission, OnPress onPress, OnTooltip onTooltip) {
-        super(x, y, width, height, message, onPress);
+    public MissionButton(MissionScreen screen, int x, int y, Component message, ClientsideActiveMission mission, OnTooltip onTooltip) {
+        super(x, y, 200, 20, message, button -> {}, onTooltip);
         this.completed = mission.isCompleted();
         this.item = mission.itemStack();
-        this.onTooltip = onTooltip;
         this.screen = screen;
         this.mission = mission;
     }
@@ -41,19 +36,15 @@ public class MissionButton extends Button {
     public void renderButton(@NotNull PoseStack matrices, int mouseX, int mouseY, float delta) {
         renderButtonTexture(matrices);
         drawText(matrices);
-        tooltip(matrices, mouseX, mouseY);
+        if (isHoveredOrFocused()) {
+            screen.activeTooltip = () -> onTooltip.onTooltip(this, matrices, mouseX, mouseY);
+        }
     }
 
     public void drawText(PoseStack matrices) {
         int color = completed ? 0x00FF00 : Utils.getTitleColor(mission.difficulty());
         Font font = Minecraft.getInstance().font;
         AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2 + 7, this.y + (this.height - 8) / 2, color);
-    }
-
-    public void tooltip(PoseStack matrices, int mouseX, int mouseY) {
-        if (this.isMouseOver(mouseX, mouseY)) {
-            screen.tooltipRunnables.add(() -> this.onTooltip.onTooltip(this, matrices, mouseX, mouseY));
-        }
     }
 
     public void renderButtonTexture(PoseStack matrices) {
@@ -92,20 +83,17 @@ public class MissionButton extends Button {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
 
-        int u = 0;
         int v = 154;
 
-        if(isHovered || mission.isCompleted()) {
+        if (isHovered || mission.isCompleted()) {
             v -= 26;
         }
 
-        if(Objects.equals(mission.difficulty(),"normal")) {
-            u = 26 * 2;
-        }
-
-        if(Objects.equals(mission.difficulty(), "hard")) {
-            u = 26;
-        }
+        int u = switch (mission.difficulty()) {
+            case "normal" -> 26 * 2;
+            case "hard" -> 26;
+            default -> 0;
+        };
 
         int textureSize = 26;
 

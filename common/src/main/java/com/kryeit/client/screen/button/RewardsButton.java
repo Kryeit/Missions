@@ -1,18 +1,19 @@
 package com.kryeit.client.screen.button;
 
 import com.kryeit.Main;
+import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public class RewardsButton extends Button {
-
+    private static final OnPress onPress = button -> ClientsideMissionPacketUtils.requestPayout();
     private static final ResourceLocation CHEST_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/entity/chest/christmas.png");
 
-    public RewardsButton(int x, int y, int width, int height, Component message, OnPress onPress) {
-        super(x, y, width, height, message, onPress);
+    public RewardsButton(int x, int y) {
+        super(x, y, 80, 20, new TextComponent("   Rewards"), onPress);
     }
 
     @Override

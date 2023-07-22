@@ -14,13 +14,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class MissionScreen extends Screen {
 
-    public final List<Runnable> tooltipRunnables = new ArrayList<>();
+    private final Runnable NO_TOOLTIP = () -> {
+    };
+    public Runnable activeTooltip = NO_TOOLTIP;
 
     public MissionScreen() {
         super(new TextComponent("Mission GUI"));
@@ -33,7 +34,7 @@ public class MissionScreen extends Screen {
         ClientsideMissionPacketUtils.setMissionUpdateHandler(this::addMissions);
         ClientsideMissionPacketUtils.requestMissions();
 
-        closeButton();
+        createCloseButton();
     }
 
     private void addMissions(List<ClientsideActiveMission> activeMissions) {
@@ -49,7 +50,6 @@ public class MissionScreen extends Screen {
             return;
         }
 
-        // Number of missions for each column
         int missionsPerColumn = 5;
 
         for (int i = 0; i < missionsPerColumn; i++) {
@@ -60,12 +60,7 @@ public class MissionScreen extends Screen {
             Component leftColumnTitle = leftColumnMission.titleString();
 
             // Left column
-            this.addRenderableWidget(new MissionButton(this, leftX, y, buttonWidth, buttonHeight, leftColumnTitle, leftColumnMission, button -> {
-                // Button clicked
-            }, (button, poseStack, mouseX, mouseY) -> {
-                renderTooltip(poseStack, getTooltip(leftColumnMission), Optional.empty(), mouseX, mouseY);
-
-            }));
+            this.addRenderableWidget(createMissionButton(leftX, y, leftColumnTitle, leftColumnMission));
 
             if (i + missionsPerColumn < activeMissions.size()) {
                 // There's a mission for the right column
@@ -73,22 +68,17 @@ public class MissionScreen extends Screen {
                 Component rightColumnTitle = rightColumnMission.titleString();
 
                 // Right column
-                this.addRenderableWidget(new MissionButton(this, rightX, y, buttonWidth, buttonHeight, rightColumnTitle, rightColumnMission, button -> {
-                    // Button clicked
-                },  (button, poseStack, mouseX, mouseY) -> {
-                    renderTooltip(poseStack, getTooltip(rightColumnMission), Optional.empty(), mouseX, mouseY);
-                }));
+                this.addRenderableWidget(createMissionButton(rightX, y, rightColumnTitle, rightColumnMission));
             }
         }
 
-        infoButton();
-        rewardButton();
-
+        createInfoButton();
+        createRewardButton();
     }
 
-    @Override
-    public void tick() {
-        super.tick();
+    private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission) {
+        Button.OnTooltip tooltip = (button, poseStack, mouseX, mouseY) -> renderTooltip(poseStack, getTooltip(mission), Optional.empty(), mouseX, mouseY);
+        return new MissionButton(this, x, y, title, mission, tooltip);
     }
 
     @Override
@@ -97,8 +87,8 @@ public class MissionScreen extends Screen {
 
         super.render(matrices, mouseX, mouseY, delta);
         drawCenteredString(matrices, Minecraft.getInstance().font, this.title, this.width / 2, 40, 0xFFFFFF);
-        tooltipRunnables.forEach(Runnable::run);
-        tooltipRunnables.clear();
+        activeTooltip.run();
+        activeTooltip = NO_TOOLTIP;
     }
 
     public List<Component> getTooltip(ClientsideActiveMission mission) {
@@ -126,7 +116,7 @@ public class MissionScreen extends Screen {
         return false;
     }
 
-    public void closeButton() {
+    public void createCloseButton() {
         int spacing = 5;
         int buttonWidth = 80;
         int buttonHeight = 20;
@@ -138,21 +128,19 @@ public class MissionScreen extends Screen {
                 button -> Minecraft.getInstance().setScreen(null)));
     }
 
-    public void infoButton() {
-        int x = (this.width / 2 - 120);
+    public void createInfoButton() {
+        int x = this.width / 2 - 120;
         int y = this.height - 20 - 20;
-        this.addRenderableWidget(new InfoButton(x, y, 20, 20, new TextComponent("")));
+        this.addRenderableWidget(new InfoButton(x, y));
     }
 
-    public void rewardButton() {
+    public void createRewardButton() {
         int spacing = 5;
-        int buttonWidth = 80;
         int buttonHeight = 20;
         int bottomPadding = 20;
         int x = (this.width / 2 + spacing);
         int y = this.height - buttonHeight - bottomPadding;
 
-        this.addRenderableWidget(new RewardsButton(x, y, buttonWidth, buttonHeight, new TextComponent("   Rewards"),
-                button -> ClientsideMissionPacketUtils.requestPayout()));
+        this.addRenderableWidget(new RewardsButton(x, y));
     }
 }
