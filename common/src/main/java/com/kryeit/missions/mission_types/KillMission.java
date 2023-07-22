@@ -1,5 +1,6 @@
 package com.kryeit.missions.mission_types;
 
+import com.kryeit.missions.MissionDifficulty;
 import net.minecraft.network.chat.Component;
 
 import java.util.Arrays;
@@ -22,8 +23,8 @@ public class KillMission implements ItemMissionType {
     }
 
     @Override
-    public String difficulty() {
-        return "hard";
+    public MissionDifficulty difficulty() {
+        return MissionDifficulty.HARD;
     }
 
     public Component titleString() {
