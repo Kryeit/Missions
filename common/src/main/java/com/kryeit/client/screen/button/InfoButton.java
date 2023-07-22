@@ -1,21 +1,20 @@
 package com.kryeit.client.screen.button;
 
-import com.kryeit.client.ClientsideActiveMission;
-import com.kryeit.client.screen.MissionScreen;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 public class InfoButton extends Button {
 
     public static final ResourceLocation INFO_ICON = new ResourceLocation("textures/gui/info_icon.png");
+    private static final OnPress ON_PRESS = button -> {
+    };
 
-    public InfoButton(int x, int y, int width, int height, Component message) {
-        super(x, y, width, height, message, null);
-
+    public InfoButton(int x, int y) {
+        super(x, y, 20, 20, new TextComponent(""), ON_PRESS);
     }
 
     @Override
