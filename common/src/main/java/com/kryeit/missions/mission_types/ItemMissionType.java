@@ -27,4 +27,14 @@ public interface ItemMissionType extends MissionType {
             MissionManager.checkReward(this, player, item);
         }
     }
+
+    default void handleItem(UUID player, ResourceLocation item, int amount) {
+        if (MissionManager.countItem(id(), player, item)) {
+            CompoundTag data = getData(player);
+            String itemString = item.toString();
+            data.putInt(itemString, data.getInt(itemString) + amount);
+
+            MissionManager.checkReward(this, player, item);
+        }
+    }
 }
