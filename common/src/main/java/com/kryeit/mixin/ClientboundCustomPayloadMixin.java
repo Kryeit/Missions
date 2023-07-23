@@ -27,7 +27,6 @@ public abstract class ClientboundCustomPayloadMixin {
         if (!identifier.equals(ClientsideMissionPacketUtils.IDENTIFIER)) return;
 
         ClientsideMissionPacketUtils.handlePacket(data);
-        System.out.println("Received missions");
 
         data.release();
         ci.cancel();
