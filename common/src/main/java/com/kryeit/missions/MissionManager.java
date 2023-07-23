@@ -5,11 +5,10 @@ import com.kryeit.Utils;
 import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+import net.minecraft.network.protocol.game.ClientboundCustomSoundPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -18,6 +17,9 @@ import java.util.Map;
 import java.util.UUID;
 
 public class MissionManager {
+
+    public static final ResourceLocation REWARD_SOUND = new ResourceLocation("entity.player.levelup");
+
     public static void checkReward(MissionType type, UUID player, ResourceLocation item) {
         DataStorage.ActiveMission activeMission = getActiveMission(type.id(), item, player);
         if (activeMission == null) return; // TODO maybe throw an exception
@@ -39,9 +41,13 @@ public class MissionManager {
         for (Map.Entry<String, Integer> entry : rewards.entrySet()) {
             ItemStack itemStack = Utils.getItem(new ResourceLocation(entry.getKey()));
             itemStack.setCount(entry.getValue());
-            giveItem(itemStack, player);
+            Utils.giveItem(itemStack, player);
         }
         DataStorage.INSTANCE.claimRewards(uuid);
+
+        if (!rewards.isEmpty()) {
+            player.connection.send(new ClientboundCustomSoundPacket(REWARD_SOUND, SoundSource.MASTER, player.position(), 1, 1));
+        }
     }
 
     public static boolean reassignMissionsIfNecessary(UUID player) {
@@ -53,34 +59,6 @@ public class MissionManager {
             return true;
         }
         return false;
-    }
-
-    private static void giveItem(ItemStack stack, ServerPlayer player) {
-        int stackSize = stack.getMaxStackSize();
-        int l = stack.getCount();
-        while (l > 0) {
-            ItemEntity itemEntity;
-            int m = Math.min(stackSize, l);
-            l -= m;
-            ItemStack itemStack = stack.copy();
-            itemStack.setCount(m);
-
-            boolean added = player.getInventory().add(itemStack);
-            if (!added || !itemStack.isEmpty()) {
-                itemEntity = player.drop(itemStack, false);
-                if (itemEntity == null) continue;
-                itemEntity.setNoPickUpDelay();
-                itemEntity.setOwner(player.getUUID());
-                continue;
-            }
-            itemStack.setCount(1);
-            itemEntity = player.drop(itemStack, false);
-            if (itemEntity != null) {
-                itemEntity.makeFakeItem();
-            }
-            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2f, ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7f + 1.0f) * 2.0f);
-            player.containerMenu.broadcastChanges();
-        }
     }
 
     public static List<DataStorage.ActiveMission> getActiveMissions(UUID playerId) {
