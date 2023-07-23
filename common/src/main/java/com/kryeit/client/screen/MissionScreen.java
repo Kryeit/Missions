@@ -22,6 +22,7 @@ public class MissionScreen extends Screen {
     private final Runnable NO_TOOLTIP = () -> {
     };
     public Runnable activeTooltip = NO_TOOLTIP;
+    private List<ClientsideActiveMission> missionsToAdd = null;
 
     public MissionScreen() {
         super(new TextComponent("Mission GUI"));
@@ -31,7 +32,7 @@ public class MissionScreen extends Screen {
     protected void init() {
         super.init();
 
-        ClientsideMissionPacketUtils.setMissionUpdateHandler(this::addMissions);
+        ClientsideMissionPacketUtils.setMissionUpdateHandler(missions -> missionsToAdd = missions);
         ClientsideMissionPacketUtils.requestMissions();
 
         createCloseButton();
@@ -86,12 +87,18 @@ public class MissionScreen extends Screen {
         this.renderBackground(matrices);
 
         super.render(matrices, mouseX, mouseY, delta);
+        if (missionsToAdd != null) {
+            addMissions(missionsToAdd);
+            missionsToAdd = null;
+        }
+
         drawCenteredString(matrices, Minecraft.getInstance().font, this.title, this.width / 2, 40, 0xFFFFFF);
         activeTooltip.run();
         activeTooltip = NO_TOOLTIP;
     }
 
     public List<Component> getTooltip(ClientsideActiveMission mission) {
+        String progress = mission.isCompleted() ? "Completed" : mission.progress() + "/" + mission.requiredAmount();
         return List.of(
                 new TextComponent("Mission Details")
                         .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD),
@@ -105,7 +112,7 @@ public class MissionScreen extends Screen {
                 new TextComponent("Amount Required: " + mission.requiredAmount())
                         .withStyle(ChatFormatting.BLUE),
 
-                new TextComponent("Your Progress: " + mission.progress() + "/" + mission.requiredAmount())
+                new TextComponent("Your Progress: " + progress)
                         .withStyle(ChatFormatting.GREEN)
         );
     }
