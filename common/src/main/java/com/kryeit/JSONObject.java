@@ -2,6 +2,7 @@ package com.kryeit;
 
 import java.text.ParseException;
 import java.util.*;
+import java.util.function.BiFunction;
 
 public class JSONObject {
     private final Map<String, Object> data;
@@ -86,6 +87,18 @@ public class JSONObject {
         @Override
         public Iterator<Object> iterator() {
             return data.iterator();
+        }
+
+        public int size() {
+            return data.size();
+        }
+
+        public <T> List<T> asList(BiFunction<JSONArray, Integer, T> mapper) {
+            List<T> out = new ArrayList<>(size());
+            for (int i = 0; i < size(); i++) {
+                out.add(mapper.apply(this, i));
+            }
+            return out;
         }
     }
 

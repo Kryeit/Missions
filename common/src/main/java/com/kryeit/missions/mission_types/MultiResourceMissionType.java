@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.UUID;
 
-public interface ItemMissionType extends MissionType {
+public interface MultiResourceMissionType extends MissionType {
     @Override
     default int getProgress(UUID player, ResourceLocation item) {
         return getData(player).getInt(item.toString());
@@ -19,13 +19,7 @@ public interface ItemMissionType extends MissionType {
     }
 
     default void handleItem(UUID player, ResourceLocation item) {
-        if (MissionManager.countItem(id(), player, item)) {
-            CompoundTag data = getData(player);
-            String itemString = item.toString();
-            data.putInt(itemString, data.getInt(itemString) + 1);
-
-            MissionManager.checkReward(this, player, item);
-        }
+        handleItem(player, item, 1);
     }
 
     default void handleItem(UUID player, ResourceLocation item, int amount) {

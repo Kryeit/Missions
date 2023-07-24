@@ -40,12 +40,8 @@ public class VoteMission implements MissionType {
         }
     }
 
-    public Component titleString() {
-        return Component.nullToEmpty("Vote in the same week");
-    }
-
     @Override
-    public Component taskString(String language, int progress, Component itemName) {
+    public Component description() {
         return Component.nullToEmpty("Vote mission");
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -84,7 +85,8 @@ public class DataStorage {
             boolean isCompleted = compound.getBoolean("completed");
             String missionID = compound.getString("mission_id");
             int requiredAmount = compound.getInt("required_amount");
-            output.add(new ActiveMission(item, isCompleted, missionID, requiredAmount));
+            String title = compound.getString("title");
+            output.add(new ActiveMission(item, isCompleted, missionID, requiredAmount, title));
         }
         return output;
     }
@@ -99,6 +101,9 @@ public class DataStorage {
         }
     }
 
+    /*
+    This method should not be used. Use MissionManager#reassignMissions(UUID player) instead
+     */
     public void reassignActiveMissions(Map<MissionType, ConfigReader.Mission> missions, UUID player) {
         ListTag list = getActiveMissionsTag(player);
         list.clear();
@@ -112,6 +117,7 @@ public class DataStorage {
             tag.putBoolean("completed", false);
             tag.putString("mission_id", randomEntry.missionType().id());
             tag.putInt("required_amount", item.getValue().getRandomValue());
+            tag.putString("title", getRandomEntry(randomEntry.titles()));
 
             list.add(tag);
         }
@@ -169,12 +175,14 @@ public class DataStorage {
         private final boolean isCompleted;
         private final String missionID;
         private final int requiredAmount;
+        private final String title;
 
-        private ActiveMission(ResourceLocation item, boolean isCompleted, String missionID, int requiredAmount) {
+        private ActiveMission(ResourceLocation item, boolean isCompleted, String missionID, int requiredAmount, String title) {
             this.item = item;
             this.isCompleted = isCompleted;
             this.missionID = missionID;
             this.requiredAmount = requiredAmount;
+            this.title = title;
         }
 
         public int requiredAmount() {
@@ -193,16 +201,16 @@ public class DataStorage {
             return item;
         }
 
-        public ClientsideActiveMission toClientMission(String language, UUID player) {
+        public ClientsideActiveMission toClientMission(UUID player) {
             MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
             ItemStack itemStack = Utils.getItem(item());
             return new ClientsideActiveMission(
-                    type.titleString(),
+                    Component.nullToEmpty(title),
                     type.difficulty(),
                     requiredAmount(),
-                    MissionTypeRegistry.INSTANCE.getType(missionID).getProgress(player, item),
+                    type.getProgress(player, item),
                     itemStack,
-                    type.taskString(language, type.getProgress(player, item()), itemStack.getDisplayName()),
+                    type.description(),
                     isCompleted()
             );
         }

@@ -1,6 +1,7 @@
 package com.kryeit.missions;
 
 import com.kryeit.JSONObject;
+import com.kryeit.JSONObject.JSONArray;
 import com.kryeit.missions.utils.Range;
 
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ConfigReader {
@@ -37,7 +39,8 @@ public class ConfigReader {
                     Range.fromString(reward.getString("amount")),
                     reward.getString("item"),
                     missionType,
-                    getItems(value.getObject("missions"))
+                    getItems(value.getObject("missions")),
+                    value.getArray("titles").asList(JSONArray::getString)
             );
             missions.put(missionType, mission);
         }
@@ -56,33 +59,7 @@ public class ConfigReader {
         return missions;
     }
 
-    public static class Mission {
-        private final Range rewardAmount;
-        private final String rewardItem;
-        private final MissionType missionType;
-        private final Map<String, Range> items;
-
-        public Mission(Range rewardAmount, String rewardItem, MissionType missionType, Map<String, Range> items) {
-            this.rewardAmount = rewardAmount;
-            this.rewardItem = rewardItem;
-            this.missionType = missionType;
-            this.items = items;
-        }
-
-        public Map<String, Range> items() {
-            return items;
-        }
-
-        public MissionType missionType() {
-            return missionType;
-        }
-
-        public String rewardItem() {
-            return rewardItem;
-        }
-
-        public Range rewardAmount() {
-            return rewardAmount;
-        }
+    public record Mission(Range rewardAmount, String rewardItem, MissionType missionType, Map<String, Range> items,
+                          List<String> titles) {
     }
 }

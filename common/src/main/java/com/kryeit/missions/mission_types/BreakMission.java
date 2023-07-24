@@ -3,20 +3,7 @@ package com.kryeit.missions.mission_types;
 import com.kryeit.missions.MissionDifficulty;
 import net.minecraft.network.chat.Component;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-public class BreakMission implements ItemMissionType {
-
-    private static final Random RAND = new Random();
-    private static final List<String> TITLES = Arrays.asList(
-            "Block Buster Bonanza",
-            "Pixelated Demolition Derby",
-            "Minecrafty Mayhem",
-            "Terrain Takedown Titan",
-            "Debris Dozer Dynamo"
-    );
+public class BreakMission implements MultiResourceMissionType {
     @Override
     public String id() {
         return "break";
@@ -27,13 +14,8 @@ public class BreakMission implements ItemMissionType {
         return MissionDifficulty.EASY;
     }
 
-    public Component titleString() {
-        String title = TITLES.get(RAND.nextInt(TITLES.size()));
-        return Component.nullToEmpty(title);
-    }
-
     @Override
-    public Component taskString(String language, int progress, Component itemName) {
+    public Component description() {
         return Component.nullToEmpty("Break mission");
     }
 }

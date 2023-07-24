@@ -54,11 +54,19 @@ public class MissionManager {
         int lastSunday = Utils.getDay() - Utils.getDayOfWeek();
         int assignedDay = DataStorage.INSTANCE.getLastAssignedDay(player);
         if (assignedDay < lastSunday) {
-            DataStorage.INSTANCE.reassignActiveMissions(Main.getConfig().getMissions(), player);
-            DataStorage.INSTANCE.setLastAssignedDay(player);
+            reassignMissions(player);
             return true;
         }
         return false;
+    }
+
+    public static void reassignMissions(UUID player) {
+        for (DataStorage.ActiveMission mission : getActiveMissions(player)) {
+            MissionTypeRegistry.INSTANCE.getType(mission.missionID()).reset(player);
+        }
+
+        DataStorage.INSTANCE.reassignActiveMissions(Main.getConfig().getMissions(), player);
+        DataStorage.INSTANCE.setLastAssignedDay(player);
     }
 
     public static List<DataStorage.ActiveMission> getActiveMissions(UUID playerId) {
@@ -83,7 +91,7 @@ public class MissionManager {
     public static void sendMissions(ServerPlayer player) {
         List<ClientsideActiveMission> clientMissions = new ArrayList<>();
         for (DataStorage.ActiveMission mission : getActiveMissions(player.getUUID())) {
-            clientMissions.add(mission.toClientMission("", player.getUUID()));
+            clientMissions.add(mission.toClientMission(player.getUUID()));
         }
 
         ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(

@@ -3,20 +3,7 @@ package com.kryeit.missions.mission_types;
 import com.kryeit.missions.MissionDifficulty;
 import net.minecraft.network.chat.Component;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-public class CraftMission implements ItemMissionType {
-
-    private static final Random RAND = new Random();
-    private static final List<String> TITLES = Arrays.asList(
-            "Masterful Manufacture Madness",
-            "Bizarre Blueprint Builder",
-            "Crafty Creation Crusade",
-            "Widget Weaving Wizard",
-            "Artisanal Assembly Adventure"
-    );
+public class CraftMission implements MultiResourceMissionType {
     @Override
     public String id() {
         return "craft";
@@ -27,13 +14,8 @@ public class CraftMission implements ItemMissionType {
         return MissionDifficulty.NORMAL;
     }
 
-    public Component titleString() {
-        String title = TITLES.get(RAND.nextInt(TITLES.size()));
-        return Component.nullToEmpty(title);
-    }
-
     @Override
-    public Component taskString(String language, int progress, Component itemName) {
+    public Component description() {
         return Component.nullToEmpty("Craft mission");
     }
 }

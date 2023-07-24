@@ -11,9 +11,7 @@ public interface MissionType {
 
     MissionDifficulty difficulty();
 
-    Component taskString(String language, int progress, Component itemName);
-
-    Component titleString();
+    Component description();
 
     int getProgress(UUID player, ResourceLocation item);
 
