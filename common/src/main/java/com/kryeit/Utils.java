@@ -14,7 +14,7 @@ public class Utils {
     }
 
     /**
-     * @return THe current day of the week. 0 is monday.
+     * @return The current day of the week. 0 is monday.
      */
     public static int getDayOfWeek() {
         return (getDay() + 3) % 7;

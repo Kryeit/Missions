@@ -1,8 +1,9 @@
-package com.kryeit.missions;
+package com.kryeit.missions.config;
 
 import com.kryeit.JSONObject;
 import com.kryeit.JSONObject.JSONArray;
-import com.kryeit.missions.utils.Range;
+import com.kryeit.missions.MissionType;
+import com.kryeit.missions.MissionTypeRegistry;
 
 import java.io.IOException;
 import java.io.InputStream;

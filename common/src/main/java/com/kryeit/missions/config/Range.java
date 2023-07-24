@@ -1,4 +1,4 @@
-package com.kryeit.missions.utils;
+package com.kryeit.missions.config;
 
 import java.util.Random;
 

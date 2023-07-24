@@ -4,6 +4,7 @@ import com.kryeit.Main;
 import com.kryeit.Utils;
 import com.kryeit.client.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
+import com.kryeit.missions.config.ConfigReader;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.game.ClientboundCustomSoundPacket;
 import net.minecraft.resources.ResourceLocation;

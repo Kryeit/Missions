@@ -1,9 +1,9 @@
 package com.kryeit;
 
 
-import com.kryeit.missions.ConfigReader;
 import com.kryeit.missions.DataStorage;
 import com.kryeit.missions.MissionTypeRegistry;
+import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.*;
 
 import java.io.IOException;
