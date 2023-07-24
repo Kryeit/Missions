@@ -11,12 +11,13 @@ import org.lwjgl.glfw.GLFW;
 public class ClientEntryPoint implements ClientModInitializer {
 
     public static KeyMapping missionGuiKey;
+
     @Override
     public void onInitializeClient() {
-        missionGuiKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.mission_gui",  GLFW.GLFW_KEY_H, "key.category.missions"));
+        missionGuiKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.mission_gui", GLFW.GLFW_KEY_H, "key.category.missions"));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (missionGuiKey.isDown()) {
+            if (missionGuiKey.isDown() && client.screen == null) {
                 client.setScreen(new MissionScreen());
             }
         });

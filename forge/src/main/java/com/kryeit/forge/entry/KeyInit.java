@@ -21,16 +21,18 @@ public final class KeyInit {
         missionGuiKey = registerKey("mission_gui", "key.category.missions", InputConstants.KEY_H);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static KeyMapping registerKey(String name, String category, int keycode) {
-        final var key = new KeyMapping("key." + Main.MOD_ID + "." + name, keycode, category);
+        KeyMapping key = new KeyMapping("key." + Main.MOD_ID + "." + name, keycode, category);
         ClientRegistry.registerKeyBinding(key);
         return key;
     }
 
     @SubscribeEvent
     public static void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (missionGuiKey.isDown()) {
-            Minecraft.getInstance().setScreen(new MissionScreen());
+        Minecraft minecraft = Minecraft.getInstance();
+        if (missionGuiKey.isDown() && minecraft.screen == null) {
+            minecraft.setScreen(new MissionScreen());
         }
     }
 
