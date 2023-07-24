@@ -39,7 +39,7 @@ public class MainForge {
         forgeEventBus.addListener((Consumer<PlayerEvent.PlayerLoggedInEvent>) event -> {
             boolean reassigned = MissionManager.reassignMissionsIfNecessary(event.getPlayer().getUUID());
             if (reassigned) {
-                // send a message, I don't know?
+                // TODO send a message, I don't know?
             }
         });
     }
