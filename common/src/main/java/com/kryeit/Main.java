@@ -20,6 +20,7 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new EatMission());
         MissionTypeRegistry.INSTANCE.register(new VoteMission());
 
+        System.out.println(ExampleExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
         try {
             configReader = ConfigReader.readFile(Path.of("missions/missions.json"));
         } catch (IOException e) {
