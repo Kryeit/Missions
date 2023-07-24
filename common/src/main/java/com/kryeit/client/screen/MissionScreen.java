@@ -106,6 +106,9 @@ public class MissionScreen extends Screen {
                 new TextComponent("Task: " + mission.missionString().getString())
                         .withStyle(ChatFormatting.WHITE),
 
+                new TextComponent("Difficulty: " + mission.difficulty())
+                        .withStyle(ChatFormatting.BLUE),
+
                 new TextComponent("Item Required: " + mission.itemStack().getDisplayName().getString())
                         .withStyle(ChatFormatting.BLUE),
 
