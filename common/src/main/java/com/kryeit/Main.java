@@ -21,7 +21,6 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new VoteMission());
         MissionTypeRegistry.INSTANCE.register(new PressMission());
 
-        System.out.println(ExampleExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
         try {
             configReader = ConfigReader.readFile(Path.of("missions/missions.json"));
         } catch (IOException e) {
