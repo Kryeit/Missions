@@ -1,7 +1,6 @@
 package com.kryeit.forge.tab;
 
 import com.kryeit.Main;
-import com.simibubi.create.Create;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ItemRenderer;

@@ -7,7 +7,9 @@
   ],
   "mixins": [
     "ClientboundCustomPayloadMixin",
-    "ServerboundCustomPayloadMixin"
+    "MechanicalPressBlockEntityMixin",
+    "ServerboundCustomPayloadMixin",
+    "interfaces.BlockEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
