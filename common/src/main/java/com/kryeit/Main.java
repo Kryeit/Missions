@@ -20,6 +20,8 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new EatMission());
         MissionTypeRegistry.INSTANCE.register(new VoteMission());
         MissionTypeRegistry.INSTANCE.register(new PressMission());
+        MissionTypeRegistry.INSTANCE.register(new MixingMission());
+
 
         try {
             configReader = ConfigReader.readFile(Path.of("missions/missions.json"));

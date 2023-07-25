@@ -1,38 +1,28 @@
 {
-  "break": {
+  "mix": {
     "reward": {
       "amount": "10-20",
-      "item": "stone"
+      "item": "diamond"
     },
     "missions": {
-      "andesite": "50-60"
-    }
+      "create:brass_ingot": "1-10"
+    },
+    "titles": [
+      "Mix it up!",
+      "Brain washed"
+    ]
   },
-  "eat": {
+  "press": {
     "reward": {
-      "amount": "30-60",
-      "item": "stone"
+      "amount": "14-20",
+      "item": "diamond"
     },
     "missions": {
-      "create:honeyed_apple": "200-3000"
-    }
-  },
-  "craft": {
-    "reward": {
-      "amount": "30-60",
-      "item": "stone"
+      "create:iron_sheet": "1-10"
     },
-    "missions": {
-      "create:gearshift": "200-3000"
-    }
-  },
-  "kill": {
-    "reward": {
-      "amount": "30-60",
-      "item": "stone"
-    },
-    "missions": {
-      "minecraft:zombie": "200-3000"
-    }
+    "titles": [
+      "Pressure increase",
+      "Mantle force"
+    ]
   }
 }
