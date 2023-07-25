@@ -112,9 +112,6 @@ public class MissionScreen extends Screen {
                 new TextComponent("Item Required: " + mission.itemStack().getDisplayName().getString())
                         .withStyle(ChatFormatting.BLUE),
 
-                new TextComponent("Amount Required: " + mission.requiredAmount())
-                        .withStyle(ChatFormatting.BLUE),
-
                 new TextComponent("Your Progress: " + progress)
                         .withStyle(ChatFormatting.GREEN)
         );
