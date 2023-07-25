@@ -1,6 +1,7 @@
 package com.kryeit.mixin;
 
 import com.kryeit.PlatformSpecific;
+import com.kryeit.Utils;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.missions.mission_types.PressMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
@@ -29,13 +30,11 @@ public class MechanicalPressBlockEntityMixin {
         Player closestPlayer = null;
 
         if(level != null && worldPosition != null)
-            closestPlayer = level.getNearestPlayer(worldPosition.getX(),
-                    worldPosition.getY(),
-                    worldPosition.getZ(),
-                    64.0, true);
+            closestPlayer = Utils.getClosestPlayer(level, worldPosition);
 
         if (closestPlayer != null)
-            MissionTypeRegistry.INSTANCE.getType(PressMission.class).handleItem(closestPlayer.getUUID(),
+            MissionTypeRegistry.INSTANCE.getType(PressMission.class).handleItem(
+                    closestPlayer.getUUID(),
                     PlatformSpecific.getResourceLocation(result.getItem()),
                     result.getCount());
     }

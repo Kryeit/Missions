@@ -1,12 +1,15 @@
 package com.kryeit;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class Utils {
     public static int getDay() {
@@ -50,5 +53,13 @@ public class Utils {
             player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2f, ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7f + 1.0f) * 2.0f);
             player.containerMenu.broadcastChanges();
         }
+    }
+
+    public static Player getClosestPlayer(Level level, BlockPos worldPosition) {
+        return level.getNearestPlayer(
+                worldPosition.getX(),
+                worldPosition.getY(),
+                worldPosition.getZ(),
+                64.0, false);
     }
 }
