@@ -29,11 +29,15 @@ public class MechanicalPressBlockEntityMixin {
         Player closestPlayer = null;
 
         if(level != null && worldPosition != null)
-            closestPlayer = level.getNearestPlayer(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), 64.0, true);
+            closestPlayer = level.getNearestPlayer(worldPosition.getX(),
+                    worldPosition.getY(),
+                    worldPosition.getZ(),
+                    64.0, true);
 
-        if (closestPlayer != null) {
-            MissionTypeRegistry.INSTANCE.getType(PressMission.class).handleItem(closestPlayer.getUUID(), PlatformSpecific.getResourceLocation(result.getItem()), result.getCount());
-        }
+        if (closestPlayer != null)
+            MissionTypeRegistry.INSTANCE.getType(PressMission.class).handleItem(closestPlayer.getUUID(),
+                    PlatformSpecific.getResourceLocation(result.getItem()),
+                    result.getCount());
     }
 }
 
