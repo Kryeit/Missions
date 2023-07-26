@@ -22,6 +22,8 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new PressMission());
         MissionTypeRegistry.INSTANCE.register(new MixingMission());
         MissionTypeRegistry.INSTANCE.register(new CompactingMission());
+        MissionTypeRegistry.INSTANCE.register(new CrushingMission());
+
 
 
         try {
