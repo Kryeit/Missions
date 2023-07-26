@@ -33,21 +33,9 @@ public class MechanicalCrafterBlockEntityMixin {
         MechanicalCrafterBlockEntity blockEntity = (MechanicalCrafterBlockEntity) (Object) this;
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
-        Level level = accessor.getLevel();
-        BlockPos worldPosition = accessor.getWorldPosition();
-
         ItemStack result =
-                blockEntity.isVirtual() ? scriptedResult : RecipeGridHandler.tryToApplyRecipe(level, groupedItems);
+                blockEntity.isVirtual() ? scriptedResult : RecipeGridHandler.tryToApplyRecipe(accessor.getLevel(), groupedItems);
 
-        Player closestPlayer = null;
-
-        if(level != null && worldPosition != null)
-            closestPlayer = Utils.getClosestPlayer(level, worldPosition);
-
-        if (closestPlayer != null && result != null)
-            MissionTypeRegistry.INSTANCE.getType(CraftMission.class).handleItem(
-                    closestPlayer.getUUID(),
-                    PlatformSpecific.getResourceLocation(result.getItem()),
-                    result.getCount());
+        Utils.handleMixinMission(accessor, CraftMission.class, result);
     }
 }

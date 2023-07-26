@@ -29,19 +29,12 @@ public class BasinOperatingBlockEntityMixin {
         if (currentRecipe != null) {
 
             BlockEntityAccessor accessor = (BlockEntityAccessor) this;
-            Player closestPlayer = Utils.getClosestPlayer(accessor.getLevel(), accessor.getWorldPosition());
 
-            if (currentRecipe instanceof MixingRecipe && closestPlayer != null)
-                MissionTypeRegistry.INSTANCE.getType(MixingMission.class).handleItem(
-                        closestPlayer.getUUID(),
-                        PlatformSpecific.getResourceLocation(currentRecipe.getResultItem().getItem()),
-                        currentRecipe.getResultItem().getCount());
+            if (currentRecipe instanceof MixingRecipe)
+                Utils.handleMixinMission(accessor, MixingMission.class, currentRecipe.getResultItem());
 
-            if(Utils.isCompactingRecipe(currentRecipe) && closestPlayer != null)
-                MissionTypeRegistry.INSTANCE.getType(CompactingMission.class).handleItem(
-                        closestPlayer.getUUID(),
-                        PlatformSpecific.getResourceLocation(currentRecipe.getResultItem().getItem()),
-                        currentRecipe.getResultItem().getCount());
+            if(Utils.isCompactingRecipe(currentRecipe))
+                Utils.handleMixinMission(accessor, CompactingMission.class, currentRecipe.getResultItem());
             // TODO: Maybe compat for some Create addon that has a RecipeType that utilizes a basin 2 blocks below?
         }
     }

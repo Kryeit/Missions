@@ -24,7 +24,6 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
     @Shadow
     public ProcessingInventory inventory;
 
-
     @Inject(
             method = "tick",
             at = @At(
@@ -37,25 +36,11 @@ public abstract class CrushingWheelControllerBlockEntityMixin {
 
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
-        Level level = accessor.getLevel();
-        BlockPos worldPosition = accessor.getWorldPosition();
-        Player closestPlayer = null;
-
-        if(level != null && worldPosition != null)
-            closestPlayer = Utils.getClosestPlayer(level, worldPosition);
-
         for(int i = 1; i < inventory.getSlots(); i++) {
             ItemStack result = inventory.getStackInSlot(i);
             if(result.getItem() == Items.AIR) continue;
-            if (closestPlayer != null)
-                MissionTypeRegistry.INSTANCE.getType(CrushingMission.class).handleItem(
-                        closestPlayer.getUUID(),
-                        PlatformSpecific.getResourceLocation(result.getItem()),
-                        result.getCount());
+            Utils.handleMixinMission(accessor, CrushingMission.class, result);
         }
-
     }
-
-
 }
 

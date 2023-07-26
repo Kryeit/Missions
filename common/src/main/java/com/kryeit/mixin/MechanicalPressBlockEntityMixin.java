@@ -24,19 +24,7 @@ public class MechanicalPressBlockEntityMixin {
     public void onItemPressed(ItemStack result, CallbackInfo ci) {
 
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
-
-        Level level = accessor.getLevel();
-        BlockPos worldPosition = accessor.getWorldPosition();
-        Player closestPlayer = null;
-
-        if(level != null && worldPosition != null)
-            closestPlayer = Utils.getClosestPlayer(level, worldPosition);
-
-        if (closestPlayer != null)
-            MissionTypeRegistry.INSTANCE.getType(PressMission.class).handleItem(
-                    closestPlayer.getUUID(),
-                    PlatformSpecific.getResourceLocation(result.getItem()),
-                    result.getCount());
+        Utils.handleMixinMission(accessor, PressMission.class, result);
     }
 }
 

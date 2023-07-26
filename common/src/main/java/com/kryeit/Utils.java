@@ -1,5 +1,11 @@
 package com.kryeit;
 
+import com.kryeit.missions.MissionType;
+import com.kryeit.missions.MissionTypeRegistry;
+import com.kryeit.missions.config.ConfigReader;
+import com.kryeit.missions.mission_types.CrushingMission;
+import com.kryeit.missions.mission_types.MultiResourceMissionType;
+import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.crafter.MechanicalCraftingRecipe;
 import net.minecraft.core.BlockPos;
@@ -73,5 +79,21 @@ public class Utils {
         return (recipe instanceof CraftingRecipe && !(recipe instanceof MechanicalCraftingRecipe) && canCompress(recipe)
                 && !AllRecipeTypes.shouldIgnoreInAutomation(recipe))
                 || recipe.getType() == AllRecipeTypes.COMPACTING.getType();
+    }
+
+    public static void handleMixinMission(BlockEntityAccessor accessor, Class<? extends MultiResourceMissionType> missionType, ItemStack result) {
+        Level level = accessor.getLevel();
+        BlockPos worldPosition = accessor.getWorldPosition();
+        Player closestPlayer = null;
+
+        if(level != null && worldPosition != null)
+            closestPlayer = Utils.getClosestPlayer(level, worldPosition);
+
+        if (closestPlayer != null && result != null)
+            MissionTypeRegistry.INSTANCE.getType(missionType).handleItem(
+                    closestPlayer.getUUID(),
+                    PlatformSpecific.getResourceLocation(result.getItem()),
+                    result.getCount());
+
     }
 }
