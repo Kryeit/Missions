@@ -6,8 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "ClientboundCustomPayloadMixin",
     "BasinOperatingBlockEntityMixin",
+    "ClientboundCustomPayloadMixin",
     "MechanicalPressBlockEntityMixin",
     "ServerboundCustomPayloadMixin",
     "interfaces.BlockEntityAccessor"

@@ -24,5 +24,18 @@
       "Pressure increase",
       "Mantle force"
     ]
+  },
+  "compact": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "iron_block": "1-10"
+    },
+    "titles": [
+      "Rubik's cube",
+      "Meatballs"
+    ]
   }
 }

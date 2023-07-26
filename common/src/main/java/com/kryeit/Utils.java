@@ -1,5 +1,7 @@
 package com.kryeit;
 
+import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.kinetics.crafter.MechanicalCraftingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -9,7 +11,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
+
+import static com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity.canCompress;
 
 public class Utils {
     public static int getDay() {
@@ -61,5 +67,11 @@ public class Utils {
                 worldPosition.getY(),
                 worldPosition.getZ(),
                 64.0, false);
+    }
+
+    public static boolean isCompactingRecipe(Recipe<?> recipe) {
+        return (recipe instanceof CraftingRecipe && !(recipe instanceof MechanicalCraftingRecipe) && canCompress(recipe)
+                && !AllRecipeTypes.shouldIgnoreInAutomation(recipe))
+                || recipe.getType() == AllRecipeTypes.COMPACTING.getType();
     }
 }

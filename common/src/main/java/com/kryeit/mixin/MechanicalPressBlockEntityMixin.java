@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-
+// Tested Fabric and Forge side
 
 @Mixin(value = MechanicalPressBlockEntity.class, remap = false)
 public class MechanicalPressBlockEntityMixin {
