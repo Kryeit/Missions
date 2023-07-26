@@ -8,6 +8,7 @@
   "mixins": [
     "BasinOperatingBlockEntityMixin",
     "ClientboundCustomPayloadMixin",
+    "MechanicalCrafterBlockEntityMixin",
     "MechanicalPressBlockEntityMixin",
     "ServerboundCustomPayloadMixin",
     "interfaces.BlockEntityAccessor"
