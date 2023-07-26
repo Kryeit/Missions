@@ -16,7 +16,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-// Only tested Forge side
+// Only tested Forge side (seeing Fabric's code, seems the same as Forge's)
+// https://github.com/Fabricators-of-Create/Create/blob/mc1.18/fabric/dev/src/main/java/com/simibubi/create/content/processing/basin/BasinOperatingBlockEntity.java#L99
 
 @Mixin(value = BasinOperatingBlockEntity.class, remap = false)
 public class BasinOperatingBlockEntityMixin {
