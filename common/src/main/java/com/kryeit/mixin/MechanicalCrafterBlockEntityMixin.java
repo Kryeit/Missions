@@ -44,7 +44,7 @@ public class MechanicalCrafterBlockEntityMixin {
         if(level != null && worldPosition != null)
             closestPlayer = Utils.getClosestPlayer(level, worldPosition);
 
-        if (closestPlayer != null)
+        if (closestPlayer != null && result != null)
             MissionTypeRegistry.INSTANCE.getType(CraftMission.class).handleItem(
                     closestPlayer.getUUID(),
                     PlatformSpecific.getResourceLocation(result.getItem()),
