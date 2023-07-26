@@ -1,14 +1,11 @@
 package com.kryeit.mixin;
 
-import com.kryeit.PlatformSpecific;
 import com.kryeit.Utils;
-import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.missions.mission_types.CompactingMission;
 import com.kryeit.missions.mission_types.MixingMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Recipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,10 +28,10 @@ public class BasinOperatingBlockEntityMixin {
             BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
             if (currentRecipe instanceof MixingRecipe)
-                Utils.handleMixinMission(accessor, MixingMission.class, currentRecipe.getResultItem());
+                Utils.handleMixinMissionItem(accessor, MixingMission.class, currentRecipe.getResultItem());
 
             if(Utils.isCompactingRecipe(currentRecipe))
-                Utils.handleMixinMission(accessor, CompactingMission.class, currentRecipe.getResultItem());
+                Utils.handleMixinMissionItem(accessor, CompactingMission.class, currentRecipe.getResultItem());
             // TODO: Maybe compat for some Create addon that has a RecipeType that utilizes a basin 2 blocks below?
         }
     }

@@ -1,9 +1,6 @@
 package com.kryeit;
 
-import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
-import com.kryeit.missions.config.ConfigReader;
-import com.kryeit.missions.mission_types.CrushingMission;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.AllRecipeTypes;
@@ -81,7 +78,7 @@ public class Utils {
                 || recipe.getType() == AllRecipeTypes.COMPACTING.getType();
     }
 
-    public static void handleMixinMission(BlockEntityAccessor accessor, Class<? extends MultiResourceMissionType> missionType, ItemStack result) {
+    public static void handleMixinMissionItem(BlockEntityAccessor accessor, Class<? extends MultiResourceMissionType> missionType, ItemStack result) {
         Level level = accessor.getLevel();
         BlockPos worldPosition = accessor.getWorldPosition();
         Player closestPlayer = null;
