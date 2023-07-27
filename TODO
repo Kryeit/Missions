@@ -1,6 +1,6 @@
 # TODO implement missing mission types
-# implement advancement corner popups but for mission completions
+# implement advancement corner popups but for mission completions (not when rewarded, when completed)
 # implement mission rerolls (one button at the side of each missionButton)
 # give ATM with 1% chance when completing a hard mission
-#
+# implement chat messages for the player that was rewarded with the mission and reward gotten (broadcast if mission difficulty is hard)
 
