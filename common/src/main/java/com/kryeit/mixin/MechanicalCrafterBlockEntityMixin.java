@@ -24,7 +24,7 @@ public class MechanicalCrafterBlockEntityMixin {
     @Inject(method = "tick", at = @At(value = "INVOKE",
             target = "Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler;tryToApplyRecipe(Lnet/minecraft/world/level/Level;Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler$GroupedItems;)Lnet/minecraft/world/item/ItemStack;",
             ordinal = 0, shift = At.Shift.AFTER))
-    private void onCraftingEnd(CallbackInfo ci) {
+    private void onApplyMechanicalCraftingRecipe(CallbackInfo ci) {
         MechanicalCrafterBlockEntity blockEntity = (MechanicalCrafterBlockEntity) (Object) this;
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 

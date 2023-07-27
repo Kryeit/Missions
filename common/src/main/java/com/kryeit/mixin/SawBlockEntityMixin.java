@@ -1,7 +1,7 @@
 package com.kryeit.mixin;
 
 import com.kryeit.Utils;
-import com.kryeit.missions.mission_types.CuttingMission;
+import com.kryeit.missions.mission_types.create.CuttingMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
@@ -27,7 +27,7 @@ public class SawBlockEntityMixin {
                     shift = At.Shift.AFTER
             )
     )
-    private void afterApplyRecipe(CallbackInfo ci) {
+    private void onApplyCuttingRecipe(CallbackInfo ci) {
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
         for(int i = 0; i < inventory.getSlots(); i++) {
             ItemStack result = inventory.getStackInSlot(i);

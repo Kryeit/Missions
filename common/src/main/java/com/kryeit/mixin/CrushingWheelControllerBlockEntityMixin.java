@@ -1,7 +1,7 @@
 package com.kryeit.mixin;
 
 import com.kryeit.Utils;
-import com.kryeit.missions.mission_types.CrushingMission;
+import com.kryeit.missions.mission_types.create.CrushingMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
@@ -27,7 +27,7 @@ public class CrushingWheelControllerBlockEntityMixin {
                     shift = At.Shift.AFTER
             )
     )
-    private void afterApplyRecipe(CallbackInfo ci) {
+    private void onApplyCrushingRecipe(CallbackInfo ci) {
 
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 

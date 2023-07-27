@@ -91,6 +91,5 @@ public class Utils {
                     closestPlayer.getUUID(),
                     PlatformSpecific.getResourceLocation(result.getItem()),
                     result.getCount());
-
     }
 }

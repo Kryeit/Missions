@@ -9,6 +9,7 @@
     "BasinOperatingBlockEntityMixin",
     "ClientboundCustomPayloadMixin",
     "CrushingWheelControllerBlockEntityMixin",
+    "FanProcessingMixin",
     "MechanicalCrafterBlockEntityMixin",
     "MechanicalPressBlockEntityMixin",
     "SawBlockEntityMixin",

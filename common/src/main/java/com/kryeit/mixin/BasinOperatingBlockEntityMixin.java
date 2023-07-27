@@ -1,8 +1,8 @@
 package com.kryeit.mixin;
 
 import com.kryeit.Utils;
-import com.kryeit.missions.mission_types.CompactingMission;
-import com.kryeit.missions.mission_types.MixingMission;
+import com.kryeit.missions.mission_types.create.basin.CompactingMission;
+import com.kryeit.missions.mission_types.create.basin.MixingMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;

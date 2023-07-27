@@ -1,7 +1,7 @@
 package com.kryeit.mixin;
 
 import com.kryeit.Utils;
-import com.kryeit.missions.mission_types.PressMission;
+import com.kryeit.missions.mission_types.create.PressMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MechanicalPressBlockEntityMixin {
 
     @Inject(method = "onItemPressed", at = @At("RETURN"))
-    public void onItemPressed(ItemStack result, CallbackInfo ci) {
+    public void onApplyPressingRecipe(ItemStack result, CallbackInfo ci) {
 
         Utils.handleMixinMissionItem(
                 (BlockEntityAccessor) this,
