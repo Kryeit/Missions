@@ -33,7 +33,7 @@ public class FanProcessingMixin {
     private static void onApplyFanRecipe(ItemEntity entity, FanProcessing.Type type, CallbackInfoReturnable<Boolean> cir, List<ItemStack> stacks) {
         Player closestPlayer = Utils.getClosestPlayer(entity.level, entity.blockPosition());
 
-        if(closestPlayer != null && !stacks.isEmpty()) {
+        if(closestPlayer != null) {
             for(ItemStack stack : stacks) {
                 switch (type) {
                     case BLASTING -> MissionTypeRegistry.INSTANCE.getType(BlastingMission.class).handleItem(
