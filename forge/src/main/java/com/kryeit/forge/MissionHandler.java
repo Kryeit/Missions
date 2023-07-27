@@ -5,8 +5,10 @@ import com.kryeit.missions.mission_types.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -26,6 +28,17 @@ public class MissionHandler {
         ResourceLocation block = event.getPlacedBlock().getBlock().getRegistryName();
         MissionTypeRegistry.INSTANCE.getType(PlaceMission.class).handleItem(event.getEntity().getUUID(), block);
     }
+
+    @SubscribeEvent
+    public void fishItem(ItemFishedEvent event) {
+        if (isNotServerPlayer(event.getPlayer())) return;
+
+        for (ItemStack itemStack : event.getDrops()) {
+            ResourceLocation item = itemStack.getItem().getRegistryName();
+            MissionTypeRegistry.INSTANCE.getType(FishMission.class).handleItem(event.getPlayer().getUUID(), item);
+        }
+    }
+
 
     @SubscribeEvent
     public void eatItem(LivingEntityUseItemEvent.Finish event) {

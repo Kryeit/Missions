@@ -40,6 +40,7 @@ public class Main {
     public static void registerMissions() {
         MissionTypeRegistry.INSTANCE.register(new BreakMission());
         MissionTypeRegistry.INSTANCE.register(new PlaceMission());
+        MissionTypeRegistry.INSTANCE.register(new FishMission());
         MissionTypeRegistry.INSTANCE.register(new CraftMission());
         MissionTypeRegistry.INSTANCE.register(new KillMission());
         MissionTypeRegistry.INSTANCE.register(new EatMission());
