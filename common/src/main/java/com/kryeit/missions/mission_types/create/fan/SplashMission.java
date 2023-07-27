@@ -4,10 +4,10 @@ import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import net.minecraft.network.chat.Component;
 
-public class HauntingMission implements MultiResourceMissionType {
+public class SplashMission implements MultiResourceMissionType {
     @Override
     public String id() {
-        return "haunt";
+        return "splash";
     }
 
     @Override
@@ -17,6 +17,6 @@ public class HauntingMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Haunting mission");
+        return Component.nullToEmpty("Splashing mission");
     }
 }

@@ -1,13 +1,13 @@
-package com.kryeit.missions.mission_types.create.basin;
+package com.kryeit.missions.mission_types.create;
 
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import net.minecraft.network.chat.Component;
 
-public class MixingMission implements MultiResourceMissionType {
+public class CutMission implements MultiResourceMissionType {
     @Override
     public String id() {
-        return "mix";
+        return "cut";
     }
 
     @Override
@@ -17,6 +17,6 @@ public class MixingMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Mixing mission");
+        return Component.nullToEmpty("Cutting mission");
     }
 }

@@ -1,10 +1,7 @@
 package com.kryeit.forge;
 
 import com.kryeit.missions.MissionTypeRegistry;
-import com.kryeit.missions.mission_types.BreakMission;
-import com.kryeit.missions.mission_types.CraftMission;
-import com.kryeit.missions.mission_types.EatMission;
-import com.kryeit.missions.mission_types.KillMission;
+import com.kryeit.missions.mission_types.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -21,6 +18,13 @@ public class MissionHandler {
         if (isNotServerPlayer(event.getPlayer())) return;
         ResourceLocation item = event.getState().getBlock().getRegistryName();
         MissionTypeRegistry.INSTANCE.getType(BreakMission.class).handleItem(event.getPlayer().getUUID(), item);
+    }
+
+    @SubscribeEvent
+    public void placeBlock(BlockEvent.EntityPlaceEvent event) {
+        if (isNotServerPlayer(event.getEntity())) return;
+        ResourceLocation block = event.getPlacedBlock().getBlock().getRegistryName();
+        MissionTypeRegistry.INSTANCE.getType(PlaceMission.class).handleItem(event.getEntity().getUUID(), block);
     }
 
     @SubscribeEvent

@@ -1,7 +1,7 @@
 package com.kryeit.mixin;
 
 import com.kryeit.Utils;
-import com.kryeit.missions.mission_types.create.CrushingMission;
+import com.kryeit.missions.mission_types.create.CrushMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
@@ -34,7 +34,7 @@ public class CrushingWheelControllerBlockEntityMixin {
         for(int i = 1; i < inventory.getSlots(); i++) {
             ItemStack result = inventory.getStackInSlot(i);
             if(result.getItem() == Items.AIR) continue;
-            Utils.handleMixinMissionItem(accessor, CrushingMission.class, result);
+            Utils.handleMixinMissionItem(accessor, CrushMission.class, result);
         }
     }
 }

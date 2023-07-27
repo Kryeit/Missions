@@ -1,13 +1,13 @@
-package com.kryeit.missions.mission_types.create.fan;
+package com.kryeit.missions.mission_types.create.basin;
 
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import net.minecraft.network.chat.Component;
 
-public class BlastingMission implements MultiResourceMissionType {
+public class MixMission implements MultiResourceMissionType {
     @Override
     public String id() {
-        return "blast";
+        return "mix";
     }
 
     @Override
@@ -17,6 +17,6 @@ public class BlastingMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Blasting mission");
+        return Component.nullToEmpty("Mixing mission");
     }
 }

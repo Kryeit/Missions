@@ -3,10 +3,10 @@ package com.kryeit.mixin;
 import com.kryeit.PlatformSpecific;
 import com.kryeit.Utils;
 import com.kryeit.missions.MissionTypeRegistry;
-import com.kryeit.missions.mission_types.create.fan.BlastingMission;
-import com.kryeit.missions.mission_types.create.fan.HauntingMission;
-import com.kryeit.missions.mission_types.create.fan.SmokingMission;
-import com.kryeit.missions.mission_types.create.fan.SplashingMission;
+import com.kryeit.missions.mission_types.create.fan.BlastMission;
+import com.kryeit.missions.mission_types.create.fan.HauntMission;
+import com.kryeit.missions.mission_types.create.fan.SmokeMission;
+import com.kryeit.missions.mission_types.create.fan.SplashMission;
 import com.simibubi.create.content.kinetics.fan.FanProcessing;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -36,19 +36,19 @@ public class FanProcessingMixin {
         if(closestPlayer != null) {
             for(ItemStack stack : stacks) {
                 switch (type) {
-                    case BLASTING -> MissionTypeRegistry.INSTANCE.getType(BlastingMission.class).handleItem(
+                    case BLASTING -> MissionTypeRegistry.INSTANCE.getType(BlastMission.class).handleItem(
                             closestPlayer.getUUID(),
                             PlatformSpecific.getResourceLocation(stack.getItem()),
                             stack.getCount());
-                    case SMOKING -> MissionTypeRegistry.INSTANCE.getType(SmokingMission.class).handleItem(
+                    case SMOKING -> MissionTypeRegistry.INSTANCE.getType(SmokeMission.class).handleItem(
                             closestPlayer.getUUID(),
                             PlatformSpecific.getResourceLocation(stack.getItem()),
                             stack.getCount());
-                    case SPLASHING -> MissionTypeRegistry.INSTANCE.getType(SplashingMission.class).handleItem(
+                    case SPLASHING -> MissionTypeRegistry.INSTANCE.getType(SplashMission.class).handleItem(
                             closestPlayer.getUUID(),
                             PlatformSpecific.getResourceLocation(stack.getItem()),
                             stack.getCount());
-                    case HAUNTING -> MissionTypeRegistry.INSTANCE.getType(HauntingMission.class).handleItem(
+                    case HAUNTING -> MissionTypeRegistry.INSTANCE.getType(HauntMission.class).handleItem(
                             closestPlayer.getUUID(),
                             PlatformSpecific.getResourceLocation(stack.getItem()),
                             stack.getCount());

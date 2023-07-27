@@ -1,7 +1,7 @@
 package com.kryeit.mixin;
 
 import com.kryeit.Utils;
-import com.kryeit.missions.mission_types.create.CuttingMission;
+import com.kryeit.missions.mission_types.create.CutMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
@@ -32,7 +32,7 @@ public class SawBlockEntityMixin {
         for(int i = 0; i < inventory.getSlots(); i++) {
             ItemStack result = inventory.getStackInSlot(i);
             if(result.getItem() == Items.AIR) continue;
-            Utils.handleMixinMissionItem(accessor, CuttingMission.class, result);
+            Utils.handleMixinMissionItem(accessor, CutMission.class, result);
         }
     }
 }

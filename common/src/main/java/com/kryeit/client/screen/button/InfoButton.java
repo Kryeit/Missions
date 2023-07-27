@@ -27,6 +27,6 @@ public class InfoButton extends Button {
         int textureSize = 20;
 
         RenderSystem.setShaderTexture(0, INFO_ICON);
-        this.blit(matrices, this.x, this.y,0, 0, textureSize, textureSize, 256, 256);
+        blit(matrices, this.x, this.y, 0, 0, textureSize, textureSize, 256, 256);
     }
 }

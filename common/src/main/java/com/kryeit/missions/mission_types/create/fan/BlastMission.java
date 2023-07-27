@@ -1,13 +1,13 @@
-package com.kryeit.missions.mission_types.create.basin;
+package com.kryeit.missions.mission_types.create.fan;
 
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import net.minecraft.network.chat.Component;
 
-public class CompactingMission implements MultiResourceMissionType {
+public class BlastMission implements MultiResourceMissionType {
     @Override
     public String id() {
-        return "compact";
+        return "blast";
     }
 
     @Override
@@ -17,6 +17,6 @@ public class CompactingMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Compacting mission");
+        return Component.nullToEmpty("Blasting mission");
     }
 }

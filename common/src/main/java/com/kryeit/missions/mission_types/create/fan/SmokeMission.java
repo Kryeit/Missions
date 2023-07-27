@@ -1,13 +1,14 @@
-package com.kryeit.missions.mission_types.create;
+package com.kryeit.missions.mission_types.create.fan;
 
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import net.minecraft.network.chat.Component;
 
-public class CrushingMission implements MultiResourceMissionType {
+public class SmokeMission implements MultiResourceMissionType {
+
     @Override
     public String id() {
-        return "crush";
+        return "smoke";
     }
 
     @Override
@@ -17,6 +18,6 @@ public class CrushingMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Crushing mission");
+        return Component.nullToEmpty("Smoking mission");
     }
 }
