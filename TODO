@@ -1,6 +1,9 @@
-# TODO implement missing mission types
+# TODO
+# implement missing mission types
 # implement advancement corner popups but for mission completions (not when rewarded, when completed)
 # implement mission rerolls (one button at the side of each missionButton)
 # give ATM with 1% chance when completing a hard mission
 # implement chat messages for the player that was rewarded with the mission and reward gotten (broadcast if mission difficulty is hard)
-
+# show Reward Range in mission button tooltip
+# fix KillMission, and also render the spawn egg item instead of the entity. If there is no spawn egg of said entity, just render a some default one
+# Close the chest (CHEST_TEXTURE) when there are claimable rewards. In RewardsButton

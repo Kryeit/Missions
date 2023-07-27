@@ -136,8 +136,8 @@ public class MissionScreen extends Screen {
     }
 
     public void createInfoButton() {
-        int x = this.width / 2 - 120;
-        int y = this.height - 20 - 20;
+        int x = this.width / 2 - 160;
+        int y = this.height - 40;
         this.addRenderableWidget(new InfoButton(x, y));
     }
 

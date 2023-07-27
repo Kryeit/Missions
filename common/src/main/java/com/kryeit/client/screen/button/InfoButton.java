@@ -1,5 +1,7 @@
 package com.kryeit.client.screen.button;
 
+import com.kryeit.Main;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -9,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class InfoButton extends Button {
 
-    public static final ResourceLocation INFO_ICON = new ResourceLocation("textures/gui/info_icon.png");
+    public static final ResourceLocation INFO_ICON = new ResourceLocation(Main.MOD_ID, "textures/gui/info_icon.png");
     private static final OnPress ON_PRESS = button -> {
     };
 
@@ -21,6 +23,10 @@ public class InfoButton extends Button {
     public void renderButton(@NotNull PoseStack matrices, int mouseX, int mouseY, float delta) {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.getTextureManager().bindForSetup(INFO_ICON);
-        blit(matrices, x, y, 0, 0, 20, 20, 20, 20);
+
+        int textureSize = 20;
+
+        RenderSystem.setShaderTexture(0, INFO_ICON);
+        this.blit(matrices, this.x, this.y,0, 0, textureSize, textureSize, 256, 256);
     }
 }
