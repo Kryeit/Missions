@@ -11,6 +11,7 @@
     "CrushingWheelControllerBlockEntityMixin",
     "MechanicalCrafterBlockEntityMixin",
     "MechanicalPressBlockEntityMixin",
+    "SawBlockEntityMixin",
     "ServerboundCustomPayloadMixin",
     "interfaces.BlockEntityAccessor"
   ],

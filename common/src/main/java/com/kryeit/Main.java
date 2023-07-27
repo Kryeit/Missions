@@ -23,6 +23,8 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new MixingMission());
         MissionTypeRegistry.INSTANCE.register(new CompactingMission());
         MissionTypeRegistry.INSTANCE.register(new CrushingMission());
+        MissionTypeRegistry.INSTANCE.register(new CuttingMission());
+
 
 
 

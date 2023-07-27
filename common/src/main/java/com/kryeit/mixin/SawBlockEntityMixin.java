@@ -1,9 +1,9 @@
 package com.kryeit.mixin;
 
 import com.kryeit.Utils;
-import com.kryeit.missions.mission_types.CrushingMission;
+import com.kryeit.missions.mission_types.CuttingMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
-import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlockEntity;
+import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = CrushingWheelControllerBlockEntity.class, remap = false)
-public class CrushingWheelControllerBlockEntityMixin {
+@Mixin(value = SawBlockEntity.class, remap = false)
+public class SawBlockEntityMixin {
 
     @Shadow
     public ProcessingInventory inventory;
@@ -23,19 +23,16 @@ public class CrushingWheelControllerBlockEntityMixin {
             method = "tick",
             at = @At(
                     value = "INVOKE",
-                    target = "Lcom/simibubi/create/content/kinetics/crusher/CrushingWheelControllerBlockEntity;applyRecipe()V",
+                    target = "Lcom/simibubi/create/content/kinetics/saw/SawBlockEntity;applyRecipe()V",
                     shift = At.Shift.AFTER
             )
     )
     private void afterApplyRecipe(CallbackInfo ci) {
-
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
-
-        for(int i = 1; i < inventory.getSlots(); i++) {
+        for(int i = 0; i < inventory.getSlots(); i++) {
             ItemStack result = inventory.getStackInSlot(i);
             if(result.getItem() == Items.AIR) continue;
-            Utils.handleMixinMissionItem(accessor, CrushingMission.class, result);
+            Utils.handleMixinMissionItem(accessor, CuttingMission.class, result);
         }
     }
 }
-

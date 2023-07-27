@@ -18,8 +18,10 @@ public class MechanicalPressBlockEntityMixin {
     @Inject(method = "onItemPressed", at = @At("RETURN"))
     public void onItemPressed(ItemStack result, CallbackInfo ci) {
 
-        BlockEntityAccessor accessor = (BlockEntityAccessor) this;
-        Utils.handleMixinMissionItem(accessor, PressMission.class, result);
+        Utils.handleMixinMissionItem(
+                (BlockEntityAccessor) this,
+                PressMission.class,
+                result);
     }
 }
 
