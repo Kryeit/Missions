@@ -42,6 +42,6 @@ public class VoteMission implements MissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Vote mission");
+        return Component.nullToEmpty("Voting mission");
     }
 }

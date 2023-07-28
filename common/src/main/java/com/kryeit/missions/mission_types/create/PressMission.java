@@ -5,6 +5,7 @@ import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import net.minecraft.network.chat.Component;
 
 public class PressMission implements MultiResourceMissionType {
+
     @Override
     public String id() {
         return "press";
@@ -17,6 +18,6 @@ public class PressMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Press Mission");
+        return Component.nullToEmpty("Pressing Mission");
     }
 }

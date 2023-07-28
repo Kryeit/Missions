@@ -16,6 +16,6 @@ public class KillMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Kill mission");
+        return Component.nullToEmpty("Killing mission");
     }
 }

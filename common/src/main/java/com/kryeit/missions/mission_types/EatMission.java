@@ -16,6 +16,6 @@ public class EatMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Eat mission");
+        return Component.nullToEmpty("Eating mission");
     }
 }

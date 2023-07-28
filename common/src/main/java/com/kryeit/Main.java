@@ -48,6 +48,7 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new PressMission());
         MissionTypeRegistry.INSTANCE.register(new CrushMission());
         MissionTypeRegistry.INSTANCE.register(new CutMission());
+        MissionTypeRegistry.INSTANCE.register(new MillMission());
 
         // Basin
         MissionTypeRegistry.INSTANCE.register(new MixMission());

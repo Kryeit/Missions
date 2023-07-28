@@ -16,6 +16,6 @@ public class CraftMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Craft mission");
+        return Component.nullToEmpty("Crafting mission");
     }
 }

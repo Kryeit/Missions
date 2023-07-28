@@ -1,11 +1,12 @@
 {
   "required": true,
-  "package": "com.kryeit.mixin",
+  "package": "com.kryeit.fabric.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
   ],
   "mixins": [
+    "MillstoneBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

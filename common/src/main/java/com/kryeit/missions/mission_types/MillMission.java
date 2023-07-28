@@ -3,10 +3,11 @@ package com.kryeit.missions.mission_types;
 import com.kryeit.missions.MissionDifficulty;
 import net.minecraft.network.chat.Component;
 
-public class BreakMission implements MultiResourceMissionType {
+public class MillMission implements MultiResourceMissionType {
+
     @Override
     public String id() {
-        return "break";
+        return "mill";
     }
 
     @Override
@@ -16,6 +17,6 @@ public class BreakMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Breaking mission");
+        return Component.nullToEmpty("Milling mission");
     }
 }
