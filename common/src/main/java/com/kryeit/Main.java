@@ -7,6 +7,7 @@ import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.*;
 import com.kryeit.missions.mission_types.create.CrushMission;
 import com.kryeit.missions.mission_types.create.CutMission;
+import com.kryeit.missions.mission_types.create.MillMission;
 import com.kryeit.missions.mission_types.create.PressMission;
 import com.kryeit.missions.mission_types.create.basin.CompactMission;
 import com.kryeit.missions.mission_types.create.basin.MixMission;
