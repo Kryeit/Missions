@@ -1,6 +1,7 @@
 package com.kryeit.missions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MissionTypeRegistry {
@@ -22,5 +23,9 @@ public class MissionTypeRegistry {
             }
         }
         return null;
+    }
+
+    public List<MissionType> getAllTypes() {
+        return List.copyOf(types.values());
     }
 }

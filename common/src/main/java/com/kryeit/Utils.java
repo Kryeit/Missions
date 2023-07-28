@@ -18,6 +18,10 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+
 import static com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity.canCompress;
 
 public class Utils {
@@ -91,5 +95,13 @@ public class Utils {
                     closestPlayer.getUUID(),
                     PlatformSpecific.getResourceLocation(result.getItem()),
                     result.getCount());
+    }
+
+    public static <T, R> List<R> map(List<T> list, Function<T, R> mappingFunction) {
+        List<R> out = new ArrayList<>();
+        for (T t : list) {
+            out.add(mappingFunction.apply(t));
+        }
+        return out;
     }
 }

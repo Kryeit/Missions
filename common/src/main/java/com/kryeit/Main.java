@@ -3,6 +3,7 @@ package com.kryeit;
 
 import com.kryeit.missions.DataStorage;
 import com.kryeit.missions.MissionDifficulty;
+import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.*;
@@ -18,20 +19,35 @@ import com.kryeit.missions.mission_types.create.fan.SmokeMission;
 import com.kryeit.missions.mission_types.create.fan.SplashMission;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static final String MOD_ID = "missions";
+    public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static ConfigReader configReader;
 
     public static void init() {
         registerMissions();
 
         try {
+            LOGGER.info("Reading config file...");
             configReader = ConfigReader.readFile(Path.of("missions/missions.json"));
+            List<MissionType> unusedTypes = new ArrayList<>(MissionTypeRegistry.INSTANCE.getAllTypes());
+            unusedTypes.removeAll(configReader.getMissions().keySet());
+
+            if (!unusedTypes.isEmpty()) {
+                LOGGER.warn(
+                        "The following mission types are available but ignored due to their absence in the config file: {}",
+                        Utils.map(unusedTypes, MissionType::id)
+                );
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
