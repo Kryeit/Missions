@@ -1,7 +1,7 @@
 package com.kryeit.missions;
 
 import com.kryeit.Utils;
-import com.kryeit.client.ClientsideActiveMission;
+import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.config.Range;
 import net.minecraft.nbt.CompoundTag;
@@ -65,7 +65,7 @@ public class DataStorage {
 
     private ListTag getActiveMissionsTag(UUID player) {
         String uuidString = player.toString();
-        CompoundTag activeMissions = getOrCreateTag(data, "active_mission");
+        CompoundTag activeMissions = getOrCreateTag(data, "active_missions");
         return getOrCreateList(activeMissions, uuidString);
     }
 
