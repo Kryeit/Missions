@@ -30,7 +30,7 @@ public class RewardsButton extends Button {
     public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
         super.renderButton(matrices, mouseX, mouseY, delta);
 
-        RenderSystem.setShaderTexture(0, rewardsAvailable ? OPEN_CHEST_TEXTURE : CHEST_TEXTURE);
+        RenderSystem.setShaderTexture(0, rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE);
 
         int textureX = x + width / 2 - 36;
         int textureY = y + height / 2 - 19;
