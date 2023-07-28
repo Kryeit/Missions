@@ -51,11 +51,8 @@ public class DataStorage {
     }
 
     public CompoundTag getMissionData(String missionID, UUID player) {
-        CompoundTag missionData = data.getCompound("mission_data");
-        if (!missionData.contains("mission_data")) data.put("mission_data", missionData);
-
-        CompoundTag missionIDData = missionData.getCompound(missionID);
-        if (!missionData.contains(missionID)) missionData.put(missionID, missionIDData);
+        CompoundTag missionData = getOrCreateTag(data, "mission_data");
+        CompoundTag missionIDData = getOrCreateTag(missionData, missionID);
 
         if (missionIDData.contains(player.toString())) {
             return missionIDData.getCompound(player.toString());
@@ -68,12 +65,8 @@ public class DataStorage {
 
     private ListTag getActiveMissionsTag(UUID player) {
         String uuidString = player.toString();
-        CompoundTag activeMissions = data.getCompound("active_missions");
-        if (!data.contains("active_missions")) data.put("active_missions", activeMissions);
-
-        ListTag list = activeMissions.getList(uuidString, Tag.TAG_COMPOUND);
-        if (!activeMissions.contains(uuidString)) activeMissions.put(uuidString, list);
-        return list;
+        CompoundTag activeMissions = getOrCreateTag(data, "active_mission");
+        return getOrCreateList(activeMissions, uuidString);
     }
 
     public List<ActiveMission> getActiveMissions(UUID player) {
@@ -125,9 +118,7 @@ public class DataStorage {
     }
 
     public int getLastAssignedDay(UUID player) {
-        CompoundTag lastAssigned = data.getCompound("last_assigned");
-        if (!data.contains("last_assigned")) data.put("last_assigned", lastAssigned);
-        return lastAssigned.getInt(player.toString());
+        return data.getCompound("last_assigned").getInt(player.toString());
     }
 
     public void setLastAssignedDay(UUID player) {
@@ -135,23 +126,18 @@ public class DataStorage {
     }
 
     public void setLastAssignedDay(UUID player, int day) {
-        CompoundTag lastAssigned = data.getCompound("last_assigned");
-        if (!data.contains("last_assigned")) data.put("last_assigned", lastAssigned);
+        CompoundTag lastAssigned = getOrCreateTag(data, "last_assigned");
         lastAssigned.putInt(player.toString(), day);
     }
 
     public void addReward(UUID player, String item, int amount) {
-        CompoundTag rewards = data.getCompound("rewards");
-        if (!data.contains("rewards")) data.put("rewards", rewards);
-
-        CompoundTag playerRewards = rewards.getCompound(player.toString());
-        if (!rewards.contains(player.toString())) rewards.put(player.toString(), playerRewards);
+        CompoundTag rewards = getOrCreateTag(data, "rewards");
+        CompoundTag playerRewards = getOrCreateTag(rewards, player.toString());
         playerRewards.putInt(item, playerRewards.getInt(item) + amount);
     }
 
     public Map<String, Integer> getUnclaimedRewards(UUID player) {
-        CompoundTag rewards = data.getCompound("rewards");
-        if (!data.contains("rewards")) data.put("rewards", rewards);
+        CompoundTag rewards = getOrCreateTag(data, "rewards");
 
         Map<String, Integer> output = new HashMap<>();
         CompoundTag playerRewards = rewards.getCompound(player.toString());
@@ -167,8 +153,19 @@ public class DataStorage {
      * @param player The player whose rewards to claim
      */
     public void claimRewards(UUID player) {
-        CompoundTag rewards = data.getCompound("rewards");
-        rewards.remove(player.toString());
+        data.getCompound("rewards").remove(player.toString());
+    }
+
+    private static CompoundTag getOrCreateTag(CompoundTag tag, String key) {
+        CompoundTag compound = tag.getCompound(key);
+        if (!tag.contains(key)) tag.put(key, compound);
+        return compound;
+    }
+
+    private static ListTag getOrCreateList(CompoundTag tag, String key) {
+        ListTag list = tag.getList(key, Tag.TAG_COMPOUND);
+        if (!tag.contains(key)) tag.put(key, list);
+        return list;
     }
 
     public static class ActiveMission {
