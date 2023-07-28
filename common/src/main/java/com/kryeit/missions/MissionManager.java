@@ -2,7 +2,8 @@ package com.kryeit.missions;
 
 import com.kryeit.Main;
 import com.kryeit.Utils;
-import com.kryeit.client.ClientsideActiveMission;
+import com.kryeit.client.ClientMissionData;
+import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.missions.config.ConfigReader;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
@@ -12,7 +13,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -90,14 +90,13 @@ public class MissionManager {
     }
 
     public static void sendMissions(ServerPlayer player) {
-        List<ClientsideActiveMission> clientMissions = new ArrayList<>();
-        for (DataStorage.ActiveMission mission : getActiveMissions(player.getUUID())) {
-            clientMissions.add(mission.toClientMission(player.getUUID()));
-        }
+        UUID playerUUID = player.getUUID();
+        boolean hasUnclaimedRewards = !DataStorage.INSTANCE.getUnclaimedRewards(playerUUID).isEmpty();
+        List<ClientsideActiveMission> clientMissions = Utils.map(getActiveMissions(playerUUID), mission -> mission.toClientMission(playerUUID));
 
         ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(
                 ClientsideMissionPacketUtils.IDENTIFIER,
-                ClientsideMissionPacketUtils.serialize(clientMissions)
+                ClientsideMissionPacketUtils.serialize(new ClientMissionData(hasUnclaimedRewards, clientMissions))
         );
         player.connection.send(packet);
     }

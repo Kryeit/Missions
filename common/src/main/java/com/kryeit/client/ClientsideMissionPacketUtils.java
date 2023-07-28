@@ -1,6 +1,7 @@
 package com.kryeit.client;
 
 import com.kryeit.Main;
+import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -16,17 +17,19 @@ public class ClientsideMissionPacketUtils {
     public static final ResourceLocation IDENTIFIER = new ResourceLocation("missions", "active_missions");
     public static final ResourceLocation PAYOUT_IDENTIFIER = new ResourceLocation(Main.MOD_ID, "payout");
     public static final ResourceLocation REQUEST_MISSIONS = new ResourceLocation(Main.MOD_ID, "request_missions");
-    private static Consumer<List<ClientsideActiveMission>> updateHandler;
+    private static Consumer<ClientMissionData> updateHandler;
 
     public static void handlePacket(FriendlyByteBuf buf) {
+        boolean rewardsAvailable = buf.readBoolean();
         List<ClientsideActiveMission> missions = buf.readList(ClientsideActiveMission::fromBuffer);
-        updateHandler.accept(missions);
+        updateHandler.accept(new ClientMissionData(rewardsAvailable, missions));
     }
 
-    public static FriendlyByteBuf serialize(List<ClientsideActiveMission> missions) {
+    public static FriendlyByteBuf serialize(ClientMissionData data) {
         FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+        buf.writeBoolean(data.hasUnclaimedRewards());
 
-        buf.writeCollection(missions, (b, mission) -> {
+        buf.writeCollection(data.activeMissions(), (b, mission) -> {
             b.writeComponent(mission.titleString());
             b.writeEnum(mission.difficulty());
             b.writeInt(mission.requiredAmount());
@@ -54,7 +57,7 @@ public class ClientsideMissionPacketUtils {
         sendPacket(packet);
     }
 
-    public static void setMissionUpdateHandler(Consumer<List<ClientsideActiveMission>> handler) {
+    public static void setMissionUpdateHandler(Consumer<ClientMissionData> handler) {
         updateHandler = handler;
     }
 

@@ -1,6 +1,7 @@
 package com.kryeit.client.screen;
 
-import com.kryeit.client.ClientsideActiveMission;
+import com.kryeit.client.ClientMissionData;
+import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.InfoButton;
 import com.kryeit.client.screen.button.MissionButton;
@@ -22,7 +23,7 @@ public class MissionScreen extends Screen {
     private final Runnable NO_TOOLTIP = () -> {
     };
     public Runnable activeTooltip = NO_TOOLTIP;
-    private List<ClientsideActiveMission> missionsToAdd = null;
+    private ClientMissionData data = null;
 
     public MissionScreen() {
         super(new TextComponent("Mission GUI"));
@@ -32,19 +33,21 @@ public class MissionScreen extends Screen {
     protected void init() {
         super.init();
 
-        ClientsideMissionPacketUtils.setMissionUpdateHandler(missions -> missionsToAdd = missions);
+        ClientsideMissionPacketUtils.setMissionUpdateHandler(missionData -> data = missionData);
         ClientsideMissionPacketUtils.requestMissions();
 
         createCloseButton();
     }
 
-    private void addMissions(List<ClientsideActiveMission> activeMissions) {
+    private void addMissions(ClientMissionData data) {
         int buttonWidth = 200;
         int buttonHeight = 20;
         int spacing = 5; // Space between buttons
 
         int leftX = (this.width / 2 - buttonWidth - spacing);
         int rightX = (this.width / 2 + spacing);
+
+        List<ClientsideActiveMission> activeMissions = data.activeMissions();
 
         if (activeMissions.size() != 10) {
             Minecraft.getInstance().gui.getChat().addMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"));
@@ -74,7 +77,7 @@ public class MissionScreen extends Screen {
         }
 
         createInfoButton();
-        createRewardButton();
+        createRewardButton(data.hasUnclaimedRewards());
     }
 
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission) {
@@ -87,9 +90,9 @@ public class MissionScreen extends Screen {
         this.renderBackground(matrices);
 
         super.render(matrices, mouseX, mouseY, delta);
-        if (missionsToAdd != null) {
-            addMissions(missionsToAdd);
-            missionsToAdd = null;
+        if (data != null) {
+            addMissions(data);
+            data = null;
         }
 
         drawCenteredString(matrices, Minecraft.getInstance().font, this.title, this.width / 2, 40, 0xFFFFFF);
@@ -141,13 +144,13 @@ public class MissionScreen extends Screen {
         this.addRenderableWidget(new InfoButton(x, y));
     }
 
-    public void createRewardButton() {
+    public void createRewardButton(boolean rewardsAvailable) {
         int spacing = 5;
         int buttonHeight = 20;
         int bottomPadding = 20;
         int x = (this.width / 2 + spacing);
         int y = this.height - buttonHeight - bottomPadding;
 
-        this.addRenderableWidget(new RewardsButton(x, y));
+        this.addRenderableWidget(new RewardsButton(x, y, rewardsAvailable));
     }
 }

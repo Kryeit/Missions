@@ -1,6 +1,6 @@
 package com.kryeit.client.screen.button;
 
-import com.kryeit.client.ClientsideActiveMission;
+import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.screen.MissionScreen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -20,10 +20,10 @@ public class MissionButton extends Button {
     private final boolean completed;
     private final ItemStack item;
 
-    protected final ClientsideActiveMission mission;
+    protected final ClientMissionData.ClientsideActiveMission mission;
     private final MissionScreen screen;
 
-    public MissionButton(MissionScreen screen, int x, int y, Component message, ClientsideActiveMission mission, OnTooltip onTooltip) {
+    public MissionButton(MissionScreen screen, int x, int y, Component message, ClientMissionData.ClientsideActiveMission mission, OnTooltip onTooltip) {
         super(x, y, 200, 20, message, button -> {}, onTooltip);
         this.completed = mission.isCompleted();
         this.item = mission.itemStack();
