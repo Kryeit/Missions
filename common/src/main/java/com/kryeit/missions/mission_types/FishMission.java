@@ -16,6 +16,6 @@ public class FishMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Fishing missioin");
+        return Component.nullToEmpty("Fishing mission");
     }
 }

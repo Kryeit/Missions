@@ -24,9 +24,9 @@ public class MillstoneBlockEntityMixin {
 
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
-        for(int i = 0; i < outputInv.getSlots(); i++) {
+        for (int i = 0; i < outputInv.getSlots(); i++) {
             ItemStack result = outputInv.getStackInSlot(i);
-            if(result.getItem() == Items.AIR) continue;
+            if (result.getItem() == Items.AIR) continue;
             Utils.handleMixinMissionItem(accessor, MillMission.class, result);
         }
     }
