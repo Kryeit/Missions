@@ -3,3 +3,17 @@
 # implement mission rerolls (one button at the side of each missionButton)
 # give ATM with 1% chance when completing a hard mission
 # show Reward Range in mission button tooltip
+
+# Stats:
+Shown when hovering the InfoButton
+- missions completed:
+  - easy
+  - normal
+  - hard
+
+# Advancements
+# First time you complete a hard mission
+# First time you complete 10 missions
+# Reroll a mission
+# Reroll 5 missions in the same week
+# Claim the rewards of 10 missions at the same time
