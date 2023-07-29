@@ -134,8 +134,7 @@ public class MissionScreen extends Screen {
         int x = (this.width / 2 - buttonWidth - spacing);
         int y = this.height - buttonHeight - bottomPadding;
 
-        this.addRenderableWidget(new Button(x, y, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"),
-                button -> Minecraft.getInstance().setScreen(null)));
+        this.addRenderableWidget(new Button(x, y, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"), button -> Minecraft.getInstance().setScreen(null)));
     }
 
     public void createInfoButton() {
