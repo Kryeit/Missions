@@ -37,7 +37,14 @@ public class MissionCompletedToast implements Toast {
     public void renderBackground(PoseStack matrices, ToastComponent toastComponent) {
         toastComponent.getMinecraft().getTextureManager().bindForSetup(TEXTURE);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        toastComponent.blit(matrices, 0, 0, 0, 0, this.width(), this.height());
+
+        int v = switch (mission.difficulty()) {
+            case NORMAL -> 32;
+            case HARD -> 0;
+            default -> 32 * 3;
+        };
+
+        toastComponent.blit(matrices, 0, 0, 0, v, this.width(), this.height());
     }
 
     public void renderText(PoseStack matrices, ToastComponent toastComponent) {
@@ -46,7 +53,7 @@ public class MissionCompletedToast implements Toast {
         toastComponent.getMinecraft().font.draw(matrices, titleText, 30, 7, -1);
 
         // Description text
-        Component descriptionText = Component.nullToEmpty(mission.missionString().getString() + " - ");
+        Component descriptionText = Component.nullToEmpty(mission.missionString().getString());
         toastComponent.getMinecraft().font.draw(matrices, descriptionText, 30, 18, -1);
     }
 
