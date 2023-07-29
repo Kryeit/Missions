@@ -21,11 +21,12 @@ public class MissionManager {
 
     public static final ResourceLocation REWARD_SOUND = new ResourceLocation("entity.player.levelup");
 
-    public static void checkReward(MissionType type, UUID player, ResourceLocation item) {
+    public static int checkReward(MissionType type, UUID player, ResourceLocation item) {
         DataStorage.ActiveMission activeMission = getActiveMission(type.id(), item, player);
-        if (activeMission == null) return; // TODO maybe throw an exception
+        if (activeMission == null) return 0;
 
-        if (type.getProgress(player, activeMission.item()) >= activeMission.requiredAmount()) {
+        int itemsLeft = activeMission.requiredAmount() - type.getProgress(player, activeMission.item());
+        if (itemsLeft <= 0) {
             ConfigReader.Mission mission = Main.getConfig().getMissions().get(type);
             int rewardAmount = mission.rewardAmount().getRandomValue();
             String rewardItem = mission.rewardItem();
@@ -34,6 +35,7 @@ public class MissionManager {
             DataStorage.INSTANCE.addReward(player, rewardItem, rewardAmount);
             DataStorage.INSTANCE.setCompleted(player, item, type.id());
         }
+        return itemsLeft;
     }
 
     public static void giveReward(ServerPlayer player) {
