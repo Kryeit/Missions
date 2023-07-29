@@ -28,7 +28,11 @@ public interface MultiResourceMissionType extends MissionType {
             String itemString = item.toString();
             data.putInt(itemString, data.getInt(itemString) + amount);
 
-            MissionManager.checkReward(this, player, item);
+            int itemsLeft = MissionManager.checkReward(this, player, item);
+            // positive when not enough items, negative when too many items -> recurse when negative
+            if (itemsLeft < 0) {
+                handleItem(player, item, -itemsLeft);
+            }
         }
     }
 }
