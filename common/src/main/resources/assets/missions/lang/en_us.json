@@ -4,5 +4,6 @@
   "test": "Mission WIP",
   "key.mission_gui.close": "Close",
   "block.missions.exchange_atm": "Exchange ATM",
-  "itemGroup.missions.base": "Missions"
+  "itemGroup.missions.base": "Missions",
+  "message.hard_mission_completed": "%s has just completed a hard mission!"
 }

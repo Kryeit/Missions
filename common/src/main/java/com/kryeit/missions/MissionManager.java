@@ -1,15 +1,20 @@
 package com.kryeit.missions;
 
 import com.kryeit.Main;
+import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.Utils;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
+import com.kryeit.client.screen.toasts.MissionCompletedToast;
 import com.kryeit.missions.config.ConfigReader;
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.game.ClientboundCustomSoundPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 
@@ -18,7 +23,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class MissionManager {
-
     public static final ResourceLocation REWARD_SOUND = new ResourceLocation("entity.player.levelup");
 
     public static int checkReward(MissionType type, UUID player, ResourceLocation item) {
@@ -34,6 +38,8 @@ public class MissionManager {
             type.reset(player);
             DataStorage.INSTANCE.addReward(player, rewardItem, rewardAmount);
             DataStorage.INSTANCE.setCompleted(player, item, type.id());
+
+            broadcastMissionCompletion(player, activeMission, type);
         }
         return itemsLeft;
     }
@@ -89,6 +95,19 @@ public class MissionManager {
             }
         }
         return null;
+    }
+
+    public static void broadcastMissionCompletion(UUID player, DataStorage.ActiveMission mission, MissionType type) {
+        MissionCompletedToast.send(mission.toClientMission(player));
+
+        if (type.difficulty() == MissionDifficulty.HARD) {
+            PlayerList playerList = MinecraftServerSupplier.getServer().getPlayerList();
+            ServerPlayer serverPlayer = playerList.getPlayer(player);
+            if (serverPlayer == null) return;
+
+            TranslatableComponent message = new TranslatableComponent("message.hard_mission_completed", serverPlayer.getName());
+            playerList.broadcastMessage(message, ChatType.CHAT, new UUID(0, 0));
+        }
     }
 
     public static void sendMissions(ServerPlayer player) {
