@@ -11,9 +11,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
@@ -25,6 +28,8 @@ import java.util.function.Function;
 import static com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity.canCompress;
 
 public class Utils {
+    private static final ItemStack DEFAULT_SPAWN_EGG = Registry.ITEM.get(new ResourceLocation("phantom_spawn_egg")).getDefaultInstance();
+
     public static int getDay() {
         return (int) (System.currentTimeMillis() / 86_400_000);
     }
@@ -103,5 +108,16 @@ public class Utils {
             out.add(mappingFunction.apply(t));
         }
         return out;
+    }
+
+    public static ItemStack getSpawnEggOfEntity(ResourceLocation entity) {
+        EntityType<?> entityType = Registry.ENTITY_TYPE.get(entity);
+
+        for (Item registryItem : Registry.ITEM) {
+            if (registryItem instanceof SpawnEggItem egg && egg.spawnsEntity(null, entityType)) {
+                return egg.getDefaultInstance();
+            }
+        }
+        return DEFAULT_SPAWN_EGG;
     }
 }

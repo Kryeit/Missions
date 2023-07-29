@@ -10,7 +10,6 @@ import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -201,13 +200,12 @@ public class DataStorage {
 
         public ClientsideActiveMission toClientMission(UUID player) {
             MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
-            ItemStack itemStack = Utils.getItem(item());
             return new ClientsideActiveMission(
                     Component.nullToEmpty(title),
                     type.difficulty(),
                     requiredAmount(),
-                    type.getProgress(player, item),
-                    itemStack,
+                    type.getProgress(player, item()),
+                    type.getItemStack(item()),
                     type.description(),
                     isCompleted()
             );
