@@ -1,16 +1,14 @@
-<center>
+<p align="center">
+  <img width="200" src="https://kryeit.com/images/missions_logo.png">
+</p>
 
-<img src="https://kryeit.com/images/missions_logo.png" width="200">
+<h1 align="center">Missions</h1>
 
-# Missions
-
-<div style="text-align:center">
-    <a href="https://modrinth.com/mod/missions">
-        <img src="https://raw.githubusercontent.com/Prospector/badges/master/modrinth-badge-72h-padded.png" width="200">
-    </a>
-</div>
-
-</center>
+<p align="center">
+  <a href="https://modrinth.com/mod/missions">
+    <img width="200" src="https://raw.githubusercontent.com/Prospector/badges/master/modrinth-badge-72h-padded.png">
+  </a>
+</p>
 
 
 
