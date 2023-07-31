@@ -7,6 +7,7 @@
   ],
   "mixins": [
     "ClientboundCustomPayloadMixin",
+    "MinecraftServerMixin",
     "ServerboundCustomPayloadMixin",
     "StatsCounterMixin",
     "create.BasinOperatingBlockEntityMixin",
