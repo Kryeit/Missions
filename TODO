@@ -3,6 +3,7 @@
 # implement mission rerolls (one button at the side of each missionButton)
 # give ATM with 1% chance when completing a hard mission
 # show Reward Range in mission button tooltip
+# TODO: IMPORTANT - Make currency exchange configurable in server config file, also add that compat to ExchangeATMBlockEntity.java
 
 # Stats:
 Shown when hovering the InfoButton
@@ -11,7 +12,7 @@ Shown when hovering the InfoButton
   - normal
   - hard
 
-# Advancements
+# Advancements - Not priority
 # First time you complete a hard mission
 # First time you complete 10 missions
 # Reroll a mission

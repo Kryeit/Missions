@@ -1,6 +1,6 @@
 package com.kryeit.missions.mission_types;
 
-import com.kryeit.Utils;
+import com.kryeit.utils.Utils;
 import com.kryeit.missions.MissionDifficulty;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

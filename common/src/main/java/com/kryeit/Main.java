@@ -1,6 +1,10 @@
 package com.kryeit;
 
 
+import com.kryeit.entry.ModBlockEntities;
+import com.kryeit.entry.ModBlocks;
+import com.kryeit.entry.ModItems;
+import com.kryeit.entry.ModMenuTypes;
 import com.kryeit.missions.DataStorage;
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionType;
@@ -17,6 +21,8 @@ import com.kryeit.missions.mission_types.create.fan.BlastMission;
 import com.kryeit.missions.mission_types.create.fan.HauntMission;
 import com.kryeit.missions.mission_types.create.fan.SmokeMission;
 import com.kryeit.missions.mission_types.create.fan.SplashMission;
+import com.kryeit.utils.Utils;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import org.slf4j.Logger;
@@ -32,8 +38,17 @@ public class Main {
     public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static ConfigReader configReader;
 
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID)
+            .creativeModeTab(() -> ModItems.mainCreativeTab, "Create: Missions");
+
     public static void init() {
         registerMissions();
+
+        // Registering
+        ModBlocks.register();
+        ModItems.register();
+        ModMenuTypes.register();
+        ModBlockEntities.register();
 
         try {
             LOGGER.info("Reading config file...");
@@ -109,4 +124,9 @@ public class Main {
                 )
         ).forEach(MissionTypeRegistry.INSTANCE::register);
     }
+
+    public static CreateRegistrate registrate() {
+        return REGISTRATE;
+    }
+
 }

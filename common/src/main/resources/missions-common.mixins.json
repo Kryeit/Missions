@@ -6,15 +6,15 @@
   "client": [
   ],
   "mixins": [
-    "BasinOperatingBlockEntityMixin",
     "ClientboundCustomPayloadMixin",
-    "CrushingWheelControllerBlockEntityMixin",
-    "FanProcessingMixin",
-    "MechanicalCrafterBlockEntityMixin",
-    "MechanicalPressBlockEntityMixin",
-    "SawBlockEntityMixin",
     "ServerboundCustomPayloadMixin",
     "StatsCounterMixin",
+    "create.BasinOperatingBlockEntityMixin",
+    "create.CrushingWheelControllerBlockEntityMixin",
+    "create.FanProcessingMixin",
+    "create.MechanicalCrafterBlockEntityMixin",
+    "create.MechanicalPressBlockEntityMixin",
+    "create.SawBlockEntityMixin",
     "interfaces.BlockEntityAccessor"
   ],
   "injectors": {

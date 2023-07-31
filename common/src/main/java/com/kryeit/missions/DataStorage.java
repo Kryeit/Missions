@@ -1,6 +1,6 @@
 package com.kryeit.missions;
 
-import com.kryeit.Utils;
+import com.kryeit.utils.Utils;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.config.Range;

@@ -1,6 +1,6 @@
 package com.kryeit.missions;
 
-import com.kryeit.Utils;
+import com.kryeit.utils.Utils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

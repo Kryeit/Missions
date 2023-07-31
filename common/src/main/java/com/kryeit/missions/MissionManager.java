@@ -2,7 +2,7 @@ package com.kryeit.missions;
 
 import com.kryeit.Main;
 import com.kryeit.MinecraftServerSupplier;
-import com.kryeit.Utils;
+import com.kryeit.utils.Utils;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;

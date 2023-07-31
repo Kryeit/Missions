@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kryeit.fabric.MainFabric"
+      "com.kryeit.MainFabric"
     ],
     "client": [
       "com.kryeit.fabric.client.ClientEntryPoint"
