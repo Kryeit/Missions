@@ -50,5 +50,10 @@ public class ItemHandlerCompatImpl extends ItemHandlerCompat {
         // you might have to adjust this method to fit your needs.
         itemHandler.setStackInSlot(slot, stack);
     }
+
+    public static ItemHandlerCompat create(BlockEntity blockEntity, int size) {
+        System.out.println("hi");
+        return null;
+    }
 }
 

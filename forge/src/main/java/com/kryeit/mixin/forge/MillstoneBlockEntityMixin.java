@@ -1,4 +1,4 @@
-package com.kryeit.mixin;
+package com.kryeit.mixin.forge;
 
 import com.kryeit.missions.mission_types.create.MillMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;

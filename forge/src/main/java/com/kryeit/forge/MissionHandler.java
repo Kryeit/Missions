@@ -1,4 +1,4 @@
-package com.kryeit;
+package com.kryeit.forge;
 
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.missions.mission_types.*;

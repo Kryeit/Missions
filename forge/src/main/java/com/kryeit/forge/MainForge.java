@@ -1,6 +1,7 @@
-package com.kryeit;
+package com.kryeit.forge;
 
-import com.kryeit.entry.KeyInit;
+import com.kryeit.Main;
+import com.kryeit.entry.forge.KeyInit;
 import com.kryeit.missions.MissionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -13,20 +14,19 @@ import java.util.function.Consumer;
 
 @Mod(Main.MOD_ID)
 public class MainForge {
-
-
-
     public MainForge() {
-        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
-
         Main.init();
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        Main.registrate().registerEventListeners(modEventBus);
+        modEventBus.addListener(this::doClientStuff);
 
+        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.register(new MissionHandler());
         forgeEventBus.addListener((Consumer<PlayerEvent.PlayerLoggedInEvent>) event -> {
             boolean reassigned = MissionManager.reassignMissionsIfNecessary(event.getPlayer().getUUID());
             if (reassigned) {
                 // TODO send a message, I don't know?
+                // TODO implement this in fabric too
             }
         });
     }

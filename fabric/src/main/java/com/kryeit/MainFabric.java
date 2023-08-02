@@ -1,6 +1,5 @@
 package com.kryeit;
 
-import com.kryeit.Main;
 import net.fabricmc.api.ModInitializer;
 
 public class MainFabric implements ModInitializer {
@@ -8,5 +7,6 @@ public class MainFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         Main.init();
+        Main.registrate().register();
     }
 }
