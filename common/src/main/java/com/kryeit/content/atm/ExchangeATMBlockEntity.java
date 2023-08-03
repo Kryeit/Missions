@@ -2,9 +2,7 @@ package com.kryeit.content.atm;
 
 import com.kryeit.utils.ItemHandlerCompat;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import io.github.fabricators_of_create.porting_lib.util.LazyOptional;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -22,7 +20,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
 
 public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuProvider {
 
@@ -38,7 +35,6 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
         TO_SMALLER, TO_BIGGER, OFF
     }
 
-    private LazyOptional<ItemHandlerCompat> lazyItemHandler = LazyOptional.empty();
 
     protected final ContainerData data;
     private int progress = 0;
@@ -98,13 +94,11 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     @Override
     public void onLoad() {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
     }
 
     @Override
     public void invalidateCaps()  {
         super.invalidateCaps();
-        lazyItemHandler.invalidate();
     }
 
     @Override

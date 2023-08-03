@@ -12,14 +12,14 @@
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
   "license": "Insert License Here",
-  "icon": "assets/missions/icon.png",
+  "icon": "logo.png",
   "environment": "*",
   "entrypoints": {
     "main": [
       "com.kryeit.MainFabric"
     ],
     "client": [
-      "com.kryeit.fabric.client.ClientEntryPoint"
+      "com.kryeit.client.ClientEntryPoint"
     ]
   },
   "mixins": [

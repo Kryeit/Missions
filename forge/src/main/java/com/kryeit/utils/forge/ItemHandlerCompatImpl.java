@@ -52,8 +52,7 @@ public class ItemHandlerCompatImpl extends ItemHandlerCompat {
     }
 
     public static ItemHandlerCompat create(BlockEntity blockEntity, int size) {
-        System.out.println("hi");
-        return null;
+        return new ItemHandlerCompatImpl(blockEntity, size);
     }
 }
 

@@ -1,12 +1,12 @@
 package com.kryeit.utils;
 
-import com.kryeit.PlatformSpecific;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.crafter.MechanicalCraftingRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
@@ -41,7 +41,7 @@ public class MixinUtils {
         if (closestPlayer != null && result != null)
             MissionTypeRegistry.INSTANCE.getType(missionType).handleItem(
                     closestPlayer.getUUID(),
-                    PlatformSpecific.getResourceLocation(result.getItem()),
+                    Registry.ITEM.getKey(result.getItem()),
                     result.getCount());
     }
 }

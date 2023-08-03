@@ -35,7 +35,4 @@ public final class KeyInit {
             minecraft.setScreen(new MissionScreen());
         }
     }
-
-
 }
-

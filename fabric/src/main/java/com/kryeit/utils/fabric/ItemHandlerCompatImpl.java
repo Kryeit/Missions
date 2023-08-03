@@ -54,4 +54,8 @@ public class ItemHandlerCompatImpl extends ItemHandlerCompat {
     public void setStackInSlot(int slot, ItemStack stack) {
         itemHandler.setStackInSlot(slot, stack);
     }
+
+    public static ItemHandlerCompat create(BlockEntity blockEntity, int size) {
+        return new ItemHandlerCompatImpl(blockEntity, size);
+    }
 }
