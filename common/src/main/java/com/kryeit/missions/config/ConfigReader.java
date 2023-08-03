@@ -5,6 +5,7 @@ import com.kryeit.JSONObject.JSONArray;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -21,9 +22,13 @@ public class ConfigReader {
     }
 
     public static ConfigReader readFile(Path path) throws IOException {
-        if (!path.toFile().exists()) {
+        File file = path.toFile();
+        if (!file.exists()) {
             InputStream stream = ConfigReader.class.getResourceAsStream("/example_config.json");
             if (stream == null) throw new NullPointerException("Cannot find example config");
+
+            //noinspection ResultOfMethodCallIgnored
+            file.getParentFile().mkdirs();
             Files.copy(stream, path);
         }
 
