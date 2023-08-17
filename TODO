@@ -18,3 +18,4 @@ Shown when hovering the InfoButton
 # Reroll a mission
 # Reroll 5 missions in the same week
 # Claim the rewards of 10 missions at the same time
+# implement missions handlers in fabric too
