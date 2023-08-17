@@ -21,7 +21,7 @@ public abstract class StatsCounterMixin {
     @Inject(method = "setValue", at = @At("HEAD"))
     public void onValueChanged(Player player, Stat<?> stat, int newValue, CallbackInfo ci) {
         if (stat.getValue() instanceof ResourceLocation resourceLocation) {
-            int value = getValue(Stats.CUSTOM, Stats.WALK_ONE_CM);
+            int value = getValue(Stats.CUSTOM, resourceLocation);
             StatisticMission.handleStatisticChange(player.getUUID(), newValue - value, resourceLocation);
         }
     }

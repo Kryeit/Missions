@@ -13,51 +13,55 @@ import java.util.UUID;
 
 public class StatisticMission {
     private static final ResourceLocation IDENTIFIER = new ResourceLocation("missions", "statistic");
-    private static final Map<ResourceLocation, MissionType> missions = new HashMap<>();
+    private static final Map<ResourceLocation, StatisticMissionType> missions = new HashMap<>();
 
     public static void handleStatisticChange(UUID player, int difference, ResourceLocation statistic) {
-        MissionType type = missions.get(statistic);
+        StatisticMissionType type = missions.get(statistic);
         if (type == null || difference == 0) return;
 
-        CompoundTag data = type.getData(player);
-        data.putInt("value", data.getInt("value") + difference);
+        type.incrementProgress(player, difference);
         MissionManager.checkReward(type, player, IDENTIFIER);
     }
 
-    public static MissionType createStatisticMission(String id, MissionDifficulty difficulty, Component description, ResourceLocation... statistics) {
-        MissionType type = createType(id, difficulty, description);
+    public static MissionType createStatisticMission(String id, MissionDifficulty difficulty, Component description, float divisor, ResourceLocation... statistics) {
+        StatisticMissionType type = new StatisticMissionType(id, difficulty, description, divisor);
         for (ResourceLocation statistic : statistics) {
             missions.put(statistic, type);
         }
         return type;
     }
 
-    private static MissionType createType(String id, MissionDifficulty difficulty, Component description) {
-        return new MissionType() {
-            @Override
-            public String id() {
-                return id;
-            }
+    private record StatisticMissionType(String id, MissionDifficulty difficulty, Component description,
+                                        float divisor) implements MissionType {
 
-            @Override
-            public MissionDifficulty difficulty() {
-                return difficulty;
-            }
+        @Override
+        public String id() {
+            return id;
+        }
 
-            @Override
-            public Component description() {
-                return description;
-            }
+        @Override
+        public MissionDifficulty difficulty() {
+            return difficulty;
+        }
 
-            @Override
-            public int getProgress(UUID player, ResourceLocation item) {
-                return getData(player).getInt("value");
-            }
+        @Override
+        public Component description() {
+            return description;
+        }
 
-            @Override
-            public void reset(UUID player) {
-                getData(player).remove("value");
-            }
-        };
+        @Override
+        public int getProgress(UUID player, ResourceLocation item) {
+            return getData(player).getInt("value");
+        }
+
+        @Override
+        public void reset(UUID player) {
+            getData(player).remove("value");
+        }
+
+        public void incrementProgress(UUID player, int lambda) {
+            CompoundTag data = getData(player);
+            data.putInt("value", data.getInt("value") + lambda);
+        }
     }
 }

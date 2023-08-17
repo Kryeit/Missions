@@ -101,24 +101,28 @@ public class Main {
                         "walk",
                         MissionDifficulty.EASY,
                         Component.nullToEmpty("Walking mission"),
+                        100_000,
                         Stats.WALK_ONE_CM, Stats.SPRINT_ONE_CM, Stats.CROUCH_ONE_CM
                 ),
                 StatisticMission.createStatisticMission(
                         "swim",
                         MissionDifficulty.EASY,
                         Component.nullToEmpty("Swimming mission"),
+                        100_000,
                         Stats.SWIM_ONE_CM
                 ),
                 StatisticMission.createStatisticMission(
                         "minecart",
                         MissionDifficulty.NORMAL,
                         Component.nullToEmpty("Minecart mission"),
+                        100_000,
                         Stats.MINECART_ONE_CM
                 ),
                 StatisticMission.createStatisticMission(
                         "ride",
                         MissionDifficulty.NORMAL,
                         Component.nullToEmpty("Riding mission"),
+                        100_000,
                         Stats.HORSE_ONE_CM,
                         Stats.PIG_ONE_CM
                 )
