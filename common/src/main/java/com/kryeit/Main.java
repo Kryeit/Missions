@@ -5,10 +5,7 @@ import com.kryeit.entry.ModBlockEntities;
 import com.kryeit.entry.ModBlocks;
 import com.kryeit.entry.ModItems;
 import com.kryeit.entry.ModMenuTypes;
-import com.kryeit.missions.DataStorage;
-import com.kryeit.missions.MissionDifficulty;
-import com.kryeit.missions.MissionType;
-import com.kryeit.missions.MissionTypeRegistry;
+import com.kryeit.missions.*;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.*;
 import com.kryeit.missions.mission_types.create.CrushMission;
@@ -25,6 +22,7 @@ import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,11 +67,19 @@ public class Main {
         Runtime.getRuntime().addShutdownHook(new Thread(DataStorage.INSTANCE::save));
     }
 
+    public static void handlePlayerLogin(Player player) {
+        boolean reassigned = MissionManager.reassignMissionsIfNecessary(player.getUUID());
+        if (reassigned) {
+            // TODO send a message, I don't know?
+            // TODO implement this in fabric too
+        }
+    }
+
     public static ConfigReader getConfig() {
         return configReader;
     }
 
-    public static void registerMissions() {
+    private static void registerMissions() {
         MissionTypeRegistry.INSTANCE.register(new BreakMission());
         MissionTypeRegistry.INSTANCE.register(new CraftMission());
         MissionTypeRegistry.INSTANCE.register(new CrushMission());
@@ -132,5 +138,4 @@ public class Main {
     public static CreateRegistrate registrate() {
         return REGISTRATE;
     }
-
 }

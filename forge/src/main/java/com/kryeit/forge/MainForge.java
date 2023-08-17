@@ -2,9 +2,8 @@ package com.kryeit.forge;
 
 import com.kryeit.Main;
 import com.kryeit.entry.forge.KeyInit;
-import com.kryeit.missions.MissionManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -22,13 +21,7 @@ public class MainForge {
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.register(new MissionHandler());
-        forgeEventBus.addListener((Consumer<PlayerEvent.PlayerLoggedInEvent>) event -> {
-            boolean reassigned = MissionManager.reassignMissionsIfNecessary(event.getPlayer().getUUID());
-            if (reassigned) {
-                // TODO send a message, I don't know?
-                // TODO implement this in fabric too
-            }
-        });
+        forgeEventBus.addListener((Consumer<PlayerLoggedInEvent>) event -> Main.handlePlayerLogin(event.getPlayer()));
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

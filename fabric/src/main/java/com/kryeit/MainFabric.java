@@ -1,6 +1,7 @@
 package com.kryeit;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 
 public class MainFabric implements ModInitializer {
 
@@ -8,5 +9,7 @@ public class MainFabric implements ModInitializer {
     public void onInitialize() {
         Main.init();
         Main.registrate().register();
+
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> Main.handlePlayerLogin(handler.getPlayer()));
     }
 }
