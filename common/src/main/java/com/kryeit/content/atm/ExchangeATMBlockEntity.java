@@ -25,10 +25,6 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
     private final ItemHandlerCompat itemHandler = ItemHandlerCompat.create(this, 2);
 
-
-
-
-
     protected Mode mode;
 
     enum Mode {

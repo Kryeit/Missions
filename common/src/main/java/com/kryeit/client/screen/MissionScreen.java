@@ -64,7 +64,7 @@ public class MissionScreen extends Screen {
             Component leftColumnTitle = leftColumnMission.titleString();
 
             // Left column
-            this.addRenderableWidget(createMissionButton(leftX, y, leftColumnTitle, leftColumnMission));
+            this.addRenderableWidget(createMissionButton(leftX, y, leftColumnTitle, leftColumnMission, i));
 
             if (i + missionsPerColumn < activeMissions.size()) {
                 // There's a mission for the right column
@@ -72,7 +72,7 @@ public class MissionScreen extends Screen {
                 Component rightColumnTitle = rightColumnMission.titleString();
 
                 // Right column
-                this.addRenderableWidget(createMissionButton(rightX, y, rightColumnTitle, rightColumnMission));
+                this.addRenderableWidget(createMissionButton(rightX, y, rightColumnTitle, rightColumnMission, i + missionsPerColumn));
             }
         }
 
@@ -80,9 +80,11 @@ public class MissionScreen extends Screen {
         createRewardButton(data.hasUnclaimedRewards());
     }
 
-    private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission) {
+    private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index) {
         Button.OnTooltip tooltip = (button, poseStack, mouseX, mouseY) -> renderTooltip(poseStack, getTooltip(mission), Optional.empty(), mouseX, mouseY);
-        return new MissionButton(this, x, y, title, mission, tooltip);
+        return new MissionButton(this, x, y, title, mission, tooltip,  button -> {
+            Minecraft.getInstance().setScreen(new MissionRerollScreen(index));
+        });
     }
 
     @Override

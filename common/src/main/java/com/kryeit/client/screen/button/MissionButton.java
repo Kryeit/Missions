@@ -23,8 +23,8 @@ public class MissionButton extends Button {
     protected final ClientMissionData.ClientsideActiveMission mission;
     private final MissionScreen screen;
 
-    public MissionButton(MissionScreen screen, int x, int y, Component message, ClientMissionData.ClientsideActiveMission mission, OnTooltip onTooltip) {
-        super(x, y, 200, 20, message, button -> {}, onTooltip);
+    public MissionButton(MissionScreen screen, int x, int y, Component message, ClientMissionData.ClientsideActiveMission mission, OnTooltip onTooltip, OnPress onPress) {
+        super(x, y, 200, 20, message, onPress, onTooltip);
         this.completed = mission.isCompleted();
         this.item = mission.itemStack();
         this.screen = screen;
