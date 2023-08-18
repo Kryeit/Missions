@@ -141,7 +141,6 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     }
 
     private boolean hasRecipe(ExchangeATMBlockEntity entity) {
-        Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
@@ -166,7 +165,6 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     }
 
     private void craftItem(ExchangeATMBlockEntity entity) {
-        Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
@@ -189,8 +187,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
             if(result != null) {
                 entity.itemHandler.extractItem(0,1, false);
-                entity.itemHandler.setStackInSlot(1, new ItemStack(result.getItem(),
-                        64));
+                entity.itemHandler.setStackInSlot(1, result);
 
                 entity.resetProgress();
             }
