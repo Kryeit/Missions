@@ -1,10 +1,8 @@
 package com.kryeit.entry;
 
-import com.kryeit.Main;
 import com.kryeit.content.atm.ExchangeATMBlockEntity;
 import com.kryeit.content.atm.ExchangeATMInstance;
 import com.kryeit.content.atm.ExchangeATMRenderer;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
 import static com.kryeit.Main.REGISTRATE;
