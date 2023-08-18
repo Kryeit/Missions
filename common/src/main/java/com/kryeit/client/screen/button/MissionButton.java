@@ -43,7 +43,7 @@ public class MissionButton extends Button {
     public void drawText(PoseStack matrices) {
         int color = completed ? 0x00FF00 : mission.difficulty().color();
         Font font = Minecraft.getInstance().font;
-        AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2 + 7, this.y + (this.height - 8) / 2, color);
+        AbstractWidget.drawCenteredString(matrices, font, this.getMessage(), this.x + this.width / 2 + 11, this.y + (this.height - 8) / 2, color);
     }
 
     public void renderButtonTexture(PoseStack matrices) {
