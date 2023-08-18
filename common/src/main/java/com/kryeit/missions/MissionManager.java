@@ -2,12 +2,13 @@ package com.kryeit.missions;
 
 import com.kryeit.Main;
 import com.kryeit.MinecraftServerSupplier;
-import com.kryeit.utils.Utils;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.toasts.MissionCompletedToast;
 import com.kryeit.missions.config.ConfigReader;
+import com.kryeit.utils.Utils;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
@@ -42,6 +43,29 @@ public class MissionManager {
             broadcastMissionCompletion(player, activeMission, type);
         }
         return itemsLeft;
+    }
+
+    public static void incrementMission(UUID player, String missionID, ResourceLocation key, int amount) {
+        MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID);
+        incrementMission(player, type, key, amount);
+    }
+
+    public static void incrementMission(UUID player, Class<? extends MissionType> clazz, ResourceLocation key, int amount) {
+        MissionType type = MissionTypeRegistry.INSTANCE.getType(clazz);
+        incrementMission(player, type, key, amount);
+    }
+
+    public static void incrementMission(UUID player, MissionType type, ResourceLocation key, int amount) {
+        if (MissionManager.countItem(type.id(), player, key)) {
+            CompoundTag data = type.getData(player);
+            type.increment(amount, key, data);
+
+            int itemsLeft = MissionManager.checkReward(type, player, key);
+            // positive when not enough items, negative when too many items -> recurse when negative
+            if (itemsLeft < 0) {
+                incrementMission(player, type, key, -itemsLeft);
+            }
+        }
     }
 
     public static void giveReward(ServerPlayer player) {

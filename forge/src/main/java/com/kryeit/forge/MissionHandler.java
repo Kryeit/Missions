@@ -1,6 +1,6 @@
 package com.kryeit.forge;
 
-import com.kryeit.missions.MissionTypeRegistry;
+import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,14 +19,15 @@ public class MissionHandler {
     public void breakBlock(BlockEvent.BreakEvent event) {
         if (isNotServerPlayer(event.getPlayer())) return;
         ResourceLocation item = event.getState().getBlock().getRegistryName();
-        MissionTypeRegistry.INSTANCE.getType(BreakMission.class).handleItem(event.getPlayer().getUUID(), item);
+        MissionManager.incrementMission(event.getPlayer().getUUID(), BreakMission.class, item, 1);
     }
 
     @SubscribeEvent
     public void placeBlock(BlockEvent.EntityPlaceEvent event) {
         if (isNotServerPlayer(event.getEntity())) return;
         ResourceLocation block = event.getPlacedBlock().getBlock().getRegistryName();
-        MissionTypeRegistry.INSTANCE.getType(PlaceMission.class).handleItem(event.getEntity().getUUID(), block);
+
+        MissionManager.incrementMission(event.getEntity().getUUID(), PlaceMission.class, block, 1);
     }
 
     @SubscribeEvent
@@ -35,7 +36,7 @@ public class MissionHandler {
 
         for (ItemStack itemStack : event.getDrops()) {
             ResourceLocation item = itemStack.getItem().getRegistryName();
-            MissionTypeRegistry.INSTANCE.getType(FishMission.class).handleItem(event.getPlayer().getUUID(), item);
+            MissionManager.incrementMission(event.getPlayer().getUUID(), FishMission.class, item, 1);
         }
     }
 
@@ -44,7 +45,7 @@ public class MissionHandler {
     public void eatItem(LivingEntityUseItemEvent.Finish event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             ResourceLocation item = event.getItem().getItem().getRegistryName();
-            MissionTypeRegistry.INSTANCE.getType(EatMission.class).handleItem(player.getUUID(), item);
+            MissionManager.incrementMission(player.getUUID(), EatMission.class, item, 1);
         }
     }
 
@@ -52,7 +53,7 @@ public class MissionHandler {
     public void killEntity(LivingDeathEvent event) {
         if (event.getSource().getEntity() instanceof ServerPlayer player) {
             ResourceLocation entity = event.getEntity().getType().getRegistryName();
-            MissionTypeRegistry.INSTANCE.getType(KillMission.class).handleItem(player.getUUID(), entity);
+            MissionManager.incrementMission(player.getUUID(), KillMission.class, entity, 1);
         }
     }
 
@@ -60,7 +61,7 @@ public class MissionHandler {
     public void craftItem(PlayerEvent.ItemCraftedEvent event) {
         if (isNotServerPlayer(event.getEntity())) return;
         ResourceLocation item = event.getCrafting().getItem().getRegistryName();
-        MissionTypeRegistry.INSTANCE.getType(CraftMission.class).handleItem(event.getPlayer().getUUID(), item);
+        MissionManager.incrementMission(event.getPlayer().getUUID(), CraftMission.class, item, 1);
     }
 
     @SubscribeEvent

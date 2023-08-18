@@ -1,7 +1,6 @@
 package com.kryeit.mixin.create;
 
-import com.kryeit.missions.MissionTypeRegistry;
-import com.kryeit.missions.mission_types.MultiResourceMissionType;
+import com.kryeit.missions.MissionManager;
 import com.kryeit.utils.MixinUtils;
 import com.simibubi.create.content.kinetics.fan.FanProcessing;
 import net.minecraft.core.Registry;
@@ -34,7 +33,7 @@ public class FanProcessingMixin {
             for (ItemStack stack : stacks) {
                 if (type == FanProcessing.Type.NONE) return;
 
-                String missionType = switch (type) {
+                String id = switch (type) {
                     case SPLASHING -> "splash";
                     case SMOKING -> "smoke";
                     case HAUNTING -> "haunt";
@@ -42,11 +41,7 @@ public class FanProcessingMixin {
                     default -> throw new IllegalStateException("Unexpected value: " + type);
                 };
 
-                ((MultiResourceMissionType) MissionTypeRegistry.INSTANCE.getType(missionType)).handleItem(
-                        closestPlayer.getUUID(),
-                        Registry.ITEM.getKey(stack.getItem()),
-                        stack.getCount()
-                );
+                MissionManager.incrementMission(closestPlayer.getUUID(), id, Registry.ITEM.getKey(stack.getItem()), stack.getCount());
             }
         }
     }

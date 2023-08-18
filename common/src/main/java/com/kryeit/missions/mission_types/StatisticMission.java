@@ -19,8 +19,7 @@ public class StatisticMission {
         StatisticMissionType type = missions.get(statistic);
         if (type == null || difference == 0) return;
 
-        type.incrementProgress(player, difference);
-        MissionManager.checkReward(type, player, IDENTIFIER);
+        MissionManager.incrementMission(player, type, IDENTIFIER, difference);
     }
 
     public static MissionType createStatisticMission(String id, MissionDifficulty difficulty, Component description, float divisor, ResourceLocation... statistics) {
@@ -51,7 +50,7 @@ public class StatisticMission {
 
         @Override
         public int getProgress(UUID player, ResourceLocation item) {
-            return getData(player).getInt("value");
+            return (int) (getData(player).getInt("value") / divisor);
         }
 
         @Override
@@ -59,9 +58,9 @@ public class StatisticMission {
             getData(player).remove("value");
         }
 
-        public void incrementProgress(UUID player, int lambda) {
-            CompoundTag data = getData(player);
-            data.putInt("value", data.getInt("value") + lambda);
+        @Override
+        public void increment(int amount, ResourceLocation item, CompoundTag data) {
+            data.putInt("value", data.getInt("value") + amount);
         }
     }
 }

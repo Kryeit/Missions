@@ -1,7 +1,6 @@
 package com.kryeit.missions.mission_types;
 
 import com.kryeit.missions.MissionDifficulty;
-import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -31,13 +30,9 @@ public class VoteMission implements MissionType {
         getData(player).remove("votes");
     }
 
-    public void handleVote(UUID player) {
-        if (MissionManager.countItem(id(), player, IDENTIFIER_LOCATION)) {
-            CompoundTag data = getData(player);
-            data.putInt("votes", data.getInt("votes") + 1);
-
-            MissionManager.checkReward(this, player, IDENTIFIER_LOCATION);
-        }
+    @Override
+    public void increment(int amount, ResourceLocation item, CompoundTag data) {
+        data.putInt("votes", data.getInt("votes") + 1);
     }
 
     @Override

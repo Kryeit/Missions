@@ -1,6 +1,5 @@
 package com.kryeit.missions.mission_types;
 
-import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -18,21 +17,9 @@ public interface MultiResourceMissionType extends MissionType {
         getData(player).getAllKeys().clear();
     }
 
-    default void handleItem(UUID player, ResourceLocation item) {
-        handleItem(player, item, 1);
-    }
-
-    default void handleItem(UUID player, ResourceLocation item, int amount) {
-        if (MissionManager.countItem(id(), player, item)) {
-            CompoundTag data = getData(player);
-            String itemString = item.toString();
-            data.putInt(itemString, data.getInt(itemString) + amount);
-
-            int itemsLeft = MissionManager.checkReward(this, player, item);
-            // positive when not enough items, negative when too many items -> recurse when negative
-            if (itemsLeft < 0) {
-                handleItem(player, item, -itemsLeft);
-            }
-        }
+    @Override
+    default void increment(int amount, ResourceLocation item, CompoundTag data) {
+        String itemString = item.toString();
+        data.putInt(itemString, data.getInt(itemString) + amount);
     }
 }

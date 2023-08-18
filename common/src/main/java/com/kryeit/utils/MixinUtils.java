@@ -1,6 +1,6 @@
 package com.kryeit.utils;
 
-import com.kryeit.missions.MissionTypeRegistry;
+import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.AllRecipeTypes;
@@ -27,7 +27,7 @@ public class MixinUtils {
     public static boolean isCompactingRecipe(Recipe<?> recipe) {
         return (recipe instanceof CraftingRecipe && !(recipe instanceof MechanicalCraftingRecipe) && canCompress(recipe)
                 && !AllRecipeTypes.shouldIgnoreInAutomation(recipe))
-                || recipe.getType() == AllRecipeTypes.COMPACTING.getType();
+               || recipe.getType() == AllRecipeTypes.COMPACTING.getType();
     }
 
     public static void handleMixinMissionItem(BlockEntityAccessor accessor, Class<? extends MultiResourceMissionType> missionType, ItemStack result) {
@@ -35,13 +35,12 @@ public class MixinUtils {
         BlockPos worldPosition = accessor.getWorldPosition();
         Player closestPlayer = null;
 
-        if(level != null && worldPosition != null)
+        if (level != null && worldPosition != null)
             closestPlayer = getClosestPlayer(level, worldPosition);
 
-        if (closestPlayer != null && result != null)
-            MissionTypeRegistry.INSTANCE.getType(missionType).handleItem(
-                    closestPlayer.getUUID(),
-                    Registry.ITEM.getKey(result.getItem()),
+        if (closestPlayer != null && result != null) {
+            MissionManager.incrementMission(closestPlayer.getUUID(), missionType, Registry.ITEM.getKey(result.getItem()),
                     result.getCount());
+        }
     }
 }
