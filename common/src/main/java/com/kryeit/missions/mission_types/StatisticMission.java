@@ -6,6 +6,9 @@ import com.kryeit.missions.MissionType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +25,8 @@ public class StatisticMission {
         MissionManager.incrementMission(player, type, IDENTIFIER, difference);
     }
 
-    public static MissionType createStatisticMission(String id, MissionDifficulty difficulty, Component description, float divisor, ResourceLocation... statistics) {
-        StatisticMissionType type = new StatisticMissionType(id, difficulty, description, divisor);
+    public static MissionType createStatisticMission(String id, MissionDifficulty difficulty, Component description, float divisor, @Nullable Item item, ResourceLocation... statistics) {
+        StatisticMissionType type = new StatisticMissionType(id, difficulty, description, divisor, item);
         for (ResourceLocation statistic : statistics) {
             missions.put(statistic, type);
         }
@@ -31,7 +34,7 @@ public class StatisticMission {
     }
 
     private record StatisticMissionType(String id, MissionDifficulty difficulty, Component description,
-                                        float divisor) implements MissionType {
+                                        float divisor, @Nullable Item item) implements MissionType {
 
         @Override
         public String id() {
@@ -61,6 +64,11 @@ public class StatisticMission {
         @Override
         public void increment(int amount, ResourceLocation item, CompoundTag data) {
             data.putInt("value", data.getInt("value") + amount);
+        }
+
+        @Override
+        public ItemStack getItemStack(ResourceLocation item) {
+            return item() == null ? MissionType.super.getItemStack(item) : item().getDefaultInstance();
         }
     }
 }

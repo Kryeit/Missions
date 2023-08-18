@@ -23,6 +23,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -108,6 +109,7 @@ public class Main {
                         MissionDifficulty.EASY,
                         Component.nullToEmpty("Walking mission"),
                         100_000,
+                        Items.LEATHER_BOOTS,
                         Stats.WALK_ONE_CM, Stats.SPRINT_ONE_CM, Stats.CROUCH_ONE_CM
                 ),
                 StatisticMission.createStatisticMission(
@@ -115,6 +117,7 @@ public class Main {
                         MissionDifficulty.EASY,
                         Component.nullToEmpty("Swimming mission"),
                         100_000,
+                        Items.TURTLE_HELMET,
                         Stats.SWIM_ONE_CM
                 ),
                 StatisticMission.createStatisticMission(
@@ -122,6 +125,7 @@ public class Main {
                         MissionDifficulty.NORMAL,
                         Component.nullToEmpty("Minecart mission"),
                         100_000,
+                        Items.MINECART,
                         Stats.MINECART_ONE_CM
                 ),
                 StatisticMission.createStatisticMission(
@@ -129,6 +133,7 @@ public class Main {
                         MissionDifficulty.NORMAL,
                         Component.nullToEmpty("Riding mission"),
                         100_000,
+                        Items.SADDLE,
                         Stats.HORSE_ONE_CM,
                         Stats.PIG_ONE_CM
                 )
