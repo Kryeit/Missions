@@ -1,5 +1,6 @@
 package com.kryeit.content.atm;
 
+import com.kryeit.coins.Coins;
 import com.kryeit.utils.ItemHandlerCompat;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -139,7 +140,6 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
         }
     }
 
-    // TODO: Implement the currency exchange from config
     private boolean hasRecipe(ExchangeATMBlockEntity entity) {
         Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
@@ -147,25 +147,24 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-//        if(this.mode == Mode.TO_BIGGER) {
-//            Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
-//                    .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
-//
-//            return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-//                    && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())
-//                    && inventory.getItem(0).getCount() == 64;
-//        } else if(this.mode == Mode.TO_SMALLER) {
-//            Optional<SmallerExchangeRecipe> match = level.getRecipeManager()
-//                    .getRecipeFor(SmallerExchangeRecipe.Type.INSTANCE, inventory, level);
-//
-//            return match.isPresent() && inventory.getItem(1).getCount() == 0
-//                    && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
-//        }
+        if(this.mode == Mode.TO_BIGGER) {
+
+            ItemStack result = Coins.getExchange(inventory.getItem(0), true);
+
+            return result != null && canInsertAmountIntoOutputSlot(inventory)
+                    && canInsertItemIntoOutputSlot(inventory, result)
+                    && inventory.getItem(0).getCount() == 64;
+        } else if(this.mode == Mode.TO_SMALLER) {
+
+            ItemStack result = Coins.getExchange(inventory.getItem(0), false);
+
+            return result != null && inventory.getItem(1).getCount() == 0
+                    && canInsertItemIntoOutputSlot(inventory, result);
+        }
 
         return false;
     }
 
-    // TODO: Implement the currency exchange from config
     private void craftItem(ExchangeATMBlockEntity entity) {
         Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
@@ -174,28 +173,27 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
         }
 
         if(this.mode == Mode.TO_BIGGER) {
-//            Optional<BiggerExchangeRecipe> match = level.getRecipeManager()
-//                    .getRecipeFor(BiggerExchangeRecipe.Type.INSTANCE, inventory, level);
-//
-//            if(match.isPresent()) {
-//                entity.itemHandler.extractItem(0,64, false);
-//                entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
-//                        entity.itemHandler.getStackInSlot(1).getCount() + 1));
-//
-//                entity.resetProgress();
-//            }
+            ItemStack result = Coins.getExchange(inventory.getItem(0), true);
+
+            if(result != null) {
+                entity.itemHandler.extractItem(0,64, false);
+                entity.itemHandler.setStackInSlot(1, new ItemStack(result.getItem(),
+                        entity.itemHandler.getStackInSlot(1).getCount() + 1));
+
+                entity.resetProgress();
+            }
 
         } else if(this.mode == Mode.TO_SMALLER) {
-//            Optional<SmallerExchangeRecipe> match = level.getRecipeManager()
-//                    .getRecipeFor(SmallerExchangeRecipe.Type.INSTANCE, inventory, level);
-//
-//            if(match.isPresent()) {
-//                entity.itemHandler.extractItem(0,1, false);
-//                entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(),
-//                        64));
-//
-//                entity.resetProgress();
-//            }
+            ItemStack result = Coins.getExchange(inventory.getItem(0), false);
+
+
+            if(result != null) {
+                entity.itemHandler.extractItem(0,1, false);
+                entity.itemHandler.setStackInSlot(1, new ItemStack(result.getItem(),
+                        64));
+
+                entity.resetProgress();
+            }
         }
     }
 
