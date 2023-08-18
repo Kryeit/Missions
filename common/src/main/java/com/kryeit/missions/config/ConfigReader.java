@@ -4,6 +4,9 @@ import com.kryeit.JSONObject;
 import com.kryeit.JSONObject.JSONArray;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
+import com.kryeit.utils.Utils;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,25 +19,18 @@ import java.util.Map;
 
 public class ConfigReader {
     private final Map<MissionType, Mission> missions;
+    private final List<ItemStack> exchange;
 
-    private ConfigReader(Map<MissionType, Mission> missions) {
+    private ConfigReader(Map<MissionType, Mission> missions, List<ItemStack> exchange) {
         this.missions = missions;
+        this.exchange = exchange;
     }
 
     public static ConfigReader readFile(Path path) throws IOException {
-        File file = path.toFile();
-        if (!file.exists()) {
-            InputStream stream = ConfigReader.class.getResourceAsStream("/example_config.json");
-            if (stream == null) throw new NullPointerException("Cannot find example config");
-
-            //noinspection ResultOfMethodCallIgnored
-            file.getParentFile().mkdirs();
-            Files.copy(stream, path);
-        }
+        String content = readOrCopyFile(path.resolve("missions.json"), "/example_config.json");
 
         Map<MissionType, Mission> missions = new HashMap<>();
-        String string = Files.readString(path);
-        JSONObject object = new JSONObject(string);
+        JSONObject object = new JSONObject(content);
 
         for (String key : object.keySet()) {
             JSONObject value = object.getObject(key);
@@ -50,7 +46,26 @@ public class ConfigReader {
             );
             missions.put(missionType, mission);
         }
-        return new ConfigReader(missions);
+
+        String exchange = readOrCopyFile(path.resolve("currency.json"), "/example_currency.json");
+        List<ItemStack> items = new JSONArray(exchange).asList((array, integer) -> {
+            ResourceLocation location = new ResourceLocation(array.getString(integer));
+            return Utils.getItem(location);
+        });
+        return new ConfigReader(missions, items);
+    }
+
+    private static String readOrCopyFile(Path path, String exampleFile) throws IOException {
+        File file = path.toFile();
+        if (!file.exists()) {
+            InputStream stream = ConfigReader.class.getResourceAsStream(exampleFile);
+            if (stream == null) throw new NullPointerException("Cannot load example file");
+
+            //noinspection ResultOfMethodCallIgnored
+            file.getParentFile().mkdirs();
+            Files.copy(stream, path);
+        }
+        return Files.readString(path);
     }
 
     private static Map<String, Range> getItems(JSONObject items) {
@@ -63,6 +78,10 @@ public class ConfigReader {
 
     public Map<MissionType, Mission> getMissions() {
         return missions;
+    }
+
+    public List<ItemStack> exchange() {
+        return exchange;
     }
 
     public record Mission(Range rewardAmount, String rewardItem, MissionType missionType, Map<String, Range> items,

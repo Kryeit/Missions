@@ -50,7 +50,7 @@ public class Main {
 
         try {
             LOGGER.info("Reading config file...");
-            configReader = ConfigReader.readFile(Path.of("missions/missions.json"));
+            configReader = ConfigReader.readFile(Path.of("missions"));
             List<MissionType> unusedTypes = new ArrayList<>(MissionTypeRegistry.INSTANCE.getAllTypes());
             unusedTypes.removeAll(configReader.getMissions().keySet());
 
