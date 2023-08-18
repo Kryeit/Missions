@@ -59,7 +59,7 @@ public class MissionCompletedToast implements Toast {
 
     public void renderItem(PoseStack matrices, ToastComponent toastComponent) {
         renderBelowItem(matrices, toastComponent);
-        toastComponent.getMinecraft().getItemRenderer().renderAndDecorateItem(mission.itemStack(), 8, 8);
+        toastComponent.getMinecraft().getItemRenderer().renderAndDecorateItem(mission.previewItem(), 8, 8);
     }
 
     public void renderBelowItem(PoseStack matrices, ToastComponent toastComponent) {

@@ -34,7 +34,8 @@ public class ClientsideMissionPacketUtils {
             b.writeEnum(mission.difficulty());
             b.writeInt(mission.requiredAmount());
             b.writeInt(mission.progress());
-            b.writeItem(mission.itemStack());
+            b.writeItem(mission.previewItem());
+            b.writeItem(mission.itemRequired());
             b.writeComponent(mission.missionString());
             b.writeBoolean(mission.isCompleted());
         });

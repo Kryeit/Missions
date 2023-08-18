@@ -27,5 +27,9 @@ public interface MissionType {
         return Utils.getItem(item);
     }
 
+    default ItemStack getPreviewStack(ResourceLocation item) {
+        return getItemStack(item);
+    }
+
     void increment(int amount, ResourceLocation item, CompoundTag data);
 }

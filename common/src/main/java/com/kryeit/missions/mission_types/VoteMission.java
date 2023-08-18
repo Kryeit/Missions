@@ -5,6 +5,8 @@ import com.kryeit.missions.MissionType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.UUID;
 
@@ -38,5 +40,15 @@ public class VoteMission implements MissionType {
     @Override
     public Component description() {
         return Component.nullToEmpty("Voting mission");
+    }
+
+    @Override
+    public ItemStack getItemStack(ResourceLocation item) {
+        return Items.AIR.getDefaultInstance();
+    }
+
+    @Override
+    public ItemStack getPreviewStack(ResourceLocation item) {
+        return Items.TOTEM_OF_UNDYING.getDefaultInstance();
     }
 }

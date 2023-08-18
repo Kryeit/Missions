@@ -14,7 +14,10 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,9 +85,7 @@ public class MissionScreen extends Screen {
 
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index) {
         Button.OnTooltip tooltip = (button, poseStack, mouseX, mouseY) -> renderTooltip(poseStack, getTooltip(mission), Optional.empty(), mouseX, mouseY);
-        return new MissionButton(this, x, y, title, mission, tooltip,  button -> {
-            Minecraft.getInstance().setScreen(new MissionRerollScreen(index));
-        });
+        return new MissionButton(this, x, y, title, mission, tooltip, button -> Minecraft.getInstance().setScreen(new MissionRerollScreen(index)));
     }
 
     @Override
@@ -104,22 +105,27 @@ public class MissionScreen extends Screen {
 
     public List<Component> getTooltip(ClientsideActiveMission mission) {
         String progress = mission.isCompleted() ? "Completed" : mission.progress() + "/" + mission.requiredAmount();
-        return List.of(
-                new TextComponent("Mission Details")
-                        .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD),
 
-                new TextComponent("Task: " + mission.missionString().getString())
-                        .withStyle(ChatFormatting.WHITE),
+        List<Component> components = new ArrayList<>();
+        components.add(new TextComponent("Mission Details")
+                .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 
-                new TextComponent("Difficulty: " + mission.difficulty())
-                        .withStyle(ChatFormatting.BLUE),
+        components.add(new TextComponent("Task: " + mission.missionString().getString())
+                .withStyle(ChatFormatting.WHITE));
 
-                new TextComponent("Item Required: " + mission.itemStack().getDisplayName().getString())
-                        .withStyle(ChatFormatting.BLUE),
+        components.add(new TextComponent("Difficulty: " + mission.difficulty())
+                .withStyle(ChatFormatting.BLUE));
 
-                new TextComponent("Your Progress: " + progress)
-                        .withStyle(ChatFormatting.GREEN)
-        );
+        ItemStack itemRequired = mission.itemRequired();
+        if (!itemRequired.is(Items.AIR)) {
+            components.add(new TextComponent("Item Required: " + itemRequired.getDisplayName().getString())
+                    .withStyle(ChatFormatting.BLUE));
+        }
+
+        components.add(new TextComponent("Your Progress: " + progress)
+                .withStyle(ChatFormatting.GREEN));
+
+        return components;
     }
 
 

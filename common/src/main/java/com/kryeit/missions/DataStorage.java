@@ -205,6 +205,7 @@ public class DataStorage {
                     type.difficulty(),
                     requiredAmount(),
                     type.getProgress(player, item()),
+                    type.getPreviewStack(item()),
                     type.getItemStack(item()),
                     type.description(),
                     isCompleted()
