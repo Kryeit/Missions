@@ -1,9 +1,7 @@
 # TODO
 # implement missing mission types
 # implement mission rerolls (one button at the side of each missionButton)
-# give ATM with 1% chance when completing a hard mission
 # show Reward Range in mission button tooltip
-# TODO: IMPORTANT - Make currency exchange configurable in server config file, also add that compat to ExchangeATMBlockEntity.java
 
 # Stats:
 Shown when hovering the InfoButton

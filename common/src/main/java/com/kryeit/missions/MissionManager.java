@@ -6,10 +6,13 @@ import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.toasts.MissionCompletedToast;
+import com.kryeit.entry.ModBlocks;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.game.ClientboundCustomSoundPacket;
@@ -129,8 +132,13 @@ public class MissionManager {
             ServerPlayer serverPlayer = playerList.getPlayer(player);
             if (serverPlayer == null) return;
 
-            TranslatableComponent message = new TranslatableComponent("message.hard_mission_completed", serverPlayer.getName());
+            MutableComponent message = new TranslatableComponent("message.hard_mission_completed", serverPlayer.getName())
+                    .withStyle(ChatFormatting.GOLD);
             playerList.broadcastMessage(message, ChatType.CHAT, new UUID(0, 0));
+
+            if (Math.random() < 0.01) {
+                Utils.giveItem(ModBlocks.EXCHANGE_ATM.asStack(), serverPlayer);
+            }
         }
     }
 
