@@ -12,7 +12,7 @@ public class VoteMission implements MissionType {
     private static final ResourceLocation IDENTIFIER_LOCATION = new ResourceLocation("vote_mission", "vote");
     @Override
     public String id() {
-        return "id";
+        return "vote";
     }
 
     @Override
