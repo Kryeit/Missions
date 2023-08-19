@@ -1,7 +1,6 @@
 package com.kryeit.mixin;
 
-import com.kryeit.client.ClientsideMissionPacketUtils;
-import com.kryeit.missions.MissionManager;
+import com.kryeit.ServerPacketHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ServerGamePacketListener;
 import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
@@ -30,24 +29,10 @@ public abstract class ServerboundCustomPayloadMixin {
         if (!(serverGamePacketListener instanceof ServerGamePacketListenerImpl packetListener)) return;
         ServerPlayer player = packetListener.getPlayer();
 
-        if (identifier.equals(ClientsideMissionPacketUtils.PAYOUT_IDENTIFIER)) {
-            MissionManager.giveReward(player);
-
+        boolean handled = ServerPacketHandler.handle(identifier, player, data);
+        if (handled) {
             data.release();
             ci.cancel();
-        } else if (identifier.equals(ClientsideMissionPacketUtils.REQUEST_MISSIONS)) {
-            MissionManager.sendMissions(player);
-
-            data.release();
-            ci.cancel();
-        } else if (identifier.equals(ClientsideMissionPacketUtils.REROLL_IDENTIFIER)) {
-            int index = data.readInt();
-
-            data.release();
-            ci.cancel();
-            if (index < 10) {
-                MissionManager.tryReassignMission(player, index);
-            }
         }
     }
 }
