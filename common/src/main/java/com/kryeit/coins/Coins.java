@@ -11,6 +11,10 @@ public class Coins {
         return Main.getConfig().exchange();
     }
 
+    public static ItemStack getCoin(int i) {
+        return getCoins().get(i);
+    }
+
     public static ItemStack getExchange(ItemStack itemStack, boolean toBigger) {
         int index = getCoins().indexOf(itemStack);
         if (index < 1 && !toBigger || (index == getCoins().size() - 1) && toBigger) return null;
