@@ -40,6 +40,14 @@ public abstract class ServerboundCustomPayloadMixin {
 
             data.release();
             ci.cancel();
+        } else if (identifier.equals(ClientsideMissionPacketUtils.REROLL_IDENTIFIER)) {
+            int index = data.readInt();
+
+            data.release();
+            ci.cancel();
+            if (index < 10) {
+                MissionManager.tryReassignMission(player, index);
+            }
         }
     }
 }

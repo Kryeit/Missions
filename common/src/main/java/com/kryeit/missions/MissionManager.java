@@ -6,6 +6,7 @@ import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.toasts.MissionCompletedToast;
+import com.kryeit.coins.Coins;
 import com.kryeit.entry.ModBlocks;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
@@ -20,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -103,6 +105,28 @@ public class MissionManager {
 
         DataStorage.INSTANCE.reassignActiveMissions(Main.getConfig().getMissions(), player);
         DataStorage.INSTANCE.setLastAssignedDay(player);
+        DataStorage.INSTANCE.resetReassignments(player);
+    }
+
+    public static ReassignmentPrice calculatePrice(UUID player) {
+        int price = 2 << DataStorage.INSTANCE.getReassignmentsSinceLastReset(player);
+        int coinIndex = (int) Utils.log(64, price - 1);
+        int coinAmount = (int) (price / Math.pow(64, coinIndex));
+
+        return new ReassignmentPrice(Coins.getCoin(coinIndex).getItem(), coinAmount);
+    }
+
+    public static void tryReassignMission(ServerPlayer serverPlayer, int index) {
+        UUID player = serverPlayer.getUUID();
+        DataStorage.ActiveMission activeMission = getActiveMissions(player).get(index);
+        if (activeMission.isCompleted()) return;
+
+        ReassignmentPrice price = calculatePrice(player);
+        if (Utils.removeItems(serverPlayer.getInventory(), price.item(), price.amount())) {
+            DataStorage.INSTANCE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
+            MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
+            DataStorage.INSTANCE.incrementReassignmentsSinceLastReset(player);
+        }
     }
 
     public static List<DataStorage.ActiveMission> getActiveMissions(UUID playerId) {
@@ -152,5 +176,8 @@ public class MissionManager {
                 ClientsideMissionPacketUtils.serialize(new ClientMissionData(hasUnclaimedRewards, clientMissions))
         );
         player.connection.send(packet);
+    }
+
+    public record ReassignmentPrice(Item item, int amount) {
     }
 }

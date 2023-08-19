@@ -1,18 +1,22 @@
 package com.kryeit.utils;
 
+import com.kryeit.MinecraftServerSupplier;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Function;
 
 public class Utils {
@@ -78,5 +82,32 @@ public class Utils {
             }
         }
         return DEFAULT_SPAWN_EGG;
+    }
+
+    public static double log(int base, int value) {
+        return Math.log(value) / Math.log(base);
+    }
+
+    public static ServerPlayer getPlayer(UUID player) {
+        PlayerList playerList = MinecraftServerSupplier.getServer().getPlayerList();
+        return playerList.getPlayer(player);
+    }
+
+    public static boolean removeItems(Inventory inventory, Item item, int amount) {
+        if (inventory.countItem(item) < amount) return false;
+
+        for (ItemStack stack : inventory.items) {
+            if (stack.getItem().equals(item)) {
+                int count = stack.getCount();
+                if (count >= amount) {
+                    stack.setCount(count - amount);
+                    break;
+                }
+                stack.setCount(0);
+                amount -= count;
+            }
+        }
+
+        return true;
     }
 }

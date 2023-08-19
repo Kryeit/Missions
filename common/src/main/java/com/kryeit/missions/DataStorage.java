@@ -102,18 +102,45 @@ public class DataStorage {
         list.clear();
 
         for (int i = 0; i < 10; i++) {
-            CompoundTag tag = new CompoundTag();
-            ConfigReader.Mission randomEntry = getRandomEntry(missions.values());
-            Map.Entry<String, Range> item = getRandomEntry(randomEntry.items().entrySet());
-
-            tag.putString("item", item.getKey());
-            tag.putBoolean("completed", false);
-            tag.putString("mission_id", randomEntry.missionType().id());
-            tag.putInt("required_amount", item.getValue().getRandomValue());
-            tag.putString("title", getRandomEntry(randomEntry.titles()));
-
-            list.add(tag);
+            list.add(createActiveMissionTag(missions));
         }
+    }
+
+    private static CompoundTag createActiveMissionTag(Map<MissionType, ConfigReader.Mission> missions) {
+        CompoundTag tag = new CompoundTag();
+        ConfigReader.Mission randomEntry = getRandomEntry(missions.values());
+        Map.Entry<String, Range> item = getRandomEntry(randomEntry.items().entrySet());
+
+        tag.putString("item", item.getKey());
+        tag.putBoolean("completed", false);
+        tag.putString("mission_id", randomEntry.missionType().id());
+        tag.putInt("required_amount", item.getValue().getRandomValue());
+        tag.putString("title", getRandomEntry(randomEntry.titles()));
+        return tag;
+    }
+
+    /*
+    This method should not be used. Use MissionManager#reassignMission(ServerPlayer player, int index) instead
+     */
+    public void reassignActiveMission(Map<MissionType, ConfigReader.Mission> missions, UUID player, int index) {
+        ListTag list = getActiveMissionsTag(player);
+        list.set(index, createActiveMissionTag(missions));
+    }
+
+    public int getReassignmentsSinceLastReset(UUID player) {
+        CompoundTag tag = getOrCreateTag(data, "reassignments");
+        return tag.getInt(player.toString());
+    }
+
+    public void incrementReassignmentsSinceLastReset(UUID player) {
+        String uuid = player.toString();
+        CompoundTag tag = getOrCreateTag(data, "reassignments");
+        tag.putInt(uuid, tag.getInt(uuid) + 1);
+    }
+
+    public void resetReassignments(UUID player) {
+        CompoundTag tag = getOrCreateTag(data, "reassignments");
+        tag.putInt(player.toString(), 0);
     }
 
     public int getLastAssignedDay(UUID player) {

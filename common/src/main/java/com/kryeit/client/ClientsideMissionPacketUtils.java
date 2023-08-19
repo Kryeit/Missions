@@ -16,6 +16,7 @@ import java.util.function.Consumer;
 public class ClientsideMissionPacketUtils {
     public static final ResourceLocation IDENTIFIER = new ResourceLocation("missions", "active_missions");
     public static final ResourceLocation PAYOUT_IDENTIFIER = new ResourceLocation(Main.MOD_ID, "payout");
+    public static final ResourceLocation REROLL_IDENTIFIER = new ResourceLocation(Main.MOD_ID, "reroll");
     public static final ResourceLocation REQUEST_MISSIONS = new ResourceLocation(Main.MOD_ID, "request_missions");
     private static Consumer<ClientMissionData> updateHandler;
 
@@ -46,6 +47,16 @@ public class ClientsideMissionPacketUtils {
         ServerboundCustomPayloadPacket packet = new ServerboundCustomPayloadPacket(
                 PAYOUT_IDENTIFIER,
                 new FriendlyByteBuf(Unpooled.buffer(0))
+        );
+        sendPacket(packet);
+    }
+
+    public static void requestReroll(int index) {
+        FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer(4));
+        buf.writeInt(index);
+        ServerboundCustomPayloadPacket packet = new ServerboundCustomPayloadPacket(
+                REROLL_IDENTIFIER,
+                buf
         );
         sendPacket(packet);
     }
