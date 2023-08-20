@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class    ExchangeATMMenu extends AbstractContainerMenu {
+public class ExchangeATMMenu extends AbstractContainerMenu {
     private final ExchangeATMBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;

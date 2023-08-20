@@ -46,8 +46,6 @@ public class ItemHandlerCompatImpl extends ItemHandlerCompat {
 
     @Override
     public void setStackInSlot(int slot, ItemStack stack) {
-        // If ItemStackHandler does not have a similar method that also takes an amount parameter,
-        // you might have to adjust this method to fit your needs.
         itemHandler.setStackInSlot(slot, stack);
     }
 
