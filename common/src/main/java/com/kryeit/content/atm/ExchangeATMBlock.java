@@ -39,13 +39,6 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
         super(properties);
     }
 
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
-
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
-    }
-
     /* FACING */
 
     @Override
