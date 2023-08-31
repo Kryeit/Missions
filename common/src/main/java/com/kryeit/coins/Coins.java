@@ -23,11 +23,15 @@ public class Coins {
     public static int indexOf(ItemStack itemStack) {
         Item item = itemStack.getItem();
         int index = 0;
+        boolean matched = false;
         for (ItemStack coin : getCoins()) {
-            if (coin.getItem().equals(item)) break;
+            if (coin.getItem().equals(item)) {
+                matched = true;
+                break;
+            }
             index++;
         }
-        return index;
+        return matched ? index : -1;
     }
 
     public static ItemStack getExchange(ItemStack itemStack, boolean toBigger) {
