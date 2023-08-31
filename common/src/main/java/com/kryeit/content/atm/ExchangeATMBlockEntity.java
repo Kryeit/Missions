@@ -1,15 +1,14 @@
 package com.kryeit.content.atm;
 
 import com.kryeit.coins.Coins;
-import com.kryeit.utils.ItemHandlerCompat;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.Containers;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -18,24 +17,103 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuProvider {
+public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuProvider, WorldlyContainer {
 
-    private final ItemHandlerCompat itemHandler = ItemHandlerCompat.create(this, 2);
+    public NonNullList<ItemStack> inventory;
 
-    protected Mode mode;
+    protected final ContainerData data;
+    private int progress = 0;
+    private int maxProgress = 64;
+
+    Mode mode;
 
     enum Mode {
         TO_SMALLER, TO_BIGGER, OFF
     }
 
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction direction) {
+        return new int[] {0, 1};
+    }
 
-    protected final ContainerData data;
-    private int progress = 0;
-    private int maxProgress = 64;
+    @Override
+    public boolean canPlaceItemThroughFace(int i, @NotNull ItemStack itemStack, @Nullable Direction direction) {
+        return i == 0;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
+        return i == 1;
+    }
+
+    @Override
+    public int getContainerSize() {
+        return 2;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack stack : this.inventory) {
+            if (!stack.isEmpty())
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public @NotNull ItemStack getItem(int i) {
+        return this.inventory.get(i);
+    }
+
+    @Override
+    public @NotNull ItemStack removeItem(int i, int j) {
+        ItemStack itemStack = ContainerHelper.removeItem(this.inventory, i, j);
+        if (!itemStack.isEmpty())
+            this.setChanged();
+        return itemStack;
+    }
+
+    @Override
+    public @NotNull ItemStack removeItemNoUpdate(int i) {
+        ItemStack itemStack = this.inventory.get(i);
+        if (itemStack.isEmpty())
+            return ItemStack.EMPTY;
+        this.inventory.set(i, ItemStack.EMPTY);
+        return itemStack;
+    }
+
+    @Override
+    public void setItem(int i, @NotNull ItemStack itemStack) {
+        this.inventory.set(i, itemStack);
+        if (!itemStack.isEmpty() && itemStack.getCount() > this.getMaxStackSize())
+            itemStack.setCount(this.getMaxStackSize());
+        this.setChanged();
+    }
+
+    public SimpleContainer getContainer() {
+        SimpleContainer container = new SimpleContainer(5);
+
+        this.inventory.forEach(stack ->
+                container.setItem(this.inventory.indexOf(stack), stack)
+        );
+
+        return container;
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return true;
+    }
+
+    @Override
+    public void clearContent() {
+
+    }
 
     public ExchangeATMBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pWorldPosition, BlockState pBlockState) {
         super(blockEntityType, pWorldPosition, pBlockState);
@@ -77,20 +155,10 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
         return ExchangeATMMenu.create(pContainerId, pInventory, this, data);
     }
 
-    // TODO: Make getCapability in both Forge and Fabric, although it's not needed
-//    @Nonnull
-//    @Override
-//    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @javax.annotation.Nullable Direction side) {
-//        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-//            return lazyItemHandler.cast();
-//        }
-//
-//        return super.getCapability(cap, side);
-//    }
-
     @Override
     public void onLoad() {
         super.onLoad();
+        inventory = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
     }
 
     @Override
@@ -100,8 +168,9 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
     @Override
     public void write(CompoundTag tag, boolean clientPacket) {
+        ContainerHelper.saveAllItems(tag, inventory);
+
         if (!clientPacket) {
-            tag.put("inventory", itemHandler.serializeNBT());
             tag.putInt("exchange_atm.progress", progress);
         }
         super.write(tag, clientPacket);
@@ -109,21 +178,16 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
     @Override
     public void read(CompoundTag tag, boolean clientPacket) {
+        ContainerHelper.loadAllItems(tag, inventory);
         if (!clientPacket) {
-            itemHandler.deserializeNBT(tag.getCompound("inventory"));
             progress = tag.getInt("exchange_atm.progress");
         }
         super.read(tag, clientPacket);
     }
 
-
     public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
-        }
-
-        Containers.dropContents(this.level, this.worldPosition, inventory);
+        assert this.level != null;
+        Containers.dropContents(this.level, this.worldPosition, this);
     }
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState, ExchangeATMBlockEntity pBlockEntity) {
@@ -141,53 +205,45 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     }
 
     private boolean hasRecipe(ExchangeATMBlockEntity entity) {
-        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
-        }
 
         if(this.mode == Mode.TO_BIGGER) {
 
-            ItemStack result = Coins.getExchange(inventory.getItem(0), true);
+            ItemStack result = Coins.getExchange(getItem(0), true);
 
-            return result != null && canInsertAmountIntoOutputSlot(inventory)
-                    && canInsertItemIntoOutputSlot(inventory, result)
-                    && inventory.getItem(0).getCount() == 64;
+            return result != null && canInsertAmountIntoOutputSlot()
+                    && canInsertItemIntoOutputSlot(result)
+                    && getItem(0).getCount() == 64;
         } else if(this.mode == Mode.TO_SMALLER) {
 
-            ItemStack result = Coins.getExchange(inventory.getItem(0), false);
+            ItemStack result = Coins.getExchange(getItem(0), false);
 
-            return result != null && inventory.getItem(1).getCount() == 0
-                    && canInsertItemIntoOutputSlot(inventory, result);
+            return result != null && getItem(1).getCount() == 0
+                    && canInsertItemIntoOutputSlot(result);
         }
 
         return false;
     }
 
     private void craftItem(ExchangeATMBlockEntity entity) {
-        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
-        }
 
         if(this.mode == Mode.TO_BIGGER) {
-            ItemStack result = Coins.getExchange(inventory.getItem(0), true);
+            ItemStack result = Coins.getExchange(getItem(0), true);
 
             if(result != null) {
-                entity.itemHandler.extractItem(0,64, false);
-                entity.itemHandler.setStackInSlot(1, new ItemStack(result.getItem(),
-                        entity.itemHandler.getStackInSlot(1).getCount() + 1));
+                removeItem(0, 64);
+                setItem(1, new ItemStack(result.getItem(),
+                        getItem(1).getCount() + 1));
 
                 entity.resetProgress();
             }
 
         } else if(this.mode == Mode.TO_SMALLER) {
-            ItemStack result = Coins.getExchange(inventory.getItem(0), false);
+            ItemStack result = Coins.getExchange(getItem(0), false);
 
 
             if(result != null) {
-                entity.itemHandler.extractItem(0,1, false);
-                entity.itemHandler.setStackInSlot(1, result);
+                removeItem(0, 1);
+                setItem(1, result);
 
                 entity.resetProgress();
             }
@@ -198,22 +254,18 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
         this.progress = 0;
     }
 
-    private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack output) {
-        return inventory.getItem(1).getItem() == output.getItem() || inventory.getItem(1).isEmpty();
+    private boolean canInsertItemIntoOutputSlot(ItemStack output) {
+        return getItem(1).getItem() == output.getItem() || getItem(1).isEmpty();
     }
 
-    private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
-        return inventory.getItem(1).getMaxStackSize() > inventory.getItem(1).getCount();
+    private boolean canInsertAmountIntoOutputSlot() {
+        return getItem(1).getMaxStackSize() > getItem(1).getCount();
     }
 
     public void updateMode() {
         if(getSpeed() >= 100) mode = Mode.TO_BIGGER;
         else if(getSpeed() <= -100) mode = Mode.TO_SMALLER;
         else mode = Mode.OFF;
-    }
-
-    public ItemHandlerCompat getItemHandler() {
-        return itemHandler;
     }
 
 }

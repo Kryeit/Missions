@@ -29,8 +29,8 @@ public class ExchangeATMMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.addSlot(new Slot(inv, 0, 44, 34));
-        this.addSlot(new ModResultSlot(inv, 1, 116, 34));
+        this.addSlot(new Slot(blockEntity, 0, 44, 34));
+        this.addSlot(new ModResultSlot(blockEntity, 1, 116, 34));
 
         addDataSlots(data);
     }

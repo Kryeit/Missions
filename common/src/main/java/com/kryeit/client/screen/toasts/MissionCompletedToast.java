@@ -31,29 +31,25 @@ public class MissionCompletedToast implements Toast {
         renderItem(matrices, toastComponent);
         renderText(matrices, toastComponent);
 
-        return delta - this.firstDrawTime < 5000L ? Visibility.SHOW : Visibility.HIDE;
+        return delta - this.firstDrawTime < 10_000L ? Visibility.SHOW : Visibility.HIDE;
     }
 
     public void renderBackground(PoseStack matrices, ToastComponent toastComponent) {
         toastComponent.getMinecraft().getTextureManager().bindForSetup(TEXTURE);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-        int v = switch (mission.difficulty()) {
-            case NORMAL -> 32;
-            case HARD -> 0;
-            default -> 32 * 3;
-        };
-
-        toastComponent.blit(matrices, 0, 0, 0, v, this.width(), this.height());
+        toastComponent.blit(matrices, 0, 0, 0, 0, this.width(), this.height());
     }
 
     public void renderText(PoseStack matrices, ToastComponent toastComponent) {
         // Title text
-        Component titleText = new TextComponent(mission.titleString().getString()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.BOLD);
+        ChatFormatting titleColor = ChatFormatting.getById(mission.difficulty().color());
+        Component titleText = new TextComponent(mission.titleString().getString()).withStyle().withStyle(titleColor);
         toastComponent.getMinecraft().font.draw(matrices, titleText, 30, 7, -1);
 
         // Description text
-        Component descriptionText = new TextComponent(mission.missionString().getString()).withStyle(ChatFormatting.GRAY);
+        ChatFormatting descriptionColor = ChatFormatting.WHITE;
+        Component descriptionText = new TextComponent(mission.missionString().getString()).withStyle(descriptionColor);
         toastComponent.getMinecraft().font.draw(matrices, descriptionText, 30, 18, -1);
     }
 
