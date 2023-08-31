@@ -36,7 +36,7 @@ public class Coins {
 
     public static ItemStack getExchange(ItemStack itemStack, boolean toBigger) {
         int index = indexOf(itemStack);
-        if (index > getCoins().size() - (toBigger ? 2 : 1)) return null;
+        if (index > getCoins().size() - (toBigger ? 2 : 1) || index == -1) return null;
         index += toBigger ? 1 : -1;
         return new ItemStack(getCoins().get(index).getItem(), toBigger ? 1 : 64);
     }
