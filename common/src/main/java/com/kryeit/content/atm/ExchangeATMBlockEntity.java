@@ -7,8 +7,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.*;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -17,7 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -30,95 +31,14 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     private int progress = 0;
     private int maxProgress = 64;
 
-    Mode mode;
+    Mode mode = Mode.OFF;
 
     enum Mode {
         TO_SMALLER, TO_BIGGER, OFF
     }
 
-    @Override
-    public int @NotNull [] getSlotsForFace(@NotNull Direction direction) {
-        return new int[] {0, 1};
-    }
-
-    @Override
-    public boolean canPlaceItemThroughFace(int i, @NotNull ItemStack itemStack, @Nullable Direction direction) {
-        return i == 0;
-    }
-
-    @Override
-    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
-        return i == 1;
-    }
-
-    @Override
-    public int getContainerSize() {
-        return 2;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        for (ItemStack stack : this.inventory) {
-            if (!stack.isEmpty())
-                return false;
-        }
-        return true;
-    }
-
-    @Override
-    public @NotNull ItemStack getItem(int i) {
-        return this.inventory.get(i);
-    }
-
-    @Override
-    public @NotNull ItemStack removeItem(int i, int j) {
-        ItemStack itemStack = ContainerHelper.removeItem(this.inventory, i, j);
-        if (!itemStack.isEmpty())
-            this.setChanged();
-        return itemStack;
-    }
-
-    @Override
-    public @NotNull ItemStack removeItemNoUpdate(int i) {
-        ItemStack itemStack = this.inventory.get(i);
-        if (itemStack.isEmpty())
-            return ItemStack.EMPTY;
-        this.inventory.set(i, ItemStack.EMPTY);
-        return itemStack;
-    }
-
-    @Override
-    public void setItem(int i, @NotNull ItemStack itemStack) {
-        this.inventory.set(i, itemStack);
-        if (!itemStack.isEmpty() && itemStack.getCount() > this.getMaxStackSize())
-            itemStack.setCount(this.getMaxStackSize());
-        this.setChanged();
-    }
-
-    public SimpleContainer getContainer() {
-        SimpleContainer container = new SimpleContainer(5);
-
-        this.inventory.forEach(stack ->
-                container.setItem(this.inventory.indexOf(stack), stack)
-        );
-
-        return container;
-    }
-
-    @Override
-    public boolean stillValid(Player player) {
-        return true;
-    }
-
-    @Override
-    public void clearContent() {
-
-    }
-
     public ExchangeATMBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pWorldPosition, BlockState pBlockState) {
         super(blockEntityType, pWorldPosition, pBlockState);
-
-        this.mode = Mode.OFF;
 
         this.data = new ContainerData() {
             public int get(int index) {
@@ -142,11 +62,80 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
         };
     }
 
+    @Override
+    public int [] getSlotsForFace(Direction direction) {
+        return new int[] {0, 1};
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, Direction direction) {
+        return i == 0;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
+        return i == 1;
+    }
+
+    @Override
+    public int getContainerSize() {
+        return 2;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack stack : this.inventory) {
+            if (!stack.isEmpty())
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public ItemStack getItem(int i) {
+        return this.inventory.get(i);
+    }
+
+    @Override
+    public ItemStack removeItem(int i, int j) {
+        ItemStack itemStack = ContainerHelper.removeItem(this.inventory, i, j);
+        if (!itemStack.isEmpty())
+            this.setChanged();
+        return itemStack;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int i) {
+        ItemStack itemStack = this.inventory.get(i);
+        if (itemStack.isEmpty())
+            return ItemStack.EMPTY;
+        this.inventory.set(i, ItemStack.EMPTY);
+        return itemStack;
+    }
+
+    @Override
+    public void setItem(int i, ItemStack itemStack) {
+        this.inventory.set(i, itemStack);
+        if (!itemStack.isEmpty() && itemStack.getCount() > this.getMaxStackSize())
+            itemStack.setCount(this.getMaxStackSize());
+        this.setChanged();
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return true;
+    }
+
+    @Override
+    public void clearContent() {
+        this.inventory.clear();
+        this.setChanged();
+    }
+
     @Nonnull
     @Override
     public Component getDisplayName() {
-
-        return new TextComponent("Exchange ATM - Mode: " + mode);
+        return Component.nullToEmpty("Exchange ATM - Mode: " + mode);
     }
 
     @Nullable
@@ -169,19 +158,14 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     @Override
     public void write(CompoundTag tag, boolean clientPacket) {
         ContainerHelper.saveAllItems(tag, inventory);
-
-        if (!clientPacket) {
-            tag.putInt("exchange_atm.progress", progress);
-        }
+        if (!clientPacket) tag.putInt("exchange_atm.progress", progress);
         super.write(tag, clientPacket);
     }
 
     @Override
     public void read(CompoundTag tag, boolean clientPacket) {
         ContainerHelper.loadAllItems(tag, inventory);
-        if (!clientPacket) {
-            progress = tag.getInt("exchange_atm.progress");
-        }
+        if (!clientPacket) progress = tag.getInt("exchange_atm.progress");
         super.read(tag, clientPacket);
     }
 
@@ -192,19 +176,17 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pState, ExchangeATMBlockEntity pBlockEntity) {
         updateMode();
-        if(hasRecipe(pBlockEntity)) {
-            pBlockEntity.progress++;
+        if (hasRecipe()) {
+            progress++;
             setChanged(pLevel, pPos, pState);
-            if(pBlockEntity.progress > pBlockEntity.maxProgress) {
-                craftItem(pBlockEntity);
-            }
+            if (progress > maxProgress) craftItem();
         } else {
-            pBlockEntity.resetProgress();
+            resetProgress();
             setChanged(pLevel, pPos, pState);
         }
     }
 
-    private boolean hasRecipe(ExchangeATMBlockEntity entity) {
+    private boolean hasRecipe() {
 
         if(this.mode == Mode.TO_BIGGER) {
 
@@ -224,28 +206,24 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
         return false;
     }
 
-    private void craftItem(ExchangeATMBlockEntity entity) {
+    private void craftItem() {
 
         if(this.mode == Mode.TO_BIGGER) {
             ItemStack result = Coins.getExchange(getItem(0), true);
-
             if(result != null) {
                 removeItem(0, 64);
-                setItem(1, new ItemStack(result.getItem(),
-                        getItem(1).getCount() + 1));
+                setItem(1, new ItemStack(result.getItem(), getItem(1).getCount() + 1));
 
-                entity.resetProgress();
+                resetProgress();
             }
 
         } else if(this.mode == Mode.TO_SMALLER) {
             ItemStack result = Coins.getExchange(getItem(0), false);
-
-
             if(result != null) {
                 removeItem(0, 1);
                 setItem(1, result);
 
-                entity.resetProgress();
+                resetProgress();
             }
         }
     }

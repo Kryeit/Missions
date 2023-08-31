@@ -1,6 +1,7 @@
 package com.kryeit.coins;
 
 import com.kryeit.Main;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -19,10 +20,21 @@ public class Coins {
         return ItemStack.EMPTY;
     }
 
+    public static int indexOf(ItemStack itemStack) {
+        Item item = itemStack.getItem();
+        int index = 0;
+        for (ItemStack coin : getCoins()) {
+            if (coin.getItem().equals(item)) break;
+            index++;
+        }
+        return index;
+    }
+
     public static ItemStack getExchange(ItemStack itemStack, boolean toBigger) {
-        int index = getCoins().indexOf(itemStack);
-        if (index < 1 && !toBigger || (index == getCoins().size() - 1) && toBigger) return null;
+        int index = indexOf(itemStack);
+        if (index > getCoins().size() - (toBigger ? 2 : 1)) return null;
         index += toBigger ? 1 : -1;
         return new ItemStack(getCoins().get(index).getItem(), toBigger ? 1 : 64);
     }
+
 }
