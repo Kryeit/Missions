@@ -4,6 +4,7 @@ import com.kryeit.entry.ModBlockEntities;
 import com.kryeit.utils.BlockUtils;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -77,18 +78,18 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                 Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos,
+                                 Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide()) {
+            BlockEntity entity = level.getBlockEntity(pos);
             if(entity instanceof ExchangeATMBlockEntity) {
-                BlockUtils.openGui((ServerPlayer)pPlayer, (ExchangeATMBlockEntity) entity, pPos);
+                BlockUtils.openGui((ServerPlayer) player, (ExchangeATMBlockEntity) entity, pos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
         }
 
-        return InteractionResult.sidedSuccess(pLevel.isClientSide());
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
