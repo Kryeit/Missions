@@ -23,11 +23,12 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuProvider, WorldlyContainer {
+public class ExchangeATMBlockEntity extends KineticBlockEntity
+        implements MenuProvider, WorldlyContainer {
 
     public NonNullList<ItemStack> inventory;
 
-    protected final ContainerData data;
+    public final ContainerData data;
     private int progress = 0;
     private int maxProgress = 64;
 
@@ -140,8 +141,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return ExchangeATMMenu.create(pContainerId, pInventory, this, data);
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return ExchangeATMMenu.create(i, inventory, this, data);
     }
 
     @Override
@@ -151,8 +152,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity implements MenuPr
     }
 
     @Override
-    public void invalidateCaps()  {
-        super.invalidateCaps();
+    public void invalidate() {
+        super.invalidate();
     }
 
     @Override

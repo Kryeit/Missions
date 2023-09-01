@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "ExchangeATMBlockEntityMixin",
     "MillstoneBlockEntityMixin"
   ],
   "injectors": {
