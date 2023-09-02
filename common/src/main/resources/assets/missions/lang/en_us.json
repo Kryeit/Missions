@@ -1,9 +1,8 @@
 {
   "key.mission_gui": "Open mission GUI",
   "key.category.missions": "Missions",
-  "test": "Mission WIP",
+  "itemGroup.missions": "Create: Missions",
   "key.mission_gui.close": "Close",
   "block.missions.exchange_atm": "Exchange ATM",
-  "itemGroup.missions.base": "Missions",
   "message.hard_mission_completed": "%s has just completed a hard mission!"
 }

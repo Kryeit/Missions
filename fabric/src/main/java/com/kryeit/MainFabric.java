@@ -9,6 +9,7 @@ public class MainFabric implements ModInitializer {
     public void onInitialize() {
         Main.init();
         Main.registrate().register();
+        MissionHandler.missionHandler();
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> Main.handlePlayerLogin(handler.getPlayer()));
     }
