@@ -13,6 +13,7 @@
     "create.BasinOperatingBlockEntityMixin",
     "create.CrushingWheelControllerBlockEntityMixin",
     "create.FanProcessingMixin",
+    "create.MechanicalCrafterBlockEntityMixin",
     "create.MechanicalPressBlockEntityMixin",
     "create.SawBlockEntityMixin",
     "interfaces.BlockEntityAccessor"

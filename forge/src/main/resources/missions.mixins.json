@@ -6,7 +6,6 @@
   "client": [
   ],
   "mixins": [
-    "MechanicalCrafterBlockEntityMixin",
     "MillstoneBlockEntityMixin"
   ],
   "injectors": {
