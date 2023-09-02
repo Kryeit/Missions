@@ -43,13 +43,11 @@ public class MissionCompletedToast implements Toast {
 
     public void renderText(PoseStack matrices, ToastComponent toastComponent) {
         // Title text
-        ChatFormatting titleColor = ChatFormatting.getById(mission.difficulty().color());
-        Component titleText = new TextComponent(mission.titleString().getString()).withStyle().withStyle(titleColor);
+        Component titleText = new TextComponent(mission.titleString().getString()).withStyle().withStyle(ChatFormatting.WHITE);
         toastComponent.getMinecraft().font.draw(matrices, titleText, 30, 7, -1);
 
         // Description text
-        ChatFormatting descriptionColor = ChatFormatting.WHITE;
-        Component descriptionText = new TextComponent(mission.missionString().getString()).withStyle(descriptionColor);
+        Component descriptionText = new TextComponent(mission.missionString().getString()).withStyle(ChatFormatting.WHITE);
         toastComponent.getMinecraft().font.draw(matrices, descriptionText, 30, 18, -1);
     }
 
