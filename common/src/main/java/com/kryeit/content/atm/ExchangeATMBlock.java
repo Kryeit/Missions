@@ -81,8 +81,8 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
                                  Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide()) {
             BlockEntity entity = level.getBlockEntity(pos);
-            if(entity instanceof ExchangeATMBlockEntity) {
-                BlockUtils.openGui((ServerPlayer) player, (ExchangeATMBlockEntity) entity, pos);
+            if (entity instanceof ExchangeATMBlockEntity atmBlockEntity) {
+                BlockUtils.openGui((ServerPlayer) player, atmBlockEntity, pos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
