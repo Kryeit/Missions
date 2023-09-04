@@ -14,7 +14,7 @@ public class ClientEntryPoint implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        missionGuiKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.mission_gui", GLFW.GLFW_KEY_H, "key.category.missions"));
+        missionGuiKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("missions.menu.key", GLFW.GLFW_KEY_H, "missions.key.category"));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (missionGuiKey.isDown() && client.screen == null) {

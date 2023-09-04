@@ -156,7 +156,7 @@ public class MissionManager {
             ServerPlayer serverPlayer = playerList.getPlayer(player);
             if (serverPlayer == null) return;
 
-            MutableComponent message = new TranslatableComponent("message.hard_mission_completed", serverPlayer.getName())
+            MutableComponent message = new TranslatableComponent("missions.message.hard_mission_completed", serverPlayer.getName())
                     .withStyle(ChatFormatting.GOLD);
             playerList.broadcastMessage(message, ChatType.CHAT, new UUID(0, 0));
 

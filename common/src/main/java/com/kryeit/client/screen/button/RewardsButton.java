@@ -5,10 +5,13 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public class RewardsButton extends Button {
+    private static final Component REWARDS = new TextComponent("     ").append(new TranslatableComponent("missions.menu.main.rewards"));
     private static final OnPress NO_PRESS = button -> {
     };
     private static final ResourceLocation CHEST_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/christmas_chest.png");
@@ -16,7 +19,7 @@ public class RewardsButton extends Button {
     private boolean rewardsAvailable;
 
     public RewardsButton(int x, int y, boolean rewardsAvailable) {
-        super(x, y, 80, 20, new TextComponent("     Rewards"), NO_PRESS);
+        super(x, y, 80, 20, REWARDS, NO_PRESS);
         this.rewardsAvailable = rewardsAvailable;
     }
 

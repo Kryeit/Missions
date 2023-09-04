@@ -1,8 +1,21 @@
 {
-  "key.mission_gui": "Open mission GUI",
-  "key.category.missions": "Missions",
-  "itemGroup.missions": "Create: Missions",
-  "key.mission_gui.close": "Close",
-  "block.missions.exchange_atm": "Exchange ATM",
-  "message.hard_mission_completed": "%s has just completed a hard mission!"
+  "missions.menu.key": "Open mission interface",
+  "missions.key.category": "Missions",
+  "missions.menu.reroll.title": "Mission Reroll Menu",
+  "missions.menu.reroll.reroll": "Reroll",
+  "missions.menu.close": "Close",
+  "missions.menu.main.rewards": "Rewards",
+  "missions.menu.main.title": "Mission Interface",
+  "missions.menu.main.tooltip.details": "Mission Details",
+  "missions.menu.main.tooltip.task": "Task: %s",
+  "missions.menu.main.tooltip.difficulty": "Difficulty: %s",
+  "missions.menu.main.tooltip.itemRequired": "Item Required: %s",
+  "missions.menu.main.tooltip.progress": "Your Progress: %s",
+  "missions.menu.main.tooltip.progress.completed": "Completed",
+  "missions.difficulty.easy": "Easy",
+  "missions.difficulty.normal": "Normal",
+  "missions.difficulty.hard": "Hard",
+  "missions.itemGroup": "Create: Missions",
+  "missions.block.exchange_atm": "Exchange ATM",
+  "missions.message.hard_mission_completed": "%s has just completed a hard mission!"
 }

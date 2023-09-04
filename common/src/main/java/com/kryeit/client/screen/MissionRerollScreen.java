@@ -5,13 +5,17 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class MissionRerollScreen extends Screen {
+    private static final Component TITLE = new TranslatableComponent("missions.menu.reroll.title");
+    private static final Component REROLL = new TranslatableComponent("missions.menu.reroll.reroll");
+    private static final Component CLOSE = new TranslatableComponent("missions.menu.close");
     private final int missionIndex;
 
     public MissionRerollScreen(int missionIndex) {
-        super(new TextComponent("Mission Reroll GUI"));
+        super(TITLE);
         this.missionIndex = missionIndex;
     }
 
@@ -27,9 +31,9 @@ public class MissionRerollScreen extends Screen {
 
         int startX = centerX - (buttonWidth * 2 + 5) / 2;
 
-        this.addRenderableWidget(new Button(startX, centerY, buttonWidth, buttonHeight, new TextComponent("Close"), button -> close()));
+        this.addRenderableWidget(new Button(startX, centerY, buttonWidth, buttonHeight, CLOSE, button -> close()));
 
-        this.addRenderableWidget(new Button(startX + buttonWidth + 5, centerY, buttonWidth, buttonHeight, new TextComponent("Reroll"), button -> {
+        this.addRenderableWidget(new Button(startX + buttonWidth + 5, centerY, buttonWidth, buttonHeight, REROLL, button -> {
             ClientsideMissionPacketUtils.requestReroll(missionIndex);
             close();
         }));

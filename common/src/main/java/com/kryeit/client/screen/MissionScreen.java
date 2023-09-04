@@ -22,14 +22,15 @@ import java.util.List;
 import java.util.Optional;
 
 public class MissionScreen extends Screen {
-
+    private static final Component TITLE = new TranslatableComponent("missions.menu.main.title");
+    private static final TranslatableComponent CLOSE = new TranslatableComponent("missions.menu.close");
     private final Runnable NO_TOOLTIP = () -> {
     };
     public Runnable activeTooltip = NO_TOOLTIP;
     private ClientMissionData data = null;
 
     public MissionScreen() {
-        super(new TextComponent("Mission GUI"));
+        super(TITLE);
     }
 
     @Override
@@ -104,25 +105,27 @@ public class MissionScreen extends Screen {
     }
 
     public List<Component> getTooltip(ClientsideActiveMission mission) {
-        String progress = mission.isCompleted() ? "Completed" : mission.progress() + "/" + mission.requiredAmount();
+        Component progress = mission.isCompleted()
+                ? new TranslatableComponent("missions.menu.main.tooltip.progress.completed")
+                : new TextComponent(mission.progress() + "/" + mission.requiredAmount());
 
         List<Component> components = new ArrayList<>();
-        components.add(new TextComponent("Mission Details")
+        components.add(new TranslatableComponent("missions.menu.main.tooltip.details")
                 .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 
-        components.add(new TextComponent("Task: " + mission.missionString().getString())
+        components.add(new TranslatableComponent("missions.menu.main.tooltip.task", mission.missionString().getString())
                 .withStyle(ChatFormatting.WHITE));
 
-        components.add(new TextComponent("Difficulty: " + mission.difficulty())
+        components.add(new TranslatableComponent("missions.menu.main.tooltip.difficulty", mission.difficulty().description())
                 .withStyle(ChatFormatting.BLUE));
 
         ItemStack itemRequired = mission.itemRequired();
         if (!itemRequired.is(Items.AIR)) {
-            components.add(new TextComponent("Item Required: " + itemRequired.getDisplayName().getString())
+            components.add(new TranslatableComponent("missions.menu.main.tooltip.itemRequired", itemRequired.getDisplayName().getString())
                     .withStyle(ChatFormatting.BLUE));
         }
 
-        components.add(new TextComponent("Your Progress: " + progress)
+        components.add(new TranslatableComponent("missions.menu.main.tooltip.progress", progress)
                 .withStyle(ChatFormatting.GREEN));
 
         return components;
@@ -142,7 +145,7 @@ public class MissionScreen extends Screen {
         int x = (this.width / 2 - buttonWidth - spacing);
         int y = this.height - buttonHeight - bottomPadding;
 
-        this.addRenderableWidget(new Button(x, y, buttonWidth, buttonHeight, new TranslatableComponent("key.mission_gui.close"), button -> Minecraft.getInstance().setScreen(null)));
+        this.addRenderableWidget(new Button(x, y, buttonWidth, buttonHeight, CLOSE, button -> Minecraft.getInstance().setScreen(null)));
     }
 
     public void createInfoButton() {
