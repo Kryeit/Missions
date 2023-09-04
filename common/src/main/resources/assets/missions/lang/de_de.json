@@ -1,4 +1,5 @@
 {
+  "itemGroup.missions": "Create: Missions",
   "missions.menu.key": "Öffne Missions Interface",
   "missions.key.category": "Missions",
   "missions.menu.reroll.title": "Mission Reroll Menu",
@@ -15,7 +16,6 @@
   "missions.difficulty.easy": "Einfach",
   "missions.difficulty.normal": "Normal",
   "missions.difficulty.hard": "Schwer",
-  "missions.itemGroup": "Create: Missions",
   "missions.block.exchange_atm": "Geldwechsel Automat",
   "missions.message.hard_mission_completed": "%s hat gerade eine schwierige Mission vollendet!"
 }

@@ -1,0 +1,21 @@
+{
+  "itemGroup.missions": "Create: Missions",
+  "missions.menu.key": "Abrir el menú de misiones",
+  "missions.key.category": "Missions",
+  "missions.menu.reroll.title": "Menú de Reroll de misiones",
+  "missions.menu.reroll.reroll": "Reroll",
+  "missions.menu.close": "Cerrar",
+  "missions.menu.main.rewards": "Recompensas",
+  "missions.menu.main.title": "Menú de misiones",
+  "missions.menu.main.tooltip.details": "Detalles de misión",
+  "missions.menu.main.tooltip.task": "Tarea: %s",
+  "missions.menu.main.tooltip.difficulty": "Dificultad: %s",
+  "missions.menu.main.tooltip.itemRequired": "Objeto requerido: %s",
+  "missions.menu.main.tooltip.progress": "Progreso: %s",
+  "missions.menu.main.tooltip.progress.completed": "Completada",
+  "missions.difficulty.easy": "Fácil",
+  "missions.difficulty.normal": "Normal",
+  "missions.difficulty.hard": "Difícil",
+  "missions.block.exchange_atm": "Cajero automático",
+  "missions.message.hard_mission_completed": "¡%s acaba de completar una misión difícil!"
+}
