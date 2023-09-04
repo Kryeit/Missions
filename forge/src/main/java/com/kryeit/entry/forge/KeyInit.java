@@ -1,4 +1,4 @@
-package com.kryeit.entry;
+package com.kryeit.entry.forge;
 
 import com.kryeit.Main;
 import com.kryeit.client.screen.MissionScreen;
