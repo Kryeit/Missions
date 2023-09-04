@@ -23,8 +23,7 @@ import java.util.Optional;
 
 public class MissionScreen extends Screen {
 
-    private final Runnable NO_TOOLTIP = () -> {
-    };
+    private final Runnable NO_TOOLTIP = () -> { };
     public Runnable activeTooltip = NO_TOOLTIP;
     private ClientMissionData data = null;
 
@@ -155,7 +154,7 @@ public class MissionScreen extends Screen {
         int spacing = 5;
         int buttonHeight = 20;
         int bottomPadding = 20;
-        int x = (this.width / 2 + spacing);
+        int x = this.width / 2 + spacing;
         int y = this.height - buttonHeight - bottomPadding;
 
         this.addRenderableWidget(new RewardsButton(x, y, rewardsAvailable));
