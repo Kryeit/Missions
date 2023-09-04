@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 
-public class BlockPlaceHandler implements BlockEvents.AfterPlace {
+public class PlaceHandler implements BlockEvents.AfterPlace {
     @Override
     public void afterPlace(BlockPlaceContext context) {
         Player player = context.getPlayer();

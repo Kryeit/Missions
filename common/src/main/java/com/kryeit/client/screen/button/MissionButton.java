@@ -53,7 +53,7 @@ public class MissionButton extends Button {
         int u = 0;
         int v = 66;
 
-        if(isHovered) {
+        if (isHovered) {
             v += 20;
         }
 

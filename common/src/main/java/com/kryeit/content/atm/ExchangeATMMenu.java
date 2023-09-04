@@ -29,8 +29,8 @@ public class ExchangeATMMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.addSlot(new Slot(blockEntity, 0, 44, 34));
-        this.addSlot(new ModResultSlot(blockEntity, 1, 116, 34));
+        this.addSlot(new Slot(blockEntity, 0, 45, 35));
+        this.addSlot(new ModResultSlot(blockEntity, 1, 116, 35));
 
         addDataSlots(data);
     }
@@ -46,7 +46,7 @@ public class ExchangeATMMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 26; // This is the height in pixels of your arrow
+        int progressArrowSize = 24; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }

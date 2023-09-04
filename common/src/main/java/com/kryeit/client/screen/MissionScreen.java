@@ -158,7 +158,7 @@ public class MissionScreen extends Screen {
         int spacing = 5;
         int buttonHeight = 20;
         int bottomPadding = 20;
-        int x = (this.width / 2 + spacing);
+        int x = this.width / 2 + spacing;
         int y = this.height - buttonHeight - bottomPadding;
 
         this.addRenderableWidget(new RewardsButton(x, y, rewardsAvailable));

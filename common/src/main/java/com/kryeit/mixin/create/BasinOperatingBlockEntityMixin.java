@@ -30,7 +30,7 @@ public class BasinOperatingBlockEntityMixin {
             if (currentRecipe instanceof MixingRecipe)
                 MixinUtils.handleMixinMissionItem(accessor, MixMission.class, currentRecipe.getResultItem());
 
-            if(MixinUtils.isCompactingRecipe(currentRecipe))
+            if (MixinUtils.isCompactingRecipe(currentRecipe))
                 MixinUtils.handleMixinMissionItem(accessor, CompactMission.class, currentRecipe.getResultItem());
             // TODO: Maybe compat for some Create addon that has a RecipeType that utilizes a basin 2 blocks below?
         }

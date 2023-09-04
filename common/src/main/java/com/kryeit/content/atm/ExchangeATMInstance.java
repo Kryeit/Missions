@@ -15,8 +15,6 @@ public class ExchangeATMInstance extends KineticBlockEntityInstance<ExchangeATMB
     final Direction direction;
     private final Direction opposite;
 
-
-
     public ExchangeATMInstance(MaterialManager materialManager, ExchangeATMBlockEntity blockEntity) {
         super(materialManager, blockEntity);
 

@@ -7,9 +7,9 @@
   ],
   "mixins": [
     "ExchangeATMBlockEntityMixin",
-    "FishingRodHookedTriggerMixin",
     "MillstoneBlockEntityMixin",
-    "event.CraftHandler"
+    "event.CraftHandler",
+    "event.FishHandler"
   ],
   "injectors": {
     "defaultRequire": 1

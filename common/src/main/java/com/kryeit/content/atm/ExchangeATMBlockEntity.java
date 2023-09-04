@@ -35,7 +35,9 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
     Mode mode = Mode.OFF;
 
     enum Mode {
-        TO_SMALLER, TO_BIGGER, OFF
+        TO_SMALLER,
+        TO_BIGGER,
+        OFF
     }
 
     public ExchangeATMBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pWorldPosition, BlockState pBlockState) {
@@ -136,7 +138,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
     @Nonnull
     @Override
     public Component getDisplayName() {
-        return Component.nullToEmpty("Exchange ATM - Mode: " + mode);
+        return Component.nullToEmpty("Exchange ATM");
     }
 
     @Nullable
@@ -165,6 +167,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
 
     @Override
     public void read(CompoundTag tag, boolean clientPacket) {
+
+        //TODO: THIS DOESNT WORK, IDK WHY, I NEED HELP WITH THIS ONE
         ContainerHelper.loadAllItems(tag, inventory);
         if (!clientPacket) progress = tag.getInt("exchange_atm.progress");
         super.read(tag, clientPacket);

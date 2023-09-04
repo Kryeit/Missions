@@ -34,7 +34,7 @@ public class MechanicalCrafterBlockEntityMixin {
         ItemStack result =
                 blockEntity.isVirtual() ? scriptedResult : RecipeGridHandler.tryToApplyRecipe(accessor.getLevel(), groupedItems);
 
-        if(result != null && countDown == 100)
+        if (result != null && countDown == 100)
             MixinUtils.handleMixinMissionItem(accessor, CraftMission.class, result);
     }
 }

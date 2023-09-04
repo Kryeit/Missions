@@ -88,11 +88,6 @@ public class Utils {
         return Math.log(value) / Math.log(base);
     }
 
-    public static ServerPlayer getPlayer(UUID player) {
-        PlayerList playerList = MinecraftServerSupplier.getServer().getPlayerList();
-        return playerList.getPlayer(player);
-    }
-
     public static boolean removeItems(Inventory inventory, Item item, int amount) {
         if (inventory.countItem(item) < amount) return false;
 
