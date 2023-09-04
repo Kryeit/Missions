@@ -16,6 +16,6 @@
   "missions.difficulty.easy": "Easy",
   "missions.difficulty.normal": "Normal",
   "missions.difficulty.hard": "Hard",
-  "missions.block.exchange_atm": "Exchange ATM",
+  "block.missions.exchange_atm": "Exchange ATM",
   "missions.message.hard_mission_completed": "%s has just completed a hard mission!"
 }
