@@ -40,9 +40,9 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
         OFF
     }
 
-    public ExchangeATMBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pWorldPosition, BlockState pBlockState) {
-        super(blockEntityType, pWorldPosition, pBlockState);
-
+    public ExchangeATMBlockEntity(BlockEntityType<?> blockEntityType, BlockPos worldPosition, BlockState blockState) {
+        super(blockEntityType, worldPosition, blockState);
+        inventory = NonNullList.withSize(2, ItemStack.EMPTY);
         this.data = new ContainerData() {
             public int get(int index) {
                 return switch (index) {
@@ -131,8 +131,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
 
     @Override
     public void clearContent() {
-        this.inventory.clear();
-        this.setChanged();
+        inventory.clear();
+        setChanged();
     }
 
     @Nonnull
@@ -150,7 +150,6 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
     @Override
     public void onLoad() {
         super.onLoad();
-        inventory = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
     }
 
     @Override
@@ -167,8 +166,6 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
 
     @Override
     public void read(CompoundTag tag, boolean clientPacket) {
-
-        //TODO: THIS DOESNT WORK, IDK WHY, I NEED HELP WITH THIS ONE
         ContainerHelper.loadAllItems(tag, inventory);
         if (!clientPacket) progress = tag.getInt("exchange_atm.progress");
         super.read(tag, clientPacket);
@@ -179,15 +176,15 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
         Containers.dropContents(this.level, this.worldPosition, this);
     }
 
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, ExchangeATMBlockEntity pBlockEntity) {
+    public void tick(Level level, BlockPos pos, BlockState state, ExchangeATMBlockEntity blockEntity) {
         updateMode();
         if (hasRecipe()) {
             progress++;
-            setChanged(pLevel, pPos, pState);
+            setChanged(level, pos, state);
             if (progress > maxProgress) craftItem();
         } else {
             resetProgress();
-            setChanged(pLevel, pPos, pState);
+            setChanged(level, pos, state);
         }
     }
 
