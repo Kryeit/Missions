@@ -1,6 +1,8 @@
 package com.kryeit.mixin;
 
+import com.kryeit.missions.MissionManager;
 import net.minecraft.advancements.critereon.FishingRodHookedTrigger;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
@@ -10,11 +12,17 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @Mixin(FishingRodHookedTrigger.class)
 public class FishingRodHookedTriggerMixin {
     @Inject(method = "trigger", at = @At("HEAD"))
-    public void goBucks(ServerPlayer serverPlayer, ItemStack itemStack, FishingHook fishingHook, Collection<ItemStack> collection, CallbackInfo ci) {
-        System.out.println(serverPlayer.getName() + ": fished these items: " + collection);
+    public void goBucks(ServerPlayer player, ItemStack usedItem, FishingHook fishingHook, Collection<ItemStack> loot, CallbackInfo ci) {
+        UUID uuid = player.getUUID();
+
+        loot.forEach(itemStack -> {
+            ResourceLocation key = itemStack.getItem().getRegistryName();
+            MissionManager.incrementMission(uuid, "fish", key, itemStack.getCount());
+        });
     }
 }
