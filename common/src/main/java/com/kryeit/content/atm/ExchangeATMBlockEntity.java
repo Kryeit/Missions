@@ -136,7 +136,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
     @Nonnull
     @Override
     public Component getDisplayName() {
-        return Component.nullToEmpty("Exchange ATM - Mode: " + mode);
+        return Component.nullToEmpty("Exchange ATM");
     }
 
     @Nullable
