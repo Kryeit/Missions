@@ -1,4 +1,4 @@
-package com.kryeit.mixin;
+package com.kryeit.mixin.event;
 
 import com.kryeit.missions.MissionManager;
 import net.minecraft.advancements.critereon.FishingRodHookedTrigger;
@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 @Mixin(FishingRodHookedTrigger.class)
-public class FishingRodHookedTriggerMixin {
+public class FishHandler {
     @Inject(method = "trigger", at = @At("HEAD"))
     public void goBucks(ServerPlayer player, ItemStack usedItem, FishingHook fishingHook, Collection<ItemStack> loot, CallbackInfo ci) {
         UUID uuid = player.getUUID();
