@@ -1,0 +1,81 @@
+package com.kryeit.client.screen.button;
+
+import com.kryeit.client.ClientsideMissionPacketUtils;
+import com.kryeit.client.screen.MissionRerollScreen;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+
+import static com.kryeit.client.screen.button.MissionButton.ADVANCEMENT_WIDGETS;
+
+
+public class RerollButton extends Button {
+    private static final OnPress NO_PRESS = button -> { };
+    private static final Component REROLL = new TextComponent("    ").append(new TranslatableComponent("missions.menu.reroll.reroll"));
+    private int missionIndex;
+    private ItemStack rerollPrice;
+
+
+    public RerollButton(int x, int y, int sizeX, int sizeY, int missionIndex, ItemStack rerollPrice) {
+        super(x, y, sizeX, sizeY, REROLL, NO_PRESS);
+        this.missionIndex = missionIndex;
+        this.rerollPrice = rerollPrice;
+    }
+
+    @Override
+    public void onPress() {
+        ClientsideMissionPacketUtils.requestReroll(missionIndex);
+        MissionRerollScreen.close();
+    }
+
+    @Override
+    public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
+        super.renderButton(matrices, mouseX, mouseY, delta);
+        renderItem(matrices);
+    }
+
+    public void renderItem(PoseStack matrices) {
+        renderBelowItem(matrices);
+        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+        int textureX = x + width / 2 - 42;
+        int textureY = y + height / 2 - 8;
+        itemRenderer.renderAndDecorateItem(rerollPrice, textureX, textureY);
+
+        // TODO: For some reason this amount is rendered below the item render, which shouldn't happen.
+        // Render the item stack's amount
+        String amountText = rerollPrice.getCount() > 1 ? String.valueOf(rerollPrice.getCount()) : "";
+        Font fontRenderer = Minecraft.getInstance().font;
+        int textX = x + width / 2 - 42 + 19 - fontRenderer.width(amountText);
+        int textY = y + height / 2;
+        fontRenderer.draw(matrices, amountText, textX, textY, 0xFFFFFF);
+    }
+
+
+    public void renderBelowItem(PoseStack matrices) {
+        Minecraft minecraft = Minecraft.getInstance();
+        minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
+
+        int v = 154;
+
+        if (isHovered) v -= 26;
+
+        int u = 26;
+
+        int textureSize = 26;
+
+        int x = this.x + 3;
+        int y = this.y - 3;
+
+        RenderSystem.setShaderTexture(0, ADVANCEMENT_WIDGETS);
+        blit(matrices, x, y, u, v, textureSize, textureSize, 256, 256);
+    }
+}

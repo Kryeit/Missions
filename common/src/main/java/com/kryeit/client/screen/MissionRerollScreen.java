@@ -1,22 +1,31 @@
 package com.kryeit.client.screen;
 
+import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientsideMissionPacketUtils;
+import com.kryeit.client.screen.button.RerollButton;
+import com.kryeit.missions.MissionManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.ItemStack;
+
+import static com.kryeit.client.screen.MissionScreen.CLOSE;
+import static com.kryeit.client.screen.button.MissionButton.ADVANCEMENT_WIDGETS;
 
 public class MissionRerollScreen extends Screen {
     private static final Component TITLE = new TranslatableComponent("missions.menu.reroll.title");
-    private static final Component REROLL = new TranslatableComponent("missions.menu.reroll.reroll");
-    private static final Component CLOSE = new TranslatableComponent("missions.menu.close");
     private final int missionIndex;
+    private final ItemStack rerollPrice;
 
-    public MissionRerollScreen(int missionIndex) {
+    public MissionRerollScreen(int missionIndex, ItemStack rerollPrice) {
         super(TITLE);
         this.missionIndex = missionIndex;
+        this.rerollPrice = rerollPrice;
     }
 
     @Override
@@ -33,13 +42,10 @@ public class MissionRerollScreen extends Screen {
 
         this.addRenderableWidget(new Button(startX, centerY, buttonWidth, buttonHeight, CLOSE, button -> close()));
 
-        this.addRenderableWidget(new Button(startX + buttonWidth + 5, centerY, buttonWidth, buttonHeight, REROLL, button -> {
-            ClientsideMissionPacketUtils.requestReroll(missionIndex);
-            close();
-        }));
+        this.addRenderableWidget(new RerollButton(startX + buttonWidth + 5, centerY, buttonWidth, buttonHeight, missionIndex, rerollPrice));
     }
 
-    private static void close() {
+    public static void close() {
         Minecraft.getInstance().setScreen(new MissionScreen());
     }
 

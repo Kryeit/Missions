@@ -23,7 +23,7 @@ import java.util.Optional;
 
 public class MissionScreen extends Screen {
     private static final Component TITLE = new TranslatableComponent("missions.menu.main.title");
-    private static final TranslatableComponent CLOSE = new TranslatableComponent("missions.menu.close");
+    public static final TranslatableComponent CLOSE = new TranslatableComponent("missions.menu.close");
     private final Runnable NO_TOOLTIP = () -> {
     };
     public Runnable activeTooltip = NO_TOOLTIP;
@@ -68,7 +68,7 @@ public class MissionScreen extends Screen {
             Component leftColumnTitle = leftColumnMission.titleString();
 
             // Left column
-            this.addRenderableWidget(createMissionButton(leftX, y, leftColumnTitle, leftColumnMission, i));
+            this.addRenderableWidget(createMissionButton(leftX, y, leftColumnTitle, leftColumnMission, i, data.rerollPrice()));
 
             if (i + missionsPerColumn < activeMissions.size()) {
                 // There's a mission for the right column
@@ -76,7 +76,7 @@ public class MissionScreen extends Screen {
                 Component rightColumnTitle = rightColumnMission.titleString();
 
                 // Right column
-                this.addRenderableWidget(createMissionButton(rightX, y, rightColumnTitle, rightColumnMission, i + missionsPerColumn));
+                this.addRenderableWidget(createMissionButton(rightX, y, rightColumnTitle, rightColumnMission, i + missionsPerColumn, data.rerollPrice()));
             }
         }
 
@@ -84,9 +84,11 @@ public class MissionScreen extends Screen {
         createRewardButton(data.hasUnclaimedRewards());
     }
 
-    private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index) {
+    private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
         Button.OnTooltip tooltip = (button, poseStack, mouseX, mouseY) -> renderTooltip(poseStack, getTooltip(mission), Optional.empty(), mouseX, mouseY);
-        return new MissionButton(this, x, y, title, mission, tooltip, button -> Minecraft.getInstance().setScreen(new MissionRerollScreen(index)));
+        return new MissionButton(this, x, y, title, mission, tooltip, button -> {
+            if(!mission.isCompleted()) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice));
+        });
     }
 
     @Override
