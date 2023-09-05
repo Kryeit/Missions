@@ -8,6 +8,7 @@ import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,13 +23,20 @@ public class ClientsideMissionPacketUtils {
 
     public static void handlePacket(FriendlyByteBuf buf) {
         boolean rewardsAvailable = buf.readBoolean();
+        ItemStack rerollPrice = buf.readItem();
+        int freeRerollsLeft = buf.readInt();
+        boolean canReroll = buf.readBoolean();
+
         List<ClientsideActiveMission> missions = buf.readList(ClientsideActiveMission::fromBuffer);
-        updateHandler.accept(new ClientMissionData(rewardsAvailable, missions));
+        updateHandler.accept(new ClientMissionData(rewardsAvailable, missions, rerollPrice, freeRerollsLeft, canReroll));
     }
 
     public static FriendlyByteBuf serialize(ClientMissionData data) {
         FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
         buf.writeBoolean(data.hasUnclaimedRewards());
+        buf.writeItem(data.rerollPrice());
+        buf.writeInt(data.freeRerollsLeft());
+        buf.writeBoolean(data.canReroll());
 
         buf.writeCollection(data.activeMissions(), (b, mission) -> {
             b.writeComponent(mission.titleString());

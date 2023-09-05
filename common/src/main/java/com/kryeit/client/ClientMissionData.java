@@ -7,12 +7,12 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public record ClientMissionData(boolean hasUnclaimedRewards, List<ClientsideActiveMission> activeMissions) {
+public record ClientMissionData(boolean hasUnclaimedRewards, List<ClientsideActiveMission> activeMissions,
+                                ItemStack rerollPrice, int freeRerollsLeft, boolean canReroll) {
 
     public record ClientsideActiveMission(Component titleString, MissionDifficulty difficulty, int requiredAmount,
                                           int progress, ItemStack previewItem, ItemStack itemRequired,
-                                          Component missionString,
-                                          boolean isCompleted) {
+                                          Component missionString, boolean isCompleted) {
 
         public static ClientsideActiveMission fromBuffer(FriendlyByteBuf buf) {
             return new ClientsideActiveMission(buf.readComponent(), buf.readEnum(MissionDifficulty.class), buf.readInt(), buf.readInt(), buf.readItem(), buf.readItem(), buf.readComponent(), buf.readBoolean());

@@ -171,13 +171,23 @@ public class MissionManager {
         boolean hasUnclaimedRewards = !DataStorage.INSTANCE.getUnclaimedRewards(playerUUID).isEmpty();
         List<ClientsideActiveMission> clientMissions = Utils.map(getActiveMissions(playerUUID), mission -> mission.toClientMission(playerUUID));
 
+        ReassignmentPrice price = MissionManager.calculatePrice(playerUUID);
+        boolean canReroll = player.getInventory().countItem(price.item()) >= price.amount();
+
+        ClientMissionData data = new ClientMissionData(hasUnclaimedRewards, clientMissions, price.asStack(), 42, canReroll);
+
         ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(
                 ClientsideMissionPacketUtils.IDENTIFIER,
-                ClientsideMissionPacketUtils.serialize(new ClientMissionData(hasUnclaimedRewards, clientMissions))
+                ClientsideMissionPacketUtils.serialize(data)
         );
         player.connection.send(packet);
     }
 
     public record ReassignmentPrice(Item item, int amount) {
+        public ItemStack asStack() {
+            ItemStack stack = item.getDefaultInstance();
+            stack.setCount(amount);
+            return stack;
+        }
     }
 }
