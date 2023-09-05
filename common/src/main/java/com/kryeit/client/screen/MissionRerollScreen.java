@@ -1,21 +1,15 @@
 package com.kryeit.client.screen;
 
-import com.kryeit.client.ClientMissionData;
-import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.RerollButton;
-import com.kryeit.missions.MissionManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 
 import static com.kryeit.client.screen.MissionScreen.CLOSE;
-import static com.kryeit.client.screen.button.MissionButton.ADVANCEMENT_WIDGETS;
 
 public class MissionRerollScreen extends Screen {
     private static final Component TITLE = new TranslatableComponent("missions.menu.reroll.title");
