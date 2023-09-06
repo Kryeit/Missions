@@ -19,8 +19,8 @@ import static com.kryeit.client.screen.button.MissionButton.ADVANCEMENT_WIDGETS;
 public class RerollButton extends Button {
     private static final OnPress NO_PRESS = button -> { };
     private static final Component REROLL = new TextComponent("    ").append(new TranslatableComponent("missions.menu.reroll.reroll"));
-    private int missionIndex;
-    private ItemStack rerollPrice;
+    private final int missionIndex;
+    private final ItemStack rerollPrice;
 
 
     public RerollButton(int x, int y, int sizeX, int sizeY, int missionIndex, ItemStack rerollPrice) {
@@ -52,8 +52,8 @@ public class RerollButton extends Button {
         // Render the item stack's amount
         String amountText = rerollPrice.getCount() > 1 ? String.valueOf(rerollPrice.getCount()) : "";
         Font fontRenderer = Minecraft.getInstance().font;
-        int textX = x + width / 2 - 42 + 19 - fontRenderer.width(amountText);
-        int textY = y + height / 2;
+        int textX = textureX + 19 - fontRenderer.width(amountText);
+        int textY = textureY + 9;
         fontRenderer.draw(matrices, amountText, textX, textY, 0xFFFFFF);
     }
 

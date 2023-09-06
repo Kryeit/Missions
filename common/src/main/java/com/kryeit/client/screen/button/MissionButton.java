@@ -84,9 +84,8 @@ public class MissionButton extends Button {
 
         int v = 154;
 
-        if (isHovered || mission.isCompleted()) {
+        if (isHovered || mission.isCompleted())
             v -= 26;
-        }
 
         int u = switch (mission.difficulty()) {
             case NORMAL -> 26 * 2;
