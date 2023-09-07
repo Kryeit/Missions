@@ -7,10 +7,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import static com.kryeit.client.screen.button.MissionButton.ADVANCEMENT_WIDGETS;
@@ -43,18 +44,22 @@ public class RerollButton extends Button {
 
     public void renderItem(PoseStack matrices) {
         renderBelowItem(matrices);
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+
+        ResourceLocation item = Registry.ITEM.getKey(rerollPrice.getItem());
+        ResourceLocation textureLocation = new ResourceLocation(item.getNamespace(), "textures/item/" + item.getPath() + ".png");
+        RenderSystem.setShaderTexture(0, textureLocation);
+
         int textureX = x + width / 2 - 42;
         int textureY = y + height / 2 - 8;
-        itemRenderer.renderAndDecorateItem(rerollPrice, textureX, textureY);
 
-        // TODO: For some reason this amount is rendered below the item render, which shouldn't happen.
+        blit(matrices, textureX, textureY, 0, 0, 16, 16, 16, 16);
+
         // Render the item stack's amount
         String amountText = rerollPrice.getCount() > 1 ? String.valueOf(rerollPrice.getCount()) : "";
         Font fontRenderer = Minecraft.getInstance().font;
-        int textX = textureX + 19 - fontRenderer.width(amountText);
+        int textX = textureX + 17 - fontRenderer.width(amountText);
         int textY = textureY + 9;
-        fontRenderer.draw(matrices, amountText, textX, textY, 0xFFFFFF);
+        fontRenderer.drawShadow(matrices, amountText, textX, textY, 0xFFFFFF);
     }
 
 
