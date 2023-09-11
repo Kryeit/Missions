@@ -14,6 +14,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -87,7 +88,7 @@ public class MissionScreen extends Screen {
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
         Button.OnTooltip tooltip = (button, poseStack, mouseX, mouseY) -> renderTooltip(poseStack, getTooltip(mission), Optional.empty(), mouseX, mouseY);
         return new MissionButton(this, x, y, title, mission, tooltip, button -> {
-            if(!mission.isCompleted()) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice));
+            if(!mission.isCompleted() || rerollPrice.getItem() == Items.AIR) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice));
         });
     }
 

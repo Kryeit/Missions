@@ -23,6 +23,6 @@ side = "BOTH"
 [[dependencies.missions]]
 modId="create"
 mandatory=true
-versionRange="[0.5.1.b,)"
+versionRange="[0.5.1.c,)"
 ordering="NONE"
 side="BOTH"
