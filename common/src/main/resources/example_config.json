@@ -8,7 +8,10 @@
       "minecraft:flint": "1-10"
     },
     "titles": [
-      "Splash"
+      "Splash",
+      "Spitting luck",
+      "Bad weather",
+      "Humid work"
     ]
   },
   "cut": {
@@ -20,7 +23,11 @@
       "minecraft:stripped_birch_log": "1-10"
     },
     "titles": [
-      "Cutting edge technology haha"
+      "Cutting edge technology",
+      "Pochita",
+      "Chainsaw man",
+      "Risky endeavour",
+      "Safety first"
     ]
   },
   "compact": {
@@ -32,8 +39,11 @@
       "minecraft:gravel": "1-10"
     },
     "titles": [
-      "Rubik's cube",
-      "Deez Meatballzzz"
+      "Meatballs",
+      "Dense topic",
+      "Industrial diamonds",
+      "Pack n' go",
+      "Wall-e works"
     ]
   },
   "break": {
@@ -45,7 +55,12 @@
       "minecraft:grass_block": "1-10"
     },
     "titles": [
-      "Master Miner"
+      "Block buster",
+      "Demolition derby",
+      "Minecrafty mayhem",
+      "Terrain takedown",
+      "Debris dozer",
+      "A good project's starters"
     ]
   },
   "haunt": {
@@ -57,7 +72,10 @@
       "minecraft:soul_sand": "1-10"
     },
     "titles": [
-      "Haunter"
+      "Spooky fans",
+      "Blue fog",
+      "Haunter x Haunter",
+      "Soul taker"
     ]
   },
   "craft": {
@@ -69,7 +87,11 @@
       "minecraft:redstone_block": "1-10"
     },
     "titles": [
-      "Crafter"
+      "Masterful manufacture",
+      "Blueprint builder",
+      "Creation crusade",
+      "Widget wizard",
+      "Artisanal assembly"
     ]
   },
   "smoke": {
@@ -93,7 +115,11 @@
       "minecraft:wither_skeleton": "1-10"
     },
     "titles": [
-      "Operation: Hasta La Vista, Baby!"
+      "Operation: Hasta La Vista, Baby!",
+      "Plague extermination",
+      "Make doomsday happen",
+      "Creature carnage carnival",
+      "Beast busting"
     ]
   },
   "ride": {
@@ -177,7 +203,11 @@
       "minecraft:rotten_flesh": "1-10"
     },
     "titles": [
-      "Epic MunchQuest"
+      "Chomp chomp",
+      "Gobble gobble",
+      "Epicurean expedition",
+      "Feast of frenzy",
+      "Culinary conqueror"
     ]
   },
   "place": {
