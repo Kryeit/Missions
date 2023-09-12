@@ -25,6 +25,6 @@ public class MainForge {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        KeyInit.init();
+        MinecraftForge.EVENT_BUS.register(KeyInit.class);
     }
 }

@@ -8,17 +8,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class KeyInit {
-    public static KeyMapping missionGuiKey;
+    public static final KeyMapping missionGuiKey = registerKey("mission_gui", "key.category.missions", InputConstants.KEY_H);
 
     private KeyInit() {
-    }
-
-    public static void init() {
-        missionGuiKey = registerKey("mission_gui", "key.category.missions", InputConstants.KEY_H);
     }
 
     @SuppressWarnings("SameParameterValue")
