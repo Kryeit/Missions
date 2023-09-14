@@ -47,6 +47,8 @@ public class ClientsideMissionPacketUtils {
             b.writeItem(mission.itemRequired());
             b.writeComponent(mission.missionString());
             b.writeBoolean(mission.isCompleted());
+            mission.rewardAmount().writeToBuf(b);
+            b.writeUtf(mission.rewardItemLocation());
         });
         return buf;
     }

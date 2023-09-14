@@ -1,5 +1,7 @@
 package com.kryeit.missions.config;
 
+import net.minecraft.network.FriendlyByteBuf;
+
 import java.util.Random;
 
 public class Range {
@@ -32,5 +34,22 @@ public class Range {
         int int1 = Integer.parseInt(split[0]);
         int int2 = Integer.parseInt(split[1]);
         return Range.of(int1, int2);
+    }
+
+    public static Range fromBuf(FriendlyByteBuf buf) {
+        return new Range(buf.readInt(), buf.readInt());
+    }
+
+    public void writeToBuf(FriendlyByteBuf buf) {
+        buf.writeInt(lower);
+        buf.writeInt(upper);
+    }
+
+    @Override
+    public String toString() {
+        return "Range{" +
+                "lower=" + lower +
+                ", upper=" + upper +
+                '}';
     }
 }

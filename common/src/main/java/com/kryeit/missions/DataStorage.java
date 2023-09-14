@@ -1,5 +1,6 @@
 package com.kryeit.missions;
 
+import com.kryeit.Main;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.config.Range;
@@ -227,6 +228,7 @@ public class DataStorage {
 
         public ClientsideActiveMission toClientMission(UUID player) {
             MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
+            ConfigReader.Mission configMission = Main.getConfig().getMissions().get(type);
             return new ClientsideActiveMission(
                     Component.nullToEmpty(title),
                     type.difficulty(),
@@ -235,7 +237,9 @@ public class DataStorage {
                     type.getPreviewStack(item()),
                     type.getItemStack(item()),
                     type.description(),
-                    isCompleted()
+                    isCompleted(),
+                    configMission.rewardAmount(),
+                    configMission.rewardItem()
             );
         }
     }
