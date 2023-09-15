@@ -11,6 +11,7 @@
   "missions.menu.main.tooltip.task": "Tarea: %s",
   "missions.menu.main.tooltip.difficulty": "Dificultad: %s",
   "missions.menu.main.tooltip.itemRequired": "Objeto requerido: %s",
+  "missions.menu.main.tooltip.reward": "Recompensa: %s de %s",
   "missions.menu.main.tooltip.progress": "Progreso: %s",
   "missions.menu.main.tooltip.progress.completed": "Completada",
   "missions.difficulty.easy": "Fácil",

@@ -6,14 +6,17 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.InfoButton;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
+import com.kryeit.utils.Utils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,8 +28,7 @@ import java.util.Optional;
 public class MissionScreen extends Screen {
     private static final Component TITLE = new TranslatableComponent("missions.menu.main.title");
     public static final TranslatableComponent CLOSE = new TranslatableComponent("missions.menu.close");
-    private final Runnable NO_TOOLTIP = () -> {
-    };
+    private final Runnable NO_TOOLTIP = () -> {};
     public Runnable activeTooltip = NO_TOOLTIP;
     private ClientMissionData data = null;
 
@@ -88,7 +90,7 @@ public class MissionScreen extends Screen {
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
         Button.OnTooltip tooltip = (button, poseStack, mouseX, mouseY) -> renderTooltip(poseStack, getTooltip(mission), Optional.empty(), mouseX, mouseY);
         return new MissionButton(this, x, y, title, mission, tooltip, button -> {
-            if(!mission.isCompleted() || rerollPrice.getItem() == Items.AIR) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice));
+            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice));
         });
     }
 
@@ -123,10 +125,13 @@ public class MissionScreen extends Screen {
                 .withStyle(ChatFormatting.BLUE));
 
         ItemStack itemRequired = mission.itemRequired();
-        if (!itemRequired.is(Items.AIR)) {
+        if (!itemRequired.is(Items.AIR))
             components.add(new TranslatableComponent("missions.menu.main.tooltip.itemRequired", itemRequired.getDisplayName().getString())
                     .withStyle(ChatFormatting.BLUE));
-        }
+
+        components.add(new TranslatableComponent("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
+                Utils.removeBrackets(Registry.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
+                .withStyle(ChatFormatting.LIGHT_PURPLE));
 
         components.add(new TranslatableComponent("missions.menu.main.tooltip.progress", progress)
                 .withStyle(ChatFormatting.GREEN));

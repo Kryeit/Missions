@@ -102,4 +102,8 @@ public class Utils {
 
         return true;
     }
+
+    public static String removeBrackets(String text) {
+        return text.replaceAll("\\[", "").replaceAll("\\]", "");
+    }
 }
