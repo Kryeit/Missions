@@ -14,6 +14,7 @@
   "missions.menu.main.tooltip.reward": "Recompensa: %s de %s",
   "missions.menu.main.tooltip.progress": "Progreso: %s",
   "missions.menu.main.tooltip.progress.completed": "Completada",
+  "missions.menu.main.reward": "Has sido recompensado con %s de %s",
   "missions.difficulty.easy": "Fácil",
   "missions.difficulty.normal": "Normal",
   "missions.difficulty.hard": "Difícil",

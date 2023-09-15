@@ -13,6 +13,7 @@ import com.kryeit.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
@@ -80,6 +81,11 @@ public class MissionManager {
             ItemStack itemStack = Utils.getItem(new ResourceLocation(entry.getKey()));
             itemStack.setCount(entry.getValue());
             Utils.giveItem(itemStack, player);
+            player.sendMessage(new TranslatableComponent("missions.menu.main.reward",
+                    itemStack.getCount(),
+                    Utils.removeBrackets(itemStack.getDisplayName().getString()))
+                    .withStyle(ChatFormatting.GREEN),
+                    player.getUUID());
         }
         DataStorage.INSTANCE.claimRewards(uuid);
 
