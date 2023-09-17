@@ -35,6 +35,7 @@ public class Utils {
     }
 
     public static void giveItem(ItemStack stack, ServerPlayer player) {
+        if (player.level.isClientSide) return;
         int stackSize = stack.getMaxStackSize();
         int l = stack.getCount();
         while (l > 0) {
