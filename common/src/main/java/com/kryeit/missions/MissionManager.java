@@ -21,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -154,7 +155,9 @@ public class MissionManager {
     }
 
     public static void broadcastMissionCompletion(UUID player, DataStorage.ActiveMission mission, MissionType type) {
-        MissionCompletedToast.send(mission.toClientMission(player));
+        Player p = MinecraftServerSupplier.getServer().getPlayerList().getPlayer(player);
+        if(p != null && p.level.isClientSide)
+            MissionCompletedToast.send(mission.toClientMission(player));
 
         if (type.difficulty() == MissionDifficulty.HARD) {
             PlayerList playerList = MinecraftServerSupplier.getServer().getPlayerList();
