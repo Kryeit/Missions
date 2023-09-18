@@ -74,7 +74,7 @@ public class MissionCompletedToast implements Toast {
         toastComponent.blit(matrices, 3, 3, u, v, textureSize, textureSize);
     }
 
-    public static void send(ClientsideActiveMission mission) {
+    public static void show(ClientsideActiveMission mission) {
         ToastComponent toastComponent = Minecraft.getInstance().getToasts();
         MissionCompletedToast toast = new MissionCompletedToast(mission);
         toastComponent.addToast(toast);

@@ -5,13 +5,14 @@ import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
-import com.kryeit.client.screen.toasts.MissionCompletedToast;
 import com.kryeit.coins.Coins;
 import com.kryeit.entry.ModBlocks;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
+import io.netty.buffer.Unpooled;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -21,7 +22,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -82,9 +82,9 @@ public class MissionManager {
             itemStack.setCount(entry.getValue());
             MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(itemStack, player));
             player.sendMessage(new TranslatableComponent("missions.menu.main.reward",
-                    itemStack.getCount(),
-                    Utils.removeBrackets(itemStack.getDisplayName().getString()))
-                    .withStyle(ChatFormatting.GREEN),
+                            itemStack.getCount(),
+                            Utils.removeBrackets(itemStack.getDisplayName().getString()))
+                            .withStyle(ChatFormatting.GREEN),
                     player.getUUID());
         }
         DataStorage.INSTANCE.claimRewards(uuid);
@@ -155,15 +155,13 @@ public class MissionManager {
     }
 
     public static void broadcastMissionCompletion(UUID player, DataStorage.ActiveMission mission, MissionType type) {
-        Player p = MinecraftServerSupplier.getServer().getPlayerList().getPlayer(player);
-        if(p != null && p.level.isClientSide)
-            MissionCompletedToast.send(mission.toClientMission(player));
+        PlayerList playerList = MinecraftServerSupplier.getServer().getPlayerList();
+        ServerPlayer serverPlayer = playerList.getPlayer(player);
+        if (serverPlayer == null) return;
+
+        showToast(serverPlayer, mission.toClientMission(player));
 
         if (type.difficulty() == MissionDifficulty.HARD) {
-            PlayerList playerList = MinecraftServerSupplier.getServer().getPlayerList();
-            ServerPlayer serverPlayer = playerList.getPlayer(player);
-            if (serverPlayer == null) return;
-
             MutableComponent message = new TranslatableComponent("missions.message.hard_mission_completed", serverPlayer.getName())
                     .withStyle(ChatFormatting.GOLD);
             playerList.broadcastMessage(message, ChatType.CHAT, new UUID(0, 0));
@@ -172,6 +170,16 @@ public class MissionManager {
                 MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.EXCHANGE_ATM.asStack(), serverPlayer));
             }
         }
+    }
+
+    private static void showToast(ServerPlayer player, ClientsideActiveMission mission) {
+        FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.buffer());
+        mission.toBuffer(buffer);
+        ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(
+                ClientsideMissionPacketUtils.SHOW_TOAST,
+                buffer
+        );
+        player.connection.send(packet);
     }
 
     public static void sendMissions(ServerPlayer player) {

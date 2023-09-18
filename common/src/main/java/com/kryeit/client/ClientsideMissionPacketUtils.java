@@ -1,6 +1,5 @@
 package com.kryeit.client;
 
-import com.kryeit.Main;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
@@ -14,11 +13,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static com.kryeit.Main.MOD_ID;
+
 public class ClientsideMissionPacketUtils {
-    public static final ResourceLocation IDENTIFIER = new ResourceLocation("missions", "active_missions");
-    public static final ResourceLocation PAYOUT_IDENTIFIER = new ResourceLocation(Main.MOD_ID, "payout");
-    public static final ResourceLocation REROLL_IDENTIFIER = new ResourceLocation(Main.MOD_ID, "reroll");
-    public static final ResourceLocation REQUEST_MISSIONS = new ResourceLocation(Main.MOD_ID, "request_missions");
+    public static final ResourceLocation IDENTIFIER = new ResourceLocation(MOD_ID, "active_missions");
+    public static final ResourceLocation PAYOUT_IDENTIFIER = new ResourceLocation(MOD_ID, "payout");
+    public static final ResourceLocation REROLL_IDENTIFIER = new ResourceLocation(MOD_ID, "reroll");
+    public static final ResourceLocation REQUEST_MISSIONS = new ResourceLocation(MOD_ID, "request_missions");
+    public static final ResourceLocation SHOW_TOAST = new ResourceLocation(MOD_ID, "show_toast");
     private static Consumer<ClientMissionData> updateHandler;
 
     public static void handlePacket(FriendlyByteBuf buf) {
@@ -38,18 +40,7 @@ public class ClientsideMissionPacketUtils {
         buf.writeInt(data.freeRerollsLeft());
         buf.writeBoolean(data.canReroll());
 
-        buf.writeCollection(data.activeMissions(), (b, mission) -> {
-            b.writeComponent(mission.titleString());
-            b.writeEnum(mission.difficulty());
-            b.writeInt(mission.requiredAmount());
-            b.writeInt(mission.progress());
-            b.writeItem(mission.previewItem());
-            b.writeItem(mission.itemRequired());
-            b.writeComponent(mission.missionString());
-            b.writeBoolean(mission.isCompleted());
-            mission.rewardAmount().writeToBuf(b);
-            b.writeUtf(mission.rewardItemLocation());
-        });
+        buf.writeCollection(data.activeMissions(), (b, mission) -> mission.toBuffer(b));
         return buf;
     }
 

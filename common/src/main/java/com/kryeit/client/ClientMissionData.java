@@ -28,5 +28,18 @@ public record ClientMissionData(boolean hasUnclaimedRewards, List<ClientsideActi
                     Range.fromBuf(buf),
                     buf.readUtf());
         }
+
+        public void toBuffer(FriendlyByteBuf buf) {
+            buf.writeComponent(titleString());
+            buf.writeEnum(difficulty());
+            buf.writeInt(requiredAmount());
+            buf.writeInt(progress());
+            buf.writeItem(previewItem());
+            buf.writeItem(itemRequired());
+            buf.writeComponent(missionString());
+            buf.writeBoolean(isCompleted());
+            rewardAmount().writeToBuf(buf);
+            buf.writeUtf(rewardItemLocation());
+        }
     }
 }

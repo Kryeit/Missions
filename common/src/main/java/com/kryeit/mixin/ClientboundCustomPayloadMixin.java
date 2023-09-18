@@ -1,6 +1,6 @@
 package com.kryeit.mixin;
 
-import com.kryeit.client.ClientsideMissionPacketUtils;
+import com.kryeit.ClientPacketHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
@@ -24,11 +24,9 @@ public abstract class ClientboundCustomPayloadMixin {
 
     @Inject(method = "handle(Lnet/minecraft/network/protocol/game/ClientGamePacketListener;)V", at = @At("HEAD"), cancellable = true)
     public void handle(ClientGamePacketListener clientGamePacketListener, CallbackInfo ci) {
-        if (!identifier.equals(ClientsideMissionPacketUtils.IDENTIFIER)) return;
-
-        ClientsideMissionPacketUtils.handlePacket(data);
-
-        data.release();
-        ci.cancel();
+        if (ClientPacketHandler.handle(identifier, data)) {
+            data.release();
+            ci.cancel();
+        }
     }
 }
