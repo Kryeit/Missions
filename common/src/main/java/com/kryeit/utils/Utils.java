@@ -85,7 +85,6 @@ public class Utils {
     public static double log(int base, int value) {
         return Math.log(value) / Math.log(base);
     }
-
     public static boolean removeItems(Inventory inventory, Item item, int amount) {
         if (inventory.countItem(item) < amount) return false;
 

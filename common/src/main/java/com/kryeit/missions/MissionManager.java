@@ -80,7 +80,7 @@ public class MissionManager {
         for (Map.Entry<String, Integer> entry : rewards.entrySet()) {
             ItemStack itemStack = Utils.getItem(new ResourceLocation(entry.getKey()));
             itemStack.setCount(entry.getValue());
-            Utils.giveItem(itemStack, player);
+            MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(itemStack, player));
             player.sendMessage(new TranslatableComponent("missions.menu.main.reward",
                     itemStack.getCount(),
                     Utils.removeBrackets(itemStack.getDisplayName().getString()))
@@ -169,7 +169,7 @@ public class MissionManager {
             playerList.broadcastMessage(message, ChatType.CHAT, new UUID(0, 0));
 
             if (Math.random() < 0.01) {
-                Utils.giveItem(ModBlocks.EXCHANGE_ATM.asStack(), serverPlayer);
+                MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.EXCHANGE_ATM.asStack(), serverPlayer));
             }
         }
     }
