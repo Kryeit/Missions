@@ -136,6 +136,14 @@ public class Main {
                         Items.SADDLE,
                         Stats.HORSE_ONE_CM,
                         Stats.PIG_ONE_CM
+                ),
+                StatisticMission.createStatisticMission(
+                        "fly",
+                        MissionDifficulty.EASY,
+                        Component.nullToEmpty("Flying mission"),
+                        100_000,
+                        Items.ELYTRA,
+                        Stats.FLY_ONE_CM
                 )
         ).forEach(MissionTypeRegistry.INSTANCE::register);
     }
