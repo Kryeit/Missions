@@ -11,7 +11,7 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public class RewardsButton extends Button {
-    private static final Component REWARDS = new TextComponent("     ").append(new TranslatableComponent("missions.menu.main.rewards"));
+    private static final Component REWARDS = new TextComponent("    ").append(new TranslatableComponent("missions.menu.main.rewards"));
     private static final OnPress NO_PRESS = button -> {
     };
     private static final ResourceLocation CHEST_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/christmas_chest.png");
@@ -35,7 +35,7 @@ public class RewardsButton extends Button {
 
         RenderSystem.setShaderTexture(0, rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE);
 
-        int textureX = x + width / 2 - 36;
+        int textureX = x + width / 2 - 46;
         int textureY = y + height / 2 - 19;
         blit(matrices, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);
     }

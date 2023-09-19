@@ -3,8 +3,6 @@ package com.kryeit.utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.core.Registry;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -39,7 +37,6 @@ public class Utils {
     }
 
     public static void giveItem(ItemStack stack, ServerPlayer player) {
-        if (player.level.isClientSide) return;
         int stackSize = stack.getMaxStackSize();
         int l = stack.getCount();
         while (l > 0) {
@@ -111,21 +108,23 @@ public class Utils {
         return text.replaceAll("\\[", "").replaceAll("\\]", "");
     }
 
-    public static Component adjustComponentToWidth(Component input, int maxWidth) {
+    public static String adjustStringToWidth(String input, int maxWidth) {
         Font fontRenderer = Minecraft.getInstance().font;
 
         if (fontRenderer.width(input) <= maxWidth) return input;
 
-        TextComponent truncatedComponent = new TextComponent("");
+        StringBuilder truncatedString = new StringBuilder();
 
-        for (Component sibling : input.getSiblings()) {
-            if (fontRenderer.width(truncatedComponent) + fontRenderer.width(sibling) <= maxWidth) {
-                truncatedComponent.append(sibling);
+        for (int i = 0; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+            String currentCharAsString = String.valueOf(currentChar);
+            if (fontRenderer.width(truncatedString.toString() + currentCharAsString + "...") <= maxWidth) {
+                truncatedString.append(currentCharAsString);
             } else {
                 break;
             }
         }
 
-        return truncatedComponent.append("...");
+        return truncatedString.append("...").toString();
     }
 }
