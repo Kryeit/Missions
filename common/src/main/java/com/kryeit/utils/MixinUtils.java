@@ -21,7 +21,7 @@ public class MixinUtils {
                 worldPosition.getX(),
                 worldPosition.getY(),
                 worldPosition.getZ(),
-                64.0, false);
+                128, false);
     }
 
     public static boolean isCompactingRecipe(Recipe<?> recipe) {
