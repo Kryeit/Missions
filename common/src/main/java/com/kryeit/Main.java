@@ -110,7 +110,9 @@ public class Main {
                         Component.nullToEmpty("Walking mission"),
                         100_000,
                         Items.LEATHER_BOOTS,
-                        Stats.WALK_ONE_CM, Stats.SPRINT_ONE_CM, Stats.CROUCH_ONE_CM
+                        Stats.WALK_ONE_CM,
+                        Stats.SPRINT_ONE_CM,
+                        Stats.CROUCH_ONE_CM
                 ),
                 StatisticMission.createStatisticMission(
                         "swim",
@@ -135,7 +137,8 @@ public class Main {
                         100_000,
                         Items.SADDLE,
                         Stats.HORSE_ONE_CM,
-                        Stats.PIG_ONE_CM
+                        Stats.PIG_ONE_CM,
+                        Stats.STRIDER_ONE_CM
                 ),
                 StatisticMission.createStatisticMission(
                         "fly",
@@ -143,7 +146,16 @@ public class Main {
                         Component.nullToEmpty("Flying mission"),
                         100_000,
                         Items.ELYTRA,
-                        Stats.FLY_ONE_CM
+                        Stats.FLY_ONE_CM,
+                        Stats.AVIATE_ONE_CM
+                ),
+                StatisticMission.createStatisticMission(
+                        "sail",
+                        MissionDifficulty.EASY,
+                        Component.nullToEmpty("Sailing mission"),
+                        100_000,
+                        Items.OAK_BOAT,
+                        Stats.BOAT_ONE_CM
                 )
         ).forEach(MissionTypeRegistry.INSTANCE::register);
     }
