@@ -19,7 +19,7 @@ public class RewardsButton extends Button {
     private boolean rewardsAvailable;
 
     public RewardsButton(int x, int y, boolean rewardsAvailable) {
-        super(x, y, 80, 20, REWARDS, NO_PRESS);
+        super(x, y, 100, 20, REWARDS, NO_PRESS);
         this.rewardsAvailable = rewardsAvailable;
     }
 

@@ -146,7 +146,7 @@ public class MissionScreen extends Screen {
 
     public void createCloseButton() {
         int spacing = 5;
-        int buttonWidth = 80;
+        int buttonWidth = 100;
         int buttonHeight = 20;
         int bottomPadding = 20;
         int x = (this.width / 2 - buttonWidth - spacing);
