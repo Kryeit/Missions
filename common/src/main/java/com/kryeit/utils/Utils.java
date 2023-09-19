@@ -1,6 +1,10 @@
 package com.kryeit.utils;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -105,5 +109,23 @@ public class Utils {
 
     public static String removeBrackets(String text) {
         return text.replaceAll("\\[", "").replaceAll("\\]", "");
+    }
+
+    public static Component adjustComponentToWidth(Component input, int maxWidth) {
+        Font fontRenderer = Minecraft.getInstance().font;
+
+        if (fontRenderer.width(input) <= maxWidth) return input;
+
+        TextComponent truncatedComponent = new TextComponent("");
+
+        for (Component sibling : input.getSiblings()) {
+            if (fontRenderer.width(truncatedComponent) + fontRenderer.width(sibling) <= maxWidth) {
+                truncatedComponent.append(sibling);
+            } else {
+                break;
+            }
+        }
+
+        return truncatedComponent.append("...");
     }
 }

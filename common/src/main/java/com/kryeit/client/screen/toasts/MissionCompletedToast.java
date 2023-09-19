@@ -1,6 +1,7 @@
 package com.kryeit.client.screen.toasts;
 
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
+import com.kryeit.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
@@ -42,8 +43,10 @@ public class MissionCompletedToast implements Toast {
     }
 
     public void renderText(PoseStack matrices, ToastComponent toastComponent) {
+        Component title = Utils.adjustComponentToWidth(mission.titleString(), 110);
+
         // Title text
-        Component titleText = new TextComponent(mission.titleString().getString()).withStyle().withStyle(ChatFormatting.WHITE);
+        Component titleText = new TextComponent(title.getString()).withStyle().withStyle(ChatFormatting.WHITE);
         toastComponent.getMinecraft().font.draw(matrices, titleText, 30, 7, -1);
 
         // Description text
