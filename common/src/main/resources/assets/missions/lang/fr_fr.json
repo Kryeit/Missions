@@ -1,0 +1,23 @@
+{
+  "itemGroup.missions": "Create: Missions",
+  "missions.menu.key": "Ouvrir interface de missions",
+  "missions.key.category": "Missions",
+  "missions.menu.reroll.title": "Menu de renouvellement des missions",
+  "missions.menu.reroll.reroll": "Renouveler",
+  "missions.menu.close": "Fermer",
+  "missions.menu.main.rewards": "Récompenses",
+  "missions.menu.main.title": "Interface de missions",
+  "missions.menu.main.tooltip.details": "Détails de la mission",
+  "missions.menu.main.tooltip.task": "Tâche: %s",
+  "missions.menu.main.tooltip.difficulty": "Difficulté: %s",
+  "missions.menu.main.tooltip.itemRequired": "Objet(s) requis: %s",
+  "missions.menu.main.tooltip.reward": "Récompense: %s de %s",
+  "missions.menu.main.tooltip.progress": "Votre progrès: %s",
+  "missions.menu.main.tooltip.progress.completed": "Complété",
+  "missions.menu.main.reward": "Vous avez été récompensé %s de %s",
+  "missions.difficulty.easy": "Simple",
+  "missions.difficulty.normal": "Normal",
+  "missions.difficulty.hard": "Difficile",
+  "block.missions.exchange_atm": "Distributeur de pièces",
+  "missions.message.hard_mission_completed": "%s vient de compléter une mission difficile!"
+}
