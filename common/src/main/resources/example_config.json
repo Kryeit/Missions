@@ -313,7 +313,7 @@
       "item": "diamond"
     },
     "missions": {
-      "create:train_signal": "20-50",
+      "create:track_signal": "20-50",
       "coarse_dirt": "100-300",
       "fern": "50-100",
       "grass": "50-100"
