@@ -24,6 +24,7 @@ public class MillstoneBlockEntityMixin {
 
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
+        // Find a fix: This gives player more progress in missions if they dont output the results right away
         for (int i = 0; i < outputInv.getSlots(); i++) {
             ItemStack result = outputInv.getStackInSlot(i);
             if (result.getItem() == Items.AIR) continue;

@@ -192,6 +192,33 @@
       "Good ol' days"
     ]
   },
+  "sail": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "missions:statistic": "5-20"
+    },
+    "titles": [
+      "Sea of pirates",
+      "Sailing the seas",
+      "Seeking treasures"
+    ]
+  },
+  "fly": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "missions:statistic": "5-30"
+    },
+    "titles": [
+      "Cloud skipping",
+      "Breeze lover"
+    ]
+  },
   "mill": {
     "reward": {
       "amount": "2-23",
