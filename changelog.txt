@@ -1,4 +1,5 @@
 0.1.1.e
 - Fixed 2 wrongly typed item id's in the example config
 - Made swimming mission easier
-- Added Flying mission and sailing mission
+- Added Flying mission and Sailing mission
+- Fixed Mission Reroll gui, just click a mission to reroll it by a price
