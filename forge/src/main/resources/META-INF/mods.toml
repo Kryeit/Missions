@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[43,)"
+loaderVersion = "[47,)"
 #issueTrackerURL = ""
 license = "MIT"
 
@@ -16,13 +16,13 @@ Missions here and there :P
 [[dependencies.missions]]
 modId = "forge"
 mandatory = true
-versionRange = "[43,)"
+versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.missions]]
 modId="create"
 mandatory=true
-versionRange="[0.5.1.c,)"
+versionRange="[0.5.1.d,)"
 ordering="NONE"
 side="BOTH"

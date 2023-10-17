@@ -4,6 +4,7 @@ import com.kryeit.MissionHandler;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.CraftMission;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +22,7 @@ public class CraftHandler {
     )
     private void onCraftedBy(Level level, Player player, int i, CallbackInfo ci) {
         if(!MissionHandler.isNotServerPlayer(player)) {
-            ResourceLocation item = Registry.ITEM.getKey(((ItemStack) (Object) this).getItem());
+            ResourceLocation item = BuiltInRegistries.ITEM.getKey(((ItemStack) (Object) this).getItem());
             MissionManager.incrementMission(player.getUUID(), CraftMission.class, item, i);
         }
     }

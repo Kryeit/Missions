@@ -5,6 +5,7 @@ import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.KillMission;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -20,7 +21,7 @@ public class KillHandler implements ServerEntityCombatEvents.AfterKilledOtherEnt
         if (player == null) return;
         if (MissionHandler.isNotServerPlayer(player)) return;
 
-        ResourceLocation entity = Registry.ENTITY_TYPE.getKey(killedEntity.getType());
+        ResourceLocation entity = BuiltInRegistries.ENTITY_TYPE.getKey(killedEntity.getType());
         MissionManager.incrementMission(player.getUUID(), KillMission.class, entity, 1);
     }
 }

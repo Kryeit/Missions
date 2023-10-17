@@ -12,9 +12,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -94,10 +96,10 @@ public class MissionScreen extends Screen {
     }
 
     @Override
-    public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(guiGraphics);
 
-        super.render(matrices, mouseX, mouseY, delta);
+        super.render(guiGraphics, mouseX, mouseY, delta);
         if (data != null) {
             addMissions(data);
             data = null;
@@ -129,7 +131,7 @@ public class MissionScreen extends Screen {
                     .withStyle(ChatFormatting.BLUE));
 
         components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
-                Utils.removeBrackets(Registry.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
+                Utils.removeBrackets(Registries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
         components.add(Components.translatable("missions.menu.main.tooltip.progress", progress)

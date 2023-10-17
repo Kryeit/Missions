@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
@@ -36,13 +37,13 @@ public class RerollButton extends Button {
     }
 
     @Override
-    public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
-        super.renderButton(matrices, mouseX, mouseY, delta);
-        renderItem(matrices);
+    public void renderButton(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        super.renderButton(guiGraphics, mouseX, mouseY, delta);
+        renderItem(guiGraphics);
     }
 
-    public void renderItem(PoseStack matrices) {
-        renderBelowItem(matrices);
+    public void renderItem(GuiGraphics guiGraphics) {
+        renderBelowItem(guiGraphics);
 
         ResourceLocation item = Registry.ITEM.getKey(rerollPrice.getItem());
         ResourceLocation textureLocation = new ResourceLocation(item.getNamespace(), "textures/item/" + item.getPath() + ".png");
@@ -51,7 +52,7 @@ public class RerollButton extends Button {
         int textureX = x + width / 2 - 42;
         int textureY = y + height / 2 - 8;
 
-        blit(matrices, textureX, textureY, 0, 0, 16, 16, 16, 16);
+        blit(guiGraphics, textureX, textureY, 0, 0, 16, 16, 16, 16);
 
         // Render the item stack's amount
         String amountText = rerollPrice.getCount() > 1 ? String.valueOf(rerollPrice.getCount()) : "";

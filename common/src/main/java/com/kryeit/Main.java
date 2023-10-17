@@ -72,7 +72,6 @@ public class Main {
         boolean reassigned = MissionManager.reassignMissionsIfNecessary(player.getUUID());
         if (reassigned) {
             // TODO send a message, I don't know?
-            // TODO implement this in fabric too
         }
     }
 

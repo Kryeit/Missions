@@ -5,6 +5,7 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -29,13 +30,13 @@ public class RewardsButton extends Button {
     }
 
     @Override
-    public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
-        super.renderButton(matrices, mouseX, mouseY, delta);
+    public void renderButton(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        super.renderButton(guiGraphics, mouseX, mouseY, delta);
 
         RenderSystem.setShaderTexture(0, rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE);
 
         int textureX = x + width / 2 - 46;
         int textureY = y + height / 2 - 19;
-        blit(matrices, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);
+        blit(guiGraphics, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);
     }
 }

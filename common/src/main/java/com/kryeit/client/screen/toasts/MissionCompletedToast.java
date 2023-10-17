@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.network.chat.Component;
@@ -23,43 +24,43 @@ public class MissionCompletedToast implements Toast {
     }
 
     @Override
-    public Visibility render(PoseStack matrices, ToastComponent toastComponent, long delta) {
+    public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long delta) {
         if (this.firstDrawTime == 0L) {
             this.firstDrawTime = delta;
         }
 
-        renderBackground(matrices, toastComponent);
-        renderItem(matrices, toastComponent);
-        renderText(matrices, toastComponent);
+        renderBackground(guiGraphics, toastComponent);
+        renderItem(guiGraphics, toastComponent);
+        renderText(guiGraphics, toastComponent);
 
         return delta - this.firstDrawTime < 10_000L ? Visibility.SHOW : Visibility.HIDE;
     }
 
-    public void renderBackground(PoseStack matrices, ToastComponent toastComponent) {
+    public void renderBackground(GuiGraphics guiGraphics, ToastComponent toastComponent) {
         toastComponent.getMinecraft().getTextureManager().bindForSetup(TEXTURE);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-        toastComponent.blit(matrices, 0, 0, 0, 0, this.width(), this.height());
+        toastComponent.blit(guiGraphics, 0, 0, 0, 0, this.width(), this.height());
     }
 
-    public void renderText(PoseStack matrices, ToastComponent toastComponent) {
+    public void renderText(GuiGraphics guiGraphics, ToastComponent toastComponent) {
         String title = Utils.adjustStringToWidth(mission.titleString().getString(), 125);
 
         // Title text
         Component titleText = Components.translatable(title).withStyle().withStyle(ChatFormatting.WHITE);
-        toastComponent.getMinecraft().font.draw(matrices, titleText, 30, 7, -1);
+        toastComponent.getMinecraft().font.draw(guiGraphics, titleText, 30, 7, -1);
 
         // Description text
         Component descriptionText = Component.literal(mission.missionString().getString()).withStyle(ChatFormatting.WHITE);
-        toastComponent.getMinecraft().font.draw(matrices, descriptionText, 30, 18, -1);
+        toastComponent.getMinecraft().font.draw(guiGraphics, descriptionText, 30, 18, -1);
     }
 
-    public void renderItem(PoseStack matrices, ToastComponent toastComponent) {
-        renderBelowItem(matrices, toastComponent);
+    public void renderItem(GuiGraphics guiGraphics, ToastComponent toastComponent) {
+        renderBelowItem(guiGraphics, toastComponent);
         toastComponent.getMinecraft().getItemRenderer().renderAndDecorateItem(mission.previewItem(), 8, 8);
     }
 
-    public void renderBelowItem(PoseStack matrices, ToastComponent toastComponent) {
+    public void renderBelowItem(GuiGraphics guiGraphics, ToastComponent toastComponent) {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
 
@@ -74,7 +75,7 @@ public class MissionCompletedToast implements Toast {
         int textureSize = 26;
 
         RenderSystem.setShaderTexture(0, ADVANCEMENT_WIDGETS);
-        toastComponent.blit(matrices, 3, 3, u, v, textureSize, textureSize);
+        toastComponent.blit(guiGraphics, 3, 3, u, v, textureSize, textureSize);
     }
 
     public static void show(ClientsideActiveMission mission) {

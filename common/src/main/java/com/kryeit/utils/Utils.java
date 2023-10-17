@@ -3,6 +3,7 @@ package com.kryeit.utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -33,7 +34,7 @@ public class Utils {
     }
 
     public static ItemStack getItem(ResourceLocation item) {
-        return Registry.ITEM.get(item).getDefaultInstance();
+        return BuiltInRegistries.ITEM.get(item).getDefaultInstance();
     }
 
     public static void giveItem(ItemStack stack, ServerPlayer player) {
@@ -59,7 +60,7 @@ public class Utils {
             if (itemEntity != null) {
                 itemEntity.makeFakeItem();
             }
-            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2f, ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7f + 1.0f) * 2.0f);
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2f, ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7f + 1.0f) * 2.0f);
             player.containerMenu.broadcastChanges();
         }
     }
@@ -73,9 +74,9 @@ public class Utils {
     }
 
     public static ItemStack getSpawnEggOfEntity(ResourceLocation entity) {
-        EntityType<?> entityType = Registry.ENTITY_TYPE.get(entity);
+        EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(entity);
 
-        for (Item registryItem : Registry.ITEM) {
+        for (Item registryItem : BuiltInRegistries.ITEM) {
             if (registryItem instanceof SpawnEggItem egg && egg.spawnsEntity(null, entityType)) {
                 return egg.getDefaultInstance();
             }

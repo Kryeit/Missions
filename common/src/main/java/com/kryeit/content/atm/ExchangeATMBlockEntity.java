@@ -147,10 +147,10 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
         return ExchangeATMMenu.create(i, inventory, this, data);
     }
 
-    @Override
-    public void onLoad() {
-        super.onLoad();
-    }
+//    @Override
+//    public void onLoad() {
+//        super.onLoad();
+//    }
 
     @Override
     public void invalidate() {

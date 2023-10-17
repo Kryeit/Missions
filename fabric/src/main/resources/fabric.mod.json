@@ -3,15 +3,16 @@
   "id": "missions",
   "version": "${version}",
   "name": "Missions",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Weekly missions!",
   "authors": [
-    "Me!"
+    "MuriPlz",
+    "MrRedRhino"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://kryeit.com/",
+    "sources": "https://github.com/Kryeit/Missions"
   },
-  "license": "Insert License Here",
+  "license": "MIT",
   "icon": "logo.png",
   "environment": "*",
   "entrypoints": {
@@ -29,7 +30,7 @@
   "depends": {
     "fabric": "*",
     "fabric-key-binding-api-v1": "*",
-    "minecraft": "1.19.2",
+    "minecraft": "1.20.1",
     "create": "*",
     "fabric-networking-api-v1": "*"
   }
