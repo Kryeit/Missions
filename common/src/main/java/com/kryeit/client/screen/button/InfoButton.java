@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +15,7 @@ public class InfoButton extends Button {
     private static final OnPress ON_PRESS = button -> { };
 
     public InfoButton(int x, int y) {
-        super(x, y, 20, 20, new TextComponent(""), ON_PRESS);
+        super(x, y, 20, 20, Component.empty(), ON_PRESS);
     }
 
     @Override

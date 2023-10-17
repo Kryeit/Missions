@@ -4,12 +4,12 @@ import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 
 import static com.kryeit.client.screen.button.MissionButton.ADVANCEMENT_WIDGETS;
 
@@ -46,11 +46,11 @@ public class MissionCompletedToast implements Toast {
         String title = Utils.adjustStringToWidth(mission.titleString().getString(), 125);
 
         // Title text
-        Component titleText = new TextComponent(title).withStyle().withStyle(ChatFormatting.WHITE);
+        Component titleText = Components.translatable(title).withStyle().withStyle(ChatFormatting.WHITE);
         toastComponent.getMinecraft().font.draw(matrices, titleText, 30, 7, -1);
 
         // Description text
-        Component descriptionText = new TextComponent(mission.missionString().getString()).withStyle(ChatFormatting.WHITE);
+        Component descriptionText = Component.literal(mission.missionString().getString()).withStyle(ChatFormatting.WHITE);
         toastComponent.getMinecraft().font.draw(matrices, descriptionText, 30, 18, -1);
     }
 

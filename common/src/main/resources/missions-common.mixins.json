@@ -10,7 +10,6 @@
     "MinecraftServerMixin",
     "ServerboundCustomPayloadMixin",
     "StatsCounterMixin",
-    "create.AirCurrentMixin",
     "create.BasinOperatingBlockEntityMixin",
     "create.CrushingWheelControllerBlockEntityMixin",
     "create.FanProcessingMixin",

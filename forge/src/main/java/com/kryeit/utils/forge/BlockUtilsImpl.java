@@ -7,6 +7,6 @@ import net.minecraftforge.network.NetworkHooks;
 
 public class BlockUtilsImpl {
     public static void openGui(ServerPlayer player, ExchangeATMBlockEntity blockEntity, BlockPos pos) {
-        NetworkHooks.openGui(player, blockEntity, pos);
+        NetworkHooks.openScreen(player, blockEntity, pos);
     }
 }

@@ -2,17 +2,17 @@ package com.kryeit.client.screen;
 
 import com.kryeit.client.screen.button.RerollButton;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 
 import static com.kryeit.client.screen.MissionScreen.CLOSE;
 
 public class MissionRerollScreen extends Screen {
-    private static final Component TITLE = new TranslatableComponent("missions.menu.reroll.title");
+    private static final Component TITLE = Components.translatable("missions.menu.reroll.title");
     private final int missionIndex;
     private final ItemStack rerollPrice;
 

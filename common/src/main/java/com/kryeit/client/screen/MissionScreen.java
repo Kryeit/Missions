@@ -9,14 +9,13 @@ import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
 import com.kryeit.utils.Utils;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -26,8 +25,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class MissionScreen extends Screen {
-    private static final Component TITLE = new TranslatableComponent("missions.menu.main.title");
-    public static final TranslatableComponent CLOSE = new TranslatableComponent("missions.menu.close");
+    private static final Component TITLE = Components.translatable("missions.menu.main.title");
+    public static final Component CLOSE = Components.translatable("missions.menu.close");
     private final Runnable NO_TOOLTIP = () -> {};
     public Runnable activeTooltip = NO_TOOLTIP;
     private ClientMissionData data = null;
@@ -57,7 +56,7 @@ public class MissionScreen extends Screen {
         List<ClientsideActiveMission> activeMissions = data.activeMissions();
 
         if (activeMissions.size() != 10) {
-            Minecraft.getInstance().gui.getChat().addMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"));
+            Minecraft.getInstance().gui.getChat().addMessage(Components.translatable("Something wrong happened, you don't have 10 missions. Contact an admin"));
             return;
         }
 
@@ -111,29 +110,29 @@ public class MissionScreen extends Screen {
 
     public List<Component> getTooltip(ClientsideActiveMission mission) {
         Component progress = mission.isCompleted()
-                ? new TranslatableComponent("missions.menu.main.tooltip.progress.completed")
-                : new TextComponent(mission.progress() + "/" + mission.requiredAmount());
+                ? Components.translatable("missions.menu.main.tooltip.progress.completed")
+                : Components.translatable(mission.progress() + "/" + mission.requiredAmount());
 
         List<Component> components = new ArrayList<>();
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.details")
+        components.add(Components.translatable("missions.menu.main.tooltip.details")
                 .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.task", mission.missionString().getString())
+        components.add(Components.translatable("missions.menu.main.tooltip.task", mission.missionString().getString())
                 .withStyle(ChatFormatting.WHITE));
 
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.difficulty", mission.difficulty().description())
+        components.add(Components.translatable("missions.menu.main.tooltip.difficulty", mission.difficulty().description())
                 .withStyle(ChatFormatting.BLUE));
 
         ItemStack itemRequired = mission.itemRequired();
         if (!itemRequired.is(Items.AIR))
-            components.add(new TranslatableComponent("missions.menu.main.tooltip.itemRequired", itemRequired.getDisplayName().getString())
+            components.add(Components.translatable("missions.menu.main.tooltip.itemRequired", itemRequired.getDisplayName().getString())
                     .withStyle(ChatFormatting.BLUE));
 
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
+        components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
                 Utils.removeBrackets(Registry.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.progress", progress)
+        components.add(Components.translatable("missions.menu.main.tooltip.progress", progress)
                 .withStyle(ChatFormatting.GREEN));
 
         return components;

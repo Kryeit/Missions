@@ -21,7 +21,8 @@ public class MainForge {
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.register(new MissionHandler());
-        forgeEventBus.addListener((Consumer<PlayerLoggedInEvent>) event -> Main.handlePlayerLogin(event.getPlayer()));
+        forgeEventBus.register(new KeyInit());
+        forgeEventBus.addListener((Consumer<PlayerLoggedInEvent>) event -> Main.handlePlayerLogin(event.getEntity()));
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

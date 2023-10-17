@@ -4,6 +4,7 @@ import com.kryeit.MissionHandler;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.EatMission;
 import io.github.fabricators_of_create.porting_lib.event.common.LivingEntityUseItemEvents;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -16,7 +17,7 @@ public class EatHandler implements LivingEntityUseItemEvents.LivingUseItemFinish
         if(entity instanceof Player player) {
             if(MissionHandler.isNotServerPlayer(player)) return null;
             if(!itemStack.isEdible()) return null;
-            ResourceLocation item = itemStack.getItem().getRegistryName();
+            ResourceLocation item = Registry.ITEM.getKey(itemStack.getItem());
             MissionManager.incrementMission(player.getUUID(), EatMission.class, item, 1);
         }
         return null;

@@ -29,7 +29,7 @@
   "depends": {
     "fabric": "*",
     "fabric-key-binding-api-v1": "*",
-    "minecraft": ">=1.18.2",
+    "minecraft": "1.19.2",
     "create": "*",
     "fabric-networking-api-v1": "*"
   }

@@ -4,13 +4,12 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.MissionRerollScreen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -19,7 +18,7 @@ import static com.kryeit.client.screen.button.MissionButton.ADVANCEMENT_WIDGETS;
 
 public class RerollButton extends Button {
     private static final OnPress NO_PRESS = button -> { };
-    private static final Component REROLL = new TextComponent("    ").append(new TranslatableComponent("missions.menu.reroll.reroll"));
+    private static final Component REROLL = Components.literal("    ").append(Components.translatable("missions.menu.reroll.reroll"));
     private final int missionIndex;
     private final ItemStack rerollPrice;
 
