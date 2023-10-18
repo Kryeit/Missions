@@ -2,7 +2,6 @@ package com.kryeit.mixin.event;
 
 import com.kryeit.missions.MissionManager;
 import net.minecraft.advancements.critereon.FishingRodHookedTrigger;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;

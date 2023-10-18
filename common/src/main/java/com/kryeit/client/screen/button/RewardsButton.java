@@ -2,8 +2,6 @@ package com.kryeit.client.screen.button;
 
 import com.kryeit.Main;
 import com.kryeit.client.ClientsideMissionPacketUtils;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

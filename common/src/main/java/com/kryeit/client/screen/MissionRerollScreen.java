@@ -1,7 +1,6 @@
 package com.kryeit.client.screen;
 
 import com.kryeit.client.screen.button.RerollButton;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

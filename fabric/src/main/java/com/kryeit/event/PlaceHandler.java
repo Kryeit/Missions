@@ -5,7 +5,6 @@ import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.PlaceMission;
 import io.github.fabricators_of_create.porting_lib.event.common.BlockEvents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
