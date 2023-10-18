@@ -1,9 +1,7 @@
 # TODO
-# limit rerolls to 16 or 20
 # give collaborators free rerolls
 # display information about rerolls in reroll screen: price, free rerolls left, ability to reroll
 # implement missing mission types
-# show Reward Range in mission button tooltip
 
 # Stats:
 Shown when hovering the InfoButton

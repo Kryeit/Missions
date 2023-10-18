@@ -31,7 +31,7 @@ public class CrushingWheelControllerBlockEntityMixin {
 
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
-        for (int i = 1; i < inventory.getSlots(); i++) {
+        for (int i = 1; i < inventory.getSlots().size(); i++) {
             ItemStack result = inventory.getStackInSlot(i);
             if (result.getItem() == Items.AIR) continue;
             MixinUtils.handleMixinMissionItem(accessor, CrushMission.class, result);

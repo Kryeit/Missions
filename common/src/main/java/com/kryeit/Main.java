@@ -20,7 +20,12 @@ import com.kryeit.missions.mission_types.create.fan.SmokeMission;
 import com.kryeit.missions.mission_types.create.fan.SplashMission;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
@@ -32,13 +37,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kryeit.entry.ModItems.CREATIVE_MODE_TAB;
+
 public class Main {
     public static final String MOD_ID = "missions";
     public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static ConfigReader configReader;
 
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID)
-            .creativeModeTab(() -> ModItems.mainCreativeTab, "Create: Missions");
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
     public static void init() {
         registerMissions();

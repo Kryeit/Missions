@@ -19,7 +19,7 @@ public class RewardsButton extends Button {
     private boolean rewardsAvailable;
 
     public RewardsButton(int x, int y, boolean rewardsAvailable) {
-        super(x, y, 100, 20, REWARDS, NO_PRESS);
+        super(x, y, 100, 20, REWARDS, NO_PRESS, Button.DEFAULT_NARRATION);
         this.rewardsAvailable = rewardsAvailable;
     }
 
@@ -30,13 +30,12 @@ public class RewardsButton extends Button {
     }
 
     @Override
-    public void renderButton(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        super.renderButton(guiGraphics, mouseX, mouseY, delta);
+    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        super.renderWidget(guiGraphics, mouseX, mouseY, delta);
 
-        RenderSystem.setShaderTexture(0, rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE);
 
-        int textureX = x + width / 2 - 46;
-        int textureY = y + height / 2 - 19;
-        blit(guiGraphics, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);
+        int textureX = getX() + width / 2 - 46;
+        int textureY = getY() + height / 2 - 19;
+        guiGraphics.blit(rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);
     }
 }

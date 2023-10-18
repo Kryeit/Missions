@@ -29,18 +29,18 @@ public class MissionCompletedToast implements Toast {
             this.firstDrawTime = delta;
         }
 
-        renderBackground(guiGraphics, toastComponent);
+        renderBackground(guiGraphics);
         renderItem(guiGraphics, toastComponent);
         renderText(guiGraphics, toastComponent);
 
         return delta - this.firstDrawTime < 10_000L ? Visibility.SHOW : Visibility.HIDE;
     }
 
-    public void renderBackground(GuiGraphics guiGraphics, ToastComponent toastComponent) {
-        toastComponent.getMinecraft().getTextureManager().bindForSetup(TEXTURE);
-        RenderSystem.setShaderTexture(0, TEXTURE);
+    public void renderBackground(GuiGraphics guiGraphics) {
+        //toastComponent.getMinecraft().getTextureManager().bindForSetup(TEXTURE);
+        //RenderSystem.setShaderTexture(0, TEXTURE);
 
-        toastComponent.blit(guiGraphics, 0, 0, 0, 0, this.width(), this.height());
+        guiGraphics.blit(TEXTURE, 0, 0, 0, 0, this.width(), this.height());
     }
 
     public void renderText(GuiGraphics guiGraphics, ToastComponent toastComponent) {
@@ -48,21 +48,22 @@ public class MissionCompletedToast implements Toast {
 
         // Title text
         Component titleText = Components.translatable(title).withStyle().withStyle(ChatFormatting.WHITE);
-        toastComponent.getMinecraft().font.draw(guiGraphics, titleText, 30, 7, -1);
+        guiGraphics.drawString(toastComponent.getMinecraft().font, titleText, 30, 7, -1);
 
         // Description text
         Component descriptionText = Component.literal(mission.missionString().getString()).withStyle(ChatFormatting.WHITE);
-        toastComponent.getMinecraft().font.draw(guiGraphics, descriptionText, 30, 18, -1);
+        guiGraphics.drawString(toastComponent.getMinecraft().font, descriptionText, 30, 18, -1);
     }
 
     public void renderItem(GuiGraphics guiGraphics, ToastComponent toastComponent) {
         renderBelowItem(guiGraphics, toastComponent);
-        toastComponent.getMinecraft().getItemRenderer().renderAndDecorateItem(mission.previewItem(), 8, 8);
+
+        guiGraphics.renderItem(mission.previewItem(), 8, 8);
     }
 
     public void renderBelowItem(GuiGraphics guiGraphics, ToastComponent toastComponent) {
-        Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
+        //Minecraft minecraft = Minecraft.getInstance();
+        //minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
 
         int v = 128;
 
@@ -74,8 +75,8 @@ public class MissionCompletedToast implements Toast {
 
         int textureSize = 26;
 
-        RenderSystem.setShaderTexture(0, ADVANCEMENT_WIDGETS);
-        toastComponent.blit(guiGraphics, 3, 3, u, v, textureSize, textureSize);
+        //RenderSystem.setShaderTexture(0, ADVANCEMENT_WIDGETS);
+        guiGraphics.blit(ADVANCEMENT_WIDGETS, 3, 3, u, v, textureSize, textureSize);
     }
 
     public static void show(ClientsideActiveMission mission) {

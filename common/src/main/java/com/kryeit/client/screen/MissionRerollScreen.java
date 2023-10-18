@@ -35,7 +35,10 @@ public class MissionRerollScreen extends Screen {
 
         int startX = centerX - (buttonWidth * 2 + 5) / 2;
 
-        this.addRenderableWidget(new Button(startX, centerY, buttonWidth, buttonHeight, CLOSE, button -> close()));
+
+        this.addRenderableWidget(Button.builder(CLOSE, button -> close())
+                .bounds(startX, centerY, buttonWidth, buttonHeight)
+                .build());
 
         this.addRenderableWidget(new RerollButton(startX + buttonWidth + 5, centerY, buttonWidth, buttonHeight, missionIndex, rerollPrice));
     }

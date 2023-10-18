@@ -25,10 +25,10 @@ public class ExchangeATMScreen extends AbstractContainerScreen<ExchangeATMMenu> 
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        this.blit(guiGraphics, x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         if (menu.isCrafting())
-            blit(guiGraphics, x + 76, y + 35, 176, 0, menu.getScaledProgress(), 16);
+            guiGraphics.blit(TEXTURE, x + 76, y + 35, 176, 0, menu.getScaledProgress(), 16);
     }
 
     @Override
