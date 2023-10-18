@@ -4,7 +4,6 @@ import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.utils.MixinUtils;
 import com.simibubi.create.content.kinetics.fan.FanProcessing;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;

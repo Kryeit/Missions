@@ -4,7 +4,6 @@ import com.kryeit.MissionHandler;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.KillMission;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
