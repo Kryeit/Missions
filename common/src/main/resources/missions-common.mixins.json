@@ -11,7 +11,6 @@
     "ServerboundCustomPayloadMixin",
     "StatsCounterMixin",
     "create.BasinOperatingBlockEntityMixin",
-    "create.CrushingWheelControllerBlockEntityMixin",
     "create.FanProcessingMixin",
     "create.MechanicalCrafterBlockEntityMixin",
     "create.MechanicalPressBlockEntityMixin",
