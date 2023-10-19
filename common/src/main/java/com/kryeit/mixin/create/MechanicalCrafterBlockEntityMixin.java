@@ -19,7 +19,6 @@ public class MechanicalCrafterBlockEntityMixin {
     protected RecipeGridHandler.GroupedItems groupedItems;
     @Shadow
     private ItemStack scriptedResult;
-
     @Shadow
     protected int countDown;
     @Inject(method = "tick", at = @At(value = "HEAD"))
@@ -27,6 +26,7 @@ public class MechanicalCrafterBlockEntityMixin {
 
         MechanicalCrafterBlockEntity blockEntity = (MechanicalCrafterBlockEntity) (Object) this;
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
+
         boolean runLogic = !accessor.getLevel().isClientSide || blockEntity.isVirtual();
         if (!runLogic)
             return;
@@ -34,7 +34,7 @@ public class MechanicalCrafterBlockEntityMixin {
         ItemStack result =
                 blockEntity.isVirtual() ? scriptedResult : RecipeGridHandler.tryToApplyRecipe(accessor.getLevel(), groupedItems);
 
-        if (result != null && countDown == 100)
+        if (result != null && countDown == 1)
             MixinUtils.handleMixinMissionItem(accessor, CraftMission.class, result);
     }
 }
