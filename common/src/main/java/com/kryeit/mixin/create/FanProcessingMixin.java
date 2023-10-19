@@ -29,7 +29,6 @@ public class FanProcessingMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT)
     private static void onApplyFanRecipe(ItemEntity entity, FanProcessing.Type type, CallbackInfoReturnable<Boolean> cir, List<ItemStack> stacks) {
-        MinecraftServerSupplier.getServer().getPlayerList().broadcastSystemMessage(Component.nullToEmpty("LEeeel"), false);
         Player closestPlayer = MixinUtils.getClosestPlayer(entity.level(), entity.blockPosition());
 
         if (closestPlayer != null) {

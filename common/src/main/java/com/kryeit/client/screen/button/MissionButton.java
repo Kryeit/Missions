@@ -43,9 +43,6 @@ public class MissionButton extends Button {
     }
 
     public void renderButtonTexture(GuiGraphics guiGraphics) {
-        //Minecraft minecraft = Minecraft.getInstance();
-        //minecraft.getTextureManager().bindForSetup(GUI_WIDGETS);
-
         int u = 0;
         int v = 66;
 
@@ -59,7 +56,6 @@ public class MissionButton extends Button {
         int x = this.getX();
         int y = this.getY();
 
-        //RenderSystem.setShaderTexture(0, GUI_WIDGETS);
         guiGraphics.blit(GUI_WIDGETS, x, y, u, v, buttonWidth, buttonHeight, 256, 256);
         renderItem(guiGraphics);
     }
@@ -74,9 +70,6 @@ public class MissionButton extends Button {
 
 
     public void renderBelowItem(GuiGraphics guiGraphics) {
-        //Minecraft minecraft = Minecraft.getInstance();
-        //minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
-
         int v = 154;
 
         if (isHovered || mission.isCompleted())
@@ -93,7 +86,6 @@ public class MissionButton extends Button {
         int x = this.getX() + 3;
         int y = this.getY() - 3;
 
-        //RenderSystem.setShaderTexture(0, ADVANCEMENT_WIDGETS);
         guiGraphics.blit(ADVANCEMENT_WIDGETS, x, y, u, v, textureSize, textureSize, 256, 256);
     }
 }

@@ -31,7 +31,6 @@ public class RewardsButton extends Button {
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         super.renderWidget(guiGraphics, mouseX, mouseY, delta);
 
-
         int textureX = getX() + width / 2 - 46;
         int textureY = getY() + height / 2 - 19;
         guiGraphics.blit(rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);

@@ -63,9 +63,6 @@ public class RerollButton extends Button {
 
 
     public void renderBelowItem(GuiGraphics guiGraphics) {
-        Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
-
         int v = 154;
 
         if (isHovered) v -= 26;
@@ -77,7 +74,6 @@ public class RerollButton extends Button {
         int x = this.getX() + 3;
         int y = this.getY() - 3;
 
-        RenderSystem.setShaderTexture(0, ADVANCEMENT_WIDGETS);
         guiGraphics.blit(ADVANCEMENT_WIDGETS, x, y, u, v, textureSize, textureSize, 256, 256);
     }
 }

@@ -35,9 +35,6 @@ public class MissionCompletedToast implements Toast {
     }
 
     public void renderBackground(GuiGraphics guiGraphics) {
-        //toastComponent.getMinecraft().getTextureManager().bindForSetup(TEXTURE);
-        //RenderSystem.setShaderTexture(0, TEXTURE);
-
         guiGraphics.blit(TEXTURE, 0, 0, 0, 0, this.width(), this.height());
     }
 
@@ -60,9 +57,6 @@ public class MissionCompletedToast implements Toast {
     }
 
     public void renderBelowItem(GuiGraphics guiGraphics, ToastComponent toastComponent) {
-        //Minecraft minecraft = Minecraft.getInstance();
-        //minecraft.getTextureManager().bindForSetup(ADVANCEMENT_WIDGETS);
-
         int v = 128;
 
         int u = switch (mission.difficulty()) {
@@ -73,7 +67,6 @@ public class MissionCompletedToast implements Toast {
 
         int textureSize = 26;
 
-        //RenderSystem.setShaderTexture(0, ADVANCEMENT_WIDGETS);
         guiGraphics.blit(ADVANCEMENT_WIDGETS, 3, 3, u, v, textureSize, textureSize);
     }
 

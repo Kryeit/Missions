@@ -17,11 +17,7 @@ public class InfoButton extends Button {
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        //Minecraft minecraft = Minecraft.getInstance();
-        //minecraft.getTextureManager().bindForSetup(INFO_ICON);
-
         int textureSize = 20;
-
         guiGraphics.blit(INFO_ICON, this.getX(), this.getY(), 0, 0, textureSize, textureSize, 256, 256);
     }
 }
