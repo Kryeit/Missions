@@ -31,7 +31,7 @@ public class MissionCompletedToast implements Toast {
         renderItem(guiGraphics, toastComponent);
         renderText(guiGraphics, toastComponent);
 
-        return delta - this.firstDrawTime < 10_000L ? Visibility.SHOW : Visibility.HIDE;
+        return delta - this.firstDrawTime < 15_000L ? Visibility.SHOW : Visibility.HIDE;
     }
 
     public void renderBackground(GuiGraphics guiGraphics) {
