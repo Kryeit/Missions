@@ -9,6 +9,7 @@
     "CrushingWheelControllerBlockEntityMixin",
     "ExchangeATMBlockEntityMixin",
     "MillstoneBlockEntityMixin",
+    "SawBlockEntityMixin",
     "event.CraftHandler",
     "event.FishHandler"
   ],

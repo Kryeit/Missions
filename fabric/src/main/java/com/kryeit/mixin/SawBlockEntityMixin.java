@@ -1,4 +1,4 @@
-package com.kryeit.mixin.create;
+package com.kryeit.mixin;
 
 import com.kryeit.missions.mission_types.create.CutMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
@@ -29,7 +29,7 @@ public class SawBlockEntityMixin {
     )
     private void onApplyCuttingRecipe(CallbackInfo ci) {
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
-        for (int i = 0; i < inventory.getSlots().size(); i++) {
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack result = inventory.getStackInSlot(i);
             if (result.getItem() == Items.AIR) continue;
             MixinUtils.handleMixinMissionItem(accessor, CutMission.class, result);
