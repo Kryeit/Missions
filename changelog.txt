@@ -1,3 +1,6 @@
+0.1.2
+- Added a message when a player's missions get reassigned
+
 0.1.1.e
 - Fixed 2 wrongly typed item id's in the example config
 - Made swimming mission easier

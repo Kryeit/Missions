@@ -70,7 +70,8 @@ public class Main {
     public static void handlePlayerLogin(Player player) {
         boolean reassigned = MissionManager.reassignMissionsIfNecessary(player.getUUID());
         if (reassigned) {
-            // TODO send a message, I don't know?
+            Component message = Component.translatable("missions.reassign");
+            player.sendSystemMessage(message);
         }
     }
 

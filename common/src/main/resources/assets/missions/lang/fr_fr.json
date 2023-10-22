@@ -19,5 +19,6 @@
   "missions.difficulty.normal": "Normal",
   "missions.difficulty.hard": "Difficile",
   "block.missions.exchange_atm": "Distributeur de pièces",
-  "missions.message.hard_mission_completed": "%s vient de compléter une mission difficile!"
+  "missions.message.hard_mission_completed": "%s vient de compléter une mission difficile!",
+  "missions.reassign": "Your missions have been reassigned! You can check your new missions in the missions menu"
 }

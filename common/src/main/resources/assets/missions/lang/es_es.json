@@ -19,5 +19,6 @@
   "missions.difficulty.normal": "Normal",
   "missions.difficulty.hard": "Difícil",
   "block.missions.exchange_atm": "Cajero automático",
-  "missions.message.hard_mission_completed": "¡%s acaba de completar una misión difícil!"
+  "missions.message.hard_mission_completed": "¡%s acaba de completar una misión difícil!",
+  "missions.reassign": "Your missions have been reassigned! You can check your new missions in the missions menu"
 }

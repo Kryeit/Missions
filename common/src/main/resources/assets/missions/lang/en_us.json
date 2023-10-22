@@ -19,5 +19,6 @@
   "missions.difficulty.normal": "Normal",
   "missions.difficulty.hard": "Hard",
   "block.missions.exchange_atm": "Exchange ATM",
-  "missions.message.hard_mission_completed": "%s has just completed a hard mission!"
+  "missions.message.hard_mission_completed": "%s has just completed a hard mission!",
+  "missions.reassign": "Your missions have been reassigned! You can check your new missions in the missions menu"
 }

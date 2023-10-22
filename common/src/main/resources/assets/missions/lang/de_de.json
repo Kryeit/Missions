@@ -19,5 +19,6 @@
   "missions.difficulty.normal": "Normal",
   "missions.difficulty.hard": "Schwer",
   "block.missions.exchange_atm": "Geldwechsel Automat",
-  "missions.message.hard_mission_completed": "%s hat gerade eine schwierige Mission vollendet!"
+  "missions.message.hard_mission_completed": "%s hat gerade eine schwierige Mission vollendet!",
+  "missions.reassign": "Your missions have been reassigned! You can check your new missions in the missions menu"
 }
