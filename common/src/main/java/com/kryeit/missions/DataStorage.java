@@ -233,6 +233,7 @@ public class DataStorage {
                     Component.nullToEmpty(title),
                     type.difficulty(),
                     requiredAmount(),
+                    missionID(),
                     type.getProgress(player, item()),
                     type.getPreviewStack(item()),
                     type.getItemStack(item()),

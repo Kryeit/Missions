@@ -111,17 +111,12 @@ public class MissionScreen extends Screen {
         components.add(Components.translatable("missions.menu.main.tooltip.details")
                 .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 
-
-        components.add(Components.translatable("missions.menu.main.tooltip.task", mission.missionString().getString())
-                .withStyle(ChatFormatting.WHITE));
-
-        components.add(Components.translatable("missions.menu.main.tooltip.difficulty", mission.difficulty().description())
-                .withStyle(ChatFormatting.BLUE));
-
-        ItemStack itemRequired = mission.itemRequired();
-        if (!itemRequired.is(Items.AIR))
-            components.add(Components.translatable("missions.menu.main.tooltip.itemRequired", itemRequired.getDisplayName().getString())
-                    .withStyle(ChatFormatting.BLUE));
+        String item = Utils.removeBrackets(mission.itemRequired().getDisplayName().getString());
+        components.add(
+                item.equalsIgnoreCase("air") ? Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                ChatFormatting.WHITE, mission.requiredAmount()) : Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                        ChatFormatting.WHITE, mission.requiredAmount(), item)
+        );
 
         components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
                 Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))

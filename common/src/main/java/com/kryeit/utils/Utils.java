@@ -1,8 +1,12 @@
 package com.kryeit.utils;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -13,6 +17,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
+import org.apache.commons.lang3.mutable.Mutable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,5 +131,27 @@ public class Utils {
         }
 
         return truncatedString.append("...").toString();
+    }
+
+    public static Component getMessage(String key, ChatFormatting color, Object... args) {
+        String translation = Component.translatable(key).getString();
+        String[] parts = translation.split("%s", -1);
+
+        if (parts.length == 0) {
+            return Component.translatable(key);
+        }
+
+        MutableComponent result = Component.literal("");
+
+        for (int i = 0; i < parts.length; i++) {
+            if (i < args.length) {
+                result.append(Component.translatable(parts[i]).setStyle(Style.EMPTY.withColor(color)));
+                result.append(Component.translatable(args[i].toString()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
+            } else {
+                result.append(Component.translatable(parts[i]).setStyle(Style.EMPTY.withColor(color)));
+            }
+        }
+
+        return result;
     }
 }
