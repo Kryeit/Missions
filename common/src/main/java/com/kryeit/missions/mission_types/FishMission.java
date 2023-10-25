@@ -11,7 +11,7 @@ public class FishMission implements MultiResourceMissionType {
 
     @Override
     public MissionDifficulty difficulty() {
-        return MissionDifficulty.NORMAL;
+        return MissionDifficulty.HARD;
     }
 
     @Override

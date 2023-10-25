@@ -115,7 +115,7 @@ public class Main {
                 ),
                 StatisticMission.createStatisticMission(
                         "swim",
-                        MissionDifficulty.EASY,
+                        MissionDifficulty.HARD,
                         Component.nullToEmpty("Swimming mission"),
                         100_000,
                         Items.TURTLE_HELMET,
@@ -131,7 +131,7 @@ public class Main {
                 ),
                 StatisticMission.createStatisticMission(
                         "ride",
-                        MissionDifficulty.NORMAL,
+                        MissionDifficulty.HARD,
                         Component.nullToEmpty("Riding mission"),
                         100_000,
                         Items.SADDLE,
@@ -149,7 +149,7 @@ public class Main {
                 ),
                 StatisticMission.createStatisticMission(
                         "sail",
-                        MissionDifficulty.EASY,
+                        MissionDifficulty.NORMAL,
                         Component.nullToEmpty("Sailing mission"),
                         100_000,
                         Items.OAK_BOAT,

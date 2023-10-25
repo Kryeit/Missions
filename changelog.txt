@@ -1,5 +1,7 @@
 0.1.2
 - Added a message when a player's missions get reassigned
+- Improved mission tooltips and added a temporary tooltip for the info button
+- Changed certain missions from Difficulty category
 
 0.1.1.e
 - Fixed 2 wrongly typed item id's in the example config

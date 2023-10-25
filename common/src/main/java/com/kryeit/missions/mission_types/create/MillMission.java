@@ -13,7 +13,7 @@ public class MillMission implements MultiResourceMissionType {
 
     @Override
     public MissionDifficulty difficulty() {
-        return MissionDifficulty.EASY;
+        return MissionDifficulty.NORMAL;
     }
 
     @Override
