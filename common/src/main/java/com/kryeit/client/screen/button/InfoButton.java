@@ -1,10 +1,16 @@
 package com.kryeit.client.screen.button;
 
 import com.kryeit.Main;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class InfoButton extends Button {
 
@@ -19,5 +25,18 @@ public class InfoButton extends Button {
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         int textureSize = 20;
         guiGraphics.blit(INFO_ICON, this.getX(), this.getY(), 0, 0, textureSize, textureSize, 256, 256);
+
+        if (isHoveredOrFocused()) {
+            guiGraphics.renderTooltip(Minecraft.getInstance().font, getInfoTooltip(), Optional.empty(), mouseX, mouseY);
+        }
+    }
+
+    public static List<Component> getInfoTooltip() {
+        List<Component> components = new ArrayList<>();
+
+        components.add(Component.literal("This tooltip is Work In Progress").withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("We plan to add different player stats here").withStyle(ChatFormatting.AQUA));
+
+        return components;
     }
 }
