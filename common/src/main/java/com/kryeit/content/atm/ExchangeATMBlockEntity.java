@@ -23,6 +23,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
+import static com.kryeit.coins.Coins.EXCHANGE_RATE;
+
 public class ExchangeATMBlockEntity extends KineticBlockEntity
         implements MenuProvider, WorldlyContainer {
 
@@ -194,14 +196,14 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
 
             ItemStack result = Coins.getExchange(getItem(0), true);
 
-            return result != null && canInsertAmountIntoOutputSlot()
+            return result != null && canInsertAmountIntoOutputSlot(1)
                     && canInsertItemIntoOutputSlot(result)
-                    && getItem(0).getCount() == 64;
+                    && getItem(0).getCount() >= EXCHANGE_RATE;
         } else if(this.mode == Mode.TO_SMALLER) {
 
             ItemStack result = Coins.getExchange(getItem(0), false);
 
-            return result != null && getItem(1).getCount() == 0
+            return result != null && canInsertAmountIntoOutputSlot(result.getCount())
                     && canInsertItemIntoOutputSlot(result);
         }
 
@@ -238,8 +240,8 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
         return getItem(1).getItem() == output.getItem() || getItem(1).isEmpty();
     }
 
-    private boolean canInsertAmountIntoOutputSlot() {
-        return getItem(1).getMaxStackSize() > getItem(1).getCount();
+    private boolean canInsertAmountIntoOutputSlot(int amount) {
+        return getItem(1).getMaxStackSize() > getItem(1).getCount() + (amount - 1);
     }
 
     public void updateMode() {
