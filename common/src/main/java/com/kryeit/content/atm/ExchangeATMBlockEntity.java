@@ -215,7 +215,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
         if(this.mode == Mode.TO_BIGGER) {
             ItemStack result = Coins.getExchange(getItem(0), true);
             if(result != null) {
-                removeItem(0, 64);
+                removeItem(0, EXCHANGE_RATE);
                 setItem(1, new ItemStack(result.getItem(), getItem(1).getCount() + 1));
 
                 resetProgress();
