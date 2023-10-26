@@ -140,7 +140,8 @@ public class MissionScreen extends Screen {
         }
 
         components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
-                Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
+                Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString())
+                + "(s)")
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
         components.add(Components.translatable("missions.menu.main.tooltip.progress", progress)
