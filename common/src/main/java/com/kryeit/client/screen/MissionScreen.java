@@ -1,5 +1,6 @@
 package com.kryeit.client.screen;
 
+import com.kryeit.Main;
 import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
@@ -25,12 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MissionScreen extends Screen {
-    private static final Component TITLE = Components.translatable("missions.menu.main.title");
+    public static final ResourceLocation MISSIONS_TITLE = new ResourceLocation(Main.MOD_ID, "textures/gui/missions_title.png");
     public static final Component CLOSE = Components.translatable("missions.menu.close");
     private ClientMissionData data = null;
 
     public MissionScreen() {
-        super(TITLE);
+        super(Component.nullToEmpty(""));
     }
 
     @Override
@@ -101,6 +102,11 @@ public class MissionScreen extends Screen {
         }
 
         guiGraphics.drawCenteredString(Minecraft.getInstance().font, this.title, this.width / 2, 40, 0xFFFFFF);
+        renderTitle(guiGraphics);
+    }
+
+    public void renderTitle(GuiGraphics guiGraphics) {
+        guiGraphics.blit(MISSIONS_TITLE, (this.width/2) - 256/2, this.height/35, 0, 0, 256, 51, 256, 256);
     }
 
     public static List<Component> getTooltip(ClientsideActiveMission mission) {

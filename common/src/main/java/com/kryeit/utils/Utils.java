@@ -91,10 +91,8 @@ public class Utils {
     public static String getEntityOfSpawnEggForTooltip(ItemStack item) {
         String entityName = "";
         if (item.getItem() instanceof SpawnEggItem egg) {
-            EntityType<?> entityType = egg.getType(null); // Pass null as the Level parameter, or provide a Level object if available
-            ResourceLocation registryName = BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
-            registryName.getPath();
-
+            EntityType<?> entityType = egg.getType(null);
+            entityName = entityType.getDescription().getString();
         }
         return entityName + "(s)";
     }
