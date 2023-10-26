@@ -2,6 +2,7 @@
 - Improved Killing mission tooltip
 - Fixed various tooltip issues
 - Added "exchange-rate" to the config.json, letting you edit the ATM exchange rate.
+- Added a Missions title in the gui
 
 0.1.2
 - Added a message when a player's missions get reassigned
