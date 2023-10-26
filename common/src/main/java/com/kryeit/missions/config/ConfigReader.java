@@ -17,8 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.kryeit.coins.Coins.EXCHANGE_RATE;
-
 public class ConfigReader {
     private final Map<MissionType, Mission> missions;
     private final List<ItemStack> exchange;
@@ -54,13 +52,6 @@ public class ConfigReader {
             ResourceLocation location = new ResourceLocation(array.getString(integer));
             return Utils.getItem(location);
         });
-
-        String config = readOrCopyFile(path.resolve("config.json"), "/example_modconfig.json");
-
-        JSONObject configObject = new JSONObject(config);
-
-        EXCHANGE_RATE = Integer.parseInt(configObject.getString("exchange-rate"));
-
         return new ConfigReader(missions, items);
     }
 
