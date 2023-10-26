@@ -87,6 +87,18 @@ public class Utils {
         return DEFAULT_SPAWN_EGG;
     }
 
+    // TODO: Improve this
+    public static String getEntityOfSpawnEggForTooltip(ItemStack item) {
+        String entityName = "";
+        if (item.getItem() instanceof SpawnEggItem egg) {
+            EntityType<?> entityType = egg.getType(null); // Pass null as the Level parameter, or provide a Level object if available
+            ResourceLocation registryName = BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
+            registryName.getPath();
+
+        }
+        return entityName + "(s)";
+    }
+
     public static double log(int base, int value) {
         return Math.log(value) / Math.log(base);
     }

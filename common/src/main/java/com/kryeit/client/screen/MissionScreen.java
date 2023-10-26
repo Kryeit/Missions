@@ -19,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,12 +112,26 @@ public class MissionScreen extends Screen {
         components.add(Components.translatable("missions.menu.main.tooltip.details")
                 .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 
-        String item = Utils.removeBrackets(mission.itemRequired().getDisplayName().getString());
-        components.add(
-                item.equalsIgnoreCase("air") ? Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
-                ChatFormatting.WHITE, mission.requiredAmount()) : Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
-                        ChatFormatting.WHITE, mission.requiredAmount(), item)
-        );
+
+        String itemName = Utils.removeBrackets(mission.itemRequired().getDisplayName().getString());
+
+        if (Items.AIR == mission.itemRequired().getItem()) {
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, mission.requiredAmount())
+            );
+        } else if (mission.itemRequired().getItem() instanceof SpawnEggItem) {
+            // This cannot be backported, 1.20+ contains a spawn egg for every mob
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, mission.requiredAmount(), Utils.getEntityOfSpawnEggForTooltip(mission.itemRequired()))
+            );
+        } else {
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, mission.requiredAmount(), itemName)
+            );
+        }
 
         components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
                 Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
@@ -127,7 +142,6 @@ public class MissionScreen extends Screen {
 
         return components;
     }
-
 
     @Override
     public boolean isPauseScreen() {
