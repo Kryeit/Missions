@@ -86,15 +86,13 @@ public class Utils {
         }
         return DEFAULT_SPAWN_EGG;
     }
-
-    // TODO: Improve this
     public static String getEntityOfSpawnEggForTooltip(ItemStack item) {
         String entityName = "";
         if (item.getItem() instanceof SpawnEggItem egg) {
             EntityType<?> entityType = egg.getType(null);
             entityName = entityType.getDescription().getString();
         }
-        return entityName + "(s)";
+        return entityName;
     }
 
     public static double log(int base, int value) {

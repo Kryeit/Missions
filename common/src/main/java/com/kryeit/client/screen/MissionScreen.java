@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MissionScreen extends Screen {
-    public static final ResourceLocation MISSIONS_TITLE = new ResourceLocation(Main.MOD_ID, "textures/gui/missions_title.png");
+    public static final ResourceLocation MISSIONS_TITLE = new ResourceLocation(Main.MOD_ID, "textures/gui/title.png");
     public static final Component CLOSE = Components.translatable("missions.menu.close");
     private ClientMissionData data = null;
 
@@ -87,7 +87,7 @@ public class MissionScreen extends Screen {
 
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
         return new MissionButton(x, y, title, mission, button -> {
-            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR && (MinecraftServerSupplier.getServer() == null || MinecraftServerSupplier.getServer().isSingleplayer())) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice));
+            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR && (MinecraftServerSupplier.getServer() == null || MinecraftServerSupplier.getServer().isSingleplayer())) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice, mission.difficulty()));
         });
     }
 
@@ -106,7 +106,7 @@ public class MissionScreen extends Screen {
     }
 
     public void renderTitle(GuiGraphics guiGraphics) {
-        guiGraphics.blit(MISSIONS_TITLE, (this.width/2) - 256/2, this.height/35, 0, 0, 256, 51, 256, 256);
+        guiGraphics.blit(MISSIONS_TITLE, (this.width/2) - 100, this.height/35, 200, 44, 0, 0, 256, 56, 256, 256);
     }
 
     public static List<Component> getTooltip(ClientsideActiveMission mission) {
@@ -140,12 +140,14 @@ public class MissionScreen extends Screen {
         }
 
         components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
-                Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString())
-                + "(s)")
+                Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
         components.add(Components.translatable("missions.menu.main.tooltip.progress", progress)
                 .withStyle(ChatFormatting.GREEN));
+
+        components.add(Component.translatable("missions.menu.main.tooltip.click")
+                .withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC));
 
         return components;
     }

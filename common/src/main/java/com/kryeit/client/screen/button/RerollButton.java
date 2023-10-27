@@ -2,6 +2,7 @@ package com.kryeit.client.screen.button;
 
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.MissionRerollScreen;
+import com.kryeit.missions.MissionDifficulty;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.Minecraft;
@@ -22,11 +23,14 @@ public class RerollButton extends Button {
     private final int missionIndex;
     private final ItemStack rerollPrice;
 
+    private final MissionDifficulty difficulty;
 
-    public RerollButton(int x, int y, int sizeX, int sizeY, int missionIndex, ItemStack rerollPrice) {
+
+    public RerollButton(int x, int y, int sizeX, int sizeY, int missionIndex, ItemStack rerollPrice, MissionDifficulty difficulty) {
         super(x, y, sizeX, sizeY, REROLL, NO_PRESS, Button.DEFAULT_NARRATION);
         this.missionIndex = missionIndex;
         this.rerollPrice = rerollPrice;
+        this.difficulty = difficulty;
     }
 
     @Override
@@ -67,7 +71,11 @@ public class RerollButton extends Button {
 
         if (isHovered) v -= 26;
 
-        int u = 26;
+        int u = switch (difficulty) {
+            case NORMAL -> 26 * 2;
+            case HARD -> 26;
+            default -> 0;
+        };
 
         int textureSize = 26;
 
