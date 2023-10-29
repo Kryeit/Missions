@@ -36,7 +36,6 @@
   "missions.menu.main.tooltip.progress.completed": "Vollendet",
   "missions.menu.main.tooltip.click": "Click to reroll the mission",
   "missions.menu.main.rewards.tooltip.empty": "Nothing to claim",
-  "missions.menu.main.rewards.tooltip.redeem": "Click to redeem",
   "missions.menu.main.reward": "You've been awarded %s of %s",
   "missions.difficulty.easy": "Einfach",
   "missions.difficulty.normal": "Normal",

@@ -10,7 +10,6 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,11 +40,7 @@ public class RewardsButton extends Button {
         guiGraphics.blit(rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);
 
         if (isHoveredOrFocused()) {
-            if (rewardsAvailable) {
-                guiGraphics.renderTooltip(Minecraft.getInstance().font,
-                        List.of(Component.translatable("missions.menu.main.rewards.tooltip.redeem").withStyle(ChatFormatting.GREEN).withStyle(ChatFormatting.BOLD)),
-                        Optional.empty(), mouseX, mouseY);
-            } else {
+            if (!rewardsAvailable) {
                 guiGraphics.renderTooltip(Minecraft.getInstance().font,
                         List.of(Component.translatable("missions.menu.main.rewards.tooltip.empty").withStyle(ChatFormatting.DARK_GRAY)),
                         Optional.empty(), mouseX, mouseY);
