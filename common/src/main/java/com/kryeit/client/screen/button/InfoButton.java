@@ -15,7 +15,7 @@ import java.util.Optional;
 public class InfoButton extends Button {
 
     public static final ResourceLocation INFO_ICON = new ResourceLocation(Main.MOD_ID, "textures/gui/info_icon.png");
-    private static final OnPress ON_PRESS = button -> { };
+    private static final OnPress ON_PRESS = button -> {};
 
     public InfoButton(int x, int y) {
         super(x, y, 20, 20, Component.empty(), ON_PRESS, Button.DEFAULT_NARRATION);

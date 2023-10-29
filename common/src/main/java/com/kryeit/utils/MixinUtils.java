@@ -43,4 +43,12 @@ public class MixinUtils {
                     result.getCount());
         }
     }
+
+    public static double getDistance(BlockPos pos1, BlockPos pos2) {
+        double deltaX = pos1.getX() - pos2.getX();
+        double deltaY = pos1.getY() - pos2.getY();
+        double deltaZ = pos1.getZ() - pos2.getZ();
+
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+    }
 }
