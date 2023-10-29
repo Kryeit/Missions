@@ -1,3 +1,7 @@
+0.1.2b
+- Fixed Server startup (Forge)
+- Improved some tooltips
+
 0.1.2a
 - Improved Killing mission tooltip
 - Fixed various tooltip issues
