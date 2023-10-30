@@ -62,7 +62,7 @@ public class ConfigReader {
         return new ConfigReader(missions, items);
     }
 
-    private static String readOrCopyFile(Path path, String exampleFile) throws IOException {
+    public static String readOrCopyFile(Path path, String exampleFile) throws IOException {
         File file = path.toFile();
         if (!file.exists()) {
             InputStream stream = ConfigReader.class.getResourceAsStream(exampleFile);

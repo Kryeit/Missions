@@ -13,11 +13,11 @@ import net.minecraft.world.item.Items;
 
 import java.util.UUID;
 
-public class TrainDrivingMissionType implements MissionType {
+public class TrainDriverMissionType implements MissionType {
     private static final ResourceLocation IDENTIFIER = new ResourceLocation(Main.MOD_ID, "distance");
 
     public static void handleDistanceChange(UUID player, int difference) {
-        MissionManager.incrementMission(player, TrainDrivingMissionType.class, IDENTIFIER, difference);
+        MissionManager.incrementMission(player, TrainDriverMissionType.class, IDENTIFIER, difference);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class TrainDrivingMissionType implements MissionType {
 
     @Override
     public MissionDifficulty difficulty() {
-        return MissionDifficulty.EASY;
+        return MissionDifficulty.NORMAL;
     }
 
     @Override

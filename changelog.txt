@@ -1,6 +1,6 @@
 0.1.3
-- Added Train Driver and Train Passenger missions
--
+- Added Train Driver and Train Passenger for X km missions
+- Added Train driver with at least X passengers for Y km mission
 
 0.1.2b
 - Fixed Server startup (Forge)

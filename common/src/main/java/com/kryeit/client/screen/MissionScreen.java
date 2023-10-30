@@ -8,6 +8,7 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.InfoButton;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
+import com.kryeit.missions.mission_types.train.TrainDriverPassengerMissionType;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
@@ -122,10 +123,21 @@ public class MissionScreen extends Screen {
         String itemName = Utils.removeBrackets(mission.itemRequired().getDisplayName().getString());
 
         if (Items.AIR == mission.itemRequired().getItem()) {
-            components.add(
-                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
-                            ChatFormatting.WHITE, mission.requiredAmount())
-            );
+
+            if (mission.itemRequired().getCount() == 1) {
+                components.add(
+                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                                ChatFormatting.WHITE, mission.requiredAmount())
+                );
+            } else {
+
+                // TrainDriverPassengerMissionType exclusively
+                components.add(
+                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                                ChatFormatting.WHITE, mission.requiredAmount(), TrainDriverPassengerMissionType.passengersNeeded())
+                );
+            }
+
         } else if (mission.itemRequired().getItem() instanceof SpawnEggItem) {
             // This cannot be backported, 1.20+ contains a spawn egg for every mob
             components.add(

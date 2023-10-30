@@ -1,18 +1,16 @@
 package com.kryeit.mixin.create;
 
 import com.kryeit.Main;
-import com.kryeit.missions.mission_types.train.TrainDrivingMissionType;
+import com.kryeit.missions.mission_types.train.TrainDriverMissionType;
+import com.kryeit.missions.mission_types.train.TrainDriverPassengerMissionType;
 import com.kryeit.missions.mission_types.train.TrainPassengerMissionType;
 import com.kryeit.utils.MixinUtils;
 import com.simibubi.create.content.trains.entity.Carriage;
 import com.simibubi.create.content.trains.entity.Train;
 import com.simibubi.create.content.trains.entity.TravellingPoint;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,10 +25,6 @@ public abstract class TrainMixin {
 
     @Shadow public double speed;
 
-    @Shadow public abstract boolean disassemble(Direction assemblyDirection, BlockPos pos);
-
-    @Shadow public abstract float distanceToLocationSqr(Level level, Vec3 location);
-
     @Shadow public List<Carriage> carriages;
 
     @Shadow public abstract int countPlayerPassengers();
@@ -39,8 +33,6 @@ public abstract class TrainMixin {
     public void onMovementAllowed(Level level, Carriage car, CallbackInfo ci){
         if (Math.abs(speed) < 0.1)
             return;
-
-        Train train = (Train) (Object) this;
 
         for (Carriage carriage : carriages) {
             carriage.forEachPresentEntity(e -> e.getIndirectPassengers()
@@ -63,12 +55,12 @@ public abstract class TrainMixin {
 
                             Main.cachedTrainPlayerPositions.replace(player, player.position());
 
-                            if (countPlayerPassengers() > 3 - 1) {
-                                // TODO: Give "(int) distance" with "2" needed passengers to the train carrying passengers mission
-                            }
-
                             if (e.getControllingPlayer().isPresent() && e.getControllingPlayer().get().equals(player.getUUID())) {
-                                TrainDrivingMissionType.handleDistanceChange(player.getUUID(), (int) distance);
+                                TrainDriverMissionType.handleDistanceChange(player.getUUID(), (int) distance);
+
+                                if (TrainDriverPassengerMissionType.passengersNeeded() >= countPlayerPassengers()) {
+                                    TrainDriverPassengerMissionType.handleDistanceChange(player.getUUID(), (int) distance);
+                                }
                             } else {
                                 TrainPassengerMissionType.handleDistanceChange(player.getUUID(), (int) distance);
                             }

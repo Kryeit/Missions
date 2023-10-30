@@ -411,5 +411,45 @@
       "Trident believer",
       "Dolphin manners"
     ]
+  },
+  "train-driver": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "missions:distance": "3-10"
+    },
+    "titles": [
+      "Training"
+    ]
+  },
+  "train-passenger": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "missions:distance": "3-10"
+    },
+    "titles": [
+      "All aboard!"
+    ]
+  },
+  "train-driver-passenger": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "missions:distance": "3-10"
+    },
+    "requirements": {
+      "missions:passengers": "2"
+    },
+    "titles": [
+      "Flesh cargo",
+      "Passive companionship"
+    ]
   }
 }

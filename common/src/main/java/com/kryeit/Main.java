@@ -18,7 +18,8 @@ import com.kryeit.missions.mission_types.create.fan.BlastMission;
 import com.kryeit.missions.mission_types.create.fan.HauntMission;
 import com.kryeit.missions.mission_types.create.fan.SmokeMission;
 import com.kryeit.missions.mission_types.create.fan.SplashMission;
-import com.kryeit.missions.mission_types.train.TrainDrivingMissionType;
+import com.kryeit.missions.mission_types.train.TrainDriverMissionType;
+import com.kryeit.missions.mission_types.train.TrainDriverPassengerMissionType;
 import com.kryeit.missions.mission_types.train.TrainPassengerMissionType;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -110,8 +111,9 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new SplashMission());
 
         // Train
-        MissionTypeRegistry.INSTANCE.register(new TrainDrivingMissionType());
+        MissionTypeRegistry.INSTANCE.register(new TrainDriverMissionType());
         MissionTypeRegistry.INSTANCE.register(new TrainPassengerMissionType());
+        MissionTypeRegistry.INSTANCE.register(new TrainDriverPassengerMissionType());
 
         List.of(
                 StatisticMission.createStatisticMission(
