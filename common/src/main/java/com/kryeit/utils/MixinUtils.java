@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import static com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity.canCompress;
 
@@ -44,10 +45,11 @@ public class MixinUtils {
         }
     }
 
-    public static double getDistance(BlockPos pos1, BlockPos pos2) {
-        double deltaX = pos1.getX() - pos2.getX();
-        double deltaY = pos1.getY() - pos2.getY();
-        double deltaZ = pos1.getZ() - pos2.getZ();
+    public static double getDistance(Vec3 pos1, Vec3 pos2) {
+        if (pos1 == null || pos2 == null) return 0;
+        double deltaX = pos1.x - pos2.x;
+        double deltaY = pos1.y - pos2.y;
+        double deltaZ = pos1.z - pos2.z;
 
         return Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
     }

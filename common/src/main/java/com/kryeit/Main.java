@@ -18,24 +18,31 @@ import com.kryeit.missions.mission_types.create.fan.BlastMission;
 import com.kryeit.missions.mission_types.create.fan.HauntMission;
 import com.kryeit.missions.mission_types.create.fan.SmokeMission;
 import com.kryeit.missions.mission_types.create.fan.SplashMission;
+import com.kryeit.missions.mission_types.train.TrainDrivingMissionType;
+import com.kryeit.missions.mission_types.train.TrainPassengerMissionType;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Main {
     public static final String MOD_ID = "missions";
     public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static ConfigReader configReader;
+
+    public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();
 
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
@@ -101,6 +108,10 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new HauntMission());
         MissionTypeRegistry.INSTANCE.register(new SmokeMission());
         MissionTypeRegistry.INSTANCE.register(new SplashMission());
+
+        // Train
+        MissionTypeRegistry.INSTANCE.register(new TrainDrivingMissionType());
+        MissionTypeRegistry.INSTANCE.register(new TrainPassengerMissionType());
 
         List.of(
                 StatisticMission.createStatisticMission(

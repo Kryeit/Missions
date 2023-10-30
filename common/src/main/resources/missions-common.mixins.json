@@ -14,6 +14,7 @@
     "create.FanProcessingMixin",
     "create.MechanicalCrafterBlockEntityMixin",
     "create.MechanicalPressBlockEntityMixin",
+    "create.TrainMixin",
     "interfaces.BlockEntityAccessor"
   ],
   "injectors": {
