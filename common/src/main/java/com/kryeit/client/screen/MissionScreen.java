@@ -8,7 +8,7 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.InfoButton;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
-import com.kryeit.missions.mission_types.train.TrainDriverPassengerMissionType;
+import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
@@ -25,6 +25,7 @@ import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MissionScreen extends Screen {
     public static final ResourceLocation MISSIONS_TITLE = new ResourceLocation(Main.MOD_ID, "textures/gui/title.png");
@@ -124,17 +125,15 @@ public class MissionScreen extends Screen {
 
         if (Items.AIR == mission.itemRequired().getItem()) {
 
-            if (mission.itemRequired().getCount() == 1) {
-                components.add(
-                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
-                                ChatFormatting.WHITE, mission.requiredAmount())
-                );
-            } else {
-
-                // TrainDriverPassengerMissionType exclusively
+            if (Objects.equals(mission.missionType(), "train-driver-passenger")) {
                 components.add(
                         Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
                                 ChatFormatting.WHITE, mission.requiredAmount(), TrainDriverPassengerMissionType.passengersNeeded())
+                );
+            } else {
+                components.add(
+                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                                ChatFormatting.WHITE, mission.requiredAmount())
                 );
             }
 

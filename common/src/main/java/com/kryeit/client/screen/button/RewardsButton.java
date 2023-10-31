@@ -20,14 +20,14 @@ public class RewardsButton extends Button {
     private boolean rewardsAvailable;
 
     public RewardsButton(int x, int y, final boolean rewardsAvailable) {
-        super(x, y, 100, 20, REWARDS,
-                button ->
-                    ClientsideMissionPacketUtils.requestPayout(), Button.DEFAULT_NARRATION);
+        super(x, y, 100, 20, REWARDS, button -> {}, DEFAULT_NARRATION);
+
         this.rewardsAvailable = rewardsAvailable;
     }
 
     @Override
     public void onPress() {
+        ClientsideMissionPacketUtils.requestPayout();
         rewardsAvailable = false;
     }
 

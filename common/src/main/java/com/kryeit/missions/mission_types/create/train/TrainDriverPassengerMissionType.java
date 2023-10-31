@@ -1,4 +1,4 @@
-package com.kryeit.missions.mission_types.train;
+package com.kryeit.missions.mission_types.create.train;
 
 import com.kryeit.JSONObject;
 import com.kryeit.Main;
@@ -34,11 +34,14 @@ public class TrainDriverPassengerMissionType implements MissionType {
             if (!file.exists()) return passengers;
             String jsonContent = new String(Files.readAllBytes(Paths.get("missions/missions.json")));
             JSONObject object = new JSONObject(jsonContent);
-            passengers = Integer.parseInt(object.getObject("train-driver-passenger").getObject("requirements").getString(PASSENGERS.toString()));
+            JSONObject thing = object.getObject("train-driver-passenger");
+            if (thing != null) {
+                passengers = Integer.parseInt(thing.getObject("requirements").getString(PASSENGERS.toString()));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return passengers;
+        return Math.max(passengers, 1);
     }
 
     @Override
@@ -58,7 +61,7 @@ public class TrainDriverPassengerMissionType implements MissionType {
 
     @Override
     public int getProgress(UUID player, ResourceLocation item) {
-        return getData(player).getInt("value") / 1_000;
+        return getData(player).getInt("value");
     }
 
     @Override
@@ -73,9 +76,7 @@ public class TrainDriverPassengerMissionType implements MissionType {
 
     @Override
     public ItemStack getItemStack(ResourceLocation item) {
-        ItemStack stack = Items.AIR.getDefaultInstance();
-        stack.setCount(passengersNeeded());
-        return stack;
+        return Items.AIR.getDefaultInstance();
     }
 
     @Override

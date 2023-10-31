@@ -1,14 +1,12 @@
 package com.kryeit.mixin.create;
 
 import com.kryeit.Main;
-import com.kryeit.missions.mission_types.train.TrainDriverMissionType;
-import com.kryeit.missions.mission_types.train.TrainDriverPassengerMissionType;
-import com.kryeit.missions.mission_types.train.TrainPassengerMissionType;
+import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
+import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
+import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
 import com.kryeit.utils.MixinUtils;
 import com.simibubi.create.content.trains.entity.Carriage;
 import com.simibubi.create.content.trains.entity.Train;
-import com.simibubi.create.content.trains.entity.TravellingPoint;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,8 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Mixin(value = Train.class, remap = false)
+import static com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType.passengersNeeded;
 
+@Mixin(value = Train.class, remap = false)
 public abstract class TrainMixin {
 
     @Shadow public double speed;
@@ -38,27 +37,21 @@ public abstract class TrainMixin {
             carriage.forEachPresentEntity(e -> e.getIndirectPassengers()
                     .forEach(p -> {
                         if (p instanceof ServerPlayer player) {
-                            if (!Main.cachedTrainPlayerPositions.containsKey(player)) Main.cachedTrainPlayerPositions.put(player, player.position());
                             double distance = MixinUtils.getDistance(Main.cachedTrainPlayerPositions.get(player), player.position());
-                            if (distance < 50) return;
 
-                            TravellingPoint trailingPoint = carriage.getTrailingPoint();
-                            TravellingPoint leadingPoint = carriage.getLeadingPoint();
-
-                            if (leadingPoint.node1 == null || trailingPoint.node1 == null)
-                                return;
-                            ResourceKey<Level> dimension = leadingPoint.node1.getLocation().dimension;
-                            if (!dimension.equals(trailingPoint.node1.getLocation().dimension)) {
-                                Main.cachedTrainPlayerPositions.replace(player, player.position());
+                            if (!Main.cachedTrainPlayerPositions.containsKey(player) || distance > 250) {
+                                Main.cachedTrainPlayerPositions.put(player, player.position());
                                 return;
                             }
+
+                            if (distance < 50) return;
 
                             Main.cachedTrainPlayerPositions.replace(player, player.position());
 
                             if (e.getControllingPlayer().isPresent() && e.getControllingPlayer().get().equals(player.getUUID())) {
                                 TrainDriverMissionType.handleDistanceChange(player.getUUID(), (int) distance);
 
-                                if (TrainDriverPassengerMissionType.passengersNeeded() >= countPlayerPassengers()) {
+                                if (passengersNeeded() <= countPlayerPassengers() - 1) {
                                     TrainDriverPassengerMissionType.handleDistanceChange(player.getUUID(), (int) distance);
                                 }
                             } else {
@@ -67,16 +60,5 @@ public abstract class TrainMixin {
                         }
                     }));
         }
-
-
-
-
-
-
-
-
-        //if (MixinUtils.getDistance(start, end) < 50) return;
-
-
     }
 }

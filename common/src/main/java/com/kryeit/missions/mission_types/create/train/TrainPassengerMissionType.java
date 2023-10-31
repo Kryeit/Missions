@@ -1,4 +1,4 @@
-package com.kryeit.missions.mission_types.train;
+package com.kryeit.missions.mission_types.create.train;
 
 import com.kryeit.Main;
 import com.kryeit.missions.MissionDifficulty;
@@ -8,36 +8,38 @@ import com.simibubi.create.AllBlocks;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import java.util.Random;
 import java.util.UUID;
 
-public class TrainDriverMissionType implements MissionType {
+public class TrainPassengerMissionType implements MissionType {
     private static final ResourceLocation IDENTIFIER = new ResourceLocation(Main.MOD_ID, "distance");
 
     public static void handleDistanceChange(UUID player, int difference) {
-        MissionManager.incrementMission(player, TrainDriverMissionType.class, IDENTIFIER, difference);
+        MissionManager.incrementMission(player, TrainPassengerMissionType.class, IDENTIFIER, difference);
     }
 
     @Override
     public String id() {
-        return "train-driver";
+        return "train-passenger";
     }
 
     @Override
     public MissionDifficulty difficulty() {
-        return MissionDifficulty.NORMAL;
+        return MissionDifficulty.EASY;
     }
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Train driving mission");
+        return Component.nullToEmpty("Train passenger mission");
     }
 
     @Override
     public int getProgress(UUID player, ResourceLocation item) {
-        return getData(player).getInt("value") / 1_000;
+        return getData(player).getInt("value");
     }
 
     @Override
@@ -57,7 +59,7 @@ public class TrainDriverMissionType implements MissionType {
 
     @Override
     public ItemStack getPreviewStack(ResourceLocation item) {
-        return AllBlocks.TRAIN_CONTROLS.asStack();
+        return AllBlocks.SEATS.get(DyeColor.byId(new Random().nextInt(0, 15))).asStack();
     }
 
 }
