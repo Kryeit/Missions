@@ -29,7 +29,7 @@ public abstract class TrainMixin {
     @Shadow public abstract int countPlayerPassengers();
 
     @Inject(method = "collideWithOtherTrains", at = @At("HEAD"))
-    public void onMovementAllowed(Level level, Carriage car, CallbackInfo ci){
+    public void onTrainMove(Level level, Carriage car, CallbackInfo ci){
         if (Math.abs(speed) < 0.1)
             return;
 
