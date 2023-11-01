@@ -1,3 +1,9 @@
+0.1.4
+- Fix forge version (for real)
+- Fixed Mechanical Crafter compat for the Craft mission in forge side
+- Added "Dive in [] for [] min with a Diving Helmet" missions
+- Various fixes to train missions
+
 0.1.3a
 - Fix claiming rewards (lol sorry)
 - Fix many train missions issues/ exploits

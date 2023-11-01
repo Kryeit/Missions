@@ -2,7 +2,7 @@ package com.kryeit.event;
 
 import com.kryeit.MissionHandler;
 import com.kryeit.missions.MissionManager;
-import com.kryeit.missions.mission_types.BreakMission;
+import com.kryeit.missions.mission_types.create.vanilla.BreakMission;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;

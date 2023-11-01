@@ -19,6 +19,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
@@ -142,6 +143,11 @@ public class MissionScreen extends Screen {
             components.add(
                     Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
                             ChatFormatting.WHITE, mission.requiredAmount(), Utils.getEntityOfSpawnEggForTooltip(mission.itemRequired()))
+            );
+        } else if (mission.itemRequired().getItem() instanceof BucketItem) {
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, Utils.getFluidFromBucketForTooltip(mission.itemRequired()), mission.requiredAmount())
             );
         } else {
             components.add(

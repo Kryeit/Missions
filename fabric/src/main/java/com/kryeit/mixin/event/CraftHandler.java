@@ -2,7 +2,7 @@ package com.kryeit.mixin.event;
 
 import com.kryeit.MissionHandler;
 import com.kryeit.missions.MissionManager;
-import com.kryeit.missions.mission_types.CraftMission;
+import com.kryeit.missions.mission_types.create.vanilla.CraftMission;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;

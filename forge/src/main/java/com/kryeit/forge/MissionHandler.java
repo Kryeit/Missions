@@ -1,7 +1,7 @@
 package com.kryeit.forge;
 
 import com.kryeit.missions.MissionManager;
-import com.kryeit.missions.mission_types.*;
+import com.kryeit.missions.mission_types.create.vanilla.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -36,7 +36,6 @@ public class MissionHandler {
         if (isNotServerPlayer(event.getEntity())) return;
 
         for (ItemStack itemStack : event.getDrops()) {
-
             ResourceLocation item = ForgeRegistries.ITEMS.getKey(itemStack.getItem());
             MissionManager.incrementMission(event.getEntity().getUUID(), FishMission.class, item, 1);
         }

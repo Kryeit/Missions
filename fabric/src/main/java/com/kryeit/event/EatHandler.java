@@ -2,7 +2,7 @@ package com.kryeit.event;
 
 import com.kryeit.MissionHandler;
 import com.kryeit.missions.MissionManager;
-import com.kryeit.missions.mission_types.EatMission;
+import com.kryeit.missions.mission_types.create.vanilla.EatMission;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingEntityEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

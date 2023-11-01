@@ -1,8 +1,16 @@
 package com.kryeit.utils;
 
+import com.simibubi.create.AllTags;
+import io.github.fabricators_of_create.porting_lib.util.FluidUtil;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.client.resources.language.LanguageInfo;
+import net.minecraft.client.resources.language.LanguageManager;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -17,6 +25,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +106,37 @@ public class Utils {
         return entityName;
     }
 
+    public static String getFluidFromBucketForTooltip(ItemStack item) {
+        String itemName = BuiltInRegistries.ITEM.getKey(item.getItem()).toString();
+        String liquidName = itemName.replace("_bucket", "");
+
+        return getFluidName(new ResourceLocation(liquidName));
+    }
+
+    public static String getFluidName(ResourceLocation input) {
+        Fluid fluid = BuiltInRegistries.FLUID.get(input);
+        return getTranslationKey(fluid);
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static String getTranslationKey(Fluid fluid) {
+        String translationKey;
+
+        if (fluid == Fluids.EMPTY) {
+            translationKey = "";
+        } else if (fluid == Fluids.WATER) {
+            translationKey = "block.minecraft.water";
+        } else if (fluid == Fluids.LAVA) {
+            translationKey = "block.minecraft.lava";
+        } else {
+            ResourceLocation id = BuiltInRegistries.FLUID.getKey(fluid);
+            String key = Util.makeDescriptionId("block", id);
+            String translated = I18n.get(key);
+            translationKey = translated.equals(key) ? Util.makeDescriptionId("fluid", id) : key;
+        }
+
+        return translationKey;
+    }
     public static double log(int base, int value) {
         return Math.log(value) / Math.log(base);
     }

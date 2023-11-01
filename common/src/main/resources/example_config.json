@@ -451,5 +451,18 @@
       "Flesh cargo",
       "Passive companionship"
     ]
+  },
+  "dive": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "lava": "10-80",
+      "water": "30-120"
+    },
+    "titles": [
+      "Depths"
+    ]
   }
 }

@@ -14,6 +14,7 @@ import com.kryeit.missions.mission_types.create.MillMission;
 import com.kryeit.missions.mission_types.create.PressMission;
 import com.kryeit.missions.mission_types.create.basin.CompactMission;
 import com.kryeit.missions.mission_types.create.basin.MixMission;
+import com.kryeit.missions.mission_types.create.diving.DivingMissionType;
 import com.kryeit.missions.mission_types.create.fan.BlastMission;
 import com.kryeit.missions.mission_types.create.fan.HauntMission;
 import com.kryeit.missions.mission_types.create.fan.SmokeMission;
@@ -21,6 +22,7 @@ import com.kryeit.missions.mission_types.create.fan.SplashMission;
 import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
+import com.kryeit.missions.mission_types.create.vanilla.*;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.network.chat.Component;
@@ -56,6 +58,7 @@ public class Main {
         ModMenuTypes.register();
         ModBlockEntities.register();
 
+
         try {
             LOGGER.info("Reading config file...");
             configReader = ConfigReader.readFile(Path.of("missions"));
@@ -73,6 +76,7 @@ public class Main {
             throw new RuntimeException(e);
         }
         Runtime.getRuntime().addShutdownHook(new Thread(DataStorage.INSTANCE::save));
+
     }
 
     public static void handlePlayerLogin(Player player) {
@@ -114,6 +118,9 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new TrainDriverMissionType());
         MissionTypeRegistry.INSTANCE.register(new TrainPassengerMissionType());
         MissionTypeRegistry.INSTANCE.register(new TrainDriverPassengerMissionType());
+
+        // Dive
+        MissionTypeRegistry.INSTANCE.register(new DivingMissionType());
 
         List.of(
                 StatisticMission.createStatisticMission(

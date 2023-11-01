@@ -1,12 +1,13 @@
-package com.kryeit.missions.mission_types;
+package com.kryeit.missions.mission_types.create.vanilla;
 
 import com.kryeit.missions.MissionDifficulty;
+import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import net.minecraft.network.chat.Component;
 
-public class PlaceMission implements MultiResourceMissionType {
+public class CraftMission implements MultiResourceMissionType {
     @Override
     public String id() {
-        return "place";
+        return "craft";
     }
 
     @Override
@@ -16,6 +17,6 @@ public class PlaceMission implements MultiResourceMissionType {
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Placing mission");
+        return Component.nullToEmpty("Crafting mission");
     }
 }

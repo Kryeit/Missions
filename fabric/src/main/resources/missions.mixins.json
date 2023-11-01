@@ -7,7 +7,9 @@
   ],
   "mixins": [
     "CrushingWheelControllerBlockEntityMixin",
+    "DivingHelmetMixin",
     "ExchangeATMBlockEntityMixin",
+    "MechanicalCrafterBlockEntityMixin",
     "MillstoneBlockEntityMixin",
     "SawBlockEntityMixin",
     "event.CraftHandler",

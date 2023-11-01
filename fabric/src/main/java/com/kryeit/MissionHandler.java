@@ -15,7 +15,6 @@ public class MissionHandler {
         BlockEvents.AFTER_PLACE.register(new PlaceHandler());
         LivingEntityEvents.FINISH_USING_ITEM.register(new EatHandler());
         ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(new KillHandler());
-        ServerLoginConnectionEvents.QUERY_START.register(new LoginHandler());
     }
 
     public static boolean isNotServerPlayer(Player player) {

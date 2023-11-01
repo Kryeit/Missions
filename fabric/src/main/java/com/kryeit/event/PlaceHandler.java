@@ -2,7 +2,7 @@ package com.kryeit.event;
 
 import com.kryeit.MissionHandler;
 import com.kryeit.missions.MissionManager;
-import com.kryeit.missions.mission_types.PlaceMission;
+import com.kryeit.missions.mission_types.create.vanilla.PlaceMission;
 import io.github.fabricators_of_create.porting_lib.event.common.BlockEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
