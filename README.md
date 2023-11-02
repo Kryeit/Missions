@@ -12,6 +12,7 @@
     <br><br>
 </h1>
 
+
 Create: Missions is a Create addon focused for Create mod servers. It will also work in singleplayers worlds, but it's designed to bring an economy throughout a server's lifetime. We hope to give server owners a better way of giving players a currency, while also encouraging players to build their own shop contraptions/exchange banks/banks.
 
 |Versions|Supported?|Create version|
