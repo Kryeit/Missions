@@ -29,10 +29,6 @@ public class Range {
         return new Random().nextInt(lower, upper + 1);
     }
 
-    public boolean isBetween(int value) {
-        return value >= lower && value <= upper;
-    }
-
     public static Range fromString(String s) {
         String[] split = s.split("-");
         int int1 = Integer.parseInt(split[0]);

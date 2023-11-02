@@ -2,7 +2,6 @@ package com.kryeit.forge;
 
 import com.kryeit.Main;
 import com.kryeit.entry.forge.KeyInit;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.IEventBus;

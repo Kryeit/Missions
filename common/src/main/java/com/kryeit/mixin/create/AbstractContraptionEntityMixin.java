@@ -1,6 +1,5 @@
 package com.kryeit.mixin.create;
 
-import com.kryeit.Main;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;

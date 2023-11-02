@@ -2,6 +2,7 @@ package com.kryeit.missions.config;
 
 import com.kryeit.JSONObject;
 import com.kryeit.JSONObject.JSONArray;
+import com.kryeit.compat.CompatAddon;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.utils.Utils;
@@ -29,7 +30,13 @@ public class ConfigReader {
     }
 
     public static ConfigReader readFile(Path path) throws IOException {
-        String content = readOrCopyFile(path.resolve("missions.json"), "/example_config.json");
+
+        String content;
+        if (CompatAddon.CREATE_DECO.isLoaded()) {
+            content = readOrCopyFile(path.resolve("missions.json"), "/createdeco/example_config.json");
+        } else {
+            content = readOrCopyFile(path.resolve("missions.json"), "/example_config.json");
+        }
 
         Map<MissionType, Mission> missions = new HashMap<>();
         JSONObject object = new JSONObject(content);
@@ -49,7 +56,12 @@ public class ConfigReader {
             missions.put(missionType, mission);
         }
 
-        String exchange = readOrCopyFile(path.resolve("currency.json"), "/example_currency.json");
+        String exchange;
+        if (CompatAddon.CREATE_DECO.isLoaded()) {
+            exchange = readOrCopyFile(path.resolve("currency.json"), "/createdeco/example_currency.json");
+        } else {
+            exchange = readOrCopyFile(path.resolve("currency.json"), "/example_currency.json");
+        }
         List<ItemStack> items = new JSONArray(exchange).asList((array, integer) -> {
             ResourceLocation location = new ResourceLocation(array.getString(integer));
             return Utils.getItem(location);

@@ -1,7 +1,6 @@
 package com.kryeit.utils;
 
-import com.simibubi.create.AllTags;
-import io.github.fabricators_of_create.porting_lib.util.FluidUtil;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
@@ -9,8 +8,6 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.client.resources.language.LanguageInfo;
-import net.minecraft.client.resources.language.LanguageManager;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -25,7 +22,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
@@ -49,6 +45,11 @@ public class Utils {
 
     public static ItemStack getItem(ResourceLocation item) {
         return BuiltInRegistries.ITEM.get(item).getDefaultInstance();
+    }
+
+    @ExpectPlatform
+    public static boolean isModLoaded(String id) {
+        throw new AssertionError();
     }
 
     public static void giveItem(ItemStack stack, ServerPlayer player) {

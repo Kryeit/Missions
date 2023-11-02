@@ -1,22 +1,22 @@
-package com.kryeit.missions.mission_types.create.vanilla;
+package com.kryeit.missions.mission_types.vanilla;
 
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import net.minecraft.network.chat.Component;
 
-public class CraftMission implements MultiResourceMissionType {
+public class BreakMission implements MultiResourceMissionType {
     @Override
     public String id() {
-        return "craft";
+        return "break";
     }
 
     @Override
     public MissionDifficulty difficulty() {
-        return MissionDifficulty.NORMAL;
+        return MissionDifficulty.EASY;
     }
 
     @Override
     public Component description() {
-        return Component.nullToEmpty("Crafting mission");
+        return Component.nullToEmpty("Breaking mission");
     }
 }

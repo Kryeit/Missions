@@ -2,7 +2,7 @@ package com.kryeit.event;
 
 import com.kryeit.MissionHandler;
 import com.kryeit.missions.MissionManager;
-import com.kryeit.missions.mission_types.create.vanilla.KillMission;
+import com.kryeit.missions.mission_types.vanilla.KillMission;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

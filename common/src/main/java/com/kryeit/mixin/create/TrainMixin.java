@@ -1,6 +1,5 @@
 package com.kryeit.mixin.create;
 
-import com.kryeit.Main;
 import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
@@ -9,7 +8,6 @@ import com.simibubi.create.content.trains.entity.Carriage;
 import com.simibubi.create.content.trains.entity.Train;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

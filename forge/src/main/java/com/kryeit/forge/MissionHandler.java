@@ -1,7 +1,7 @@
 package com.kryeit.forge;
 
 import com.kryeit.missions.MissionManager;
-import com.kryeit.missions.mission_types.create.vanilla.*;
+import com.kryeit.missions.mission_types.vanilla.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
