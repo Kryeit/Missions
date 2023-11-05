@@ -122,6 +122,7 @@ public class Main {
 
         // Contraption
         MissionTypeRegistry.INSTANCE.register(new DrillMission());
+        MissionTypeRegistry.INSTANCE.register(new SawMission());
 
         List.of(
                 StatisticMission.createStatisticMission(

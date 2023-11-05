@@ -1,11 +1,14 @@
 package com.kryeit.mixin.create;
 
 import com.kryeit.missions.mission_types.MultiResourceMissionType;
+import com.kryeit.missions.mission_types.create.CutMission;
 import com.kryeit.missions.mission_types.create.DrillMission;
+import com.kryeit.missions.mission_types.create.SawMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.kryeit.utils.MixinUtils;
 import com.simibubi.create.content.kinetics.base.BlockBreakingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.drill.DrillBlockEntity;
+import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,13 +27,16 @@ public abstract class BlockBreakingKineticBlockEntityMixin {
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
         BlockBreakingKineticBlockEntity entity = (BlockBreakingKineticBlockEntity) (Object) this;
-        Class<? extends MultiResourceMissionType> mission = null;
+        Class<? extends MultiResourceMissionType> mission;
 
-        if (entity instanceof DrillBlockEntity) {
+        if (entity instanceof SawBlockEntity) {
+            mission = SawMission.class;
+        } else if (entity instanceof DrillBlockEntity){
             mission = DrillMission.class;
         } else {
-            mission = DrillMission.class;
+            return;
         }
+
         BlockPos pos = getBreakingPos();
         BlockState state = accessor.getLevel().getBlockState(pos);
         ItemStack result = state.getBlock().asItem().getDefaultInstance();
