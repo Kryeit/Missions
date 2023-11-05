@@ -9,10 +9,7 @@ import com.kryeit.missions.*;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.StatisticMission;
 import com.kryeit.missions.mission_types.VoteMission;
-import com.kryeit.missions.mission_types.create.CrushMission;
-import com.kryeit.missions.mission_types.create.CutMission;
-import com.kryeit.missions.mission_types.create.MillMission;
-import com.kryeit.missions.mission_types.create.PressMission;
+import com.kryeit.missions.mission_types.create.*;
 import com.kryeit.missions.mission_types.create.basin.CompactMission;
 import com.kryeit.missions.mission_types.create.basin.MixMission;
 import com.kryeit.missions.mission_types.create.diving.DivingMissionType;
@@ -122,6 +119,9 @@ public class Main {
 
         // Dive
         MissionTypeRegistry.INSTANCE.register(new DivingMissionType());
+
+        // Contraption
+        MissionTypeRegistry.INSTANCE.register(new DrillMission());
 
         List.of(
                 StatisticMission.createStatisticMission(

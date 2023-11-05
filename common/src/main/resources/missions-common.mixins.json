@@ -12,6 +12,8 @@
     "StatsCounterMixin",
     "create.AbstractContraptionEntityMixin",
     "create.BasinOperatingBlockEntityMixin",
+    "create.BlockBreakingKineticBlockEntityMixin",
+    "create.BlockBreakingMovementBehaviourMixin",
     "create.FanProcessingMixin",
     "create.MechanicalPressBlockEntityMixin",
     "create.TrainMixin",

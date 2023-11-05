@@ -33,6 +33,7 @@
   "missions.menu.main.tooltip.task.train-passenger": "Be a passenger in a train for %s km",
   "missions.menu.main.tooltip.task.train-driver-passenger": "Drive a train for %s km with at least %s passengers",
   "missions.menu.main.tooltip.task.dive": "Dive in %s for %s min with a Diving Helmet",
+  "missions.menu.main.tooltip.task.drill": "Drill %s of %s",
   "missions.menu.main.tooltip.difficulty": "Difficulté: %s",
   "missions.menu.main.tooltip.itemRequired": "Objet(s) requis: %s",
   "missions.menu.main.tooltip.reward": "Récompense: %s %s",
