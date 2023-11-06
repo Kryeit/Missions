@@ -4,7 +4,7 @@ import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
 import com.simibubi.create.AllItems;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +35,7 @@ public class DivingMissionType implements MissionType {
 
     @Override
     public ItemStack getItemStack(ResourceLocation fluid) {
-        return BuiltInRegistries.FLUID.get(fluid).getBucket().getDefaultInstance();
+        return Registry.FLUID.get(fluid).getBucket().getDefaultInstance();
     }
 
     @Override

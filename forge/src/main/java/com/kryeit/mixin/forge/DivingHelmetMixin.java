@@ -43,7 +43,7 @@ public class DivingHelmetMixin {
         if (lavaDiving) {
             DivingMissionType.handleTimeChange(player.getUUID(), 1, new ResourceLocation("minecraft", "lava"));
         } else {
-            BlockState blockState = event.getEntity().level().getBlockState(BlockPos.containing(event.getEntity().getEyePosition()));
+            BlockState blockState = event.getEntity().level.getBlockState(new BlockPos(event.getEntity().getEyePosition()));
 
             DivingMissionType.handleTimeChange(player.getUUID(), 1,
                     ForgeRegistries.FLUID_TYPES.get().getKey(blockState.getFluidState().getFluidType()));

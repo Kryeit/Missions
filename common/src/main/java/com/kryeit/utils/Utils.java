@@ -8,7 +8,7 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class Utils {
-    private static final ItemStack DEFAULT_SPAWN_EGG = BuiltInRegistries.ITEM.get(new ResourceLocation("phantom_spawn_egg")).getDefaultInstance();
+    private static final ItemStack DEFAULT_SPAWN_EGG = Registry.ITEM.get(new ResourceLocation("phantom_spawn_egg")).getDefaultInstance();
 
     public static int getDay() {
         return (int) (System.currentTimeMillis() / 86_400_000);
@@ -44,7 +44,7 @@ public class Utils {
     }
 
     public static ItemStack getItem(ResourceLocation item) {
-        return BuiltInRegistries.ITEM.get(item).getDefaultInstance();
+        return Registry.ITEM.get(item).getDefaultInstance();
     }
 
     @ExpectPlatform
@@ -67,7 +67,7 @@ public class Utils {
                 itemEntity = player.drop(itemStack, false);
                 if (itemEntity == null) continue;
                 itemEntity.setNoPickUpDelay();
-                itemEntity.setTarget(player.getUUID());
+                itemEntity.setOwner(player.getUUID());
                 continue;
             }
             itemStack.setCount(1);
@@ -75,7 +75,7 @@ public class Utils {
             if (itemEntity != null) {
                 itemEntity.makeFakeItem();
             }
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2f, ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7f + 1.0f) * 2.0f);
+            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2f, ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7f + 1.0f) * 2.0f);
             player.containerMenu.broadcastChanges();
         }
     }
@@ -89,9 +89,9 @@ public class Utils {
     }
 
     public static ItemStack getSpawnEggOfEntity(ResourceLocation entity) {
-        EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(entity);
+        EntityType<?> entityType = Registry.ENTITY_TYPE.get(entity);
 
-        for (Item registryItem : BuiltInRegistries.ITEM) {
+        for (Item registryItem : Registry.ITEM) {
             if (registryItem instanceof SpawnEggItem egg && egg.spawnsEntity(null, entityType)) {
                 return egg.getDefaultInstance();
             }
@@ -108,14 +108,14 @@ public class Utils {
     }
 
     public static String getFluidFromBucketForTooltip(ItemStack item) {
-        String itemName = BuiltInRegistries.ITEM.getKey(item.getItem()).toString();
+        String itemName = Registry.ITEM.getKey(item.getItem()).toString();
         String liquidName = itemName.replace("_bucket", "");
 
         return getFluidName(new ResourceLocation(liquidName));
     }
 
     public static String getFluidName(ResourceLocation input) {
-        Fluid fluid = BuiltInRegistries.FLUID.get(input);
+        Fluid fluid = Registry.FLUID.get(input);
         return getTranslationKey(fluid);
     }
 
@@ -130,7 +130,7 @@ public class Utils {
         } else if (fluid == Fluids.LAVA) {
             translationKey = "block.minecraft.lava";
         } else {
-            ResourceLocation id = BuiltInRegistries.FLUID.getKey(fluid);
+            ResourceLocation id = Registry.FLUID.getKey(fluid);
             String key = Util.makeDescriptionId("block", id);
             String translated = I18n.get(key);
             translationKey = translated.equals(key) ? Util.makeDescriptionId("fluid", id) : key;

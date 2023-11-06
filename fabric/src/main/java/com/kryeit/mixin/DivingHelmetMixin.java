@@ -5,7 +5,7 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.armor.DivingHelmetItem;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -44,10 +44,10 @@ public class DivingHelmetMixin {
         if (lavaDiving) {
             DivingMissionType.handleTimeChange(player.getUUID(), 1, new ResourceLocation("minecraft", "lava"));
         } else {
-            BlockState blockState = entity.level().getBlockState(BlockPos.containing(entity.getEyePosition()));
+            BlockState blockState = entity.level.getBlockState(new BlockPos(entity.getEyePosition()));
 
             DivingMissionType.handleTimeChange(player.getUUID(), 1,
-                    BuiltInRegistries.FLUID.getKey(blockState.getFluidState().getType()));
+                    Registry.FLUID.getKey(blockState.getFluidState().getType()));
         }
     }
 
