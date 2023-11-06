@@ -2,9 +2,9 @@ package com.kryeit.client.screen;
 
 import com.kryeit.client.screen.button.RerollButton;
 import com.kryeit.missions.MissionDifficulty;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -37,7 +37,10 @@ public class MissionRerollScreen extends Screen {
 
         int startX = centerX - (buttonWidth * 2 + 5) / 2;
 
-        this.addRenderableWidget(new Button(startX, centerY, buttonWidth, buttonHeight, CLOSE, button -> close()));
+
+        this.addRenderableWidget(Button.builder(CLOSE, button -> close())
+                .bounds(startX, centerY, buttonWidth, buttonHeight)
+                .build());
 
         this.addRenderableWidget(new RerollButton(startX + buttonWidth + 5, centerY, buttonWidth, buttonHeight, missionIndex, rerollPrice, difficulty));
     }
@@ -47,9 +50,9 @@ public class MissionRerollScreen extends Screen {
     }
 
     @Override
-    public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(guiGraphics);
+        super.render(guiGraphics, mouseX, mouseY, delta);
     }
 
     @Override

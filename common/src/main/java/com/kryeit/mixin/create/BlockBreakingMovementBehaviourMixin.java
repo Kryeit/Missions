@@ -10,7 +10,7 @@ import com.simibubi.create.content.kinetics.base.BlockBreakingMovementBehaviour;
 import com.simibubi.create.content.kinetics.drill.DrillBlock;
 import com.simibubi.create.content.kinetics.saw.SawBlock;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -45,7 +45,7 @@ public class BlockBreakingMovementBehaviourMixin {
         ItemStack result = context.world.getBlockState(breakingPos).getBlock().asItem().getDefaultInstance();
 
         if (closestPlayer != null) {
-            MissionManager.incrementMission(closestPlayer.getUUID(), mission, Registry.ITEM.getKey(result.getItem()),
+            MissionManager.incrementMission(closestPlayer.getUUID(), mission, BuiltInRegistries.ITEM.getKey(result.getItem()),
                     count.get());
         }
     }

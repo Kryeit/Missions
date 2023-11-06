@@ -1,36 +1,34 @@
 package com.kryeit.client.screen.button;
 
 import com.kryeit.Main;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class InfoButton extends Button {
 
     public static final ResourceLocation INFO_ICON = new ResourceLocation(Main.MOD_ID, "textures/gui/info_icon.png");
-    private static final OnPress ON_PRESS = button -> { };
+    private static final OnPress ON_PRESS = button -> {};
 
     public InfoButton(int x, int y) {
-        super(x, y, 20, 20, Component.empty(), ON_PRESS);
+        super(x, y, 20, 20, Component.empty(), ON_PRESS, Button.DEFAULT_NARRATION);
     }
 
     @Override
-    public void renderButton(@NotNull PoseStack matrices, int mouseX, int mouseY, float delta) {
-        Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindForSetup(INFO_ICON);
-
+    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         int textureSize = 20;
+        guiGraphics.blit(INFO_ICON, this.getX(), this.getY(), 0, 0, textureSize, textureSize, 256, 256);
 
-        RenderSystem.setShaderTexture(0, INFO_ICON);
-        blit(matrices, this.x, this.y, 0, 0, textureSize, textureSize, 256, 256);
+        if (isHoveredOrFocused()) {
+            guiGraphics.renderTooltip(Minecraft.getInstance().font, getInfoTooltip(), Optional.empty(), mouseX, mouseY);
+        }
     }
 
     public static List<Component> getInfoTooltip() {

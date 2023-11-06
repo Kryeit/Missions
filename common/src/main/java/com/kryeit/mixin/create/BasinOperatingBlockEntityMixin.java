@@ -6,6 +6,7 @@ import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.kryeit.utils.MixinUtils;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.crafting.Recipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,10 +29,10 @@ public class BasinOperatingBlockEntityMixin {
             BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
             if (currentRecipe instanceof MixingRecipe)
-                MixinUtils.handleMixinMissionItem(accessor, MixMission.class, currentRecipe.getResultItem());
+                MixinUtils.handleMixinMissionItem(accessor, MixMission.class, currentRecipe.getResultItem(RegistryAccess.EMPTY));
 
             if (MixinUtils.isCompactingRecipe(currentRecipe))
-                MixinUtils.handleMixinMissionItem(accessor, CompactMission.class, currentRecipe.getResultItem());
+                MixinUtils.handleMixinMissionItem(accessor, CompactMission.class, currentRecipe.getResultItem(RegistryAccess.EMPTY));
         }
     }
 }

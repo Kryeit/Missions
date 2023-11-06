@@ -1,5 +1,6 @@
 package com.kryeit.client.screen;
 
+import com.kryeit.Main;
 import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
@@ -9,13 +10,13 @@ import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
 import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.utils.Utils;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
@@ -26,17 +27,14 @@ import net.minecraft.world.item.SpawnEggItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class MissionScreen extends Screen {
-    private static final Component TITLE = Components.translatable("missions.menu.main.title");
+    public static final ResourceLocation MISSIONS_TITLE = new ResourceLocation(Main.MOD_ID, "textures/gui/title.png");
     public static final Component CLOSE = Components.translatable("missions.menu.close");
-    private final Runnable NO_TOOLTIP = () -> {};
-    public Runnable activeTooltip = NO_TOOLTIP;
     private ClientMissionData data = null;
 
     public MissionScreen() {
-        super(TITLE);
+        super(Component.nullToEmpty(""));
     }
 
     @Override
@@ -91,25 +89,27 @@ public class MissionScreen extends Screen {
     }
 
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
-        Button.OnTooltip tooltip = (button, poseStack, mouseX, mouseY) -> renderTooltip(poseStack, getTooltip(mission), Optional.empty(), mouseX, mouseY);
-        return new MissionButton(this, x, y, title, mission, tooltip, button -> {
+        return new MissionButton(x, y, title, mission, button -> {
             if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR && (MinecraftServerSupplier.getServer() == null || MinecraftServerSupplier.getServer().isSingleplayer())) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice, mission.difficulty()));
         });
     }
 
     @Override
-    public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(guiGraphics);
 
-        super.render(matrices, mouseX, mouseY, delta);
+        super.render(guiGraphics, mouseX, mouseY, delta);
         if (data != null) {
             addMissions(data);
             data = null;
         }
 
-        drawCenteredString(matrices, Minecraft.getInstance().font, this.title, this.width / 2, 40, 0xFFFFFF);
-        activeTooltip.run();
-        activeTooltip = NO_TOOLTIP;
+        guiGraphics.drawCenteredString(Minecraft.getInstance().font, this.title, this.width / 2, 40, 0xFFFFFF);
+        renderTitle(guiGraphics);
+    }
+
+    public void renderTitle(GuiGraphics guiGraphics) {
+        guiGraphics.blit(MISSIONS_TITLE, (this.width/2) - 100, this.height/35, 200, 44, 0, 0, 256, 56, 256, 256);
     }
 
     public static List<Component> getTooltip(ClientsideActiveMission mission) {
@@ -120,6 +120,7 @@ public class MissionScreen extends Screen {
         List<Component> components = new ArrayList<>();
         components.add(Components.translatable("missions.menu.main.tooltip.details")
                 .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
+
 
         String itemName = Utils.removeBrackets(mission.itemRequired().getDisplayName().getString());
 
@@ -156,7 +157,7 @@ public class MissionScreen extends Screen {
         }
 
         components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
-                        Utils.removeBrackets(Registry.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
+                Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
         components.add(Components.translatable("missions.menu.main.tooltip.progress", progress)
@@ -167,7 +168,6 @@ public class MissionScreen extends Screen {
 
         return components;
     }
-
 
     @Override
     public boolean isPauseScreen() {
@@ -182,7 +182,10 @@ public class MissionScreen extends Screen {
         int x = (this.width / 2 - buttonWidth - spacing);
         int y = this.height - buttonHeight - bottomPadding;
 
-        this.addRenderableWidget(new Button(x, y, buttonWidth, buttonHeight, CLOSE, button -> Minecraft.getInstance().setScreen(null)));
+
+        this.addRenderableWidget(Button.builder(CLOSE, button -> Minecraft.getInstance().setScreen(null))
+                .bounds(x, y, buttonWidth, buttonHeight)
+                .build());
     }
 
     public void createInfoButton() {

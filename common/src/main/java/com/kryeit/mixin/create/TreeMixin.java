@@ -4,7 +4,7 @@ import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.create.contraption.SawMission;
 import com.simibubi.create.foundation.utility.TreeCutter;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -21,7 +21,7 @@ import java.util.function.BiConsumer;
 
 import static com.kryeit.utils.MixinUtils.getClosestPlayer;
 
-@Mixin(value = TreeCutter.Tree.class, remap = false)
+@Mixin(TreeCutter.Tree.class)
 public class TreeMixin {
 
     @Shadow @Final private List<BlockPos> leaves;
@@ -43,7 +43,7 @@ public class TreeMixin {
             MissionManager.incrementMission(
                     closestPlayer.getUUID(),
                     SawMission.class,
-                    Registry.ITEM.getKey(world.getBlockState(pos).getBlock().asItem()),
+                    BuiltInRegistries.ITEM.getKey(world.getBlockState(pos).getBlock().asItem()),
                     1);
         });
     }

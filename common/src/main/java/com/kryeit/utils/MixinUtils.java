@@ -6,7 +6,7 @@ import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.crafter.MechanicalCraftingRecipe;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
@@ -41,7 +41,7 @@ public class MixinUtils {
             closestPlayer = getClosestPlayer(level, worldPosition);
 
         if (closestPlayer != null && result != null) {
-            MissionManager.incrementMission(closestPlayer.getUUID(), missionType, Registry.ITEM.getKey(result.getItem()),
+            MissionManager.incrementMission(closestPlayer.getUUID(), missionType, BuiltInRegistries.ITEM.getKey(result.getItem()),
                     result.getCount());
         }
     }
