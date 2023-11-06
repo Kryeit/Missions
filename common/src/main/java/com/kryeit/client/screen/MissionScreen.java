@@ -1,5 +1,6 @@
 package com.kryeit.client.screen;
 
+import com.kryeit.Main;
 import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
@@ -9,6 +10,7 @@ import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
 import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.utils.Utils;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
@@ -29,14 +31,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class MissionScreen extends Screen {
-    private static final Component TITLE = Components.translatable("missions.menu.main.title");
-    public static final Component CLOSE = Components.translatable("missions.menu.close");
+    public static final ResourceLocation MISSIONS_TITLE = new ResourceLocation(Main.MOD_ID, "textures/gui/title.png");    public static final Component CLOSE = Components.translatable("missions.menu.close");
     private final Runnable NO_TOOLTIP = () -> {};
     public Runnable activeTooltip = NO_TOOLTIP;
     private ClientMissionData data = null;
 
     public MissionScreen() {
-        super(TITLE);
+        super(Component.nullToEmpty(""));
     }
 
     @Override
@@ -100,6 +101,8 @@ public class MissionScreen extends Screen {
     @Override
     public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
+
+        renderTitle(matrices);
 
         super.render(matrices, mouseX, mouseY, delta);
         if (data != null) {
@@ -199,5 +202,12 @@ public class MissionScreen extends Screen {
         int y = this.height - buttonHeight - bottomPadding;
 
         this.addRenderableWidget(new RewardsButton(x, y, rewardsAvailable));
+    }
+
+    public void renderTitle(PoseStack matrices) {
+        Minecraft minecraft = Minecraft.getInstance();
+        minecraft.getTextureManager().bindForSetup(MISSIONS_TITLE);
+        RenderSystem.setShaderTexture(0, MISSIONS_TITLE);
+        blit(matrices,(this.width/2) - 100, this.height/35, 200, 44, 0, 0, 256, 56, 256, 256);
     }
 }
