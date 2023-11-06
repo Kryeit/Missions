@@ -18,6 +18,7 @@ import static com.simibubi.create.content.kinetics.press.MechanicalPressBlockEnt
 
 public class MixinUtils {
     public static Player getClosestPlayer(Level level, BlockPos worldPosition) {
+        if (level == null) return null;
         return level.getNearestPlayer(
                 worldPosition.getX(),
                 worldPosition.getY(),

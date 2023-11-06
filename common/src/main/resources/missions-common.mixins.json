@@ -17,6 +17,7 @@
     "create.FanProcessingMixin",
     "create.MechanicalPressBlockEntityMixin",
     "create.TrainMixin",
+    "create.TreeMixin",
     "interfaces.BlockEntityAccessor",
     "interfaces.TreeAccessor"
   ],

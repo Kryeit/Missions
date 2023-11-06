@@ -493,7 +493,7 @@
     "missions": {
       "oak_log": "400-2000",
       "spruce_log": "1000-3000",
-      "spruce_leave": "500-1000"
+      "spruce_leaves": "500-1000"
     },
     "titles": [
       "Scary business"
