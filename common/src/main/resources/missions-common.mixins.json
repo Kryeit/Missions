@@ -17,7 +17,8 @@
     "create.FanProcessingMixin",
     "create.MechanicalPressBlockEntityMixin",
     "create.TrainMixin",
-    "interfaces.BlockEntityAccessor"
+    "interfaces.BlockEntityAccessor",
+    "interfaces.TreeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,4 +1,4 @@
-package com.kryeit.missions.mission_types.create;
+package com.kryeit.missions.mission_types.create.contraption;
 
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.mission_types.MultiResourceMissionType;

@@ -464,5 +464,39 @@
     "titles": [
       "Depths"
     ]
+  },
+  "drill": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "stone": "1400-6000",
+      "cobblestone": "300-1500",
+      "andesite": "500-2000",
+      "create:ochrum": "500-3000",
+      "calcite": "500-2500",
+      "create:asurine": "500-3000",
+      "create:scoria": "500-3000",
+      "blackstone": "1000-2000",
+      "netherrack": "2000-7000"
+    },
+    "titles": [
+      "Never-ending breaking"
+    ]
+  },
+  "saw": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "oak_log": "400-2000",
+      "spruce_log": "1000-3000",
+      "spruce_leave": "500-1000"
+    },
+    "titles": [
+      "Scary business"
+    ]
   }
 }
