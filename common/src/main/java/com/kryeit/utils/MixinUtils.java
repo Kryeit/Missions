@@ -37,7 +37,7 @@ public class MixinUtils {
         BlockPos worldPosition = accessor.getWorldPosition();
         Player closestPlayer = null;
 
-        if (level != null && worldPosition != null)
+        if (worldPosition != null)
             closestPlayer = getClosestPlayer(level, worldPosition);
 
         if (closestPlayer != null && result != null) {

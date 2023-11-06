@@ -21,7 +21,6 @@ public class AbstractContraptionEntityMixin {
             for (ServerPlayer player : cachedTrainPlayerPositions.keySet()) {
                 if (player.getUUID().equals(user.getUUID())) {
                     cachedTrainPlayerPositions.remove(player);
-                    return;
                 }
             }
         }

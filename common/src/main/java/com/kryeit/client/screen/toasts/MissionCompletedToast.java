@@ -28,7 +28,7 @@ public class MissionCompletedToast implements Toast {
         }
 
         renderBackground(guiGraphics);
-        renderItem(guiGraphics, toastComponent);
+        renderItem(guiGraphics);
         renderText(guiGraphics, toastComponent);
 
         return delta - this.firstDrawTime < 15_000L ? Visibility.SHOW : Visibility.HIDE;
@@ -50,13 +50,13 @@ public class MissionCompletedToast implements Toast {
         guiGraphics.drawString(toastComponent.getMinecraft().font, descriptionText, 30, 18, -1);
     }
 
-    public void renderItem(GuiGraphics guiGraphics, ToastComponent toastComponent) {
-        renderBelowItem(guiGraphics, toastComponent);
+    public void renderItem(GuiGraphics guiGraphics) {
+        renderBelowItem(guiGraphics);
 
         guiGraphics.renderItem(mission.previewItem(), 8, 8);
     }
 
-    public void renderBelowItem(GuiGraphics guiGraphics, ToastComponent toastComponent) {
+    public void renderBelowItem(GuiGraphics guiGraphics) {
         int v = 128;
 
         int u = switch (mission.difficulty()) {
