@@ -1,6 +1,7 @@
 package com.kryeit.client.screen;
 
 import com.kryeit.client.screen.button.RerollButton;
+import com.kryeit.missions.MissionDifficulty;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.Minecraft;
@@ -15,11 +16,13 @@ public class MissionRerollScreen extends Screen {
     private static final Component TITLE = Components.translatable("missions.menu.reroll.title");
     private final int missionIndex;
     private final ItemStack rerollPrice;
+    private final MissionDifficulty difficulty;
 
-    public MissionRerollScreen(int missionIndex, ItemStack rerollPrice) {
+    public MissionRerollScreen(int missionIndex, ItemStack rerollPrice, MissionDifficulty difficulty) {
         super(TITLE);
         this.missionIndex = missionIndex;
         this.rerollPrice = rerollPrice;
+        this.difficulty = difficulty;
     }
 
     @Override
@@ -36,7 +39,7 @@ public class MissionRerollScreen extends Screen {
 
         this.addRenderableWidget(new Button(startX, centerY, buttonWidth, buttonHeight, CLOSE, button -> close()));
 
-        this.addRenderableWidget(new RerollButton(startX + buttonWidth + 5, centerY, buttonWidth, buttonHeight, missionIndex, rerollPrice));
+        this.addRenderableWidget(new RerollButton(startX + buttonWidth + 5, centerY, buttonWidth, buttonHeight, missionIndex, rerollPrice, difficulty));
     }
 
     public static void close() {

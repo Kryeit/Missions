@@ -8,7 +8,6 @@ import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-
 public class RewardsButton extends Button {
     private static final Component REWARDS = Components.literal("    ").append(Components.translatable("missions.menu.main.rewards"));
     private static final OnPress NO_PRESS = button -> {

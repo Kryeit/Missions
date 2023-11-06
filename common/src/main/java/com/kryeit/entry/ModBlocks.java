@@ -7,7 +7,6 @@ import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MaterialColor;
 
 import static com.kryeit.Main.REGISTRATE;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
@@ -19,7 +18,6 @@ public class ModBlocks {
         REGISTRATE.block("exchange_atm", ExchangeATMBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(BlockBehaviour.Properties::noOcclusion)
-            .properties(p -> p.color(MaterialColor.METAL))
             .addLayer(() -> RenderType::translucent)
             .transform(BlockStressDefaults.setImpact(32.0))
             .transform(axeOrPickaxe())

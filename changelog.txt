@@ -1,3 +1,35 @@
+0.1.5
+- Added Create Deco compat: if you load the mod for the first time, a missions.json and currency.json for createdeco will be created
+
+0.1.4
+- Fix forge version (for real)
+- Fixed Mechanical Crafter compat for the Craft mission in forge side
+- Added "Dive in [] for [] min with a Diving Helmet" missions
+- Various fixes to train missions
+
+0.1.3a
+- Fix claiming rewards (lol sorry)
+- Fix many train missions issues/ exploits
+
+0.1.3
+- Added Train Driver and Train Passenger for X km missions
+- Added Train driver with at least X passengers for Y km mission
+
+0.1.2b
+- Fixed Server startup (Forge)
+- Improved some tooltips
+
+0.1.2a
+- Improved Killing mission tooltip
+- Fixed various tooltip issues
+- Added "exchange-rate" to the config.json, letting you edit the ATM exchange rate.
+- Added a Missions title in the gui
+
+0.1.2
+- Added a message when a player's missions get reassigned
+- Improved mission tooltips and added a temporary tooltip for the info button
+- Changed certain missions from Difficulty category
+
 0.1.1.e
 - Fixed 2 wrongly typed item id's in the example config
 - Made swimming mission easier

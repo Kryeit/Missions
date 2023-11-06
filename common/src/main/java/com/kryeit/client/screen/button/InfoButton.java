@@ -3,11 +3,15 @@ package com.kryeit.client.screen.button;
 import com.kryeit.Main;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InfoButton extends Button {
 
@@ -27,5 +31,14 @@ public class InfoButton extends Button {
 
         RenderSystem.setShaderTexture(0, INFO_ICON);
         blit(matrices, this.x, this.y, 0, 0, textureSize, textureSize, 256, 256);
+    }
+
+    public static List<Component> getInfoTooltip() {
+        List<Component> components = new ArrayList<>();
+
+        components.add(Component.literal("This tooltip is Work In Progress").withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("We plan to add different player stats here").withStyle(ChatFormatting.AQUA));
+
+        return components;
     }
 }

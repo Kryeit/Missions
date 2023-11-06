@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class Coins {
-
+    public static int EXCHANGE_RATE = 64;
     public static List<ItemStack> getCoins() {
         return Main.getConfig().exchange();
     }
@@ -38,7 +38,7 @@ public class Coins {
         int index = indexOf(itemStack);
         if (index > getCoins().size() - (toBigger ? 2 : 1) || index < (toBigger ? 0 : 1)) return null;
         index += toBigger ? 1 : -1;
-        return new ItemStack(getCoins().get(index).getItem(), toBigger ? 1 : 64);
+        return new ItemStack(getCoins().get(index).getItem(), toBigger ? 1 : EXCHANGE_RATE);
     }
 
 }

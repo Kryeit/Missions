@@ -12,7 +12,7 @@ public record ClientMissionData(boolean hasUnclaimedRewards, List<ClientsideActi
                                 ItemStack rerollPrice, int freeRerollsLeft, boolean canReroll) {
 
     public record ClientsideActiveMission(Component titleString, MissionDifficulty difficulty, int requiredAmount,
-                                          int progress, ItemStack previewItem, ItemStack itemRequired,
+                                          String missionType, int progress, ItemStack previewItem, ItemStack itemRequired,
                                           Component missionString, boolean isCompleted, Range rewardAmount,
                                           String rewardItemLocation) {
 
@@ -20,6 +20,7 @@ public record ClientMissionData(boolean hasUnclaimedRewards, List<ClientsideActi
             return new ClientsideActiveMission(buf.readComponent(),
                     buf.readEnum(MissionDifficulty.class),
                     buf.readInt(),
+                    buf.readUtf(),
                     buf.readInt(),
                     buf.readItem(),
                     buf.readItem(),
@@ -33,6 +34,7 @@ public record ClientMissionData(boolean hasUnclaimedRewards, List<ClientsideActi
             buf.writeComponent(titleString());
             buf.writeEnum(difficulty());
             buf.writeInt(requiredAmount());
+            buf.writeUtf(missionType());
             buf.writeInt(progress());
             buf.writeItem(previewItem());
             buf.writeItem(itemRequired());

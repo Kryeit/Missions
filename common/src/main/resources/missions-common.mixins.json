@@ -10,13 +10,16 @@
     "MinecraftServerMixin",
     "ServerboundCustomPayloadMixin",
     "StatsCounterMixin",
+    "create.AbstractContraptionEntityMixin",
     "create.BasinOperatingBlockEntityMixin",
-    "create.CrushingWheelControllerBlockEntityMixin",
+    "create.BlockBreakingKineticBlockEntityMixin",
+    "create.BlockBreakingMovementBehaviourMixin",
     "create.FanProcessingMixin",
-    "create.MechanicalCrafterBlockEntityMixin",
     "create.MechanicalPressBlockEntityMixin",
-    "create.SawBlockEntityMixin",
-    "interfaces.BlockEntityAccessor"
+    "create.TrainMixin",
+    "create.TreeMixin",
+    "interfaces.BlockEntityAccessor",
+    "interfaces.TreeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -7,6 +7,7 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.InfoButton;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
+import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.utils.Utils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.utility.Components;
@@ -17,11 +18,14 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class MissionScreen extends Screen {
@@ -89,7 +93,7 @@ public class MissionScreen extends Screen {
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
         Button.OnTooltip tooltip = (button, poseStack, mouseX, mouseY) -> renderTooltip(poseStack, getTooltip(mission), Optional.empty(), mouseX, mouseY);
         return new MissionButton(this, x, y, title, mission, tooltip, button -> {
-            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR && (MinecraftServerSupplier.getServer() == null || MinecraftServerSupplier.getServer().isSingleplayer())) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice));
+            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR && (MinecraftServerSupplier.getServer() == null || MinecraftServerSupplier.getServer().isSingleplayer())) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice, mission.difficulty()));
         });
     }
 
@@ -108,7 +112,7 @@ public class MissionScreen extends Screen {
         activeTooltip = NO_TOOLTIP;
     }
 
-    public List<Component> getTooltip(ClientsideActiveMission mission) {
+    public static List<Component> getTooltip(ClientsideActiveMission mission) {
         Component progress = mission.isCompleted()
                 ? Components.translatable("missions.menu.main.tooltip.progress.completed")
                 : Components.translatable(mission.progress() + "/" + mission.requiredAmount());
@@ -117,23 +121,49 @@ public class MissionScreen extends Screen {
         components.add(Components.translatable("missions.menu.main.tooltip.details")
                 .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 
-        components.add(Components.translatable("missions.menu.main.tooltip.task", mission.missionString().getString())
-                .withStyle(ChatFormatting.WHITE));
+        String itemName = Utils.removeBrackets(mission.itemRequired().getDisplayName().getString());
 
-        components.add(Components.translatable("missions.menu.main.tooltip.difficulty", mission.difficulty().description())
-                .withStyle(ChatFormatting.BLUE));
+        if (Items.AIR == mission.itemRequired().getItem()) {
 
-        ItemStack itemRequired = mission.itemRequired();
-        if (!itemRequired.is(Items.AIR))
-            components.add(Components.translatable("missions.menu.main.tooltip.itemRequired", itemRequired.getDisplayName().getString())
-                    .withStyle(ChatFormatting.BLUE));
+            if (Objects.equals(mission.missionType(), "train-driver-passenger")) {
+                components.add(
+                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                                ChatFormatting.WHITE, mission.requiredAmount(), TrainDriverPassengerMissionType.passengersNeeded())
+                );
+            } else {
+                components.add(
+                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                                ChatFormatting.WHITE, mission.requiredAmount())
+                );
+            }
+
+        } else if (mission.itemRequired().getItem() instanceof SpawnEggItem) {
+            // This cannot be backported, 1.20+ contains a spawn egg for every mob
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, mission.requiredAmount(), Utils.getEntityOfSpawnEggForTooltip(mission.itemRequired()))
+            );
+        } else if (mission.itemRequired().getItem() instanceof BucketItem) {
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, Utils.getFluidFromBucketForTooltip(mission.itemRequired()), mission.requiredAmount())
+            );
+        } else {
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, mission.requiredAmount(), itemName)
+            );
+        }
 
         components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
-                Utils.removeBrackets(Registry.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
+                        Utils.removeBrackets(Registry.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
         components.add(Components.translatable("missions.menu.main.tooltip.progress", progress)
                 .withStyle(ChatFormatting.GREEN));
+
+        components.add(Component.translatable("missions.menu.main.tooltip.click")
+                .withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC));
 
         return components;
     }

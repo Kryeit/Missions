@@ -6,7 +6,11 @@
   "client": [
   ],
   "mixins": [
-    "MillstoneBlockEntityMixin"
+    "CrushingWheelControllerBlockEntityMixin",
+    "DivingHelmetMixin",
+    "MechanicalCrafterBlockEntityMixin",
+    "MillstoneBlockEntityMixin",
+    "SawBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

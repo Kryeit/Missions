@@ -13,7 +13,7 @@ public class PressMission implements MultiResourceMissionType {
 
     @Override
     public MissionDifficulty difficulty() {
-        return MissionDifficulty.NORMAL;
+        return MissionDifficulty.EASY;
     }
 
     @Override

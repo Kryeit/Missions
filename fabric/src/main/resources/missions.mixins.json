@@ -6,8 +6,12 @@
   "client": [
   ],
   "mixins": [
+    "CrushingWheelControllerBlockEntityMixin",
+    "DivingHelmetMixin",
     "ExchangeATMBlockEntityMixin",
+    "MechanicalCrafterBlockEntityMixin",
     "MillstoneBlockEntityMixin",
+    "SawBlockEntityMixin",
     "event.CraftHandler",
     "event.FishHandler"
   ],

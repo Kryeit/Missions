@@ -29,7 +29,7 @@ public class ExchangeATMBlockEntityMixin implements ExtendedScreenHandlerFactory
     @Nonnull
     @Override
     public Component getDisplayName() {
-        return Component.nullToEmpty("Exchange ATM");
+        return blockEntity.getDisplayName();
     }
 
     @Nullable
