@@ -165,7 +165,7 @@ public class MissionScreen extends Screen {
         components.add(Components.translatable("missions.menu.main.tooltip.progress", progress)
                 .withStyle(ChatFormatting.GREEN));
 
-        components.add(Component.translatable("missions.menu.main.tooltip.click")
+        components.add(Components.translatable("missions.menu.main.tooltip.click")
                 .withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC));
 
         return components;

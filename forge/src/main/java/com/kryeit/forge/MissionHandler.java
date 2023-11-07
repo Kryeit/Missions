@@ -10,7 +10,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -54,7 +54,7 @@ public class MissionHandler {
     public void killEntity(LivingDeathEvent event) {
         if (event.getSource().getEntity() instanceof ServerPlayer player) {
 
-            ResourceLocation entity = ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType());
+            ResourceLocation entity = ForgeRegistries.ENTITIES.getKey(event.getEntity().getType());
             MissionManager.incrementMission(player.getUUID(), KillMission.class, entity, 1);
         }
     }

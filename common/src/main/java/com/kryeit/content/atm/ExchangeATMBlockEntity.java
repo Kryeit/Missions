@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -140,7 +141,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
     @Nonnull
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.missions.exchange_atm");
+        return new TranslatableComponent("block.missions.exchange_atm");
     }
 
     @Nullable

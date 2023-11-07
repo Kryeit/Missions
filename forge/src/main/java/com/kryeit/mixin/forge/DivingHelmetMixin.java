@@ -6,7 +6,11 @@ import com.simibubi.create.content.equipment.armor.DivingHelmetItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,21 +26,25 @@ import static com.simibubi.create.content.equipment.armor.DivingHelmetItem.getWo
 @Mixin(value = DivingHelmetItem.class, remap = false)
 public class DivingHelmetMixin {
     @Inject(method = "breatheUnderwater", at = @At("HEAD"))
-    private static void onDive(LivingEvent.LivingTickEvent event, CallbackInfo ci) {
+    private static void onDive(LivingEvent.LivingUpdateEvent event, CallbackInfo ci) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
 
-        ItemStack helmet = getWornItem(event.getEntity());
+        LivingEntity entity = event.getEntityLiving();
+
+        ItemStack helmet = getWornItem(entity);
         if (helmet.isEmpty())
             return;
 
-        boolean lavaDiving = event.getEntity().isInLava();
+        boolean lavaDiving = entity.isInLava();
         if (!helmet.getItem()
                 .isFireResistant() && lavaDiving)
             return;
-        if (!event.getEntity().canDrownInFluidType(event.getEntity().getEyeInFluidType()) && !lavaDiving)
+        if (!entity.isEyeInFluid(FluidTags.WATER) && !lavaDiving)
+            return;
+        if (entity instanceof Player && ((Player) entity).isCreative())
             return;
 
-        List<ItemStack> backtanks = BacktankUtil.getAllWithAir(event.getEntity());
+        List<ItemStack> backtanks = BacktankUtil.getAllWithAir(entity);
         if (backtanks.isEmpty())
             return;
 
@@ -46,7 +54,7 @@ public class DivingHelmetMixin {
             BlockState blockState = event.getEntity().level.getBlockState(new BlockPos(event.getEntity().getEyePosition()));
 
             DivingMissionType.handleTimeChange(player.getUUID(), 1,
-                    ForgeRegistries.FLUID_TYPES.get().getKey(blockState.getFluidState().getFluidType()));
+                    ForgeRegistries.FLUIDS.getKey(blockState.getFluidState().getType()));
         }
     }
 

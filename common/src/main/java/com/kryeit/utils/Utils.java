@@ -1,5 +1,6 @@
 package com.kryeit.utils;
 
+import com.simibubi.create.foundation.utility.Components;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -186,21 +187,21 @@ public class Utils {
     }
 
     public static Component getMessage(String key, ChatFormatting color, Object... args) {
-        String translation = Component.translatable(key, "%s", "%s").getString();
+        String translation = Components.translatable(key, "%s", "%s").getString();
         String[] parts = translation.split("%s", -1);
 
         if (parts.length == 0) {
-            return Component.translatable(key);
+            return Components.translatable(key);
         }
 
-        MutableComponent result = Component.literal("");
+        MutableComponent result = Components.literal("");
 
         for (int i = 0; i < parts.length; i++) {
             if (i < args.length) {
-                result.append(Component.translatable(parts[i]).setStyle(Style.EMPTY.withColor(color)));
-                result.append(Component.translatable(args[i].toString()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
+                result.append(Components.translatable(parts[i]).setStyle(Style.EMPTY.withColor(color)));
+                result.append(Components.translatable(args[i].toString()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
             } else {
-                result.append(Component.translatable(parts[i]).setStyle(Style.EMPTY.withColor(color)));
+                result.append(Components.translatable(parts[i]).setStyle(Style.EMPTY.withColor(color)));
             }
         }
 

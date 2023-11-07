@@ -50,7 +50,7 @@ public class MissionCompletedToast implements Toast {
         toastComponent.getMinecraft().font.draw(matrices, titleText, 30, 7, -1);
 
         // Description text
-        Component descriptionText = Component.literal(mission.missionString().getString()).withStyle(ChatFormatting.WHITE);
+        Component descriptionText = Components.literal(mission.missionString().getString()).withStyle(ChatFormatting.WHITE);
         toastComponent.getMinecraft().font.draw(matrices, descriptionText, 30, 18, -1);
     }
 

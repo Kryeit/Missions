@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +20,7 @@ public class InfoButton extends Button {
     private static final OnPress ON_PRESS = button -> { };
 
     public InfoButton(int x, int y) {
-        super(x, y, 20, 20, Component.empty(), ON_PRESS);
+        super(x, y, 20, 20, TextComponent.EMPTY, ON_PRESS);
     }
 
     @Override
@@ -36,8 +37,8 @@ public class InfoButton extends Button {
     public static List<Component> getInfoTooltip() {
         List<Component> components = new ArrayList<>();
 
-        components.add(Component.literal("This tooltip is Work In Progress").withStyle(ChatFormatting.AQUA));
-        components.add(Component.literal("We plan to add different player stats here").withStyle(ChatFormatting.AQUA));
+        components.add(new TextComponent("This tooltip is Work In Progress").withStyle(ChatFormatting.AQUA));
+        components.add(new TextComponent("We plan to add different player stats here").withStyle(ChatFormatting.AQUA));
 
         return components;
     }

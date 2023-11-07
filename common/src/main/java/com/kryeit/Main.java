@@ -29,6 +29,8 @@ import com.kryeit.missions.mission_types.vanilla.*;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
@@ -85,8 +87,8 @@ public class Main {
     public static void handlePlayerLogin(Player player) {
         boolean reassigned = MissionManager.reassignMissionsIfNecessary(player.getUUID());
         if (reassigned) {
-            Component message = Component.translatable("missions.reassign");
-            player.sendSystemMessage(message);
+            Component message = new TranslatableComponent("missions.reassign");
+            player.sendMessage(message, player.getUUID());
         }
     }
 

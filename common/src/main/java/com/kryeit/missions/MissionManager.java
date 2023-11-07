@@ -14,6 +14,7 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.game.ClientboundCustomSoundPacket;
@@ -80,16 +81,15 @@ public class MissionManager {
             ItemStack itemStack = Utils.getItem(new ResourceLocation(entry.getKey()));
             itemStack.setCount(entry.getValue());
             MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(itemStack, player));
-            player.sendSystemMessage(Components.translatable("missions.menu.main.reward",
+            player.sendMessage(Components.translatable("missions.menu.main.reward",
                             itemStack.getCount(),
                             Utils.removeBrackets(itemStack.getDisplayName().getString()))
-                            .withStyle(ChatFormatting.GREEN)
-            );
+                    .withStyle(ChatFormatting.GREEN), player.getUUID());
         }
         DataStorage.INSTANCE.claimRewards(uuid);
 
         if (!rewards.isEmpty()) {
-            player.connection.send(new ClientboundCustomSoundPacket(REWARD_SOUND, SoundSource.MASTER, player.position(), 1, 1, 1));
+            player.connection.send(new ClientboundCustomSoundPacket(REWARD_SOUND, SoundSource.MASTER, player.position(), 1, 1));
         }
     }
 
@@ -163,7 +163,7 @@ public class MissionManager {
         if (type.difficulty() == MissionDifficulty.HARD) {
             Component message = Components.translatable("missions.message.hard_mission_completed", serverPlayer.getName())
                     .withStyle(ChatFormatting.GOLD);
-            playerList.broadcastSystemMessage(message, false);
+            playerList.broadcastMessage(message, ChatType.SYSTEM, player);
 
             if (Math.random() < 0.01) {
                 MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.EXCHANGE_ATM.asStack(), serverPlayer));
