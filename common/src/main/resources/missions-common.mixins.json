@@ -10,13 +10,16 @@
     "MinecraftServerMixin",
     "ServerboundCustomPayloadMixin",
     "StatsCounterMixin",
+    "create.AbstractContraptionEntityMixin",
     "create.AirCurrentMixin",
     "create.BasinOperatingBlockEntityMixin",
-    "create.CrushingWheelControllerBlockEntityMixin",
+    "create.BlockBreakingKineticBlockEntityMixin",
+    "create.BlockBreakingMovementBehaviourMixin",
     "create.FanProcessingMixin",
     "create.MechanicalCrafterBlockEntityMixin",
     "create.MechanicalPressBlockEntityMixin",
-    "create.SawBlockEntityMixin",
+    "create.TrainMixin",
+    "create.TreeMixin",
     "interfaces.BlockEntityAccessor"
   ],
   "injectors": {

@@ -2,6 +2,7 @@ package com.kryeit.mixin.event;
 
 import com.kryeit.missions.MissionManager;
 import net.minecraft.advancements.critereon.FishingRodHookedTrigger;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -21,7 +22,7 @@ public class FishHandler {
         UUID uuid = player.getUUID();
 
         loot.forEach(itemStack -> {
-            ResourceLocation key = itemStack.getItem().getRegistryName();
+            ResourceLocation key = Registry.ITEM.getKey(itemStack.getItem());
             MissionManager.incrementMission(uuid, "fish", key, itemStack.getCount());
         });
     }

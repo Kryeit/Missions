@@ -1,6 +1,7 @@
-package com.kryeit.missions.mission_types;
+package com.kryeit.missions.mission_types.vanilla;
 
 import com.kryeit.missions.MissionDifficulty;
+import com.kryeit.missions.mission_types.MultiResourceMissionType;
 import net.minecraft.network.chat.Component;
 
 public class FishMission implements MultiResourceMissionType {
@@ -11,7 +12,7 @@ public class FishMission implements MultiResourceMissionType {
 
     @Override
     public MissionDifficulty difficulty() {
-        return MissionDifficulty.NORMAL;
+        return MissionDifficulty.HARD;
     }
 
     @Override

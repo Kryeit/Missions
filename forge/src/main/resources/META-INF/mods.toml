@@ -26,3 +26,10 @@ mandatory=true
 versionRange="[0.5.1.c,)"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.missions]]
+modId="createdeco"
+mandatory=false
+versionRange="*"
+ordering="NONE"
+side="BOTH"

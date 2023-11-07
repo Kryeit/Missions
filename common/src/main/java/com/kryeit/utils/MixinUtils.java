@@ -12,11 +12,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import static com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity.canCompress;
 
 public class MixinUtils {
     public static Player getClosestPlayer(Level level, BlockPos worldPosition) {
+        if (level == null) return null;
         return level.getNearestPlayer(
                 worldPosition.getX(),
                 worldPosition.getY(),
@@ -35,7 +37,7 @@ public class MixinUtils {
         BlockPos worldPosition = accessor.getWorldPosition();
         Player closestPlayer = null;
 
-        if (level != null && worldPosition != null)
+        if (worldPosition != null)
             closestPlayer = getClosestPlayer(level, worldPosition);
 
         if (closestPlayer != null && result != null) {
@@ -43,4 +45,14 @@ public class MixinUtils {
                     result.getCount());
         }
     }
+
+    public static double getDistance(Vec3 pos1, Vec3 pos2) {
+        if (pos1 == null || pos2 == null) return 0;
+        double deltaX = pos1.x - pos2.x;
+        double deltaY = pos1.y - pos2.y;
+        double deltaZ = pos1.z - pos2.z;
+
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+    }
+
 }

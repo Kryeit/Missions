@@ -7,29 +7,40 @@ import com.kryeit.entry.ModItems;
 import com.kryeit.entry.ModMenuTypes;
 import com.kryeit.missions.*;
 import com.kryeit.missions.config.ConfigReader;
-import com.kryeit.missions.mission_types.*;
+import com.kryeit.missions.mission_types.StatisticMission;
+import com.kryeit.missions.mission_types.VoteMission;
 import com.kryeit.missions.mission_types.create.CrushMission;
 import com.kryeit.missions.mission_types.create.CutMission;
 import com.kryeit.missions.mission_types.create.MillMission;
 import com.kryeit.missions.mission_types.create.PressMission;
 import com.kryeit.missions.mission_types.create.basin.CompactMission;
 import com.kryeit.missions.mission_types.create.basin.MixMission;
+import com.kryeit.missions.mission_types.create.contraption.DrillMission;
+import com.kryeit.missions.mission_types.create.contraption.SawMission;
+import com.kryeit.missions.mission_types.create.diving.DivingMissionType;
 import com.kryeit.missions.mission_types.create.fan.BlastMission;
 import com.kryeit.missions.mission_types.create.fan.HauntMission;
 import com.kryeit.missions.mission_types.create.fan.SmokeMission;
 import com.kryeit.missions.mission_types.create.fan.SplashMission;
+import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
+import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
+import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
+import com.kryeit.missions.mission_types.vanilla.*;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Main {
@@ -37,8 +48,9 @@ public class Main {
     public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static ConfigReader configReader;
 
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID)
-            .creativeModeTab(() -> ModItems.mainCreativeTab, "Create: Missions");
+    public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();
+
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
     public static void init() {
         registerMissions();
@@ -48,6 +60,7 @@ public class Main {
         ModItems.register();
         ModMenuTypes.register();
         ModBlockEntities.register();
+
 
         try {
             LOGGER.info("Reading config file...");
@@ -66,13 +79,14 @@ public class Main {
             throw new RuntimeException(e);
         }
         Runtime.getRuntime().addShutdownHook(new Thread(DataStorage.INSTANCE::save));
+
     }
 
     public static void handlePlayerLogin(Player player) {
         boolean reassigned = MissionManager.reassignMissionsIfNecessary(player.getUUID());
         if (reassigned) {
-            // TODO send a message, I don't know?
-            // TODO implement this in fabric too
+            Component message = Component.translatable("missions.reassign");
+            player.sendSystemMessage(message);
         }
     }
 
@@ -103,6 +117,18 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new SmokeMission());
         MissionTypeRegistry.INSTANCE.register(new SplashMission());
 
+        // Train
+        MissionTypeRegistry.INSTANCE.register(new TrainDriverMissionType());
+        MissionTypeRegistry.INSTANCE.register(new TrainPassengerMissionType());
+        MissionTypeRegistry.INSTANCE.register(new TrainDriverPassengerMissionType());
+
+        // Dive
+        MissionTypeRegistry.INSTANCE.register(new DivingMissionType());
+
+        // Contraption
+        MissionTypeRegistry.INSTANCE.register(new DrillMission());
+        MissionTypeRegistry.INSTANCE.register(new SawMission());
+
         List.of(
                 StatisticMission.createStatisticMission(
                         "walk",
@@ -116,7 +142,7 @@ public class Main {
                 ),
                 StatisticMission.createStatisticMission(
                         "swim",
-                        MissionDifficulty.EASY,
+                        MissionDifficulty.HARD,
                         Component.nullToEmpty("Swimming mission"),
                         100_000,
                         Items.TURTLE_HELMET,
@@ -132,7 +158,7 @@ public class Main {
                 ),
                 StatisticMission.createStatisticMission(
                         "ride",
-                        MissionDifficulty.NORMAL,
+                        MissionDifficulty.HARD,
                         Component.nullToEmpty("Riding mission"),
                         100_000,
                         Items.SADDLE,
@@ -150,7 +176,7 @@ public class Main {
                 ),
                 StatisticMission.createStatisticMission(
                         "sail",
-                        MissionDifficulty.EASY,
+                        MissionDifficulty.NORMAL,
                         Component.nullToEmpty("Sailing mission"),
                         100_000,
                         Items.OAK_BOAT,

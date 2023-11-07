@@ -1,5 +1,6 @@
 package com.kryeit.client.screen;
 
+import com.kryeit.Main;
 import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
@@ -7,33 +8,36 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.InfoButton;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
+import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.utils.Utils;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class MissionScreen extends Screen {
-    private static final Component TITLE = new TranslatableComponent("missions.menu.main.title");
-    public static final TranslatableComponent CLOSE = new TranslatableComponent("missions.menu.close");
+    public static final ResourceLocation MISSIONS_TITLE = new ResourceLocation(Main.MOD_ID, "textures/gui/title.png");    public static final Component CLOSE = Components.translatable("missions.menu.close");
     private final Runnable NO_TOOLTIP = () -> {};
     public Runnable activeTooltip = NO_TOOLTIP;
     private ClientMissionData data = null;
 
     public MissionScreen() {
-        super(TITLE);
+        super(Component.nullToEmpty(""));
     }
 
     @Override
@@ -57,7 +61,7 @@ public class MissionScreen extends Screen {
         List<ClientsideActiveMission> activeMissions = data.activeMissions();
 
         if (activeMissions.size() != 10) {
-            Minecraft.getInstance().gui.getChat().addMessage(new TextComponent("Something wrong happened, you don't have 10 missions. Contact an admin"));
+            Minecraft.getInstance().gui.getChat().addMessage(Components.translatable("Something wrong happened, you don't have 10 missions. Contact an admin"));
             return;
         }
 
@@ -90,13 +94,15 @@ public class MissionScreen extends Screen {
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
         Button.OnTooltip tooltip = (button, poseStack, mouseX, mouseY) -> renderTooltip(poseStack, getTooltip(mission), Optional.empty(), mouseX, mouseY);
         return new MissionButton(this, x, y, title, mission, tooltip, button -> {
-            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR && (MinecraftServerSupplier.getServer() == null || MinecraftServerSupplier.getServer().isSingleplayer())) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice));
+            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR && (MinecraftServerSupplier.getServer() == null || MinecraftServerSupplier.getServer().isSingleplayer())) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice, mission.difficulty()));
         });
     }
 
     @Override
     public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
+
+        renderTitle(matrices);
 
         super.render(matrices, mouseX, mouseY, delta);
         if (data != null) {
@@ -109,32 +115,58 @@ public class MissionScreen extends Screen {
         activeTooltip = NO_TOOLTIP;
     }
 
-    public List<Component> getTooltip(ClientsideActiveMission mission) {
+    public static List<Component> getTooltip(ClientsideActiveMission mission) {
         Component progress = mission.isCompleted()
-                ? new TranslatableComponent("missions.menu.main.tooltip.progress.completed")
-                : new TextComponent(mission.progress() + "/" + mission.requiredAmount());
+                ? Components.translatable("missions.menu.main.tooltip.progress.completed")
+                : Components.translatable(mission.progress() + "/" + mission.requiredAmount());
 
         List<Component> components = new ArrayList<>();
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.details")
+        components.add(Components.translatable("missions.menu.main.tooltip.details")
                 .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.task", mission.missionString().getString())
-                .withStyle(ChatFormatting.WHITE));
+        String itemName = Utils.removeBrackets(mission.itemRequired().getDisplayName().getString());
 
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.difficulty", mission.difficulty().description())
-                .withStyle(ChatFormatting.BLUE));
+        if (Items.AIR == mission.itemRequired().getItem()) {
 
-        ItemStack itemRequired = mission.itemRequired();
-        if (!itemRequired.is(Items.AIR))
-            components.add(new TranslatableComponent("missions.menu.main.tooltip.itemRequired", itemRequired.getDisplayName().getString())
-                    .withStyle(ChatFormatting.BLUE));
+            if (Objects.equals(mission.missionType(), "train-driver-passenger")) {
+                components.add(
+                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                                ChatFormatting.WHITE, mission.requiredAmount(), TrainDriverPassengerMissionType.passengersNeeded())
+                );
+            } else {
+                components.add(
+                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                                ChatFormatting.WHITE, mission.requiredAmount())
+                );
+            }
 
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
-                Utils.removeBrackets(Registry.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
+        } else if (mission.itemRequired().getItem() instanceof SpawnEggItem) {
+            // This cannot be backported, 1.20+ contains a spawn egg for every mob
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, mission.requiredAmount(), Utils.getEntityOfSpawnEggForTooltip(mission.itemRequired()))
+            );
+        } else if (mission.itemRequired().getItem() instanceof BucketItem) {
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, Utils.getFluidFromBucketForTooltip(mission.itemRequired()), mission.requiredAmount())
+            );
+        } else {
+            components.add(
+                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                            ChatFormatting.WHITE, mission.requiredAmount(), itemName)
+            );
+        }
+
+        components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
+                        Utils.removeBrackets(Registry.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
-        components.add(new TranslatableComponent("missions.menu.main.tooltip.progress", progress)
+        components.add(Components.translatable("missions.menu.main.tooltip.progress", progress)
                 .withStyle(ChatFormatting.GREEN));
+
+        components.add(Component.translatable("missions.menu.main.tooltip.click")
+                .withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC));
 
         return components;
     }
@@ -170,5 +202,12 @@ public class MissionScreen extends Screen {
         int y = this.height - buttonHeight - bottomPadding;
 
         this.addRenderableWidget(new RewardsButton(x, y, rewardsAvailable));
+    }
+
+    public void renderTitle(PoseStack matrices) {
+        Minecraft minecraft = Minecraft.getInstance();
+        minecraft.getTextureManager().bindForSetup(MISSIONS_TITLE);
+        RenderSystem.setShaderTexture(0, MISSIONS_TITLE);
+        blit(matrices,(this.width/2) - 100, this.height/35, 200, 44, 0, 0, 256, 56, 256, 256);
     }
 }

@@ -1,6 +1,6 @@
 package com.kryeit.mixin.create;
 
-import com.kryeit.missions.mission_types.CraftMission;
+import com.kryeit.missions.mission_types.vanilla.CraftMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.kryeit.utils.MixinUtils;
 import com.simibubi.create.content.kinetics.crafter.MechanicalCrafterBlockEntity;

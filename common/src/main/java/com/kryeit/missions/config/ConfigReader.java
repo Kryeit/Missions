@@ -2,6 +2,7 @@ package com.kryeit.missions.config;
 
 import com.kryeit.JSONObject;
 import com.kryeit.JSONObject.JSONArray;
+import com.kryeit.compat.CompatAddon;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.utils.Utils;
@@ -17,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.kryeit.coins.Coins.EXCHANGE_RATE;
+
 public class ConfigReader {
     private final Map<MissionType, Mission> missions;
     private final List<ItemStack> exchange;
@@ -27,7 +30,13 @@ public class ConfigReader {
     }
 
     public static ConfigReader readFile(Path path) throws IOException {
-        String content = readOrCopyFile(path.resolve("missions.json"), "/example_config.json");
+
+        String content;
+        if (CompatAddon.CREATE_DECO.isLoaded()) {
+            content = readOrCopyFile(path.resolve("missions.json"), "/createdeco/example_config.json");
+        } else {
+            content = readOrCopyFile(path.resolve("missions.json"), "/example_config.json");
+        }
 
         Map<MissionType, Mission> missions = new HashMap<>();
         JSONObject object = new JSONObject(content);
@@ -47,15 +56,25 @@ public class ConfigReader {
             missions.put(missionType, mission);
         }
 
-        String exchange = readOrCopyFile(path.resolve("currency.json"), "/example_currency.json");
+        String exchange;
+        if (CompatAddon.CREATE_DECO.isLoaded()) {
+            exchange = readOrCopyFile(path.resolve("currency.json"), "/createdeco/example_currency.json");
+        } else {
+            exchange = readOrCopyFile(path.resolve("currency.json"), "/example_currency.json");
+        }
         List<ItemStack> items = new JSONArray(exchange).asList((array, integer) -> {
             ResourceLocation location = new ResourceLocation(array.getString(integer));
             return Utils.getItem(location);
         });
+
+        String config = readOrCopyFile(path.resolve("config.json"), "/example_modconfig.json");
+        JSONObject configObject = new JSONObject(config);
+        EXCHANGE_RATE = Integer.parseInt(configObject.getString("exchange-rate"));
+
         return new ConfigReader(missions, items);
     }
 
-    private static String readOrCopyFile(Path path, String exampleFile) throws IOException {
+    public static String readOrCopyFile(Path path, String exampleFile) throws IOException {
         File file = path.toFile();
         if (!file.exists()) {
             InputStream stream = ConfigReader.class.getResourceAsStream(exampleFile);

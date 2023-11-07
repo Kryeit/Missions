@@ -2,32 +2,33 @@ package com.kryeit.client.screen.button;
 
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.MissionRerollScreen;
+import com.kryeit.missions.MissionDifficulty;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import static com.kryeit.client.screen.button.MissionButton.ADVANCEMENT_WIDGETS;
-
-
 public class RerollButton extends Button {
     private static final OnPress NO_PRESS = button -> { };
-    private static final Component REROLL = new TextComponent("    ").append(new TranslatableComponent("missions.menu.reroll.reroll"));
+    private static final Component REROLL = Components.literal("    ").append(Components.translatable("missions.menu.reroll.reroll"));
     private final int missionIndex;
     private final ItemStack rerollPrice;
+    private final MissionDifficulty difficulty;
 
 
-    public RerollButton(int x, int y, int sizeX, int sizeY, int missionIndex, ItemStack rerollPrice) {
+
+    public RerollButton(int x, int y, int sizeX, int sizeY, int missionIndex, ItemStack rerollPrice, MissionDifficulty difficulty) {
         super(x, y, sizeX, sizeY, REROLL, NO_PRESS);
         this.missionIndex = missionIndex;
         this.rerollPrice = rerollPrice;
+        this.difficulty = difficulty;
     }
 
     @Override
@@ -71,7 +72,11 @@ public class RerollButton extends Button {
 
         if (isHovered) v -= 26;
 
-        int u = 26;
+        int u = switch (difficulty) {
+            case NORMAL -> 26 * 2;
+            case HARD -> 26;
+            default -> 0;
+        };
 
         int textureSize = 26;
 

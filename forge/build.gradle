@@ -21,7 +21,7 @@ loom {
 
 configurations {
     common
-    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+    shadowCommon
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentForge.extendsFrom common
@@ -37,7 +37,7 @@ dependencies {
     forge "net.minecraftforge:forge:${forge_version}"
 
     modImplementation("com.simibubi.create:create-${minecraft_version}:${create_version}:all") { transitive = false }
-    modImplementation("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
+    modImplementation("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}")
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
@@ -57,17 +57,17 @@ shadowJar {
     exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
+    archiveClassifier =  "dev-shadow"
 }
 
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    classifier null
+    archiveClassifier =  null
 }
 
 jar {
-    classifier "dev"
+    archiveClassifier =  "dev"
 }
 
 sourcesJar {

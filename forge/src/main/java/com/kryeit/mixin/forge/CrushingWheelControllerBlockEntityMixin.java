@@ -1,4 +1,4 @@
-package com.kryeit.mixin.create;
+package com.kryeit.mixin.forge;
 
 import com.kryeit.missions.mission_types.create.CrushMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
@@ -28,7 +28,6 @@ public class CrushingWheelControllerBlockEntityMixin {
             )
     )
     private void onApplyCrushingRecipe(CallbackInfo ci) {
-
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
         for (int i = 1; i < inventory.getSlots(); i++) {

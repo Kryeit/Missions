@@ -12,7 +12,7 @@ public class MixMission implements MultiResourceMissionType {
 
     @Override
     public MissionDifficulty difficulty() {
-        return MissionDifficulty.EASY;
+        return MissionDifficulty.NORMAL;
     }
 
     @Override

@@ -9,13 +9,12 @@ import com.kryeit.coins.Coins;
 import com.kryeit.entry.ModBlocks;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
+import com.simibubi.create.foundation.utility.Components;
 import io.netty.buffer.Unpooled;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.ChatType;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.game.ClientboundCustomSoundPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -81,16 +80,16 @@ public class MissionManager {
             ItemStack itemStack = Utils.getItem(new ResourceLocation(entry.getKey()));
             itemStack.setCount(entry.getValue());
             MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(itemStack, player));
-            player.sendMessage(new TranslatableComponent("missions.menu.main.reward",
+            player.sendSystemMessage(Components.translatable("missions.menu.main.reward",
                             itemStack.getCount(),
                             Utils.removeBrackets(itemStack.getDisplayName().getString()))
-                            .withStyle(ChatFormatting.GREEN),
-                    player.getUUID());
+                            .withStyle(ChatFormatting.GREEN)
+            );
         }
         DataStorage.INSTANCE.claimRewards(uuid);
 
         if (!rewards.isEmpty()) {
-            player.connection.send(new ClientboundCustomSoundPacket(REWARD_SOUND, SoundSource.MASTER, player.position(), 1, 1));
+            player.connection.send(new ClientboundCustomSoundPacket(REWARD_SOUND, SoundSource.MASTER, player.position(), 1, 1, 1));
         }
     }
 
@@ -162,9 +161,9 @@ public class MissionManager {
         showToast(serverPlayer, mission.toClientMission(player));
 
         if (type.difficulty() == MissionDifficulty.HARD) {
-            MutableComponent message = new TranslatableComponent("missions.message.hard_mission_completed", serverPlayer.getName())
+            Component message = Components.translatable("missions.message.hard_mission_completed", serverPlayer.getName())
                     .withStyle(ChatFormatting.GOLD);
-            playerList.broadcastMessage(message, ChatType.CHAT, new UUID(0, 0));
+            playerList.broadcastSystemMessage(message, false);
 
             if (Math.random() < 0.01) {
                 MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.EXCHANGE_ATM.asStack(), serverPlayer));
