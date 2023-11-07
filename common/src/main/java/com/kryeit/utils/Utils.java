@@ -189,7 +189,6 @@ public class Utils {
         String translation = Component.translatable(key, "%s", "%s").getString();
         String[] parts = translation.split("%s", -1);
 
-        System.out.println(Arrays.toString(parts));
         if (parts.length == 0) {
             return Component.translatable(key);
         }
