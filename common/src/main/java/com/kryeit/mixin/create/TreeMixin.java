@@ -21,7 +21,7 @@ import java.util.function.BiConsumer;
 
 import static com.kryeit.utils.MixinUtils.getClosestPlayer;
 
-@Mixin(TreeCutter.Tree.class)
+@Mixin(value = TreeCutter.Tree.class, remap = false)
 public class TreeMixin {
 
     @Shadow @Final private List<BlockPos> leaves;
