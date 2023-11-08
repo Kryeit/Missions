@@ -18,8 +18,7 @@
     "create.MechanicalPressBlockEntityMixin",
     "create.TrainMixin",
     "create.TreeMixin",
-    "interfaces.BlockEntityAccessor",
-    "interfaces.TreeAccessor"
+    "interfaces.BlockEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
