@@ -1,3 +1,6 @@
+0.1.6
+- Fixed Steam n Rails not being able to load with missions mod installed
+
 0.1.5
 - Added Drill and saw missions
 - Added Create Deco compat: if you load the mod for the first time, a missions.json and currency.json for createdeco will be created

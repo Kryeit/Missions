@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static com.kryeit.Main.cachedTrainPlayerPositions;
 
-@Mixin(value = AbstractContraptionEntity.class, remap = false)
+@Mixin(value = AbstractContraptionEntity.class)
 public class AbstractContraptionEntityMixin {
 
     @Inject(method = "getDismountLocationForPassenger", at = @At("HEAD"))
