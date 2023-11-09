@@ -46,11 +46,10 @@
       "Chainsaw man",
       "Risky endeavour",
       "Safety first",
-      "Precision Incision",
-      "Cuts Like a Knife",
-      "Blade Runner",
-      "Carve Your Destiny",
-      "Slice of Life"
+      "Precision incision",
+      "Cuts like a knife",
+      "Blade runner",
+      "Slice of life"
     ]
   },
   "compact": {
@@ -69,19 +68,18 @@
       "packed_ice": "500-1200"
     },
     "titles": [
-      "Meatballs",
       "Dense topic",
       "Industrial diamonds",
       "Pack n' go",
       "Wall-e works",
-      "Compact and Conquer",
-      "Miniature Marvels",
-      "Compact Craftsmanship",
+      "Compact and conquer",
+      "Miniature marvels",
+      "Compact craftsmanship",
       "Size doesn't matter",
-      "Small-Scale Success",
-      "Mission Miniaturized",
-      "Pocket-Sized Pursuit",
-      "Downsizing Dilemma"
+      "Small-scale success",
+      "Mission miniaturized",
+      "Pocket-sized pursuit",
+      "Downsizing dilemma"
     ]
   },
   "break": {
@@ -106,8 +104,7 @@
       "Debris dozer",
       "A good project's starters",
       "Smash and Grab",
-      "Hammer Time",
-      "Minecraft Mayhem"
+      "Hammer Time"
     ]
   },
   "haunt": {
@@ -129,9 +126,9 @@
       "Blue fog",
       "Haunter x Haunter",
       "Soul taker",
-      "Ectoplasmic Expedition",
-      "Poltergeist Pursuit",
-      "Spooky Specter Search"
+      "Ectoplasmic expedition",
+      "Poltergeist pursuit",
+      "Spooky search"
     ]
   },
   "craft": {
@@ -155,10 +152,10 @@
       "Creation crusade",
       "Widget wizard",
       "Artisanal assembly",
-      "Crafting Chronicles",
-      "Crafting Chaos",
-      "Crafting Crusaders",
-      "Craftsmanship Challenge"
+      "Crafting chronicles",
+      "Crafting chaos",
+      "Crafting crusaders",
+      "Craftsmanship challenge"
     ]
   },
   "smoke": {
@@ -178,12 +175,12 @@
       "Boss fight fog",
       "Cooking mama",
       "Smoke on the Water",
-      "Smoke Signals Symphony",
-      "Light My Fire",
-      "Smoke Gets in Your Eyes",
-      "Sweet Smokes of Mine",
-      "Smoldering Secrets",
-      "Foggy Pursuit"
+      "Smoke signals",
+      "Light my fire",
+      "Smoke gets in your eyes",
+      "Sweet smokes of mine",
+      "Smoldering secrets",
+      "Foggy pursuit"
     ]
   },
   "kill": {
@@ -206,9 +203,9 @@
       "Creature massacre",
       "Beast busting",
       "Slayy",
-      "Skeletons in the Closet",
-      "Creeper Crusade",
-      "Slay Ride Showdown",
+      "Skeletons in the closet",
+      "Creeper crusade",
+      "Slaying ride",
       "Monsters, Inc.",
       "The Witch Hunt"
     ]
@@ -226,13 +223,13 @@
       "Old town road",
       "Tireless odyssey",
       "Good ol' days",
-      "Beast Rider's Challenge",
-      "Animal Kingdom Adventure",
+      "Beast rider's challenge",
+      "Animal adventure",
       "How much Horsepower does it have?",
-      "Riding on Sunshine",
-      "Saddle Safari",
-      "Piggyback Pilgrimage",
-      "Steed of Speed"
+      "Riding on sunshine",
+      "Saddle safari",
+      "Piggyback pilgrimage",
+      "Steed of speed"
     ]
   },
   "sail": {
@@ -247,10 +244,10 @@
       "Sea of pirates",
       "Sailing the seas",
       "Seeking treasures",
-      "Nautical Adventure",
+      "Nautical adventure",
       "Sail the Seven Seas",
       "Journey to the Deep Blue",
-      "Pirate's Plunder Cruise"
+      "Pirate's Cruise"
     ]
   },
   "fly": {
@@ -267,10 +264,9 @@
       "Free Bird",
       "Wings of Freedom",
       "Up, Up, and Away",
-      "To Infinity and Beyond",
-      "Cloud Nine Challenge",
-      "Eagle Eye Expedition",
-      "Airborne Ascension"
+      "To infinity and beyond",
+      "Eagle Eye",
+      "Ascension"
     ]
   },
   "mill": {
@@ -288,11 +284,11 @@
     "titles": [
       "Soft crushing",
       "Starter machinery",
-      "Mill of Fortune",
+      "Mill of fortune",
       "Almost as fun as Crushing Wheels",
-      "Flour Power Pursuit",
-      "Milling Marvels",
-      "Wheat Whirlwind"
+      "Flour power",
+      "Milling marvels",
+      "Wheat whirlwind"
     ]
   },
   "blast": {
@@ -314,9 +310,9 @@
       "Blastoise",
       "Heatwave",
       "Flamethrower",
-      "Furnace Fury",
-      "Forge the Future",
-      "Blazing a Trail"
+      "Furnace fury",
+      "Forge the future",
+      "Blazing a trail"
     ]
   },
   "minecart": {
@@ -331,11 +327,11 @@
       "Roller coaster",
       "Rudimentary transport",
       "Smol tracks",
-      "Minecart Mania",
-      "Rails to Riches",
-      "Minecart Magic",
-      "Rollercoaster Roadtrip",
-      "Cartwheel Carnival"
+      "Minecart mania",
+      "Rails to riches",
+      "Minecart magic",
+      "Rollercoaster roadtrip",
+      "Cartwheel carnival"
     ]
   },
   "crush": {
@@ -358,12 +354,12 @@
       "Superlative milling",
       "Not the crush you're thinking of",
       "Worse than stepping on lego",
-      "Ore Obliteration",
-      "Mineral Mania",
-      "Crush and Conquer Quest",
-      "Stone Smasher's Showdown",
-      "The Gravel Grind",
-      "The Grind never stops"
+      "Ore obliteration",
+      "Mineral mania",
+      "Crush and conquer",
+      "Stone smasher",
+      "The gravel grind",
+      "The grind never stops"
     ]
   },
   "fish": {
@@ -383,11 +379,11 @@
     "titles": [
       "Fisherman",
       "Lucky retrieving",
-      "Reel in the Fun",
-      "Fisherman's Fortune",
-      "Fishing Frenzy",
-      "Tales of the Tackle",
-      "Splashing Success"
+      "Reel in the fun",
+      "Fisherman's fortune",
+      "Fishing frenzy",
+      "Tales of the tackle",
+      "Splashing success"
     ]
   },
   "eat": {
@@ -411,8 +407,8 @@
       "Feast of frenzy",
       "Culinary conqueror",
       "Stuffed to the brim",
-      "Minecraft Munchies",
-      "Satisfying the Stomach",
+      "Minecraft munchies",
+      "Satisfying the stomach",
       "Foodie's Delight",
       "don't forget the diet soda"
     ]
@@ -429,13 +425,13 @@
       "grass": "50-100"
     },
     "titles": [
-      "Master Builder",
+      "Master builder",
       "Finest detailing",
       "Last touchups",
-      "Laying the Foundations",
-      "Setting the Stage",
-      "Item Arrangement Adventure",
-      "Place and Prosper"
+      "Laying the foundations",
+      "Setting the stage",
+      "Arrangement adventure",
+      "Places to place"
     ]
   },
   "press": {
@@ -452,10 +448,10 @@
       "Bonk",
       "Factory noise",
       "Basic machinery",
-      "Pressing Predicament",
-      "The Power of Compression",
-      "Under Pressure",
-      "Press It to Impress"
+      "Pressing predicament",
+      "The power of compression",
+      "Under pressure",
+      "Press it to impress"
     ]
   },
   "mix": {
@@ -472,11 +468,11 @@
       "Stressful mix",
       "Solid brewery",
       "Wizard crafting",
-      "Brewing and Stewing",
+      "Brewing and stewing",
       "Minecraft Mix Master",
-      "Cauldron Chaos",
-      "Bubbling Brew Brigade",
-      "Blend and Mend"
+      "Cauldron chaos",
+      "Bubbling background noise",
+      "Blend and mend"
     ]
   },
   "walk": {
@@ -493,8 +489,8 @@
       "Warden bothering",
       "Walking simulator",
       "They call me the wanderer",
-      "Pathfinder's Pursuit",
-      "Wanderlust Quest",
+      "Pathfinder's pursuit",
+      "Wanderlust quest",
       "The Walking Challenge",
       "The walking dead"
     ]
@@ -511,10 +507,10 @@
       "Squid hunter",
       "Trident believer",
       "Dolphin manners",
-      "Dive into Adventure",
-      "Waterworld Wanderlust",
-      "Deep Dive Discovery",
-      "Submerged Saga"
+      "Dive into adventure",
+      "Waterworld wanderlust",
+      "Deep dive discovery",
+      "Submerged saga"
     ]
   },
   "train-driver": {
@@ -527,11 +523,11 @@
     },
     "titles": [
       "Training",
-      "Rails of Fortune",
-      "Locomotion Commotion",
-      "Ride the Rails Rally",
-      "Engineer's Excellence",
-      "Train Troubles"
+      "Rails of fortune",
+      "Locomotion commotion",
+      "Rails rally",
+      "Engineer's excellence",
+      "Train troubles"
     ]
   },
   "train-passenger": {
@@ -545,12 +541,13 @@
     "titles": [
       "All aboard!",
       "Trust the driver",
-      "Passenger's Paradise",
-      "Ticket to Adventure",
-      "Train Traveler's Tale",
-      "Relaxing Ride Challenge",
-      "Passenger's Perspective",
-      "Don't tell me how to drive!"
+      "Passenger's paradise",
+      "Ticket to adventure",
+      "Traveler's tale",
+      "Relaxing ride",
+      "Passenger's perspective",
+      "Don't tell me how to drive!",
+      "Secondary character"
     ]
   },
   "train-driver-passenger": {
@@ -567,11 +564,11 @@
     "titles": [
       "Flesh cargo",
       "Passive companionship",
-      "Driver and Rider Duo",
-      "Onboard Teamwork Challenge",
-      "The Conductor's Co-Pilot",
-      "Driver's Assistant Journey",
-      "Train Partnership Pursuit"
+      "Symbiosis",
+      "Onboard teamwork",
+      "Copilot",
+      "Driver's Assistant to the R. Manager",
+      "Train partnership"
     ]
   },
   "dive": {
@@ -585,9 +582,9 @@
     },
     "titles": [
       "Depths",
-      "Deep Dive Discovery",
-      "Exploring the Abyss",
-      "Treasures of the Deep"
+      "Deep discovery",
+      "Exploring the abyss",
+      "Treasures of the deep"
     ]
   },
   "drill": {
@@ -608,10 +605,9 @@
     },
     "titles": [
       "Never-ending breaking",
-      "Hand me the C4",
-      "Bore and Explore",
-      "Diamond Drill Digger",
-      "Ores in Oreverdrive"
+      "Hand me the Contraption-4",
+      "Bore and explore",
+      "Archeology speedrun"
     ]
   },
   "saw": {
@@ -627,8 +623,8 @@
     "titles": [
       "Scary business",
       "I want to play a game",
-      "Sawmill Showdown",
-      "Sawdust and Glory"
+      "Go back to your roots",
+      "Sawdust and glory"
     ]
   }
 }
