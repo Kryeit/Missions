@@ -37,7 +37,7 @@ public class TreeMixin {
 
         final Player closestPlayer = getClosestPlayer(world, logs.get(0));
 
-        if (closestPlayer == null) return;
+        if (closestPlayer == null || all.isEmpty()) return;
 
         all.forEach(pos -> {
             MissionManager.incrementMission(
