@@ -5,7 +5,6 @@ import com.kryeit.missions.mission_types.create.contraption.SawMission;
 import com.simibubi.create.foundation.utility.TreeCutter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -45,7 +44,7 @@ public class TreeMixin {
             MissionManager.incrementMission(
                     closestPlayer.getUUID(),
                     SawMission.class,
-                    BuiltInRegistries.ITEM.getKey(world.getBlockState(pos).getBlock().asItem()),
+                    Registry.ITEM.getKey(world.getBlockState(pos).getBlock().asItem()),
                     1);
         });
     }
