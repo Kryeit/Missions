@@ -31,13 +31,14 @@ public class TreeMixin {
     @Inject(method = "destroyBlocks", at = @At("HEAD"))
     public void destroyBlocks(Level world, ItemStack toDamage, Player playerEntity, BiConsumer<BlockPos, ItemStack> drop, CallbackInfo ci) {
         List<BlockPos> all = new ArrayList<>(logs);
+        if (logs.isEmpty()) return;
 
         // TODO: For some reason there is more BlockPos for leaves than it should (like 3x)
         all.addAll(leaves);
-
+        
         final Player closestPlayer = getClosestPlayer(world, logs.get(0));
 
-        if (closestPlayer == null || all.isEmpty()) return;
+        if (closestPlayer == null) return;
 
         all.forEach(pos -> {
             MissionManager.incrementMission(
