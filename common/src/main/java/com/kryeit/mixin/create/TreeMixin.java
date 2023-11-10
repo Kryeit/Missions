@@ -44,7 +44,7 @@ public class TreeMixin {
             MissionManager.incrementMission(
                     closestPlayer.getUUID(),
                     SawMission.class,
-                    Registry.ITEM.getKey(world.getBlockState(pos).getBlock().asItem()),
+                    BuiltInRegistries.ITEM.getKey(world.getBlockState(pos).getBlock().asItem()),
                     1);
         });
     }
