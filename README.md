@@ -68,6 +68,7 @@ You can add as many item id's to the "missions" bracket, and add as many titles 
 
 <p align="center">
   <img width="200" src="https://cdn.modrinth.com/data/KN33kvHF/images/c3e00905e1082e33477a90274f27b09ec4919f3a.png">
+
 The Exchange ATM doesn't have a crafting recipe, and can only be obtained with a 1% change after compleating a hard mission.
 
 It lets you to exchange currencies from smaller to bigger currency. Depends on which rotation direction the shaft has. It also requires 100 rpm, and consumes much more SU.
