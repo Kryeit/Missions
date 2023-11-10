@@ -52,6 +52,8 @@ public class Main {
 
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
+ //   public static Queue queue = new Queue();
+
     public static void init() {
         registerMissions();
 
