@@ -15,11 +15,11 @@
 
 Create: Missions is a Create addon focused for Create mod servers. It will also work in singleplayers worlds, but it's designed to bring an economy throughout a server's lifetime. We hope to give server owners a better way of giving players a currency, while also encouraging players to build their own shop contraptions/exchange banks/banks.
 
-|Versions|Supported?|Create version|
-|:---------:|:---------:|:---------:|
-| 1.18        | 0.1.1.e, unsupported|0.5.1.c+|
-| 1.19  | 0.1.1.e, unsupported|0.5.1.c+|
-| 1.20| latest, supported|0.5.1.d+|
+|Versions|     Supported?     |Create version|
+|:---------:|:------------------:|:---------:|
+| 1.18        | 0.1.8, unsupported |0.5.1.c+|
+| 1.19  | 0.1.8, unsupported |0.5.1.c+|
+| 1.20| latest, supported  |0.5.1.d+|
 
 # What's this addon?
 It works by giving **10 random missions per player per week**. These missions can be vanilla missions like **"Break X Veridium"** or Create mod related like **"Drive a train for 4 km with at least 2 passengers"**. You can also reroll the missions, and claim prices by completing them.
