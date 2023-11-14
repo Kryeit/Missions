@@ -17,9 +17,9 @@ Create: Missions is a Create addon focused for Create mod servers. It will also 
 
 |Versions|      Supported?      |Create version|
 |:---------:|:--------------------:|:---------:|
-| 1.18        | 0.1.7, only bugfixes |0.5.1.c+|
-| 1.19  | 0.1.7, only bugfixes |0.5.1.c+|
-| 1.20|  latest, supported |0.5.1.d+|
+| 1.18        | 0.1.8, only bugfixes |0.5.1.c+|
+| 1.19  | 0.1.8, only bugfixes |0.5.1.c+|
+| 1.20|  latest, supported   |0.5.1.d+|
 
 # What's this addon?
 It works by giving **10 random missions per player per week**. These missions can be vanilla missions like **"Break X Veridium"** or Create mod related like **"Drive a train for 4 km with at least 2 passengers"**. You can also reroll the missions, and claim prices by completing them.
