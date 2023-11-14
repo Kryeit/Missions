@@ -14,27 +14,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = MechanicalCrafterBlockEntity.class, remap = false)
 public class MechanicalCrafterBlockEntityMixin {
-
     @Shadow
     protected RecipeGridHandler.GroupedItems groupedItems;
     @Shadow
     private ItemStack scriptedResult;
     @Shadow
     protected int countDown;
-    @Inject(method = "tick", at = @At(value = "HEAD"))
+
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler;tryToApplyRecipe(Lnet/minecraft/world/level/Level;Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler$GroupedItems;)Lnet/minecraft/world/item/ItemStack;"))
     private void onApplyMechanicalCraftingRecipe(CallbackInfo ci) {
+
+        if (countDown == 20)
+            return;
 
         MechanicalCrafterBlockEntity blockEntity = (MechanicalCrafterBlockEntity) (Object) this;
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
-        boolean runLogic = !accessor.getLevel().isClientSide || blockEntity.isVirtual();
-        if (!runLogic)
-            return;
-
         ItemStack result =
                 blockEntity.isVirtual() ? scriptedResult : RecipeGridHandler.tryToApplyRecipe(accessor.getLevel(), groupedItems);
 
-        if (result != null && countDown == 1)
+        if (result != null)
             MixinUtils.handleMixinMissionItem(accessor, CraftMission.class, result);
     }
 }

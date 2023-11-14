@@ -6,6 +6,7 @@ import com.kryeit.utils.MixinUtils;
 import com.simibubi.create.content.kinetics.crafter.MechanicalCrafterBlockEntity;
 import com.simibubi.create.content.kinetics.crafter.RecipeGridHandler;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.TickEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,20 +22,20 @@ public class MechanicalCrafterBlockEntityMixin {
     private ItemStack scriptedResult;
     @Shadow
     protected int countDown;
-    @Inject(method = "tick", at = @At(value = "HEAD"))
+
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler;tryToApplyRecipe(Lnet/minecraft/world/level/Level;Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler$GroupedItems;)Lnet/minecraft/world/item/ItemStack;"))
     private void onApplyMechanicalCraftingRecipe(CallbackInfo ci) {
+
+        if (countDown == 20)
+            return;
 
         MechanicalCrafterBlockEntity blockEntity = (MechanicalCrafterBlockEntity) (Object) this;
         BlockEntityAccessor accessor = (BlockEntityAccessor) this;
 
-        boolean runLogic = !accessor.getLevel().isClientSide || blockEntity.isVirtual();
-        if (!runLogic)
-            return;
-
         ItemStack result =
                 blockEntity.isVirtual() ? scriptedResult : RecipeGridHandler.tryToApplyRecipe(accessor.getLevel(), groupedItems);
 
-        if (result != null && countDown == 20)
+        if (result != null)
             MixinUtils.handleMixinMissionItem(accessor, CraftMission.class, result);
     }
 }
