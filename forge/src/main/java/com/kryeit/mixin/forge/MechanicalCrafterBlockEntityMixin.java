@@ -26,7 +26,7 @@ public class MechanicalCrafterBlockEntityMixin {
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler;tryToApplyRecipe(Lnet/minecraft/world/level/Level;Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler$GroupedItems;)Lnet/minecraft/world/item/ItemStack;"))
     private void onApplyMechanicalCraftingRecipe(CallbackInfo ci) {
 
-        if (countDown == 20)
+        if (countDown != 20)
             return;
 
         MechanicalCrafterBlockEntity blockEntity = (MechanicalCrafterBlockEntity) (Object) this;
