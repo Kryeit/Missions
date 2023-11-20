@@ -12,13 +12,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = MechanicalCrafterBlockEntity.class, remap = false)
+@Mixin(MechanicalCrafterBlockEntity.class)
 public class MechanicalCrafterBlockEntityMixin {
-    @Shadow
+    @Shadow(remap = false)
     protected RecipeGridHandler.GroupedItems groupedItems;
-    @Shadow
+    @Shadow(remap = false)
     private ItemStack scriptedResult;
-    @Shadow
+    @Shadow(remap = false)
     protected int countDown;
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler;tryToApplyRecipe(Lnet/minecraft/world/level/Level;Lcom/simibubi/create/content/kinetics/crafter/RecipeGridHandler$GroupedItems;)Lnet/minecraft/world/item/ItemStack;"))
