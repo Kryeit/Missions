@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 
-@Mixin(FanProcessing.class)
+@Mixin(value = FanProcessing.class, remap = false)
 public class FanProcessingMixin {
 
     @Inject(
