@@ -57,6 +57,7 @@ body:
           - "0.1.6"
           - "0.1.7"
           - "0.1.8"
+          - "0.2"
       validations:
         required: false
   -   type: dropdown
