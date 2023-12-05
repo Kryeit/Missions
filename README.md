@@ -17,8 +17,8 @@ Create: Missions is a Create addon focused for Create mod servers. It will also 
 
 |Versions|      Supported?      |Create version|
 |:---------:|:--------------------:|:---------:|
-| 1.18        | 0.1.8, only bugfixes |0.5.1.c+|
-| 1.19  | 0.1.8, only bugfixes |0.5.1.c+|
+| 1.18        | 0.2, only bugfixes |0.5.1.c+|
+| 1.19  | 0.2, only bugfixes |0.5.1.c+|
 | 1.20|  latest, supported   |0.5.1.d+|
 
 # What's this addon?
