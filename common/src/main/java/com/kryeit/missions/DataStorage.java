@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class DataStorage {
-    public static final File FILE = new File("missions/mission_data.nbt");
+    public static final File FILE = new File("mods/missions/mission_data.nbt");
     public static final DataStorage INSTANCE = new DataStorage();
     private final CompoundTag data;
 
