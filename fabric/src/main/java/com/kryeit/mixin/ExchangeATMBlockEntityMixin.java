@@ -5,6 +5,7 @@ import com.kryeit.content.atm.ExchangeATMMenu;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +30,7 @@ public class ExchangeATMBlockEntityMixin implements ExtendedScreenHandlerFactory
     @Nonnull
     @Override
     public Component getDisplayName() {
-        return blockEntity.getDisplayName();
+        return new TranslatableComponent("block.missions.exchange_atm");
     }
 
     @Nullable
