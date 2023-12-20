@@ -1,5 +1,6 @@
 package com.kryeit.mixin.create;
 
+import com.kryeit.MinecraftServerSupplier;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +18,7 @@ public class AbstractContraptionEntityMixin {
     @Inject(method = "getDismountLocationForPassenger", at = @At("HEAD"))
     private void onDismount(LivingEntity entityLiving, CallbackInfoReturnable<Vec3> cir) {
         if (entityLiving instanceof ServerPlayer user) {
-            if (cachedTrainPlayerPositions.isEmpty()) return;
+            if (cachedTrainPlayerPositions.isEmpty() && MinecraftServerSupplier.getServer() != null) return;
             for (ServerPlayer player : cachedTrainPlayerPositions.keySet()) {
                 if (player.getUUID().equals(user.getUUID())) {
                     cachedTrainPlayerPositions.remove(player);

@@ -11,7 +11,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Main.MOD_ID)
 public final class KeyInit {
 
     public static KeyMapping MISSION_GUI = new KeyMapping(

@@ -1,6 +1,7 @@
 package com.kryeit.entry.forge;
 
 import com.kryeit.Main;
+import com.kryeit.client.screen.MissionScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,7 +16,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if(KeyInit.MISSION_GUI.consumeClick()) {
-                Minecraft.getInstance().player.sendSystemMessage(Component.literal("Pressed a Key!"));
+                Minecraft.getInstance().setScreen(new MissionScreen());
             }
         }
     }
