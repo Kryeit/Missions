@@ -17,6 +17,7 @@ public class ModBlockEntities {
             .renderer(() -> ExchangeATMRenderer::new)
             .register();
 
+    @SuppressWarnings("EmptyMethod")
     public static void register() {}
 
 }

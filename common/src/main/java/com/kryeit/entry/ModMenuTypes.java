@@ -24,6 +24,7 @@ public class ModMenuTypes {
                 .register();
     }
 
+    @SuppressWarnings("EmptyMethod")
     public static void register() {
 
     }

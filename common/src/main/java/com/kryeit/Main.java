@@ -3,7 +3,7 @@ package com.kryeit;
 
 import com.kryeit.entry.ModBlockEntities;
 import com.kryeit.entry.ModBlocks;
-import com.kryeit.entry.ModItems;
+import com.kryeit.entry.ModCreativeTabs;
 import com.kryeit.entry.ModMenuTypes;
 import com.kryeit.missions.*;
 import com.kryeit.missions.config.ConfigReader;
@@ -29,7 +29,6 @@ import com.kryeit.missions.mission_types.vanilla.*;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -52,17 +51,16 @@ public class Main {
 
     public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();
 
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID)
+            .creativeModeTab(() -> ModCreativeTabs.mainCreativeTab, "Create: Missions");;
 
     public static void init() {
         registerMissions();
 
         // Registering
         ModBlocks.register();
-        ModItems.register();
         ModMenuTypes.register();
         ModBlockEntities.register();
-
 
         try {
             LOGGER.info("Reading config file...");
