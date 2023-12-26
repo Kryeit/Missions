@@ -3,7 +3,7 @@ package com.kryeit;
 
 import com.kryeit.entry.ModBlockEntities;
 import com.kryeit.entry.ModBlocks;
-import com.kryeit.entry.ModItems;
+import com.kryeit.entry.ModCreativeTabs;
 import com.kryeit.entry.ModMenuTypes;
 import com.kryeit.missions.*;
 import com.kryeit.missions.config.ConfigReader;
@@ -50,14 +50,14 @@ public class Main {
 
     public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();
 
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID)
+            .creativeModeTab(() -> ModCreativeTabs.mainCreativeTab, "Create: Missions");
 
     public static void init() {
         registerMissions();
 
         // Registering
         ModBlocks.register();
-        ModItems.register();
         ModMenuTypes.register();
         ModBlockEntities.register();
 

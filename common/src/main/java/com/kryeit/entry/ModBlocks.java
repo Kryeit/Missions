@@ -14,6 +14,10 @@ import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
 public class ModBlocks {
 
+    static {
+        REGISTRATE.creativeModeTab(() -> ModCreativeTabs.mainCreativeTab);
+    }
+
     public static final BlockEntry<ExchangeATMBlock> EXCHANGE_ATM =
         REGISTRATE.block("exchange_atm", ExchangeATMBlock::new)
             .initialProperties(SharedProperties::softMetal)

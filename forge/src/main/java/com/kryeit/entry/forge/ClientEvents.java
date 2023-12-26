@@ -3,7 +3,6 @@ package com.kryeit.entry.forge;
 import com.kryeit.Main;
 import com.kryeit.client.screen.MissionScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
