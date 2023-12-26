@@ -3,7 +3,7 @@ package com.kryeit;
 
 import com.kryeit.entry.ModBlockEntities;
 import com.kryeit.entry.ModBlocks;
-import com.kryeit.entry.ModItems;
+import com.kryeit.entry.ModCreativeTabs;
 import com.kryeit.entry.ModMenuTypes;
 import com.kryeit.missions.*;
 import com.kryeit.missions.config.ConfigReader;
@@ -28,6 +28,7 @@ import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
 import com.kryeit.missions.mission_types.vanilla.*;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -43,6 +44,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.kryeit.entry.ModCreativeTabs.useBaseTab;
+
 public class Main {
     public static final String MOD_ID = "missions";
     public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
@@ -57,10 +60,12 @@ public class Main {
 
         // Registering
         ModBlocks.register();
-        ModItems.register();
         ModMenuTypes.register();
         ModBlockEntities.register();
+        ModCreativeTabs.register();
 
+        useBaseTab();
+        finalizeRegistrate();
 
         try {
             LOGGER.info("Reading config file...");
@@ -185,7 +190,9 @@ public class Main {
         ).forEach(MissionTypeRegistry.INSTANCE::register);
     }
 
-    public static CreateRegistrate registrate() {
-        return REGISTRATE;
+    @ExpectPlatform
+    public static void finalizeRegistrate() {
+        throw new AssertionError();
     }
+
 }

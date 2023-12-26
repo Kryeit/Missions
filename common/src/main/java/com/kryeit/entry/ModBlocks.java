@@ -9,10 +9,15 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.kryeit.Main.REGISTRATE;
+import static com.kryeit.entry.ModCreativeTabs.useBaseTab;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
 public class ModBlocks {
+
+    static {
+        useBaseTab();
+    }
 
     public static final BlockEntry<ExchangeATMBlock> EXCHANGE_ATM =
         REGISTRATE.block("exchange_atm", ExchangeATMBlock::new)

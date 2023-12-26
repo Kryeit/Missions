@@ -3,8 +3,6 @@ package com.kryeit.mixin.create;
 import com.kryeit.missions.mission_types.vanilla.CraftMission;
 import com.kryeit.mixin.interfaces.BlockEntityAccessor;
 import com.kryeit.utils.MixinUtils;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.simibubi.create.content.kinetics.crafter.MechanicalCrafterBlockEntity;
 import com.simibubi.create.content.kinetics.crafter.RecipeGridHandler;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +11,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = MechanicalCrafterBlockEntity.class, remap = false)
 public class MechanicalCrafterBlockEntityMixin {
