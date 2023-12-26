@@ -1,7 +1,6 @@
 build/
 *.ipr
 run/
-!fabric/run/config/fabric_loader_dependencies.json
 *.iws
 out/
 *.iml
