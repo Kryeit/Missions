@@ -61,7 +61,6 @@ public class Main {
         ModMenuTypes.register();
         ModBlockEntities.register();
 
-
         try {
             LOGGER.info("Reading config file...");
             configReader = ConfigReader.readFile(Path.of("config/missions"));
