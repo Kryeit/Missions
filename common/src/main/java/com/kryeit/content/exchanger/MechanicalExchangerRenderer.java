@@ -1,4 +1,4 @@
-package com.kryeit.content.atm;
+package com.kryeit.content.exchanger;
 
 import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -15,13 +15,13 @@ import net.minecraft.core.Direction;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 
-public class ExchangeATMRenderer extends KineticBlockEntityRenderer<ExchangeATMBlockEntity> {
-    public ExchangeATMRenderer(BlockEntityRendererProvider.Context context) {
+public class MechanicalExchangerRenderer extends KineticBlockEntityRenderer<MechanicalExchangerBlockEntity> {
+    public MechanicalExchangerRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    protected void renderSafe(ExchangeATMBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+    protected void renderSafe(MechanicalExchangerBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {
         if (Backend.canUseInstancing(be.getLevel())) return;
         Direction direction = be.getBlockState()

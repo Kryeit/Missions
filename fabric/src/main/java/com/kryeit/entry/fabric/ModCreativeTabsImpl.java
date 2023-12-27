@@ -14,13 +14,13 @@ import net.minecraft.world.item.CreativeModeTab;
 import java.util.function.Supplier;
 
 import static com.kryeit.Main.REGISTRATE;
-import static com.kryeit.entry.ModBlocks.EXCHANGE_ATM;
+import static com.kryeit.entry.ModBlocks.MECHANICAL_EXCHANGER;
 
 public class ModCreativeTabsImpl {
     private static final ModCreativeTabs.TabInfo MAIN_TAB = register("main",
             () -> FabricItemGroup.builder()
                     .title(Component.literal("Create: Missions"))
-                    .icon(() -> EXCHANGE_ATM.asStack())
+                    .icon(() -> MECHANICAL_EXCHANGER.asStack())
                     .displayItems(new ModCreativeTabs.RegistrateDisplayItemsGenerator(ModCreativeTabs.Tabs.MAIN))
                     .build());
 

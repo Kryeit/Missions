@@ -1,4 +1,4 @@
-package com.kryeit.content.atm;
+package com.kryeit.content.exchanger;
 
 import com.kryeit.entry.ModBlockEntities;
 import com.kryeit.utils.BlockUtils;
@@ -28,10 +28,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 
-public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<ExchangeATMBlockEntity> {
+public class MechanicalExchangerBlock extends DirectionalKineticBlock implements IBE<MechanicalExchangerBlockEntity> {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public ExchangeATMBlock(Properties properties) {
+    public MechanicalExchangerBlock(Properties properties) {
         super(properties);
     }
 
@@ -63,7 +63,7 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof ExchangeATMBlockEntity atmBlockEntity) {
+            if (blockEntity instanceof MechanicalExchangerBlockEntity atmBlockEntity) {
                 atmBlockEntity.drops();
             }
         }
@@ -75,7 +75,7 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
                                  Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide()) {
             BlockEntity entity = level.getBlockEntity(pos);
-            if (entity instanceof ExchangeATMBlockEntity atmBlockEntity) {
+            if (entity instanceof MechanicalExchangerBlockEntity atmBlockEntity) {
                 BlockUtils.openGui((ServerPlayer) player, atmBlockEntity, pos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
@@ -86,19 +86,19 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
     }
 
     @Override
-    public Class<ExchangeATMBlockEntity> getBlockEntityClass() {
-        return ExchangeATMBlockEntity.class;
+    public Class<MechanicalExchangerBlockEntity> getBlockEntityClass() {
+        return MechanicalExchangerBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends ExchangeATMBlockEntity> getBlockEntityType() {
-        return ModBlockEntities.EXCHANGE_ATM.get();
+    public BlockEntityType<? extends MechanicalExchangerBlockEntity> getBlockEntityType() {
+        return ModBlockEntities.MECHANICAL_EXCHANGER.get();
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ExchangeATMBlockEntity(ModBlockEntities.EXCHANGE_ATM.get(), pos, state);
+        return new MechanicalExchangerBlockEntity(ModBlockEntities.MECHANICAL_EXCHANGER.get(), pos, state);
     }
     @Nullable
     @Override
@@ -107,7 +107,7 @@ public class ExchangeATMBlock extends DirectionalKineticBlock implements IBE<Exc
             return null;
         }
         return (level1, blockPos, blockState, t) -> {
-            if (t instanceof ExchangeATMBlockEntity be) {
+            if (t instanceof MechanicalExchangerBlockEntity be) {
                 be.tick(level1, blockPos, blockState, be);
             }
         };

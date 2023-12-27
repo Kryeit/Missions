@@ -14,7 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import static com.kryeit.Main.REGISTRATE;
-import static com.kryeit.entry.ModBlocks.EXCHANGE_ATM;
+import static com.kryeit.entry.ModBlocks.MECHANICAL_EXCHANGER;
 
 @EventBusSubscriber(bus = Bus.MOD)
 public class ModCreativeTabsImpl {
@@ -26,7 +26,7 @@ public class ModCreativeTabsImpl {
             () -> CreativeModeTab.builder()
                     .title(Component.literal("Create: Missions"))
                     .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
-                    .icon(() -> EXCHANGE_ATM.asStack())
+                    .icon(() -> MECHANICAL_EXCHANGER.asStack())
                     .displayItems(new ModCreativeTabs.RegistrateDisplayItemsGenerator(ModCreativeTabs.Tabs.MAIN))
                     .build());
 

@@ -1,4 +1,4 @@
-package com.kryeit.content.atm;
+package com.kryeit.content.exchanger;
 
 import com.jozufozu.flywheel.api.MaterialManager;
 import com.simibubi.create.AllPartialModels;
@@ -9,13 +9,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 
-public class ExchangeATMInstance extends KineticBlockEntityInstance<ExchangeATMBlockEntity> {
+public class MechanicalExchangerInstance extends KineticBlockEntityInstance<MechanicalExchangerBlockEntity> {
 
     protected final RotatingData shaft;
     final Direction direction;
     private final Direction opposite;
 
-    public ExchangeATMInstance(MaterialManager materialManager, ExchangeATMBlockEntity blockEntity) {
+    public MechanicalExchangerInstance(MaterialManager materialManager, MechanicalExchangerBlockEntity blockEntity) {
         super(materialManager, blockEntity);
 
         direction = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);

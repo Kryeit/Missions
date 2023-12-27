@@ -1,4 +1,4 @@
-package com.kryeit.content.atm;
+package com.kryeit.content.exchanger;
 
 import com.kryeit.client.screen.slot.ModResultSlot;
 import com.kryeit.entry.ModBlocks;
@@ -11,18 +11,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class ExchangeATMMenu extends AbstractContainerMenu {
-    private final ExchangeATMBlockEntity blockEntity;
+public class MechanicalExchangerMenu extends AbstractContainerMenu {
+    private final MechanicalExchangerBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public ExchangeATMMenu(MenuType<?> type, int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public MechanicalExchangerMenu(MenuType<?> type, int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(type, pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
-    public ExchangeATMMenu(MenuType<?> type, int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.EXCHANGE_ATM_MENU.get(), pContainerId);
+    public MechanicalExchangerMenu(MenuType<?> type, int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.MECHANICAL_EXCHANGER_MENU.get(), pContainerId);
         checkContainerSize(inv, 2);
-        blockEntity = ((ExchangeATMBlockEntity) entity);
+        blockEntity = ((MechanicalExchangerBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
 
@@ -35,8 +35,8 @@ public class ExchangeATMMenu extends AbstractContainerMenu {
         addDataSlots(data);
     }
 
-    public static ExchangeATMMenu create(int id, Inventory inv, ExchangeATMBlockEntity be, ContainerData data) {
-        return new ExchangeATMMenu(ModMenuTypes.EXCHANGE_ATM_MENU.get(), id, inv, be, data);
+    public static MechanicalExchangerMenu create(int id, Inventory inv, MechanicalExchangerBlockEntity be, ContainerData data) {
+        return new MechanicalExchangerMenu(ModMenuTypes.MECHANICAL_EXCHANGER_MENU.get(), id, inv, be, data);
     }
 
     public boolean isCrafting() {
@@ -105,7 +105,7 @@ public class ExchangeATMMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.EXCHANGE_ATM.get());
+                pPlayer, ModBlocks.MECHANICAL_EXCHANGER.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
