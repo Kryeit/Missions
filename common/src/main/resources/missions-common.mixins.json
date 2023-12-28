@@ -12,7 +12,6 @@
     "ServerboundCustomPayloadMixin",
     "StatsCounterMixin",
     "create.AbstractContraptionEntityMixin",
-    "create.AirCurrentMixin",
     "create.BasinOperatingBlockEntityMixin",
     "create.BlockBreakingKineticBlockEntityMixin",
     "create.BlockBreakingMovementBehaviourMixin",
