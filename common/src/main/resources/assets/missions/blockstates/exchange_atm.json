@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": { "model": "missions:block/exchange_atm" },
-    "facing=east": { "model": "missions:block/exchange_atm", "y": 90 },
-    "facing=south": { "model": "missions:block/exchange_atm", "y": 180 },
-    "facing=west": { "model": "missions:block/exchange_atm", "y": 270 }
-  }
-}

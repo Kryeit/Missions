@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "missions:block/mechanical_exchanger" },
+    "facing=east": { "model": "missions:block/mechanical_exchanger", "y": 90 },
+    "facing=south": { "model": "missions:block/mechanical_exchanger", "y": 180 },
+    "facing=west": { "model": "missions:block/mechanical_exchanger", "y": 270 }
+  }
+}
