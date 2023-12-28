@@ -1,4 +1,4 @@
-package com.kryeit.content.atm;
+package com.kryeit.content.exchanger;
 
 import com.kryeit.Main;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -9,10 +9,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class ExchangeATMScreen extends AbstractContainerScreen<ExchangeATMMenu> {
+public class MechanicalExchangerScreen extends AbstractContainerScreen<MechanicalExchangerMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Main.MOD_ID, "textures/gui/exchange_atm_gui.png");
-    public ExchangeATMScreen(ExchangeATMMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+            new ResourceLocation(Main.MOD_ID, "textures/gui/mechanical_exchanger_gui.png");
+    public MechanicalExchangerScreen(MechanicalExchangerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 

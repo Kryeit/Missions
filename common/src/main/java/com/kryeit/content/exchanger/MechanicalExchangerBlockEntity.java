@@ -1,4 +1,4 @@
-package com.kryeit.content.atm;
+package com.kryeit.content.exchanger;
 
 import com.kryeit.coins.Coins;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 
 import static com.kryeit.coins.Coins.EXCHANGE_RATE;
 
-public class ExchangeATMBlockEntity extends KineticBlockEntity
+public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         implements MenuProvider, WorldlyContainer {
 
     public NonNullList<ItemStack> inventory;
@@ -42,22 +42,22 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
         OFF
     }
 
-    public ExchangeATMBlockEntity(BlockEntityType<?> blockEntityType, BlockPos worldPosition, BlockState blockState) {
+    public MechanicalExchangerBlockEntity(BlockEntityType<?> blockEntityType, BlockPos worldPosition, BlockState blockState) {
         super(blockEntityType, worldPosition, blockState);
         inventory = NonNullList.withSize(2, ItemStack.EMPTY);
         this.data = new ContainerData() {
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> ExchangeATMBlockEntity.this.progress;
-                    case 1 -> ExchangeATMBlockEntity.this.maxProgress;
+                    case 0 -> MechanicalExchangerBlockEntity.this.progress;
+                    case 1 -> MechanicalExchangerBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
 
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> ExchangeATMBlockEntity.this.progress = value;
-                    case 1 -> ExchangeATMBlockEntity.this.maxProgress = value;
+                    case 0 -> MechanicalExchangerBlockEntity.this.progress = value;
+                    case 1 -> MechanicalExchangerBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -140,13 +140,13 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
     @Nonnull
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.missions.exchange_atm");
+        return Component.translatable("block.missions.mechanical_exchanger");
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return ExchangeATMMenu.create(i, inventory, this, data);
+        return MechanicalExchangerMenu.create(i, inventory, this, data);
     }
 
 //    @Override
@@ -178,7 +178,7 @@ public class ExchangeATMBlockEntity extends KineticBlockEntity
         Containers.dropContents(this.level, this.worldPosition, this);
     }
 
-    public void tick(Level level, BlockPos pos, BlockState state, ExchangeATMBlockEntity blockEntity) {
+    public void tick(Level level, BlockPos pos, BlockState state, MechanicalExchangerBlockEntity blockEntity) {
         updateMode();
         if (hasRecipe()) {
             progress++;
