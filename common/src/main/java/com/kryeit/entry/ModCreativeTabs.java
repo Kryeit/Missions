@@ -7,13 +7,13 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-import static com.kryeit.entry.ModBlocks.EXCHANGE_ATM;
+import static com.kryeit.entry.ModBlocks.MECHANICAL_EXCHANGER;
 
 public class ModCreativeTabs {
 
     public static final CreativeModeTab mainCreativeTab = new CreativeModeTab(Utils.nextTabId(), Main.MOD_ID) {
         @Override
         @Nonnull
-        public ItemStack makeIcon() { return EXCHANGE_ATM.asStack(); }
+        public ItemStack makeIcon() { return MECHANICAL_EXCHANGER.asStack(); }
     };
 }

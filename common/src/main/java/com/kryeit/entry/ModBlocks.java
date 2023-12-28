@@ -1,6 +1,6 @@
 package com.kryeit.entry;
 
-import com.kryeit.content.atm.ExchangeATMBlock;
+import com.kryeit.content.exchanger.MechanicalExchangerBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
@@ -18,8 +18,8 @@ public class ModBlocks {
         REGISTRATE.creativeModeTab(() -> ModCreativeTabs.mainCreativeTab);
     }
 
-    public static final BlockEntry<ExchangeATMBlock> EXCHANGE_ATM =
-        REGISTRATE.block("exchange_atm", ExchangeATMBlock::new)
+    public static final BlockEntry<MechanicalExchangerBlock> MECHANICAL_EXCHANGER =
+        REGISTRATE.block("mechanical_exchanger", MechanicalExchangerBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(BlockBehaviour.Properties::noOcclusion)
             .addLayer(() -> RenderType::translucent)

@@ -1,7 +1,7 @@
 package com.kryeit.mixin;
 
-import com.kryeit.content.atm.ExchangeATMBlockEntity;
-import com.kryeit.content.atm.ExchangeATMMenu;
+import com.kryeit.content.exchanger.MechanicalExchangerBlockEntity;
+import com.kryeit.content.exchanger.MechanicalExchangerMenu;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -16,11 +16,11 @@ import org.spongepowered.asm.mixin.Unique;
 
 import javax.annotation.Nonnull;
 
-@Mixin(ExchangeATMBlockEntity.class)
+@Mixin(MechanicalExchangerBlockEntity.class)
 public class ExchangeATMBlockEntityMixin implements ExtendedScreenHandlerFactory {
 
     @Unique
-    ExchangeATMBlockEntity blockEntity = (ExchangeATMBlockEntity) (Object) this;
+    MechanicalExchangerBlockEntity blockEntity = (MechanicalExchangerBlockEntity) (Object) this;
 
     @Override
     public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
@@ -36,6 +36,6 @@ public class ExchangeATMBlockEntityMixin implements ExtendedScreenHandlerFactory
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return ExchangeATMMenu.create(i, inventory, blockEntity, blockEntity.data);
+        return MechanicalExchangerMenu.create(i, inventory, blockEntity, blockEntity.data);
     }
 }

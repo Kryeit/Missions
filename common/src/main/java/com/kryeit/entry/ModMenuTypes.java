@@ -1,7 +1,7 @@
 package com.kryeit.entry;
 
-import com.kryeit.content.atm.ExchangeATMMenu;
-import com.kryeit.content.atm.ExchangeATMScreen;
+import com.kryeit.content.exchanger.MechanicalExchangerMenu;
+import com.kryeit.content.exchanger.MechanicalExchangerScreen;
 import com.tterrag.registrate.builders.MenuBuilder;
 import com.tterrag.registrate.util.entry.MenuEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
@@ -13,8 +13,8 @@ import static com.kryeit.Main.REGISTRATE;
 
 public class ModMenuTypes {
 
-    public static final MenuEntry<ExchangeATMMenu> EXCHANGE_ATM_MENU =
-            register("exchange_atm_menu", ExchangeATMMenu::new, () -> ExchangeATMScreen::new);
+    public static final MenuEntry<MechanicalExchangerMenu> MECHANICAL_EXCHANGER_MENU =
+            register("mechanical_exchanger_menu", MechanicalExchangerMenu::new, () -> MechanicalExchangerScreen::new);
 
 
     private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> register(

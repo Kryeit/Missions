@@ -166,7 +166,7 @@ public class MissionManager {
             playerList.broadcastMessage(message, ChatType.SYSTEM, player);
 
             if (Math.random() < 0.01) {
-                MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.EXCHANGE_ATM.asStack(), serverPlayer));
+                MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.MECHANICAL_EXCHANGER.asStack(), serverPlayer));
             }
         }
     }

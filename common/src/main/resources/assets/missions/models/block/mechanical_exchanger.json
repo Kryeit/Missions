@@ -10,7 +10,7 @@
 		"5": "create:block/flap_display_side",
 		"6": "create:block/nixie_tube",
 		"7": "create:item/linked_controller",
-		"8": "missions:block/exchange_atm_front",
+		"8": "missions:block/mechanical_exchanger_front",
 		"particle": "create:block/brass_casing"
 	},
 	"elements": [
