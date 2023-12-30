@@ -12,13 +12,16 @@ public class MainFabric implements ModInitializer {
         Main.registrate().register();
         MissionHandler.registerEvents();
 
-        ClientCommandManager.DISPATCHER.register(ClientCommandManager
-                .literal("missions")
-                .executes(context -> {
-                    // This is made by ChatScreenMixin.java
-                    //context.getSource().getClient().setScreen(new MissionScreen());
-                    return 1;
-                }));
+        if (MinecraftServerSupplier.getServer() == null) {
+            ClientCommandManager.DISPATCHER.register(ClientCommandManager
+                    .literal("missions")
+                    .executes(context -> {
+                        // This is made by ChatScreenMixin.java
+                        //context.getSource().getClient().setScreen(new MissionScreen());
+                        return 1;
+                    }));
+        }
+
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> Main.handlePlayerLogin(handler.getPlayer()));
     }
