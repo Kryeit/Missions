@@ -1,6 +1,7 @@
 package com.kryeit.fabric;
 
 import com.kryeit.Main;
+import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.MissionHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
@@ -18,15 +19,17 @@ public class MainImpl implements ModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> Main.handlePlayerLogin(handler.getPlayer()));
 
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-            dispatcher.register(ClientCommandManager
-                    .literal("missions")
-                    .executes(context -> {
-                        // This is made by ChatScreenMixin.java
-                        //context.getSource().getClient().setScreen(new MissionScreen());
-                        return 1;
-                    }));
-        });
+        if (MinecraftServerSupplier.getServer() == null) {
+            ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+                dispatcher.register(ClientCommandManager
+                        .literal("missions")
+                        .executes(context -> {
+                            // This is made by ChatScreenMixin.java
+                            //context.getSource().getClient().setScreen(new MissionScreen());
+                            return 1;
+                        }));
+            });
+        }
     }
 
 
