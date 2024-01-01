@@ -70,6 +70,7 @@ public class MechanicalExchangerBlock extends DirectionalKineticBlock implements
         super.onRemove(state, level, pos, newState, isMoving);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos,
                                  Player player, InteractionHand hand, BlockHitResult hit) {
