@@ -149,11 +149,6 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         return MechanicalExchangerMenu.create(i, inventory, this, data);
     }
 
-//    @Override
-//    public void onLoad() {
-//        super.onLoad();
-//    }
-
     @Override
     public void invalidate() {
         super.invalidate();
