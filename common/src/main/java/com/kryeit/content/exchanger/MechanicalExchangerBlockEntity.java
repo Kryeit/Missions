@@ -16,7 +16,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -149,11 +148,6 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         return MechanicalExchangerMenu.create(i, inventory, this, data);
     }
 
-//    @Override
-//    public void onLoad() {
-//        super.onLoad();
-//    }
-
     @Override
     public void invalidate() {
         super.invalidate();
@@ -178,15 +172,16 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         Containers.dropContents(this.level, this.worldPosition, this);
     }
 
-    public void tick(Level level, BlockPos pos, BlockState state, MechanicalExchangerBlockEntity blockEntity) {
+    @Override
+    public void tick() {
+        super.tick();
+
         updateMode();
         if (hasRecipe()) {
             progress++;
-            setChanged(level, pos, state);
             if (progress > maxProgress) craftItem();
         } else {
             resetProgress();
-            setChanged(level, pos, state);
         }
     }
 
@@ -245,8 +240,8 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
     }
 
     public void updateMode() {
-        if(getSpeed() >= 100) mode = Mode.TO_BIGGER;
-        else if(getSpeed() <= -100) mode = Mode.TO_SMALLER;
+        if (getSpeed() >= 100) mode = Mode.TO_BIGGER;
+        else if (getSpeed() <= -100) mode = Mode.TO_SMALLER;
         else mode = Mode.OFF;
     }
 
