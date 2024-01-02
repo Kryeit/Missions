@@ -148,11 +148,6 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         return MechanicalExchangerMenu.create(i, inventory, this, data);
     }
 
-//    @Override
-//    public void onLoad() {
-//        super.onLoad();
-//    }
-
     @Override
     public void invalidate() {
         super.invalidate();
@@ -161,14 +156,14 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
     @Override
     public void write(CompoundTag tag, boolean clientPacket) {
         ContainerHelper.saveAllItems(tag, inventory);
-        if (!clientPacket) tag.putInt("exchange_atm.progress", progress);
+        if (!clientPacket) tag.putInt("mechanical_exchanger.progress", progress);
         super.write(tag, clientPacket);
     }
 
     @Override
     public void read(CompoundTag tag, boolean clientPacket) {
         ContainerHelper.loadAllItems(tag, inventory);
-        if (!clientPacket) progress = tag.getInt("exchange_atm.progress");
+        if (!clientPacket) progress = tag.getInt("mechanical_exchanger.progress");
         super.read(tag, clientPacket);
     }
 
