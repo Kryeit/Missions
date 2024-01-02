@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class Utils {
-    private static final ItemStack DEFAULT_SPAWN_EGG = BuiltInRegistries.ITEM.get(new ResourceLocation("phantom_spawn_egg")).getDefaultInstance();
+    private static final ItemStack DEFAULT_SPAWN_EGG = BuiltInRegistries.ITEM.get(new ResourceLocation("player_head")).getDefaultInstance();
 
     public static int getDay() {
         return (int) (System.currentTimeMillis() / 86_400_000);
