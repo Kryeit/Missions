@@ -26,7 +26,7 @@ public class InfoButton extends Button {
         int textureSize = 20;
         guiGraphics.blit(INFO_ICON, this.getX(), this.getY(), 0, 0, textureSize, textureSize, 20, 20);
 
-        if (isHoveredOrFocused()) {
+        if (isHovered) {
             guiGraphics.renderTooltip(Minecraft.getInstance().font, getInfoTooltip(), Optional.empty(), mouseX, mouseY);
         }
     }
