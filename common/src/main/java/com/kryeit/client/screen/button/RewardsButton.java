@@ -39,12 +39,10 @@ public class RewardsButton extends Button {
         int textureY = getY() + height / 2 - 19;
         guiGraphics.blit(rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);
 
-        if (isHovered) {
-            if (!rewardsAvailable) {
-                guiGraphics.renderTooltip(Minecraft.getInstance().font,
-                        List.of(Component.translatable("missions.menu.main.rewards.tooltip.empty").withStyle(ChatFormatting.DARK_GRAY)),
-                        Optional.empty(), mouseX, mouseY);
-            }
+        if (isHovered && !rewardsAvailable) {
+            guiGraphics.renderTooltip(Minecraft.getInstance().font,
+                    List.of(Component.translatable("missions.menu.main.rewards.tooltip.empty").withStyle(ChatFormatting.DARK_GRAY)),
+                    Optional.empty(), mouseX, mouseY);
         }
     }
 }

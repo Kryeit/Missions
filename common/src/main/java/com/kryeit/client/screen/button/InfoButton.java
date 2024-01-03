@@ -1,6 +1,5 @@
 package com.kryeit.client.screen.button;
 
-import com.kryeit.Main;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
