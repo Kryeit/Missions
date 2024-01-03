@@ -179,9 +179,11 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         updateMode();
         if (hasRecipe()) {
             progress++;
+            setChanged();
             if (progress > maxProgress) craftItem();
         } else {
             resetProgress();
+            setChanged();
         }
     }
 
