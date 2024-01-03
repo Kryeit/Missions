@@ -15,11 +15,11 @@
 
 Create: Missions is a Create addon focused for Create mod servers. It will also work in singleplayers worlds, but it's designed to bring an economy throughout a server's lifetime. We hope to give server owners a better way of giving players a currency, while also encouraging players to build their own shop contraptions/exchange banks/banks.
 
-|Versions|      Supported?      |Create version|
-|:---------:|:--------------------:|:---------:|
-| 1.18        | 0.2, only bugfixes |0.5.1.c+|
-| 1.19  | 0.2, only bugfixes |0.5.1.c+|
-| 1.20|  latest, supported   |0.5.1.d+|
+|Versions|Supported?|Create version|
+|:---------:|:---------:|:---------:|
+| 1.18        | only bugfixes |0.5.1.c+|
+| 1.19  | only bugfixes |0.5.1.c+|
+| 1.20| latest, supported|0.5.1.d+|
 
 # What's this addon?
 It works by giving **10 random missions per player per week**. These missions can be vanilla missions like **"Break X Veridium"** or Create mod related like **"Drive a train for 4 km with at least 2 passengers"**. You can also reroll the missions, and claim prices by completing them.
@@ -30,11 +30,11 @@ It works by giving **10 random missions per player per week**. These missions ca
 <details>
 <summary>Spoilers</summary>
 
-Select the currency in `missions\currency.json`, it will be 64 -> 1 in the same order the list is in, by default. You can change it by going to `missions\config.json` and changing the value of "exchange-rate". This **only** affects the exchange rate of the Exchange ATM Block, which is the only way of exchanging coins this mod gives.
+Select the currency in `config\missions\currency.json`, it will be 64 -> 1 in the same order the list is in, by default. You can change it by going to `config\missions\config.json` and changing the value of "exchange-rate". This **only** affects the exchange rate of the Exchange ATM Block, which is the only way of exchanging coins this mod gives.
 
 <details>
 <summary>missions.json -> How to configure the missions? </summary>
-This file can be found in your server files, inside a "missions" folder.
+This file can be found in `config\missions\missions.json`.
 An example mission configuration:
 
 ```json
@@ -64,7 +64,7 @@ You can add as many item id's to the "missions" bracket, and add as many titles 
 
 </details>
 <details>
-<summary>Mechanical Exchanger</summary>
+<summary>Mechanical Exchanger Block </summary>
 
 <p align="center">
   <img width="200" src="https://cdn.modrinth.com/data/KN33kvHF/images/c3e00905e1082e33477a90274f27b09ec4919f3a.png">
@@ -90,8 +90,7 @@ It lets you to exchange currencies from smaller to bigger currency. Depends on w
 - Incentive in your server an economy with no virtual balance or top lists
 - Modify from time to time the missions to they get refreshed for the players, also touchups to the missions ranges are really needed for balancing. If someone uses a better mission config file and more balanced feel free to share it with me!
 - Have in mind always the ability for a player to reroll a mission, dont give them money to infinitely reroll missions as that takes fun away. Build your economy balancing having that cost in mind.
-- Use the Exchange ATM to build a public bank!
+- Use the Mechanical Exchanger to build a public bank!
 </details>
 
 </details>
-
