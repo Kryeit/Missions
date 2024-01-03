@@ -20,7 +20,7 @@
       "com.kryeit.MainFabric"
     ],
     "client": [
-      "com.kryeit.client.ClientEntryPoint"
+      "com.kryeit.MainClient"
     ]
   },
   "mixins": [
