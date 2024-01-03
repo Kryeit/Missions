@@ -77,7 +77,7 @@ It lets you to exchange currencies from smaller to bigger currency. Depends on w
 <details>
 <summary>Suggestions </summary>
 
-- I suggest changing the default **missions\currency.json** to coin items that you have in your modpack. In my case, I use Create Deco coins:
+- I suggest changing the default `config\missions\currency.json` to coin items that you have in your modpack. In my case, I use Create Deco coins (when using Create deco, this currency.json will be created instead):
 
 ```json
 [
