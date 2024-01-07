@@ -43,6 +43,6 @@ public class ModCreativeTabsImpl {
     }
 
     public static void useBaseTab() {
-        REGISTRATE.useCreativeTab(MAIN_TAB);
+        REGISTRATE.setCreativeTab(MAIN_TAB);
     }
 }
