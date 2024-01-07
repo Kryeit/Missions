@@ -1,3 +1,7 @@
+# 0.2.5
+- (1.19) Fix Mechanical Exchanger GUI texture
+- (1.20 Forge) Fix patch F compat
+
 # 0.2.4
 - Fix Mechanical Exchanger shaft not updating upon place
 - Fix mission menu tooltips bugging when pressing buttons
