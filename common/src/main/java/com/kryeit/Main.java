@@ -18,10 +18,6 @@ import com.kryeit.missions.mission_types.create.basin.MixMission;
 import com.kryeit.missions.mission_types.create.contraption.DrillMission;
 import com.kryeit.missions.mission_types.create.contraption.SawMission;
 import com.kryeit.missions.mission_types.create.diving.DivingMissionType;
-import com.kryeit.missions.mission_types.create.fan.BlastMission;
-import com.kryeit.missions.mission_types.create.fan.HauntMission;
-import com.kryeit.missions.mission_types.create.fan.SmokeMission;
-import com.kryeit.missions.mission_types.create.fan.SplashMission;
 import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
@@ -115,12 +111,6 @@ public class Main {
         // Basin
         MissionTypeRegistry.INSTANCE.register(new CompactMission());
         MissionTypeRegistry.INSTANCE.register(new MixMission());
-
-        // Fan
-        MissionTypeRegistry.INSTANCE.register(new BlastMission());
-        MissionTypeRegistry.INSTANCE.register(new HauntMission());
-        MissionTypeRegistry.INSTANCE.register(new SmokeMission());
-        MissionTypeRegistry.INSTANCE.register(new SplashMission());
 
         // Train
         MissionTypeRegistry.INSTANCE.register(new TrainDriverMissionType());

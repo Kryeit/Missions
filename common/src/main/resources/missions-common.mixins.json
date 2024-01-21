@@ -15,7 +15,6 @@
     "create.BasinOperatingBlockEntityMixin",
     "create.BlockBreakingKineticBlockEntityMixin",
     "create.BlockBreakingMovementBehaviourMixin",
-    "create.FanProcessingMixin",
     "create.MechanicalCrafterBlockEntityMixin",
     "create.MechanicalPressBlockEntityMixin",
     "create.TrainMixin",
