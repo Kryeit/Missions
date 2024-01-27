@@ -17,11 +17,8 @@ public class MainImpl implements ModInitializer {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> Main.handlePlayerLogin(handler.getPlayer()));
     }
 
-
-
     public static void finalizeRegistrate() {
         REGISTRATE.register();
     }
-
 
 }

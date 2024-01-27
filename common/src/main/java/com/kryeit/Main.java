@@ -1,6 +1,5 @@
 package com.kryeit;
 
-
 import com.kryeit.entry.ModBlockEntities;
 import com.kryeit.entry.ModBlocks;
 import com.kryeit.entry.ModCreativeTabs;
