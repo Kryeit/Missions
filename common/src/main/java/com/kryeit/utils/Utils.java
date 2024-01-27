@@ -1,7 +1,6 @@
 package com.kryeit.utils;
 
 import com.kryeit.client.ClientMissionData;
-import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -186,15 +185,6 @@ public class Utils {
 
         return truncatedString.append("...").toString();
     }
-
-    public static String extractLastPart(String key) {
-        int lastIndex = key.lastIndexOf('.');
-        if (lastIndex != -1) { // Check if a dot was found
-            return key.substring(lastIndex + 1);
-        }
-        return key; // Return the original key if no dot is found
-    }
-
 
     public static Component getMissionMessage(ClientMissionData.ClientsideActiveMission mission, String key, ChatFormatting color, Object... args) {
         String translation = Component.translatable(key).getString();
