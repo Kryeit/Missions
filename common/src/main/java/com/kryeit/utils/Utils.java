@@ -1,5 +1,8 @@
 package com.kryeit.utils;
 
+import com.kryeit.missions.MissionType;
+import com.kryeit.missions.MissionTypeRegistry;
+import com.kryeit.missions.config.ConfigReader;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -183,8 +186,23 @@ public class Utils {
         return truncatedString.append("...").toString();
     }
 
+    public static String extractLastPart(String key) {
+        int lastIndex = key.lastIndexOf('.');
+        if (lastIndex != -1 && lastIndex < key.length() - 1) {
+            return key.substring(lastIndex + 1);
+        }
+        return key;
+    }
+
     public static Component getMessage(String key, ChatFormatting color, Object... args) {
         String translation = Component.translatable(key).getString();
+
+        if (translation.equals(key)) {
+            MissionType type = MissionTypeRegistry.INSTANCE.getType(extractLastPart(key));
+            if (type != null)
+                translation = type.description().getString();
+        }
+
         String[] parts = translation.split("%s", -1);
 
         if (parts.length == 0) {
