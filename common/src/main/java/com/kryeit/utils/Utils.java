@@ -186,7 +186,8 @@ public class Utils {
         return truncatedString.append("...").toString();
     }
 
-    public static Component getMissionMessage(ClientMissionData.ClientsideActiveMission mission, String key, ChatFormatting color, Object... args) {
+    public static Component getMissionMessage(ClientMissionData.ClientsideActiveMission mission, ChatFormatting color, Object... args) {
+        String key = "missions.menu.main.tooltip.task." + mission.missionType();
         String translation = Component.translatable(key).getString();
 
         if (translation.equals(key) && isAddonMission(mission)) {
