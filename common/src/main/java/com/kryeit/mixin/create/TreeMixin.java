@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,24 +31,21 @@ public class TreeMixin {
 
     @Inject(method = "destroyBlocks", at = @At("HEAD"))
     public void destroyBlocks(Level world, ItemStack toDamage, Player playerEntity, BiConsumer<BlockPos, ItemStack> drop, CallbackInfo ci) {
-        List<BlockPos> all = new ArrayList<>(logs);
         if (logs.isEmpty()) return;
 
+        Set<BlockPos> all = new HashSet<>(logs);
         all.addAll(leaves);
         
         final Player closestPlayer = getClosestPlayer(world, logs.get(0));
 
         if (closestPlayer == null) return;
 
-        Set<BlockPos> noDuplicates = new HashSet<>(all);
-        all = new ArrayList<>(noDuplicates);
-
-        all.forEach(pos -> {
+        all.forEach(pos ->
             MissionManager.incrementMission(
                     closestPlayer.getUUID(),
                     SawMission.class,
                     BuiltInRegistries.ITEM.getKey(world.getBlockState(pos).getBlock().asItem()),
-                    1);
-        });
+                    1)
+        );
     }
 }

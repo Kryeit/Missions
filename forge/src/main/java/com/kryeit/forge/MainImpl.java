@@ -8,6 +8,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.function.Consumer;
@@ -27,6 +28,7 @@ public class MainImpl {
         ModCreativeTabsImpl.register(bus);
 
         bus.addListener(this::doClientStuff);
+        bus.addListener(this::onConfigRead);
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.register(new MissionHandler());
@@ -35,6 +37,10 @@ public class MainImpl {
 
     public static void finalizeRegistrate() {
         REGISTRATE.registerEventListeners(bus);
+    }
+
+    private void onConfigRead(final FMLCommonSetupEvent event) {
+        Main.readConfig();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

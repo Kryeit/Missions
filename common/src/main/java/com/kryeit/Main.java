@@ -61,22 +61,6 @@ public class Main {
         useBaseTab();
         finalizeRegistrate();
 
-        try {
-            LOGGER.info("Reading config file...");
-            configReader = ConfigReader.readFile(Path.of("config/missions"));
-            List<MissionType> unusedTypes = new ArrayList<>(MissionTypeRegistry.INSTANCE.getAllTypes());
-            unusedTypes.removeAll(configReader.getMissions().keySet());
-
-            if (!unusedTypes.isEmpty()) {
-                LOGGER.warn(
-                        "The following mission types are available but ignored due to their absence in the config file: {}",
-                        Utils.map(unusedTypes, MissionType::id)
-                );
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         Runtime.getRuntime().addShutdownHook(new Thread(DataStorage.INSTANCE::save));
 
     }
@@ -180,6 +164,25 @@ public class Main {
     @ExpectPlatform
     public static void finalizeRegistrate() {
         throw new AssertionError();
+    }
+
+    public static void readConfig() {
+        try {
+            LOGGER.info("Reading config file...");
+            configReader = ConfigReader.readFile(Path.of("config/missions"));
+            List<MissionType> unusedTypes = new ArrayList<>(MissionTypeRegistry.INSTANCE.getAllTypes());
+            unusedTypes.removeAll(configReader.getMissions().keySet());
+
+            if (!unusedTypes.isEmpty()) {
+                LOGGER.warn(
+                        "The following mission types are available but ignored due to their absence in the config file: {}",
+                        Utils.map(unusedTypes, MissionType::id)
+                );
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
