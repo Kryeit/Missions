@@ -8,7 +8,6 @@ import com.kryeit.entry.ModMenuTypes;
 import com.kryeit.missions.*;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.StatisticMission;
-import com.kryeit.missions.mission_types.VoteMission;
 import com.kryeit.missions.mission_types.create.CrushMission;
 import com.kryeit.missions.mission_types.create.CutMission;
 import com.kryeit.missions.mission_types.create.MillMission;
@@ -106,7 +105,6 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new MillMission());
         MissionTypeRegistry.INSTANCE.register(new PlaceMission());
         MissionTypeRegistry.INSTANCE.register(new PressMission());
-        MissionTypeRegistry.INSTANCE.register(new VoteMission());
 
         // Basin
         MissionTypeRegistry.INSTANCE.register(new CompactMission());
