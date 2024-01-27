@@ -1,8 +1,9 @@
 package com.kryeit.utils;
 
+import com.kryeit.client.ClientMissionData;
+import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
-import com.kryeit.missions.config.ConfigReader;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -188,19 +189,18 @@ public class Utils {
 
     public static String extractLastPart(String key) {
         int lastIndex = key.lastIndexOf('.');
-        if (lastIndex != -1 && lastIndex < key.length() - 1) {
+        if (lastIndex != -1) { // Check if a dot was found
             return key.substring(lastIndex + 1);
         }
-        return key;
+        return key; // Return the original key if no dot is found
     }
 
-    public static Component getMessage(String key, ChatFormatting color, Object... args) {
+
+    public static Component getMissionMessage(ClientMissionData.ClientsideActiveMission mission, String key, ChatFormatting color, Object... args) {
         String translation = Component.translatable(key).getString();
 
-        if (translation.equals(key)) {
-            MissionType type = MissionTypeRegistry.INSTANCE.getType(extractLastPart(key));
-            if (type != null)
-                translation = type.description().getString();
+        if (translation.equals(key) && isAddonMission(mission)) {
+            translation = mission.missionString().getString();
         }
 
         String[] parts = translation.split("%s", -1);
@@ -221,5 +221,15 @@ public class Utils {
         }
 
         return result;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static boolean isAddonMission(ClientMissionData.ClientsideActiveMission mission) {
+        for (MissionType type : MissionTypeRegistry.INSTANCE.getAllTypes()) {
+            if (type.id().equals(mission.missionType())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

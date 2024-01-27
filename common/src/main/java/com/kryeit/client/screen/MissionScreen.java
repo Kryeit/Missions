@@ -128,12 +128,12 @@ public class MissionScreen extends Screen {
 
             if (Objects.equals(mission.missionType(), "train-driver-passenger")) {
                 components.add(
-                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                        Utils.getMissionMessage(mission, "missions.menu.main.tooltip.task." + mission.missionType(),
                                 ChatFormatting.WHITE, mission.requiredAmount(), TrainDriverPassengerMissionType.passengersNeeded())
                 );
             } else {
                 components.add(
-                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                        Utils.getMissionMessage(mission, "missions.menu.main.tooltip.task." + mission.missionType(),
                                 ChatFormatting.WHITE, mission.requiredAmount())
                 );
             }
@@ -141,17 +141,17 @@ public class MissionScreen extends Screen {
         } else if (mission.itemRequired().getItem() instanceof SpawnEggItem) {
             // This cannot be backported, 1.20+ contains a spawn egg for every mob
             components.add(
-                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                    Utils.getMissionMessage(mission, "missions.menu.main.tooltip.task." + mission.missionType(),
                             ChatFormatting.WHITE, mission.requiredAmount(), Utils.getEntityOfSpawnEggForTooltip(mission.itemRequired()))
             );
         } else if (mission.itemRequired().getItem() instanceof BucketItem) {
             components.add(
-                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                    Utils.getMissionMessage(mission, "missions.menu.main.tooltip.task." + mission.missionType(),
                             ChatFormatting.WHITE, Utils.getFluidFromBucketForTooltip(mission.itemRequired()), mission.requiredAmount())
             );
         } else {
             components.add(
-                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                    Utils.getMissionMessage(mission, "missions.menu.main.tooltip.task." + mission.missionType(),
                             ChatFormatting.WHITE, mission.requiredAmount(), itemName)
             );
         }

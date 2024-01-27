@@ -42,7 +42,7 @@ import static com.kryeit.entry.ModCreativeTabs.useBaseTab;
 
 public class Main {
     public static final String MOD_ID = "missions";
-    public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger("Missions");
     private static ConfigReader configReader;
 
     public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();

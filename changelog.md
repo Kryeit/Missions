@@ -1,3 +1,10 @@
+# 0.2.7
+- Added compat with Create: Missions' addons
+- Deleted fan missions
+
+# 0.2.6
+- Fix crash when onDismount(), when dismounting a train
+
 # 0.2.5
 - (1.19) Fix Mechanical Exchanger GUI texture
 - (1.20 Forge) Fix patch F compat
