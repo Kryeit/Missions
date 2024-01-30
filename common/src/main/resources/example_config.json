@@ -247,7 +247,6 @@
     },
     "missions": {
       "create:crushed_raw_gold": "150-300",
-      "leather": "100-200",
       "quartz": "200-500",
       "create:experience_nugget": "300-1000",
       "string": "200-500",
