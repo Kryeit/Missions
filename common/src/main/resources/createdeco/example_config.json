@@ -529,9 +529,25 @@
     },
     "titles": [
       "Scary business",
-      "I want to play a game",
       "Go back to your roots",
       "Sawdust and glory"
+    ]
+  },
+  "harvester": {
+    "reward": {
+      "amount": "8-30",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "wheat_seeds": "1000-3000",
+      "carrot": "1000-3000",
+      "potato": "1000-3000",
+      "cocoa_beans": "400-1200"
+    },
+    "titles": [
+      "Becoming sufficient",
+      "Hunger demands",
+      "Stardew quirks"
     ]
   }
 }

@@ -31,6 +31,7 @@
   "missions.menu.main.tooltip.task.dive": "Dive in %s for %s min with a Diving Helmet",
   "missions.menu.main.tooltip.task.drill": "Break %s of %s with a drill",
   "missions.menu.main.tooltip.task.saw": "Break %s of %s with a saw",
+  "missions.menu.main.tooltip.task.harvester": "Harvest %s of %s with a harvester",
   "missions.menu.main.tooltip.difficulty": "Difficulty: %s",
   "missions.menu.main.tooltip.itemRequired": "Item Required: %s",
   "missions.menu.main.tooltip.reward": "Reward: %s %s(s)",

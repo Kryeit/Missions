@@ -14,6 +14,7 @@ import com.kryeit.missions.mission_types.create.PressMission;
 import com.kryeit.missions.mission_types.create.basin.CompactMission;
 import com.kryeit.missions.mission_types.create.basin.MixMission;
 import com.kryeit.missions.mission_types.create.contraption.DrillMission;
+import com.kryeit.missions.mission_types.create.contraption.HarvestMission;
 import com.kryeit.missions.mission_types.create.contraption.SawMission;
 import com.kryeit.missions.mission_types.create.diving.DivingMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
@@ -104,6 +105,7 @@ public class Main {
         // Contraption
         MissionTypeRegistry.INSTANCE.register(new DrillMission());
         MissionTypeRegistry.INSTANCE.register(new SawMission());
+        MissionTypeRegistry.INSTANCE.register(new HarvestMission());
 
         List.of(
                 StatisticMission.createStatisticMission(
