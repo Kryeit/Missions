@@ -127,17 +127,12 @@
       "hoglin": "15-40"
     },
     "titles": [
-      "Operation: Hasta La Vista, Baby!",
       "Plague extermination",
       "Make doomsday happen",
       "Creature massacre",
       "Beast busting",
-      "Slayy",
-      "Skeletons in the closet",
-      "Creeper crusade",
       "Slaying ride",
-      "Monsters, Inc.",
-      "The Witch Hunt"
+      "Monsters, Inc."
     ]
   },
   "ride": {
@@ -255,16 +250,12 @@
       "red_sand": "200-800"
     },
     "titles": [
-      "Smash",
       "Superlative milling",
-      "Not the crush you're thinking of",
       "Worse than stepping on lego",
       "Ore obliteration",
-      "Mineral mania",
       "Crush and conquer",
       "Stone smasher",
-      "The gravel grind",
-      "The grind never stops"
+      "The gravel grind"
     ]
   },
   "fish": {
