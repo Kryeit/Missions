@@ -23,13 +23,10 @@ public class HarvesterMovementBehaviourMixin {
     )
     private void cutCrop(Level level, BlockPos pos, BlockState state, CallbackInfoReturnable<BlockState> cir) {
 
-        //System.out.println("Level: " + level + " BlockPos: " + pos + " BlockState: " + state);
-
         Player closestPlayer = MixinUtils.getClosestPlayer(level, pos);
 
         ItemStack result = state.getBlock().asItem().getDefaultInstance();
 
-        System.out.println("Closest player: " + closestPlayer + " Result: " + result);
         if (closestPlayer != null) {
             MissionManager.incrementMission(closestPlayer.getUUID(), HarvestMission.class, BuiltInRegistries.ITEM.getKey(result.getItem()),
                     1);
