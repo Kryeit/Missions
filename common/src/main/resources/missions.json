@@ -532,7 +532,9 @@
       "wheat_seeds": "1000-3000",
       "carrot": "1000-3000",
       "potato": "1000-3000",
-      "cocoa_beans": "400-1200"
+      "cocoa_beans": "400-1200",
+      "kelp": "500-1300",
+      "sugar_cane": "400-1000"
     },
     "titles": [
       "Becoming sufficient",
