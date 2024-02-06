@@ -1,25 +1,4 @@
 {
-  "splash": {
-    "reward": {
-      "amount": "2-23",
-      "item": "diamond"
-    },
-    "missions": {
-      "minecraft:clay_ball": "180-2000",
-      "gold_nugget": "150-500",
-      "create:dough": "500-1000",
-      "packed_ice": "300-1000",
-      "redstone": "200-500",
-      "iron_nugget": "1000-3000",
-      "quartz": "500-1500"
-    },
-    "titles": [
-      "Splash",
-      "Spitting luck",
-      "Bad weather",
-      "Humid work"
-    ]
-  },
   "cut": {
     "reward": {
       "amount": "2-23",
@@ -45,7 +24,11 @@
       "Pochita",
       "Chainsaw man",
       "Risky endeavour",
-      "Safety first"
+      "Safety first",
+      "Precision incision",
+      "Cuts like a knife",
+      "Blade runner",
+      "Slice of life"
     ]
   },
   "compact": {
@@ -64,11 +47,18 @@
       "packed_ice": "500-1200"
     },
     "titles": [
-      "Meatballs",
       "Dense topic",
       "Industrial diamonds",
       "Pack n' go",
-      "Wall-e works"
+      "Wall-e works",
+      "Compact and conquer",
+      "Miniature marvels",
+      "Compact craftsmanship",
+      "Size doesn't matter",
+      "Small-scale success",
+      "Mission miniaturized",
+      "Pocket-sized pursuit",
+      "Downsizing dilemma"
     ]
   },
   "break": {
@@ -91,28 +81,9 @@
       "Minecrafty mayhem",
       "Terrain takedown",
       "Debris dozer",
-      "A good project's starters"
-    ]
-  },
-  "haunt": {
-    "reward": {
-      "amount": "2-23",
-      "item": "diamond"
-    },
-    "missions": {
-      "minecraft:soul_sand": "500-1700",
-      "glow_berries": "500-1000",
-      "blackstone": "1000-2000",
-      "nether_brick": "400-1500",
-      "glow_ink_sac": "200-500",
-      "prismarine_shard": "100-300",
-      "soul_lantern": "100-300"
-    },
-    "titles": [
-      "Spooky fans",
-      "Blue fog",
-      "Haunter x Haunter",
-      "Soul taker"
+      "A good project's starters",
+      "Smash and Grab",
+      "Hammer Time"
     ]
   },
   "craft": {
@@ -135,25 +106,11 @@
       "Blueprint builder",
       "Creation crusade",
       "Widget wizard",
-      "Artisanal assembly"
-    ]
-  },
-  "smoke": {
-    "reward": {
-      "amount": "2-23",
-      "item": "diamond"
-    },
-    "missions": {
-      "minecraft:cooked_beef": "100-500",
-      "bread": "500-1500",
-      "dried_kelp": "500-1000",
-      "baked_potato": "300-1200",
-      "cooked_rabbit": "5-25"
-    },
-    "titles": [
-      "Smoking is bad for your health",
-      "Boss fight fog",
-      "Cooking mama"
+      "Artisanal assembly",
+      "Crafting chronicles",
+      "Crafting chaos",
+      "Crafting crusaders",
+      "Craftsmanship challenge"
     ]
   },
   "kill": {
@@ -166,14 +123,16 @@
       "zombie": "100-300",
       "endermite": "5-50",
       "skeleton": "100-250",
+      "ender_dragon": "1-10",
       "hoglin": "15-40"
     },
     "titles": [
-      "Operation: Hasta La Vista, Baby!",
       "Plague extermination",
       "Make doomsday happen",
       "Creature massacre",
-      "Beast busting"
+      "Beast busting",
+      "Slaying ride",
+      "Monsters, Inc."
     ]
   },
   "ride": {
@@ -188,7 +147,14 @@
       "Rodeo",
       "Old town road",
       "Tireless odyssey",
-      "Good ol' days"
+      "Good ol' days",
+      "Beast rider's challenge",
+      "Animal adventure",
+      "How much Horsepower does it have?",
+      "Riding on sunshine",
+      "Saddle safari",
+      "Piggyback pilgrimage",
+      "Steed of speed"
     ]
   },
   "sail": {
@@ -202,7 +168,11 @@
     "titles": [
       "Sea of pirates",
       "Sailing the seas",
-      "Seeking treasures"
+      "Seeking treasures",
+      "Nautical adventure",
+      "Sail the Seven Seas",
+      "Journey to the Deep Blue",
+      "Pirate's Cruise"
     ]
   },
   "fly": {
@@ -215,7 +185,13 @@
     },
     "titles": [
       "Cloud skipping",
-      "Breeze lover"
+      "Breeze lover",
+      "Free Bird",
+      "Wings of Freedom",
+      "Up, Up, and Away",
+      "To infinity and beyond",
+      "Eagle Eye",
+      "Ascension"
     ]
   },
   "mill": {
@@ -232,28 +208,12 @@
     },
     "titles": [
       "Soft crushing",
-      "Starter machinery"
-    ]
-  },
-  "blast": {
-    "reward": {
-      "amount": "2-23",
-      "item": "diamond"
-    },
-    "missions": {
-      "minecraft:gravel": "1-10",
-      "cracked_stone_bricks": "500-1000",
-      "glass": "1500-3000",
-      "stone": "400-2000",
-      "green_dye": "300-800",
-      "cracked_polished_blackstone_bricks": "500-1000",
-      "create:scoria": "500-1000"
-    },
-    "titles": [
-      "It's a blast",
-      "Blastoise",
-      "Heatwave",
-      "Flamethrower"
+      "Starter machinery",
+      "Mill of fortune",
+      "Almost as fun as Crushing Wheels",
+      "Flour power",
+      "Milling marvels",
+      "Wheat whirlwind"
     ]
   },
   "minecart": {
@@ -267,7 +227,12 @@
     "titles": [
       "Roller coaster",
       "Rudimentary transport",
-      "Smol tracks"
+      "Smol tracks",
+      "Minecart mania",
+      "Rails to riches",
+      "Minecart magic",
+      "Rollercoaster roadtrip",
+      "Cartwheel carnival"
     ]
   },
   "crush": {
@@ -277,7 +242,6 @@
     },
     "missions": {
       "create:crushed_raw_gold": "150-300",
-      "leather": "100-200",
       "quartz": "200-500",
       "create:experience_nugget": "300-1000",
       "string": "200-500",
@@ -286,10 +250,12 @@
       "red_sand": "200-800"
     },
     "titles": [
-      "Smash",
       "Superlative milling",
-      "Not the crush you're thinking of",
-      "Worse than stepping on lego"
+      "Worse than stepping on lego",
+      "Ore obliteration",
+      "Crush and conquer",
+      "Stone smasher",
+      "The gravel grind"
     ]
   },
   "fish": {
@@ -308,7 +274,12 @@
     },
     "titles": [
       "Fisherman",
-      "Lucky retrieving"
+      "Lucky retrieving",
+      "Reel in the fun",
+      "Fisherman's fortune",
+      "Fishing frenzy",
+      "Tales of the tackle",
+      "Splashing success"
     ]
   },
   "eat": {
@@ -330,7 +301,12 @@
       "Gobble gobble",
       "Epicurean expedition",
       "Feast of frenzy",
-      "Culinary conqueror"
+      "Culinary conqueror",
+      "Stuffed to the brim",
+      "Minecraft munchies",
+      "Satisfying the stomach",
+      "Foodie's Delight",
+      "don't forget the diet soda"
     ]
   },
   "place": {
@@ -345,9 +321,13 @@
       "grass": "50-100"
     },
     "titles": [
-      "Master Builder",
+      "Master builder",
       "Finest detailing",
-      "Last touchups"
+      "Last touchups",
+      "Laying the foundations",
+      "Setting the stage",
+      "Arrangement adventure",
+      "Places to place"
     ]
   },
   "press": {
@@ -363,7 +343,11 @@
     "titles": [
       "Bonk",
       "Factory noise",
-      "Basic machinery"
+      "Basic machinery",
+      "Pressing predicament",
+      "The power of compression",
+      "Under pressure",
+      "Press it to impress"
     ]
   },
   "mix": {
@@ -379,7 +363,12 @@
     "titles": [
       "Stressful mix",
       "Solid brewery",
-      "Wizard crafting"
+      "Wizard crafting",
+      "Brewing and stewing",
+      "Minecraft Mix Master",
+      "Cauldron chaos",
+      "Bubbling background noise",
+      "Blend and mend"
     ]
   },
   "walk": {
@@ -394,7 +383,12 @@
       "Marathon",
       "Farlands enjoyer",
       "Warden bothering",
-      "Walking simulator"
+      "Walking simulator",
+      "They call me the wanderer",
+      "Pathfinder's pursuit",
+      "Wanderlust quest",
+      "The Walking Challenge",
+      "The walking dead"
     ]
   },
   "swim": {
@@ -408,7 +402,11 @@
     "titles": [
       "Squid hunter",
       "Trident believer",
-      "Dolphin manners"
+      "Dolphin manners",
+      "Dive into adventure",
+      "Waterworld wanderlust",
+      "Deep dive discovery",
+      "Submerged saga"
     ]
   },
   "train-driver": {
@@ -420,7 +418,12 @@
       "missions:distance": "3-10"
     },
     "titles": [
-      "Training"
+      "Training",
+      "Rails of fortune",
+      "Locomotion commotion",
+      "Rails rally",
+      "Engineer's excellence",
+      "Train troubles"
     ]
   },
   "train-passenger": {
@@ -432,7 +435,15 @@
       "missions:distance": "3-10"
     },
     "titles": [
-      "All aboard!"
+      "All aboard!",
+      "Trust the driver",
+      "Passenger's paradise",
+      "Ticket to adventure",
+      "Traveler's tale",
+      "Relaxing ride",
+      "Passenger's perspective",
+      "Don't tell me how to drive!",
+      "Secondary character"
     ]
   },
   "train-driver-passenger": {
@@ -448,7 +459,12 @@
     },
     "titles": [
       "Flesh cargo",
-      "Passive companionship"
+      "Passive companionship",
+      "Symbiosis",
+      "Onboard teamwork",
+      "Copilot",
+      "Driver's Assistant to the R. Manager",
+      "Train partnership"
     ]
   },
   "dive": {
@@ -461,7 +477,10 @@
       "water": "30-120"
     },
     "titles": [
-      "Depths"
+      "Depths",
+      "Deep discovery",
+      "Exploring the abyss",
+      "Treasures of the deep"
     ]
   },
   "drill": {
@@ -481,7 +500,10 @@
       "netherrack": "2000-7000"
     },
     "titles": [
-      "Never-ending breaking"
+      "Never-ending breaking",
+      "Hand me the Contraption-4",
+      "Bore and explore",
+      "Archeology speedrun"
     ]
   },
   "saw": {
@@ -492,10 +514,32 @@
     "missions": {
       "oak_log": "400-2000",
       "spruce_log": "1000-3000",
-      "spruce_leaves": "500-1000"
+      "spruce_leaves": "500-1000",
+      "bamboo": "500-2000"
     },
     "titles": [
-      "Scary business"
+      "Scary business",
+      "Go back to your roots",
+      "Sawdust and glory"
+    ]
+  },
+  "harvester": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "missions": {
+      "wheat_seeds": "1000-3000",
+      "carrot": "1000-3000",
+      "potato": "1000-3000",
+      "cocoa_beans": "400-1200",
+      "kelp": "500-1300",
+      "sugar_cane": "400-1000"
+    },
+    "titles": [
+      "Becoming sufficient",
+      "Hunger demands",
+      "Stardew quirks"
     ]
   }
 }

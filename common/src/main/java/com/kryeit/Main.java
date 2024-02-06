@@ -8,7 +8,6 @@ import com.kryeit.entry.ModMenuTypes;
 import com.kryeit.missions.*;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.StatisticMission;
-import com.kryeit.missions.mission_types.VoteMission;
 import com.kryeit.missions.mission_types.create.CrushMission;
 import com.kryeit.missions.mission_types.create.CutMission;
 import com.kryeit.missions.mission_types.create.MillMission;
@@ -16,12 +15,9 @@ import com.kryeit.missions.mission_types.create.PressMission;
 import com.kryeit.missions.mission_types.create.basin.CompactMission;
 import com.kryeit.missions.mission_types.create.basin.MixMission;
 import com.kryeit.missions.mission_types.create.contraption.DrillMission;
+import com.kryeit.missions.mission_types.create.contraption.HarvestMission;
 import com.kryeit.missions.mission_types.create.contraption.SawMission;
 import com.kryeit.missions.mission_types.create.diving.DivingMissionType;
-import com.kryeit.missions.mission_types.create.fan.BlastMission;
-import com.kryeit.missions.mission_types.create.fan.HauntMission;
-import com.kryeit.missions.mission_types.create.fan.SmokeMission;
-import com.kryeit.missions.mission_types.create.fan.SplashMission;
 import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
@@ -45,7 +41,7 @@ import java.util.List;
 
 public class Main {
     public static final String MOD_ID = "missions";
-    public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger("Missions");
     private static ConfigReader configReader;
 
     public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();
@@ -61,6 +57,10 @@ public class Main {
         ModMenuTypes.register();
         ModBlockEntities.register();
 
+        Runtime.getRuntime().addShutdownHook(new Thread(DataStorage.INSTANCE::save));
+    }
+
+    public static void readConfig() {
         try {
             LOGGER.info("Reading config file...");
             configReader = ConfigReader.readFile(Path.of("config/missions"));
@@ -77,8 +77,6 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Runtime.getRuntime().addShutdownHook(new Thread(DataStorage.INSTANCE::save));
-
     }
 
     public static void handlePlayerLogin(Player player) {
@@ -104,17 +102,10 @@ public class Main {
         MissionTypeRegistry.INSTANCE.register(new MillMission());
         MissionTypeRegistry.INSTANCE.register(new PlaceMission());
         MissionTypeRegistry.INSTANCE.register(new PressMission());
-        MissionTypeRegistry.INSTANCE.register(new VoteMission());
 
         // Basin
         MissionTypeRegistry.INSTANCE.register(new CompactMission());
         MissionTypeRegistry.INSTANCE.register(new MixMission());
-
-        // Fan
-        MissionTypeRegistry.INSTANCE.register(new BlastMission());
-        MissionTypeRegistry.INSTANCE.register(new HauntMission());
-        MissionTypeRegistry.INSTANCE.register(new SmokeMission());
-        MissionTypeRegistry.INSTANCE.register(new SplashMission());
 
         // Train
         MissionTypeRegistry.INSTANCE.register(new TrainDriverMissionType());
@@ -127,6 +118,7 @@ public class Main {
         // Contraption
         MissionTypeRegistry.INSTANCE.register(new DrillMission());
         MissionTypeRegistry.INSTANCE.register(new SawMission());
+        MissionTypeRegistry.INSTANCE.register(new HarvestMission());
 
         List.of(
                 StatisticMission.createStatisticMission(

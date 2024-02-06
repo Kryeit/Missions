@@ -42,7 +42,7 @@ public class BlockBreakingMovementBehaviourMixin {
         Level level = context.world;
         Player closestPlayer = MixinUtils.getClosestPlayer(level, breakingPos);
 
-        ItemStack result = context.world.getBlockState(breakingPos).getBlock().asItem().getDefaultInstance();
+        ItemStack result = block.asItem().getDefaultInstance();
 
         if (closestPlayer != null) {
             MissionManager.incrementMission(closestPlayer.getUUID(), mission, Registry.ITEM.getKey(result.getItem()),

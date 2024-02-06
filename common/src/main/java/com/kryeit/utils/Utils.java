@@ -1,5 +1,8 @@
 package com.kryeit.utils;
 
+import com.kryeit.client.ClientMissionData;
+import com.kryeit.missions.MissionType;
+import com.kryeit.missions.MissionTypeRegistry;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -188,8 +191,14 @@ public class Utils {
         return truncatedString.append("...").toString();
     }
 
-    public static Component getMessage(String key, ChatFormatting color, Object... args) {
-        String translation = Component.translatable(key, "%s", "%s").getString();
+    public static Component getMissionMessage(ClientMissionData.ClientsideActiveMission mission, ChatFormatting color, Object... args) {
+        String key = "missions.menu.main.tooltip.task." + mission.missionType();
+        String translation = Component.translatable(key).getString();
+
+        if (translation.equals(key) && isAddonMission(mission)) {
+            translation = mission.missionString().getString();
+        }
+
         String[] parts = translation.split("%s", -1);
 
         if (parts.length == 0) {
@@ -208,5 +217,15 @@ public class Utils {
         }
 
         return result;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static boolean isAddonMission(ClientMissionData.ClientsideActiveMission mission) {
+        for (MissionType type : MissionTypeRegistry.INSTANCE.getAllTypes()) {
+            if (type.id().equals(mission.missionType())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

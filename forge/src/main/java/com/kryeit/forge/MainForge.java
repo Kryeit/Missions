@@ -5,6 +5,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.function.Consumer;
@@ -16,9 +17,15 @@ public class MainForge {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         Main.registrate().registerEventListeners(modEventBus);
 
+        modEventBus.addListener(this::onConfigRead);
+
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.register(new MissionHandler());
         forgeEventBus.addListener((Consumer<PlayerLoggedInEvent>) event -> Main.handlePlayerLogin(event.getEntity()));
+    }
+
+    private void onConfigRead(final FMLCommonSetupEvent event) {
+        Main.readConfig();
     }
 
 }
