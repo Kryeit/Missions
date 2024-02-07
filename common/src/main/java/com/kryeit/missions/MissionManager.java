@@ -30,6 +30,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.kryeit.missions.config.ConfigReader.EXCHANGER_DROP_RATE;
+import static com.kryeit.missions.config.ConfigReader.FIRST_REROLLING_CURRENCY;
+
 public class MissionManager {
 
     public static int checkReward(MissionType type, UUID player, ResourceLocation item) {
@@ -117,6 +120,7 @@ public class MissionManager {
     public static ReassignmentPrice calculatePrice(UUID player) {
         int price = 2 << DataStorage.INSTANCE.getReassignmentsSinceLastReset(player);
         int coinIndex = (int) Utils.log(64, price - 1);
+
         int coinAmount = (int) (price / Math.pow(64, coinIndex));
 
         return new ReassignmentPrice(Coins.getCoin(coinIndex).getItem(), coinAmount);
@@ -166,7 +170,7 @@ public class MissionManager {
                     .withStyle(ChatFormatting.GOLD);
             playerList.broadcastSystemMessage(message, false);
 
-            if (Math.random() < 0.01) {
+            if (Math.random() <= EXCHANGER_DROP_RATE) {
                 MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.MECHANICAL_EXCHANGER.asStack(), serverPlayer));
             }
         }

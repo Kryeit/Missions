@@ -1,6 +1,7 @@
 package com.kryeit.fabric;
 
 import com.kryeit.client.screen.MissionScreen;
+import com.kryeit.missions.config.ConfigReader;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
@@ -30,6 +31,9 @@ public class MainClient implements ClientModInitializer {
                     .executes(context -> {
                         // This is made by ChatScreenMixin.java
                         //context.getSource().getClient().setScreen(new MissionScreen());
+                        System.out.println(ConfigReader.EXCHANGER_DROP_RATE);
+                        System.out.println(ConfigReader.FIRST_REROLLING_CURRENCY);
+
                         return 1;
                     }));
         });

@@ -2,6 +2,7 @@ package com.kryeit.missions.config;
 
 import com.kryeit.JSONObject;
 import com.kryeit.JSONObject.JSONArray;
+import com.kryeit.coins.Coins;
 import com.kryeit.compat.CompatAddon;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
@@ -23,6 +24,8 @@ import static com.kryeit.coins.Coins.EXCHANGE_RATE;
 public class ConfigReader {
     private final Map<MissionType, Mission> missions;
     private final List<ItemStack> exchange;
+    public static double EXCHANGER_DROP_RATE;
+    public static int FIRST_REROLLING_CURRENCY;
 
     private ConfigReader(Map<MissionType, Mission> missions, List<ItemStack> exchange) {
         this.missions = missions;
@@ -69,7 +72,10 @@ public class ConfigReader {
 
         String config = readOrCopyFile(path.resolve("config.json"), "/config.json");
         JSONObject configObject = new JSONObject(config);
+
         EXCHANGE_RATE = Integer.parseInt(configObject.getString("exchange-rate"));
+        EXCHANGER_DROP_RATE = (double) configObject.get("exchanger-drop-rate");
+        FIRST_REROLLING_CURRENCY = Integer.parseInt(configObject.getString("first-rerolling-currency"));
 
         return new ConfigReader(missions, items);
     }
