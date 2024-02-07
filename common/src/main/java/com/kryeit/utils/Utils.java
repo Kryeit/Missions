@@ -1,9 +1,5 @@
 package com.kryeit.utils;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.kryeit.Main;
-import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
@@ -21,8 +17,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.packs.resources.Resource;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
@@ -34,10 +28,8 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 public class Utils {
@@ -194,34 +186,9 @@ public class Utils {
         return truncatedString.append("...").toString();
     }
 
-    public static String getRawTranslation(String key) {
-
-        ResourceManager resourceManager = MinecraftServerSupplier.getServer().getResourceManager();
-        // Get current language
-        String currentLanguage = Minecraft.getInstance().getLanguageManager().getSelected();
-
-        // Adjust the path to the language file based on the current language
-        ResourceLocation location = new ResourceLocation(Main.MOD_ID, "lang/" + currentLanguage + ".json");
-
-        Optional<Resource> resource = resourceManager.getResource(location);
-
-        if (resource.isEmpty())
-            location = new ResourceLocation(Main.MOD_ID, "lang/en_us.json");
-
-        try (InputStreamReader reader = new InputStreamReader(resourceManager.getResource(location).get().open())) {
-            JsonElement je = JsonParser.parseReader(reader);
-            if (je.isJsonObject() && je.getAsJsonObject().has(key)) {
-                return je.getAsJsonObject().get(key).getAsString();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Translation not found for key: " + key; // Fallback string
-    }
-
     public static Component getMissionMessage(ClientMissionData.ClientsideActiveMission mission, ChatFormatting color, Object... args) {
         String key = "missions.menu.main.tooltip.task." + mission.missionType();
-        String translation = getRawTranslation(key);
+        String translation = I18n.get(key).replace("Format error: ", "");
 
         if (translation.equals(key) && isAddonMission(mission)) {
             translation = mission.missionString().getString();
