@@ -193,7 +193,7 @@ public class Utils {
 
     public static Component getMissionMessage(ClientMissionData.ClientsideActiveMission mission, ChatFormatting color, Object... args) {
         String key = "missions.menu.main.tooltip.task." + mission.missionType();
-        String translation = Component.translatable(key).getString();
+        String translation = I18n.get(key).replace("Format error: ", "");
 
         if (translation.equals(key) && isAddonMission(mission)) {
             translation = mission.missionString().getString();
