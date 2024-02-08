@@ -1,5 +1,5 @@
 {
   "exchange-rate": "64",
-  "exchanger-drop-rate": 0.01,
+  "exchanger-drop-rate": "0.01",
   "first-rerolling-currency": "0"
 }

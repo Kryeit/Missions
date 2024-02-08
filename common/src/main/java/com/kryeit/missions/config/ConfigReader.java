@@ -74,7 +74,7 @@ public class ConfigReader {
         JSONObject configObject = new JSONObject(config);
 
         EXCHANGE_RATE = Integer.parseInt(configObject.getString("exchange-rate"));
-        EXCHANGER_DROP_RATE = (double) configObject.get("exchanger-drop-rate");
+        EXCHANGER_DROP_RATE = Double.parseDouble(configObject.getString("exchanger-drop-rate"));
         FIRST_REROLLING_CURRENCY = Integer.parseInt(configObject.getString("first-rerolling-currency"));
 
         return new ConfigReader(missions, items);
