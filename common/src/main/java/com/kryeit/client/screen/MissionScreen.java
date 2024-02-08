@@ -1,7 +1,6 @@
 package com.kryeit.client.screen;
 
 import com.kryeit.Main;
-import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
@@ -90,7 +89,9 @@ public class MissionScreen extends Screen {
 
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
         return new MissionButton(x, y, title, mission, button -> {
-            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR && (MinecraftServerSupplier.getServer() == null || MinecraftServerSupplier.getServer().isSingleplayer())) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice, mission.difficulty()));
+            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR) {
+                Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice, mission.difficulty()));
+            }
         });
     }
 
