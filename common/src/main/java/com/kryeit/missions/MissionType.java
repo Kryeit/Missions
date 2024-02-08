@@ -20,7 +20,7 @@ public interface MissionType {
     void reset(UUID player);
 
     default CompoundTag getData(UUID player) {
-        return DataStorage.INSTANCE.getMissionData(id(), player);
+        return MissionManager.getStorage().getMissionData(id(), player);
     }
 
     default ItemStack getItemStack(ResourceLocation item) {

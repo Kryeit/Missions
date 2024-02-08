@@ -16,9 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class DataStorage {
-    public static final File FILE = new File("mods/missions/mission_data.nbt");
-    public static final DataStorage INSTANCE = new DataStorage();
+public class DataStorage implements AutoCloseable {
+    private static final File FILE = new File("mods/missions/mission_data.nbt");
     private final CompoundTag data;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -95,9 +94,6 @@ public class DataStorage {
         }
     }
 
-    /*
-    This method should not be used. Use MissionManager#reassignMissions(UUID player) instead
-     */
     public void reassignActiveMissions(Map<MissionType, ConfigReader.Mission> missions, UUID player) {
         ListTag list = getActiveMissionsTag(player);
         list.clear();
@@ -193,6 +189,11 @@ public class DataStorage {
         ListTag list = tag.getList(key, Tag.TAG_COMPOUND);
         if (!tag.contains(key)) tag.put(key, list);
         return list;
+    }
+
+    @Override
+    public void close() {
+        save();
     }
 
     public static class ActiveMission {
