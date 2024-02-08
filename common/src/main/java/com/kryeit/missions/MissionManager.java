@@ -30,8 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.kryeit.missions.config.ConfigReader.EXCHANGER_DROP_RATE;
-import static com.kryeit.missions.config.ConfigReader.FIRST_REROLLING_CURRENCY;
+import static com.kryeit.missions.config.ConfigReader.*;
 
 public class MissionManager {
     private static final DataStorage STORAGE = new DataStorage();
@@ -122,8 +121,15 @@ public class MissionManager {
         STORAGE.resetReassignments(player);
     }
 
-    public static ReassignmentPrice calculatePrice(UUID player) {
-        int price = 2 << STORAGE.getReassignmentsSinceLastReset(player);
+    public static ReassignmentPrice calculatePrice(ServerPlayer player) {
+        int freeRerolls = getTotalFreeRerolls(player);
+        int rerolls = STORAGE.getReassignmentsSinceLastReset(player.getUUID());
+
+        if (freeRerolls > rerolls) {
+            return new ReassignmentPrice(Coins.getCoin(0).getItem(), 0);
+        }
+
+        int price = 2 << rerolls - freeRerolls;
         int coinIndex = (int) Utils.log(64, price - 1);
 
         int coinAmount = (int) (price / Math.pow(64, coinIndex));
@@ -136,7 +142,7 @@ public class MissionManager {
         DataStorage.ActiveMission activeMission = getActiveMissions(player).get(index);
         if (activeMission.isCompleted()) return;
 
-        ReassignmentPrice price = calculatePrice(player);
+        ReassignmentPrice price = calculatePrice(serverPlayer);
         if (Utils.removeItems(serverPlayer.getInventory(), price.item(), price.amount())) {
             STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
             MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
@@ -196,10 +202,13 @@ public class MissionManager {
         boolean hasUnclaimedRewards = !STORAGE.getUnclaimedRewards(playerUUID).isEmpty();
         List<ClientsideActiveMission> clientMissions = Utils.map(getActiveMissions(playerUUID), mission -> mission.toClientMission(playerUUID));
 
-        ReassignmentPrice price = MissionManager.calculatePrice(playerUUID);
+        ReassignmentPrice price = MissionManager.calculatePrice(player);
         boolean canReroll = player.getInventory().countItem(price.item()) >= price.amount();
 
-        ClientMissionData data = new ClientMissionData(hasUnclaimedRewards, clientMissions, price.asStack(), 42, canReroll);
+        int rerolls = STORAGE.getReassignmentsSinceLastReset(playerUUID);
+        int freeRerollsLeft = Math.max(0, getTotalFreeRerolls(player) - rerolls);
+
+        ClientMissionData data = new ClientMissionData(hasUnclaimedRewards, clientMissions, price.asStack(), freeRerollsLeft, freeRerollsLeft > 0 || canReroll);
 
         ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(
                 ClientsideMissionPacketUtils.IDENTIFIER,
@@ -214,5 +223,9 @@ public class MissionManager {
             stack.setCount(amount);
             return stack;
         }
+    }
+
+    private static int getTotalFreeRerolls(ServerPlayer player) {
+        return 2;
     }
 }
