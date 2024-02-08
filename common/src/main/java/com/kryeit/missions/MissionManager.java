@@ -34,6 +34,11 @@ import static com.kryeit.missions.config.ConfigReader.EXCHANGER_DROP_RATE;
 import static com.kryeit.missions.config.ConfigReader.FIRST_REROLLING_CURRENCY;
 
 public class MissionManager {
+    private static final DataStorage STORAGE = new DataStorage();
+
+    public static DataStorage getStorage() {
+        return STORAGE;
+    }
 
     public static int checkReward(MissionType type, UUID player, ResourceLocation item) {
         DataStorage.ActiveMission activeMission = getActiveMission(type.id(), item, player);
@@ -46,8 +51,8 @@ public class MissionManager {
             String rewardItem = mission.rewardItem();
 
             type.reset(player);
-            DataStorage.INSTANCE.addReward(player, rewardItem, rewardAmount);
-            DataStorage.INSTANCE.setCompleted(player, item, type.id());
+            STORAGE.addReward(player, rewardItem, rewardAmount);
+            STORAGE.setCompleted(player, item, type.id());
 
             broadcastMissionCompletion(player, activeMission, type);
         }
@@ -79,7 +84,7 @@ public class MissionManager {
 
     public static void giveReward(ServerPlayer player) {
         UUID uuid = player.getUUID();
-        Map<String, Integer> rewards = DataStorage.INSTANCE.getUnclaimedRewards(uuid);
+        Map<String, Integer> rewards = STORAGE.getUnclaimedRewards(uuid);
         for (Map.Entry<String, Integer> entry : rewards.entrySet()) {
             ItemStack itemStack = Utils.getItem(new ResourceLocation(entry.getKey()));
             itemStack.setCount(entry.getValue());
@@ -90,7 +95,7 @@ public class MissionManager {
                             .withStyle(ChatFormatting.GREEN)
             );
         }
-        DataStorage.INSTANCE.claimRewards(uuid);
+        STORAGE.claimRewards(uuid);
 
         if (!rewards.isEmpty()) {
             player.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.PLAYER_LEVELUP), SoundSource.MASTER, player.position().x, player.position().y, player.position().z, 1, 1, 1));
@@ -99,7 +104,7 @@ public class MissionManager {
 
     public static boolean reassignMissionsIfNecessary(UUID player) {
         int lastSunday = Utils.getDay() - Utils.getDayOfWeek();
-        int assignedDay = DataStorage.INSTANCE.getLastAssignedDay(player);
+        int assignedDay = STORAGE.getLastAssignedDay(player);
         if (assignedDay < lastSunday) {
             reassignMissions(player);
             return true;
@@ -112,18 +117,18 @@ public class MissionManager {
             MissionTypeRegistry.INSTANCE.getType(mission.missionID()).reset(player);
         }
 
-        DataStorage.INSTANCE.reassignActiveMissions(Main.getConfig().getMissions(), player);
-        DataStorage.INSTANCE.setLastAssignedDay(player);
-        DataStorage.INSTANCE.resetReassignments(player);
+        STORAGE.reassignActiveMissions(Main.getConfig().getMissions(), player);
+        STORAGE.setLastAssignedDay(player);
+        STORAGE.resetReassignments(player);
     }
 
     public static ReassignmentPrice calculatePrice(UUID player) {
-        int price = 2 << DataStorage.INSTANCE.getReassignmentsSinceLastReset(player);
+        int price = 2 << STORAGE.getReassignmentsSinceLastReset(player);
         int coinIndex = (int) Utils.log(64, price - 1);
 
         int coinAmount = (int) (price / Math.pow(64, coinIndex));
 
-        return new ReassignmentPrice(Coins.getCoin(coinIndex).getItem(), coinAmount);
+        return new ReassignmentPrice(Coins.getCoin(coinIndex + FIRST_REROLLING_CURRENCY).getItem(), coinAmount);
     }
 
     public static void tryReassignMission(ServerPlayer serverPlayer, int index) {
@@ -133,14 +138,14 @@ public class MissionManager {
 
         ReassignmentPrice price = calculatePrice(player);
         if (Utils.removeItems(serverPlayer.getInventory(), price.item(), price.amount())) {
-            DataStorage.INSTANCE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
+            STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
             MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
-            DataStorage.INSTANCE.incrementReassignmentsSinceLastReset(player);
+            STORAGE.incrementReassignmentsSinceLastReset(player);
         }
     }
 
     public static List<DataStorage.ActiveMission> getActiveMissions(UUID playerId) {
-        return DataStorage.INSTANCE.getActiveMissions(playerId);
+        return STORAGE.getActiveMissions(playerId);
     }
 
     public static boolean countItem(String missionTypeID, UUID player, ResourceLocation item) {
@@ -149,7 +154,7 @@ public class MissionManager {
     }
 
     public static DataStorage.ActiveMission getActiveMission(String id, ResourceLocation item, UUID player) {
-        List<DataStorage.ActiveMission> missions = DataStorage.INSTANCE.getActiveMissions(player);
+        List<DataStorage.ActiveMission> missions = STORAGE.getActiveMissions(player);
         for (DataStorage.ActiveMission mission : missions) {
             if (mission.missionID().equals(id) && mission.item().equals(item) && !mission.isCompleted()) {
                 return mission;
@@ -188,7 +193,7 @@ public class MissionManager {
 
     public static void sendMissions(ServerPlayer player) {
         UUID playerUUID = player.getUUID();
-        boolean hasUnclaimedRewards = !DataStorage.INSTANCE.getUnclaimedRewards(playerUUID).isEmpty();
+        boolean hasUnclaimedRewards = !STORAGE.getUnclaimedRewards(playerUUID).isEmpty();
         List<ClientsideActiveMission> clientMissions = Utils.map(getActiveMissions(playerUUID), mission -> mission.toClientMission(playerUUID));
 
         ReassignmentPrice price = MissionManager.calculatePrice(playerUUID);
