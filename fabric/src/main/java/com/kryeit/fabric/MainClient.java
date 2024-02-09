@@ -31,9 +31,6 @@ public class MainClient implements ClientModInitializer {
                     .executes(context -> {
                         // This is made by ChatScreenMixin.java
                         //context.getSource().getClient().setScreen(new MissionScreen());
-                        System.out.println(ConfigReader.EXCHANGER_DROP_RATE);
-                        System.out.println(ConfigReader.FIRST_REROLL_CURRENCY);
-
                         return 1;
                     }));
         });
