@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class DataStorage {
+public class DataStorage implements AutoCloseable{
     public static final File FILE = new File("mods/missions/mission_data.nbt");
     public static final DataStorage INSTANCE = new DataStorage();
     private final CompoundTag data;
@@ -120,9 +120,6 @@ public class DataStorage {
         return tag;
     }
 
-    /*
-    This method should not be used. Use MissionManager#reassignMission(ServerPlayer player, int index) instead
-     */
     public void reassignActiveMission(Map<MissionType, ConfigReader.Mission> missions, UUID player, int index) {
         ListTag list = getActiveMissionsTag(player);
         list.set(index, createActiveMissionTag(missions));
@@ -193,6 +190,11 @@ public class DataStorage {
         ListTag list = tag.getList(key, Tag.TAG_COMPOUND);
         if (!tag.contains(key)) tag.put(key, list);
         return list;
+    }
+
+    @Override
+    public void close() {
+        save();
     }
 
     public static class ActiveMission {

@@ -48,6 +48,10 @@ public class RerollButton extends Button {
 
         ResourceLocation item = Registry.ITEM.getKey(rerollPrice.getItem());
         ResourceLocation textureLocation = new ResourceLocation(item.getNamespace(), "textures/item/" + item.getPath() + ".png");
+
+        if (rerollPrice.getCount() == 1)
+            textureLocation = RewardsButton.CHEST_TEXTURE;
+
         RenderSystem.setShaderTexture(0, textureLocation);
 
         int textureX = x + width / 2 - 42;

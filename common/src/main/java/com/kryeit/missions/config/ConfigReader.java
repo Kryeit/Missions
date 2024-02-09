@@ -24,6 +24,11 @@ public class ConfigReader {
     private final Map<MissionType, Mission> missions;
     private final List<ItemStack> exchange;
 
+    public static double EXCHANGER_DROP_RATE;
+    public static int FIRST_REROLL_CURRENCY;
+    public static int FREE_REROLLS;
+    public static String COMMAND_UPON_MISSION;
+
     private ConfigReader(Map<MissionType, Mission> missions, List<ItemStack> exchange) {
         this.missions = missions;
         this.exchange = exchange;
@@ -69,7 +74,12 @@ public class ConfigReader {
 
         String config = readOrCopyFile(path.resolve("config.json"), "/config.json");
         JSONObject configObject = new JSONObject(config);
+
         EXCHANGE_RATE = Integer.parseInt(configObject.getString("exchange-rate"));
+        EXCHANGER_DROP_RATE = Double.parseDouble(configObject.getString("exchanger-drop-rate"));
+        FIRST_REROLL_CURRENCY = Integer.parseInt(configObject.getString("first-reroll-currency"));
+        FREE_REROLLS = Integer.parseInt(configObject.getString("free-rerolls"));
+        COMMAND_UPON_MISSION = configObject.getString("command-upon-mission");
 
         return new ConfigReader(missions, items);
     }

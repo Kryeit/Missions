@@ -12,7 +12,7 @@ public class RewardsButton extends Button {
     private static final Component REWARDS = Components.literal("    ").append(Components.translatable("missions.menu.main.rewards"));
     private static final OnPress NO_PRESS = button -> {
     };
-    private static final ResourceLocation CHEST_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/christmas_chest.png");
+    public static final ResourceLocation CHEST_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/christmas_chest.png");
     private static final ResourceLocation OPEN_CHEST_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/open_christmas_chest.png");
     private boolean rewardsAvailable;
 

@@ -5,7 +5,10 @@ import com.kryeit.entry.ModBlockEntities;
 import com.kryeit.entry.ModBlocks;
 import com.kryeit.entry.ModCreativeTabs;
 import com.kryeit.entry.ModMenuTypes;
-import com.kryeit.missions.*;
+import com.kryeit.missions.MissionDifficulty;
+import com.kryeit.missions.MissionManager;
+import com.kryeit.missions.MissionType;
+import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.StatisticMission;
 import com.kryeit.missions.mission_types.create.CrushMission;
@@ -57,8 +60,7 @@ public class Main {
         ModMenuTypes.register();
         ModBlockEntities.register();
 
-        Runtime.getRuntime().addShutdownHook(new Thread(DataStorage.INSTANCE::save));
-    }
+        Runtime.getRuntime().addShutdownHook(new Thread(MissionManager.getStorage()::save));    }
 
     public static void readConfig() {
         try {

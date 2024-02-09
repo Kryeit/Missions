@@ -6,11 +6,18 @@ import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.coins.Coins;
+import com.kryeit.compat.CompatAddon;
 import com.kryeit.entry.ModBlocks;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
 import io.netty.buffer.Unpooled;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.node.NodeType;
+import net.luckperms.api.node.types.PermissionNode;
+import net.luckperms.api.query.QueryOptions;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -28,7 +35,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.kryeit.missions.config.ConfigReader.*;
+
 public class MissionManager {
+
+    private static final DataStorage STORAGE = new DataStorage();
+
+    public static DataStorage getStorage() {
+        return STORAGE;
+    }
+
     public static final ResourceLocation REWARD_SOUND = new ResourceLocation("entity.player.levelup");
 
     public static int checkReward(MissionType type, UUID player, ResourceLocation item) {
@@ -42,8 +58,8 @@ public class MissionManager {
             String rewardItem = mission.rewardItem();
 
             type.reset(player);
-            DataStorage.INSTANCE.addReward(player, rewardItem, rewardAmount);
-            DataStorage.INSTANCE.setCompleted(player, item, type.id());
+            STORAGE.addReward(player, rewardItem, rewardAmount);
+            STORAGE.setCompleted(player, item, type.id());
 
             broadcastMissionCompletion(player, activeMission, type);
         }
@@ -75,7 +91,7 @@ public class MissionManager {
 
     public static void giveReward(ServerPlayer player) {
         UUID uuid = player.getUUID();
-        Map<String, Integer> rewards = DataStorage.INSTANCE.getUnclaimedRewards(uuid);
+        Map<String, Integer> rewards = STORAGE.getUnclaimedRewards(uuid);
         for (Map.Entry<String, Integer> entry : rewards.entrySet()) {
             ItemStack itemStack = Utils.getItem(new ResourceLocation(entry.getKey()));
             itemStack.setCount(entry.getValue());
@@ -86,7 +102,7 @@ public class MissionManager {
                             .withStyle(ChatFormatting.GREEN)
             );
         }
-        DataStorage.INSTANCE.claimRewards(uuid);
+        STORAGE.claimRewards(uuid);
 
         if (!rewards.isEmpty()) {
             player.connection.send(new ClientboundCustomSoundPacket(REWARD_SOUND, SoundSource.MASTER, player.position(), 1, 1, 1));
@@ -95,7 +111,7 @@ public class MissionManager {
 
     public static boolean reassignMissionsIfNecessary(UUID player) {
         int lastSunday = Utils.getDay() - Utils.getDayOfWeek();
-        int assignedDay = DataStorage.INSTANCE.getLastAssignedDay(player);
+        int assignedDay = STORAGE.getLastAssignedDay(player);
         if (assignedDay < lastSunday) {
             reassignMissions(player);
             return true;
@@ -108,17 +124,25 @@ public class MissionManager {
             MissionTypeRegistry.INSTANCE.getType(mission.missionID()).reset(player);
         }
 
-        DataStorage.INSTANCE.reassignActiveMissions(Main.getConfig().getMissions(), player);
-        DataStorage.INSTANCE.setLastAssignedDay(player);
-        DataStorage.INSTANCE.resetReassignments(player);
+        STORAGE.reassignActiveMissions(Main.getConfig().getMissions(), player);
+        STORAGE.setLastAssignedDay(player);
+        STORAGE.resetReassignments(player);
     }
 
-    public static ReassignmentPrice calculatePrice(UUID player) {
-        int price = 2 << DataStorage.INSTANCE.getReassignmentsSinceLastReset(player);
+    public static ReassignmentPrice calculatePrice(ServerPlayer player) {
+        int freeRerolls = getTotalFreeRerolls(player);
+        int rerolls = STORAGE.getReassignmentsSinceLastReset(player.getUUID());
+
+        if (freeRerolls > rerolls) {
+            return new ReassignmentPrice(Coins.getCoin(0).getItem(), 1);
+        }
+
+        int price = 2 << rerolls - freeRerolls;
         int coinIndex = (int) Utils.log(64, price - 1);
+
         int coinAmount = (int) (price / Math.pow(64, coinIndex));
 
-        return new ReassignmentPrice(Coins.getCoin(coinIndex).getItem(), coinAmount);
+        return new ReassignmentPrice(Coins.getCoin(coinIndex + FIRST_REROLL_CURRENCY).getItem(), coinAmount);
     }
 
     public static void tryReassignMission(ServerPlayer serverPlayer, int index) {
@@ -126,16 +150,21 @@ public class MissionManager {
         DataStorage.ActiveMission activeMission = getActiveMissions(player).get(index);
         if (activeMission.isCompleted()) return;
 
-        ReassignmentPrice price = calculatePrice(player);
-        if (Utils.removeItems(serverPlayer.getInventory(), price.item(), price.amount())) {
-            DataStorage.INSTANCE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
+        ReassignmentPrice price = calculatePrice(serverPlayer);
+
+        if (price.amount == 1) {
+            STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
             MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
-            DataStorage.INSTANCE.incrementReassignmentsSinceLastReset(player);
+            STORAGE.incrementReassignmentsSinceLastReset(player);
+        } else if (Utils.removeItems(serverPlayer.getInventory(), price.item(), price.amount())) {
+            STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
+            MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
+            STORAGE.incrementReassignmentsSinceLastReset(player);
         }
     }
 
     public static List<DataStorage.ActiveMission> getActiveMissions(UUID playerId) {
-        return DataStorage.INSTANCE.getActiveMissions(playerId);
+        return STORAGE.getActiveMissions(playerId);
     }
 
     public static boolean countItem(String missionTypeID, UUID player, ResourceLocation item) {
@@ -144,7 +173,7 @@ public class MissionManager {
     }
 
     public static DataStorage.ActiveMission getActiveMission(String id, ResourceLocation item, UUID player) {
-        List<DataStorage.ActiveMission> missions = DataStorage.INSTANCE.getActiveMissions(player);
+        List<DataStorage.ActiveMission> missions = STORAGE.getActiveMissions(player);
         for (DataStorage.ActiveMission mission : missions) {
             if (mission.missionID().equals(id) && mission.item().equals(item) && !mission.isCompleted()) {
                 return mission;
@@ -158,6 +187,8 @@ public class MissionManager {
         ServerPlayer serverPlayer = playerList.getPlayer(player);
         if (serverPlayer == null) return;
 
+        Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
+
         showToast(serverPlayer, mission.toClientMission(player));
 
         if (type.difficulty() == MissionDifficulty.HARD) {
@@ -165,7 +196,7 @@ public class MissionManager {
                     .withStyle(ChatFormatting.GOLD);
             playerList.broadcastSystemMessage(message, false);
 
-            if (Math.random() < 0.01) {
+            if (Math.random() <= EXCHANGER_DROP_RATE) {
                 MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.MECHANICAL_EXCHANGER.asStack(), serverPlayer));
             }
         }
@@ -183,13 +214,16 @@ public class MissionManager {
 
     public static void sendMissions(ServerPlayer player) {
         UUID playerUUID = player.getUUID();
-        boolean hasUnclaimedRewards = !DataStorage.INSTANCE.getUnclaimedRewards(playerUUID).isEmpty();
+        boolean hasUnclaimedRewards = !STORAGE.getUnclaimedRewards(playerUUID).isEmpty();
         List<ClientsideActiveMission> clientMissions = Utils.map(getActiveMissions(playerUUID), mission -> mission.toClientMission(playerUUID));
 
-        ReassignmentPrice price = MissionManager.calculatePrice(playerUUID);
+        ReassignmentPrice price = MissionManager.calculatePrice(player);
         boolean canReroll = player.getInventory().countItem(price.item()) >= price.amount();
 
-        ClientMissionData data = new ClientMissionData(hasUnclaimedRewards, clientMissions, price.asStack(), 42, canReroll);
+        int rerolls = STORAGE.getReassignmentsSinceLastReset(playerUUID);
+        int freeRerollsLeft = Math.max(0, getTotalFreeRerolls(player) - rerolls);
+
+        ClientMissionData data = new ClientMissionData(hasUnclaimedRewards, clientMissions, price.asStack(), freeRerollsLeft, freeRerollsLeft > 0 || canReroll);
 
         ClientboundCustomPayloadPacket packet = new ClientboundCustomPayloadPacket(
                 ClientsideMissionPacketUtils.IDENTIFIER,
@@ -204,5 +238,33 @@ public class MissionManager {
             stack.setCount(amount);
             return stack;
         }
+    }
+
+    private static int getTotalFreeRerolls(ServerPlayer player) {
+        int defaultValue = FREE_REROLLS;
+
+        if (!CompatAddon.LUCKPERMS.isLoaded())
+            return defaultValue;
+
+        LuckPerms luckPerms = LuckPermsProvider.get();
+
+        User user = luckPerms.getUserManager().getUser(player.getUUID());
+        if (user == null) return defaultValue;
+
+        String contextKey = "amount";
+
+        QueryOptions queryOptions = luckPerms.getContextManager().getQueryOptions(user).orElse(null);
+        if (queryOptions == null) return defaultValue;
+
+        for (PermissionNode node : user.resolveInheritedNodes(NodeType.PERMISSION, queryOptions)) {
+            if (node.getKey().equals("missions.freerolls")) {
+                Integer amount = node.getContexts().getAnyValue(contextKey).map(Integer::valueOf).orElse(null);
+                if (amount != null) {
+                    return amount;
+                }
+            }
+        }
+
+        return defaultValue;
     }
 }
