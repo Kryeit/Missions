@@ -247,7 +247,7 @@ public class MissionManager {
     private static int getTotalFreeRerolls(ServerPlayer player) {
         int defaultValue = 2;
 
-        if (CompatAddon.LUCKPERMS.isLoaded())
+        if (!CompatAddon.LUCKPERMS.isLoaded())
             return defaultValue;
 
         LuckPerms luckPerms = LuckPermsProvider.get();
