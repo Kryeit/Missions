@@ -187,6 +187,8 @@ public class MissionManager {
         ServerPlayer serverPlayer = playerList.getPlayer(player);
         if (serverPlayer == null) return;
 
+        Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
+
         showToast(serverPlayer, mission.toClientMission(player));
 
         if (type.difficulty() == MissionDifficulty.HARD) {

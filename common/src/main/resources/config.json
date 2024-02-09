@@ -2,5 +2,6 @@
   "exchange-rate": "64",
   "exchanger-drop-rate": "0.01",
   "first-reroll-currency": "0",
-  "free-rerolls": "2"
+  "free-rerolls": "2",
+  "command-upon-mission": "/say %"
 }
