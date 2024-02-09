@@ -1,8 +1,10 @@
 package com.kryeit.utils;
 
+import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
+import com.mojang.brigadier.ParseResults;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -11,11 +13,14 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -222,5 +227,19 @@ public class Utils {
             }
         }
         return true;
+    }
+
+    public static void executeCommandAsServer(String command) {
+        MinecraftServer minecraftServer = MinecraftServerSupplier.getServer();
+        CommandSourceStack commandSource = minecraftServer.createCommandSourceStack();
+        Commands commandManager = minecraftServer.getCommands();
+
+        ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSource);
+
+        try {
+            commandManager.getDispatcher().execute(parseResults);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
