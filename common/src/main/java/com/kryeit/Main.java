@@ -64,8 +64,6 @@ public class Main {
 
         useBaseTab();
         finalizeRegistrate();
-
-        Runtime.getRuntime().addShutdownHook(new Thread(MissionManager.getStorage()::save));
     }
 
     public static void handlePlayerLogin(Player player) {

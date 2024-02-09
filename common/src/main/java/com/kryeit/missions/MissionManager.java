@@ -42,6 +42,10 @@ import static com.kryeit.missions.config.ConfigReader.*;
 public class MissionManager {
     private static final DataStorage STORAGE = new DataStorage();
 
+    static {
+        Runtime.getRuntime().addShutdownHook(new Thread(MissionManager.getStorage()::save));
+    }
+
     public static DataStorage getStorage() {
         return STORAGE;
     }
@@ -128,9 +132,9 @@ public class MissionManager {
         STORAGE.resetReassignments(player);
     }
 
-    public static ReassignmentPrice calculatePrice(ServerPlayer player) {
+    public static ReassignmentPrice calculatePrice(UUID player) {
         int freeRerolls = getTotalFreeRerolls(player);
-        int rerolls = STORAGE.getReassignmentsSinceLastReset(player.getUUID());
+        int rerolls = STORAGE.getReassignmentsSinceLastReset(player);
 
         if (freeRerolls > rerolls) {
             return new ReassignmentPrice(Coins.getCoin(0).getItem(), 1);
@@ -149,14 +153,9 @@ public class MissionManager {
         DataStorage.ActiveMission activeMission = getActiveMissions(player).get(index);
         if (activeMission.isCompleted()) return;
 
-        ReassignmentPrice price = calculatePrice(serverPlayer);
+        ReassignmentPrice price = calculatePrice(player);
 
-        if (price.amount == 1) {
-            // Free rolls
-            STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
-            MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
-            STORAGE.incrementReassignmentsSinceLastReset(player);
-        } else if (Utils.removeItems(serverPlayer.getInventory(), price.item, price.amount)) {
+        if (price.amount == 1 || Utils.removeItems(serverPlayer.getInventory(), price.item, price.amount)) {
             STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
             MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
             STORAGE.incrementReassignmentsSinceLastReset(player);
@@ -215,11 +214,11 @@ public class MissionManager {
         boolean hasUnclaimedRewards = !STORAGE.getUnclaimedRewards(playerUUID).isEmpty();
         List<ClientsideActiveMission> clientMissions = Utils.map(getActiveMissions(playerUUID), mission -> mission.toClientMission(playerUUID));
 
-        ReassignmentPrice price = MissionManager.calculatePrice(player);
+        ReassignmentPrice price = MissionManager.calculatePrice(playerUUID);
         boolean canReroll = player.getInventory().countItem(price.item()) >= price.amount();
 
         int rerolls = STORAGE.getReassignmentsSinceLastReset(playerUUID);
-        int freeRerollsLeft = Math.max(0, getTotalFreeRerolls(player) - rerolls);
+        int freeRerollsLeft = Math.max(0, getTotalFreeRerolls(playerUUID) - rerolls);
 
         ClientMissionData data = new ClientMissionData(hasUnclaimedRewards, clientMissions, price.asStack(), freeRerollsLeft, freeRerollsLeft > 0 || canReroll);
 
@@ -238,7 +237,8 @@ public class MissionManager {
         }
     }
 
-    private static int getTotalFreeRerolls(ServerPlayer player) {
+    @SuppressWarnings("UnreachableCode")
+    private static int getTotalFreeRerolls(UUID player) {
         int defaultValue = FREE_REROLLS;
 
         if (!CompatAddon.LUCKPERMS.isLoaded())
@@ -246,14 +246,13 @@ public class MissionManager {
 
         LuckPerms luckPerms = LuckPermsProvider.get();
 
-        User user = luckPerms.getUserManager().getUser(player.getUUID());
+        User user = luckPerms.getUserManager().getUser(player);
         if (user == null) return defaultValue;
-
-        String contextKey = "amount";
 
         QueryOptions queryOptions = luckPerms.getContextManager().getQueryOptions(user).orElse(null);
         if (queryOptions == null) return defaultValue;
 
+        String contextKey = "amount";
         for (PermissionNode node : user.resolveInheritedNodes(NodeType.PERMISSION, queryOptions)) {
             if (node.getKey().equals("missions.freerolls")) {
                 Integer amount = node.getContexts().getAnyValue(contextKey).map(Integer::valueOf).orElse(null);
