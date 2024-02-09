@@ -222,7 +222,7 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
             ItemStack result = Coins.getExchange(getItem(0), false);
             if(result != null) {
                 removeItem(0, 1);
-                setItem(1, result);
+                setItem(1, new ItemStack(result.getItem(), getItem(1).getCount() + result.getCount()));
 
                 resetProgress();
             }
