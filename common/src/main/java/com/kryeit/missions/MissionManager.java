@@ -37,8 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.kryeit.missions.config.ConfigReader.EXCHANGER_DROP_RATE;
-import static com.kryeit.missions.config.ConfigReader.FIRST_REROLLING_CURRENCY;
+import static com.kryeit.missions.config.ConfigReader.*;
 
 public class MissionManager {
     private static final DataStorage STORAGE = new DataStorage();
@@ -137,17 +136,12 @@ public class MissionManager {
             return new ReassignmentPrice(Coins.getCoin(0).getItem(), 1);
         }
 
-        int price = 2 << (rerolls - freeRerolls);
+        int price = 2 << rerolls - freeRerolls;
+        int coinIndex = (int) Utils.log(64, price - 1);
 
-        int coinIndex = (int) Utils.log(64, price - 1) + FIRST_REROLLING_CURRENCY;
-        int coinAmount = (int) (price / Math.pow(64, coinIndex - FIRST_REROLLING_CURRENCY));
+        int coinAmount = (int) (price / Math.pow(64, coinIndex));
 
-        ItemStack coinStack = Coins.getCoin(coinIndex);
-        if(coinStack.isEmpty()) {
-            return new ReassignmentPrice(ItemStack.EMPTY.getItem(), 0);
-        }
-
-        return new ReassignmentPrice(coinStack.getItem(), coinAmount);
+        return new ReassignmentPrice(Coins.getCoin(coinIndex + FIRST_REROLL_CURRENCY).getItem(), coinAmount);
     }
 
     public static void tryReassignMission(ServerPlayer serverPlayer, int index) {
@@ -245,7 +239,7 @@ public class MissionManager {
     }
 
     private static int getTotalFreeRerolls(ServerPlayer player) {
-        int defaultValue = 2;
+        int defaultValue = FREE_REROLLS;
 
         if (!CompatAddon.LUCKPERMS.isLoaded())
             return defaultValue;
@@ -261,7 +255,7 @@ public class MissionManager {
         if (queryOptions == null) return defaultValue;
 
         for (PermissionNode node : user.resolveInheritedNodes(NodeType.PERMISSION, queryOptions)) {
-            if (node.getKey().equals("example.node")) {
+            if (node.getKey().equals("missions.freerolls")) {
                 Integer amount = node.getContexts().getAnyValue(contextKey).map(Integer::valueOf).orElse(null);
                 if (amount != null) {
                     return amount;
