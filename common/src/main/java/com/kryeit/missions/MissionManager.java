@@ -6,11 +6,18 @@ import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.coins.Coins;
+import com.kryeit.compat.CompatAddon;
 import com.kryeit.entry.ModBlocks;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
 import io.netty.buffer.Unpooled;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.node.NodeType;
+import net.luckperms.api.node.types.PermissionNode;
+import net.luckperms.api.query.QueryOptions;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +37,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.kryeit.missions.config.ConfigReader.*;
+import static com.kryeit.missions.config.ConfigReader.EXCHANGER_DROP_RATE;
+import static com.kryeit.missions.config.ConfigReader.FIRST_REROLLING_CURRENCY;
 
 public class MissionManager {
     private static final DataStorage STORAGE = new DataStorage();
@@ -126,15 +134,20 @@ public class MissionManager {
         int rerolls = STORAGE.getReassignmentsSinceLastReset(player.getUUID());
 
         if (freeRerolls > rerolls) {
-            return new ReassignmentPrice(Coins.getCoin(0).getItem(), 0);
+            return new ReassignmentPrice(Coins.getCoin(0).getItem(), 1);
         }
 
-        int price = 2 << rerolls - freeRerolls;
-        int coinIndex = (int) Utils.log(64, price - 1);
+        int price = 2 << (rerolls - freeRerolls);
 
-        int coinAmount = (int) (price / Math.pow(64, coinIndex));
+        int coinIndex = (int) Utils.log(64, price - 1) + FIRST_REROLLING_CURRENCY;
+        int coinAmount = (int) (price / Math.pow(64, coinIndex - FIRST_REROLLING_CURRENCY));
 
-        return new ReassignmentPrice(Coins.getCoin(coinIndex + FIRST_REROLLING_CURRENCY).getItem(), coinAmount);
+        ItemStack coinStack = Coins.getCoin(coinIndex);
+        if(coinStack.isEmpty()) {
+            return new ReassignmentPrice(ItemStack.EMPTY.getItem(), 0);
+        }
+
+        return new ReassignmentPrice(coinStack.getItem(), coinAmount);
     }
 
     public static void tryReassignMission(ServerPlayer serverPlayer, int index) {
@@ -143,7 +156,13 @@ public class MissionManager {
         if (activeMission.isCompleted()) return;
 
         ReassignmentPrice price = calculatePrice(serverPlayer);
-        if (Utils.removeItems(serverPlayer.getInventory(), price.item(), price.amount())) {
+
+        if (price.amount == 1) {
+            // Free rolls
+            STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
+            MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
+            STORAGE.incrementReassignmentsSinceLastReset(player);
+        } else if (Utils.removeItems(serverPlayer.getInventory(), price.item, price.amount)) {
             STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
             MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
             STORAGE.incrementReassignmentsSinceLastReset(player);
@@ -226,6 +245,30 @@ public class MissionManager {
     }
 
     private static int getTotalFreeRerolls(ServerPlayer player) {
-        return 2;
+        int defaultValue = 2;
+
+        if (CompatAddon.LUCKPERMS.isLoaded())
+            return defaultValue;
+
+        LuckPerms luckPerms = LuckPermsProvider.get();
+
+        User user = luckPerms.getUserManager().getUser(player.getUUID());
+        if (user == null) return defaultValue;
+
+        String contextKey = "amount";
+
+        QueryOptions queryOptions = luckPerms.getContextManager().getQueryOptions(user).orElse(null);
+        if (queryOptions == null) return defaultValue;
+
+        for (PermissionNode node : user.resolveInheritedNodes(NodeType.PERMISSION, queryOptions)) {
+            if (node.getKey().equals("example.node")) {
+                Integer amount = node.getContexts().getAnyValue(contextKey).map(Integer::valueOf).orElse(null);
+                if (amount != null) {
+                    return amount;
+                }
+            }
+        }
+
+        return defaultValue;
     }
 }
