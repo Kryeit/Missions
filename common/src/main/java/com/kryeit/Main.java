@@ -150,7 +150,7 @@ public class Main {
                         Component.nullToEmpty("Flying mission"),
                         100_000,
                         Items.ELYTRA,
-                        Stats.FLY_ONE_CM
+                        Stats.AVIATE_ONE_CM
                 ),
                 StatisticMission.createStatisticMission(
                         "sail",
