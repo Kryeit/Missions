@@ -8,6 +8,7 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.coins.Coins;
 import com.kryeit.compat.CompatAddon;
 import com.kryeit.entry.ModBlocks;
+import com.kryeit.entry.ModSounds;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
@@ -19,6 +20,7 @@ import net.luckperms.api.node.NodeType;
 import net.luckperms.api.node.types.PermissionNode;
 import net.luckperms.api.query.QueryOptions;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -64,7 +66,7 @@ public class MissionManager {
             STORAGE.addReward(player, rewardItem, rewardAmount);
             STORAGE.setCompleted(player, item, type.id());
 
-            broadcastMissionCompletion(player, activeMission, type);
+            onMissionComplete(player, activeMission, type);
         }
         return itemsLeft;
     }
@@ -181,11 +183,12 @@ public class MissionManager {
         return null;
     }
 
-    public static void broadcastMissionCompletion(UUID player, DataStorage.ActiveMission mission, MissionType type) {
+    public static void onMissionComplete(UUID player, DataStorage.ActiveMission mission, MissionType type) {
         PlayerList playerList = MinecraftServerSupplier.getServer().getPlayerList();
         ServerPlayer serverPlayer = playerList.getPlayer(player);
         if (serverPlayer == null) return;
 
+        serverPlayer.playSound(ModSounds.MISSION_COMPLETE.get(),1f, 1f);
         Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
 
         showToast(serverPlayer, mission.toClientMission(player));

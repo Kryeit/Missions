@@ -45,5 +45,6 @@
   "missions.difficulty.hard": "Difficile",
   "block.missions.mechanical_exchanger": "Mechanical Exchanger",
   "missions.message.hard_mission_completed": "%s vient de compléter une mission difficile!",
-  "missions.reassign": "Your missions have been reassigned just like every week! Open the missions menu with /missions or the missions key"
+  "missions.reassign": "Your missions have been reassigned just like every week! Open the missions menu with /missions or the missions key",
+  "sounds.missions.mission_complete": "Mission completed"
 }

@@ -45,5 +45,6 @@
   "missions.difficulty.hard": "Трудно",
   "block.missions.mechanical_exchanger": "Механический обменник",
   "missions.message.hard_mission_completed": "%s выполнил тяжелое задание!",
-  "missions.reassign": "Ваши миссии были переназначены! Вы можете проверить свои новые миссии в меню заданий"
+  "missions.reassign": "Ваши миссии были переназначены! Вы можете проверить свои новые миссии в меню заданий",
+  "sounds.missions.mission_complete": "Mission completed"
 }
