@@ -1,6 +1,6 @@
-package com.kryeit.entry.forge;
+package com.kryeit.registry.forge;
 
-import com.kryeit.entry.ModCreativeTabs;
+import com.kryeit.registry.ModCreativeTabs;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;

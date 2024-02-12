@@ -1,4 +1,4 @@
-package com.kryeit.entry;
+package com.kryeit.registry;
 
 import com.kryeit.Main;
 import com.kryeit.content.exchanger.MechanicalExchangerBlock;
@@ -9,8 +9,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import static com.kryeit.Main.REGISTRATE;
-import static com.kryeit.entry.ModCreativeTabs.useBaseTab;
+import static com.kryeit.registry.ModCreativeTabs.useBaseTab;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 

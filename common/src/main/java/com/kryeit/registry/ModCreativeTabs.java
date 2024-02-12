@@ -1,4 +1,4 @@
-package com.kryeit.entry;
+package com.kryeit.registry;
 
 import com.kryeit.Main;
 import com.kryeit.multiloader.Env;
@@ -21,8 +21,6 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import static com.kryeit.Main.REGISTRATE;
 
 public class ModCreativeTabs {
 

@@ -1,8 +1,8 @@
 package com.kryeit.forge;
 
 import com.kryeit.Main;
-import com.kryeit.entry.forge.KeyInit;
-import com.kryeit.entry.forge.ModCreativeTabsImpl;
+import com.kryeit.registry.forge.KeyInit;
+import com.kryeit.registry.forge.ModCreativeTabsImpl;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.IEventBus;

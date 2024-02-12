@@ -1,6 +1,6 @@
 package com.kryeit;
 
-import com.kryeit.entry.*;
+import com.kryeit.registry.*;
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
@@ -23,7 +23,6 @@ import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
 import com.kryeit.missions.mission_types.vanilla.*;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.Registrate;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -40,11 +39,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.kryeit.entry.ModCreativeTabs.useBaseTab;
+import static com.kryeit.registry.ModCreativeTabs.useBaseTab;
 
 public class Main {
     public static final String MOD_ID = "missions";
-    public static final Logger LOGGER = LoggerFactory.getLogger("Missions");
+    public static final String NAME = "Missions";
+    public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
     private static ConfigReader configReader;
 
     public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();

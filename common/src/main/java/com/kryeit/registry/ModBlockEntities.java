@@ -1,12 +1,10 @@
-package com.kryeit.entry;
+package com.kryeit.registry;
 
 import com.kryeit.Main;
 import com.kryeit.content.exchanger.MechanicalExchangerBlockEntity;
 import com.kryeit.content.exchanger.MechanicalExchangerInstance;
 import com.kryeit.content.exchanger.MechanicalExchangerRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-
-import static com.kryeit.Main.REGISTRATE;
 
 
 public class ModBlockEntities {

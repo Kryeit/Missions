@@ -1,4 +1,4 @@
-package com.kryeit.entry;
+package com.kryeit.registry;
 
 import com.kryeit.Main;
 import com.kryeit.content.exchanger.MechanicalExchangerMenu;
@@ -9,8 +9,6 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-
-import static com.kryeit.Main.REGISTRATE;
 
 public class ModMenuTypes {
 

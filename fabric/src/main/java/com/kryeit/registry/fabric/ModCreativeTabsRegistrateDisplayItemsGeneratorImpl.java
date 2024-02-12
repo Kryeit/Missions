@@ -1,4 +1,4 @@
-package com.kryeit.entry.fabric;
+package com.kryeit.registry.fabric;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.resources.ResourceKey;

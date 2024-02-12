@@ -1,7 +1,7 @@
-package com.kryeit.entry.fabric;
+package com.kryeit.registry.fabric;
 
 import com.kryeit.Main;
-import com.kryeit.entry.ModCreativeTabs;
+import com.kryeit.registry.ModCreativeTabs;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,7 +14,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import java.util.function.Supplier;
 
 import static com.kryeit.Main.REGISTRATE;
-import static com.kryeit.entry.ModBlocks.MECHANICAL_EXCHANGER;
+import static com.kryeit.registry.ModBlocks.MECHANICAL_EXCHANGER;
 
 public class ModCreativeTabsImpl {
     private static final ModCreativeTabs.TabInfo MAIN_TAB = register("main",

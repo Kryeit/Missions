@@ -1,6 +1,6 @@
 package com.kryeit.content.exchanger;
 
-import com.kryeit.entry.ModBlockEntities;
+import com.kryeit.registry.ModBlockEntities;
 import com.kryeit.utils.BlockUtils;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;

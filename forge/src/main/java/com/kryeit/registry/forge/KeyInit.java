@@ -1,4 +1,4 @@
-package com.kryeit.entry.forge;
+package com.kryeit.registry.forge;
 
 import com.kryeit.client.screen.MissionScreen;
 import com.mojang.blaze3d.platform.InputConstants;

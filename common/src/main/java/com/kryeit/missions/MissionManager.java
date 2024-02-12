@@ -7,8 +7,8 @@ import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.coins.Coins;
 import com.kryeit.compat.CompatAddon;
-import com.kryeit.entry.ModBlocks;
-import com.kryeit.entry.ModSounds;
+import com.kryeit.registry.ModBlocks;
+import com.kryeit.registry.ModSounds;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
@@ -20,7 +20,6 @@ import net.luckperms.api.node.NodeType;
 import net.luckperms.api.node.types.PermissionNode;
 import net.luckperms.api.query.QueryOptions;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -188,7 +187,7 @@ public class MissionManager {
         ServerPlayer serverPlayer = playerList.getPlayer(player);
         if (serverPlayer == null) return;
 
-        serverPlayer.playSound(ModSounds.MISSION_COMPLETE.get(),1f, 1f);
+        serverPlayer.playSound(ModSounds.MISSION_COMPLETE.get());
         Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
 
         showToast(serverPlayer, mission.toClientMission(player));

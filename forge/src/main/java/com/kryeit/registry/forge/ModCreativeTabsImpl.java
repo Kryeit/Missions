@@ -1,7 +1,7 @@
-package com.kryeit.entry.forge;
+package com.kryeit.registry.forge;
 
 import com.kryeit.Main;
-import com.kryeit.entry.ModCreativeTabs;
+import com.kryeit.registry.ModCreativeTabs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -14,7 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import static com.kryeit.Main.REGISTRATE;
-import static com.kryeit.entry.ModBlocks.MECHANICAL_EXCHANGER;
+import static com.kryeit.registry.ModBlocks.MECHANICAL_EXCHANGER;
 
 @EventBusSubscriber(bus = Bus.MOD)
 public class ModCreativeTabsImpl {
