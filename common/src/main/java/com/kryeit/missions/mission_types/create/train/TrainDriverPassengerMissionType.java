@@ -1,7 +1,7 @@
 package com.kryeit.missions.mission_types.create.train;
 
 import com.kryeit.JSONObject;
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
@@ -20,8 +20,8 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 public class TrainDriverPassengerMissionType implements MissionType {
-    private static final ResourceLocation IDENTIFIER = new ResourceLocation(Main.MOD_ID, "distance");
-    private static final ResourceLocation PASSENGERS = new ResourceLocation(Main.MOD_ID, "passengers");
+    private static final ResourceLocation IDENTIFIER = new ResourceLocation(Missions.MOD_ID, "distance");
+    private static final ResourceLocation PASSENGERS = new ResourceLocation(Missions.MOD_ID, "passengers");
 
     public static void handleDistanceChange(UUID player, int difference) {
         MissionManager.incrementMission(player, TrainDriverPassengerMissionType.class, IDENTIFIER, difference);

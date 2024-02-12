@@ -1,6 +1,6 @@
 package com.kryeit.content.exchanger;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -10,8 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class MechanicalExchangerScreen extends AbstractContainerScreen<MechanicalExchangerMenu> {
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Main.MOD_ID, "textures/gui/mechanical_exchanger_gui.png");
+    private static final ResourceLocation TEXTURE = Missions.asResource("textures/gui/mechanical_exchanger_gui.png");
     public MechanicalExchangerScreen(MechanicalExchangerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Iterator;
 import java.util.Map;
 
-import static com.kryeit.Main.cachedTrainPlayerPositions;
+import static com.kryeit.Missions.cachedTrainPlayerPositions;
 
 @Mixin(value = AbstractContraptionEntity.class)
 public class AbstractContraptionEntityMixin {

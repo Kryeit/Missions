@@ -1,6 +1,6 @@
 package com.kryeit.missions.mission_types.create.train;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
@@ -14,7 +14,7 @@ import net.minecraft.world.item.Items;
 import java.util.UUID;
 
 public class TrainDriverMissionType implements MissionType {
-    private static final ResourceLocation IDENTIFIER = new ResourceLocation(Main.MOD_ID, "distance");
+    private static final ResourceLocation IDENTIFIER = new ResourceLocation(Missions.MOD_ID, "distance");
 
     public static void handleDistanceChange(UUID player, int difference) {
         MissionManager.incrementMission(player, TrainDriverMissionType.class, IDENTIFIER, difference);

@@ -1,6 +1,6 @@
 package com.kryeit.coins;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -9,7 +9,7 @@ import java.util.List;
 public class Coins {
     public static int EXCHANGE_RATE;
     public static List<ItemStack> getCoins() {
-        return Main.getConfig().exchange();
+        return Missions.getConfig().exchange();
     }
 
     public static ItemStack getCoin(int index) {

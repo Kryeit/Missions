@@ -1,6 +1,6 @@
 package com.kryeit.registry.fabric;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.registry.ModCreativeTabs;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.CreativeModeTab;
 
 import java.util.function.Supplier;
 
-import static com.kryeit.Main.REGISTRATE;
+import static com.kryeit.Missions.REGISTRATE;
 import static com.kryeit.registry.ModBlocks.MECHANICAL_EXCHANGER;
 
 public class ModCreativeTabsImpl {
@@ -33,7 +33,7 @@ public class ModCreativeTabsImpl {
     }
 
     private static ModCreativeTabs.TabInfo register(String name, Supplier<CreativeModeTab> supplier) {
-        ResourceLocation id = new ResourceLocation(Main.MOD_ID, name);
+        ResourceLocation id = new ResourceLocation(Missions.MOD_ID, name);
         ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, id);
         CreativeModeTab tab = supplier.get();
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, key, tab);

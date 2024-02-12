@@ -1,7 +1,6 @@
 package com.kryeit.fabric;
 
 import com.kryeit.client.screen.MissionScreen;
-import com.kryeit.missions.config.ConfigReader;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
@@ -11,7 +10,7 @@ import net.minecraft.client.KeyMapping;
 import org.lwjgl.glfw.GLFW;
 
 
-public class MainClient implements ClientModInitializer {
+public class MissionsClientImpl implements ClientModInitializer {
 
     public static KeyMapping missionGuiKey;
 

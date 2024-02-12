@@ -1,6 +1,6 @@
 package com.kryeit.mixin;
 
-import com.kryeit.ServerPacketHandler;
+import com.kryeit.packet.ServerPacketHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ServerGamePacketListener;
 import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;

@@ -1,4 +1,4 @@
-package com.kryeit;
+package com.kryeit.packet;
 
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;

@@ -1,5 +1,6 @@
 package com.kryeit.client;
 
+import com.kryeit.Missions;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
@@ -13,14 +14,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import static com.kryeit.Main.MOD_ID;
-
 public class ClientsideMissionPacketUtils {
-    public static final ResourceLocation IDENTIFIER = new ResourceLocation(MOD_ID, "active_missions");
-    public static final ResourceLocation PAYOUT_IDENTIFIER = new ResourceLocation(MOD_ID, "payout");
-    public static final ResourceLocation REROLL_IDENTIFIER = new ResourceLocation(MOD_ID, "reroll");
-    public static final ResourceLocation REQUEST_MISSIONS = new ResourceLocation(MOD_ID, "request_missions");
-    public static final ResourceLocation SHOW_TOAST = new ResourceLocation(MOD_ID, "show_toast");
+    public static final ResourceLocation IDENTIFIER = Missions.asResource("active_missions");
+    public static final ResourceLocation PAYOUT_IDENTIFIER = Missions.asResource("payout");
+    public static final ResourceLocation REROLL_IDENTIFIER = Missions.asResource("reroll");
+    public static final ResourceLocation REQUEST_MISSIONS = Missions.asResource("request_missions");
+    public static final ResourceLocation SHOW_TOAST = Missions.asResource("show_toast");
     private static Consumer<ClientMissionData> updateHandler;
 
     public static void handlePacket(FriendlyByteBuf buf) {

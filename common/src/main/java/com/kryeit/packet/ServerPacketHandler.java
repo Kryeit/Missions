@@ -1,4 +1,4 @@
-package com.kryeit;
+package com.kryeit.packet;
 
 import com.kryeit.missions.MissionManager;
 import net.minecraft.network.FriendlyByteBuf;

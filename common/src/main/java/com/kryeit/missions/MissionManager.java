@@ -1,15 +1,15 @@
 package com.kryeit.missions;
 
-import com.kryeit.Main;
 import com.kryeit.MinecraftServerSupplier;
+import com.kryeit.Missions;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.coins.Coins;
 import com.kryeit.compat.CompatAddon;
+import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.registry.ModBlocks;
 import com.kryeit.registry.ModSounds;
-import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
 import io.netty.buffer.Unpooled;
@@ -57,7 +57,7 @@ public class MissionManager {
 
         int itemsLeft = activeMission.requiredAmount() - type.getProgress(player, activeMission.item());
         if (itemsLeft <= 0) {
-            ConfigReader.Mission mission = Main.getConfig().getMissions().get(type);
+            ConfigReader.Mission mission = Missions.getConfig().getMissions().get(type);
             int rewardAmount = mission.rewardAmount().getRandomValue();
             String rewardItem = mission.rewardItem();
 
@@ -128,7 +128,7 @@ public class MissionManager {
             MissionTypeRegistry.INSTANCE.getType(mission.missionID()).reset(player);
         }
 
-        STORAGE.reassignActiveMissions(Main.getConfig().getMissions(), player);
+        STORAGE.reassignActiveMissions(Missions.getConfig().getMissions(), player);
         STORAGE.setLastAssignedDay(player);
         STORAGE.resetReassignments(player);
     }
@@ -157,7 +157,7 @@ public class MissionManager {
         ReassignmentPrice price = calculatePrice(player);
 
         if (price.amount == 1 || Utils.removeItems(serverPlayer.getInventory(), price.item, price.amount)) {
-            STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
+            STORAGE.reassignActiveMission(Missions.getConfig().getMissions(), player, index);
             MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
             STORAGE.incrementReassignmentsSinceLastReset(player);
         }

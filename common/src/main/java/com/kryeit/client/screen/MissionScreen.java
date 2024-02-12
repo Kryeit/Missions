@@ -1,6 +1,6 @@
 package com.kryeit.client.screen;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class MissionScreen extends Screen {
-    public static final ResourceLocation MISSIONS_TITLE = new ResourceLocation(Main.MOD_ID, "textures/gui/title.png");
+    public static final ResourceLocation MISSIONS_TITLE = Missions.asResource("textures/gui/title.png");
     public static final Component CLOSE = Components.translatable("missions.menu.close");
     private ClientMissionData data = null;
 

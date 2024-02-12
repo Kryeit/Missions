@@ -17,10 +17,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kryeit.fabric.MainImpl"
+      "com.kryeit.fabric.MissionsImpl"
     ],
     "client": [
-      "com.kryeit.fabric.MainClient"
+      "com.kryeit.fabric.MissionsClientImpl"
     ]
   },
   "mixins": [

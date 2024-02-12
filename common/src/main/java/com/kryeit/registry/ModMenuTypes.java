@@ -1,6 +1,6 @@
 package com.kryeit.registry;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.content.exchanger.MechanicalExchangerMenu;
 import com.kryeit.content.exchanger.MechanicalExchangerScreen;
 import com.tterrag.registrate.builders.MenuBuilder;
@@ -18,7 +18,7 @@ public class ModMenuTypes {
 
     private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> register(
             String name, MenuBuilder.ForgeMenuFactory<C> factory, NonNullSupplier<MenuBuilder.ScreenFactory<C, S>> screenFactory) {
-        return Main.registrate()
+        return Missions.registrate()
                 .menu(name, factory, screenFactory)
                 .register();
     }

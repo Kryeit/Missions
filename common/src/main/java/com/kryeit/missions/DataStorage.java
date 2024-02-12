@@ -1,6 +1,6 @@
 package com.kryeit.missions;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.config.Range;
@@ -229,7 +229,7 @@ public class DataStorage implements AutoCloseable {
 
         public ClientsideActiveMission toClientMission(UUID player) {
             MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
-            ConfigReader.Mission configMission = Main.getConfig().getMissions().get(type);
+            ConfigReader.Mission configMission = Missions.getConfig().getMissions().get(type);
             return new ClientsideActiveMission(
                     Component.nullToEmpty(title),
                     type.difficulty(),

@@ -1,6 +1,6 @@
 package com.kryeit.registry.forge;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.registry.ModCreativeTabs;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -13,14 +13,14 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import static com.kryeit.Main.REGISTRATE;
+import static com.kryeit.Missions.REGISTRATE;
 import static com.kryeit.registry.ModBlocks.MECHANICAL_EXCHANGER;
 
 @EventBusSubscriber(bus = Bus.MOD)
 public class ModCreativeTabsImpl {
 
     private static final DeferredRegister<CreativeModeTab> TAB_REGISTER =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Main.MOD_ID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Missions.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> MAIN_TAB = TAB_REGISTER.register("main",
             () -> CreativeModeTab.builder()

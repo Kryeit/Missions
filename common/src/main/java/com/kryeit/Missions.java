@@ -1,6 +1,5 @@
 package com.kryeit;
 
-import com.kryeit.registry.*;
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
@@ -21,10 +20,12 @@ import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
 import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
 import com.kryeit.missions.mission_types.vanilla.*;
+import com.kryeit.registry.*;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
@@ -41,7 +42,7 @@ import java.util.List;
 
 import static com.kryeit.registry.ModCreativeTabs.useBaseTab;
 
-public class Main {
+public class Missions {
     public static final String MOD_ID = "missions";
     public static final String NAME = "Missions";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
@@ -63,6 +64,10 @@ public class Main {
 
         useBaseTab();
         finalizeRegistrate();
+    }
+
+    public static ResourceLocation asResource(String key) {
+        return new ResourceLocation(MOD_ID, key);
     }
 
     public static void handlePlayerLogin(Player player) {

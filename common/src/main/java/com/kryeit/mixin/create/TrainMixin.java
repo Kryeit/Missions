@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-import static com.kryeit.Main.cachedTrainPlayerPositions;
+import static com.kryeit.Missions.cachedTrainPlayerPositions;
 import static com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType.passengersNeeded;
 
 @Mixin(value = Train.class, remap = false)
