@@ -1,5 +1,6 @@
 package com.kryeit.entry;
 
+import com.kryeit.Main;
 import com.kryeit.content.exchanger.MechanicalExchangerBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
@@ -19,8 +20,8 @@ public class ModBlocks {
         useBaseTab();
     }
 
-    public static final BlockEntry<MechanicalExchangerBlock> MECHANICAL_EXCHANGER =
-        REGISTRATE.block("mechanical_exchanger", MechanicalExchangerBlock::new)
+    public static final BlockEntry<MechanicalExchangerBlock> MECHANICAL_EXCHANGER = Main.registrate()
+            .block("mechanical_exchanger",MechanicalExchangerBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(BlockBehaviour.Properties::noOcclusion)
             .addLayer(() -> RenderType::translucent)

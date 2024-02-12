@@ -1,5 +1,6 @@
 package com.kryeit.entry;
 
+import com.kryeit.Main;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -9,7 +10,7 @@ import static com.kryeit.Main.MOD_ID;
 import static com.kryeit.Main.REGISTRATE;
 
 public class ModSounds {
-    public static final RegistryEntry<SoundEvent> MISSION_COMPLETE = REGISTRATE
+    public static final RegistryEntry<SoundEvent> MISSION_COMPLETE = Main.registrate()
             .simple(
                     "mission_complete",
                     Registries.SOUND_EVENT,

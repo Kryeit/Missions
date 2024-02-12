@@ -23,6 +23,7 @@ import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
 import com.kryeit.missions.mission_types.vanilla.*;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.Registrate;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -48,7 +49,7 @@ public class Main {
 
     public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();
 
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
+    public static CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
     public static void init() {
         registerMissions();
@@ -159,6 +160,10 @@ public class Main {
                         Stats.BOAT_ONE_CM
                 )
         ).forEach(MissionTypeRegistry.INSTANCE::register);
+    }
+
+    public static CreateRegistrate registrate() {
+        return REGISTRATE;
     }
 
     @ExpectPlatform

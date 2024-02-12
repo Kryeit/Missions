@@ -1,5 +1,6 @@
 package com.kryeit.entry;
 
+import com.kryeit.Main;
 import com.kryeit.multiloader.Env;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
@@ -178,7 +179,7 @@ public class ModCreativeTabs {
 
         private List<Item> collectBlocks(ResourceKey<CreativeModeTab> tab, Predicate<Item> exclusionPredicate) {
             List<Item> items = new ReferenceArrayList<>();
-            for (RegistryEntry<Block> entry : REGISTRATE.getAll(Registries.BLOCK)) {
+            for (RegistryEntry<Block> entry : Main.registrate().getAll(Registries.BLOCK)) {
                 if (!isInCreativeTab(entry, tab))
                     continue;
                 Item item = entry.get()
@@ -196,7 +197,7 @@ public class ModCreativeTabs {
                                         Predicate<Item> exclusionPredicate) {
             List<Item> items = new ReferenceArrayList<>();
 
-            for (RegistryEntry<Item> entry : REGISTRATE.getAll(Registries.ITEM)) {
+            for (RegistryEntry<Item> entry : Main.registrate().getAll(Registries.ITEM)) {
                 if (!isInCreativeTab(entry, tab))
                     continue;
                 Item item = entry.get();
