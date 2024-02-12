@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class Coins {
-    public static int EXCHANGE_RATE = 64;
+    public static int EXCHANGE_RATE;
     public static List<ItemStack> getCoins() {
         return Main.getConfig().exchange();
     }
