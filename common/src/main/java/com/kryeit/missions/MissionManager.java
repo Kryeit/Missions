@@ -187,7 +187,7 @@ public class MissionManager {
         ServerPlayer serverPlayer = playerList.getPlayer(player);
         if (serverPlayer == null) return;
 
-        serverPlayer.playSound(ModSounds.MISSION_COMPLETE.get());
+        serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(ModSounds.MISSION_COMPLETE.get()), SoundSource.NEUTRAL, serverPlayer.position().x, serverPlayer.position().y, serverPlayer.position().z, 1, 1, 1));
         Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
 
         showToast(serverPlayer, mission.toClientMission(player));
