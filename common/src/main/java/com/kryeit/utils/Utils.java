@@ -234,12 +234,8 @@ public class Utils {
         CommandSourceStack commandSource = minecraftServer.createCommandSourceStack();
         Commands commandManager = minecraftServer.getCommands();
 
-        ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSource);
+        ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSource.withSuppressedOutput());
 
-        try {
-            commandManager.getDispatcher().execute(parseResults);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        MinecraftServerSupplier.getServer().getCommands().performCommand(parseResults, command);
     }
 }
