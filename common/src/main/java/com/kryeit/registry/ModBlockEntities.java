@@ -10,7 +10,7 @@ import com.tterrag.registrate.util.entry.BlockEntityEntry;
 public class ModBlockEntities {
 
     public static final BlockEntityEntry<MechanicalExchangerBlockEntity> MECHANICAL_EXCHANGER = Missions.registrate()
-            .blockEntity("mechanical_exchanger",MechanicalExchangerBlockEntity::new)
+            .blockEntity("mechanical_exchanger", MechanicalExchangerBlockEntity::new)
             .instance(() -> MechanicalExchangerInstance::new)
             .validBlocks(ModBlocks.MECHANICAL_EXCHANGER)
             .renderer(() -> MechanicalExchangerRenderer::new)

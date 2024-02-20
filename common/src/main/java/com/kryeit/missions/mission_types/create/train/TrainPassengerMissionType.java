@@ -43,7 +43,7 @@ public class TrainPassengerMissionType implements MissionType {
     }
 
     @Override
-    public void reset(UUID player) {
+    public void reset(UUID player, ResourceLocation item) {
         getData(player).remove("value");
     }
 
