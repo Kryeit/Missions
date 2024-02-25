@@ -20,7 +20,7 @@ public class ModBlocks {
     }
 
     public static final BlockEntry<MechanicalExchangerBlock> MECHANICAL_EXCHANGER = Missions.registrate()
-            .block("mechanical_exchanger", MechanicalExchangerBlock::create)
+            .block("mechanical_exchanger", MechanicalExchangerBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(BlockBehaviour.Properties::noOcclusion)
             .addLayer(() -> RenderType::translucent)
