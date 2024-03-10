@@ -1,6 +1,7 @@
 package com.kryeit.coins;
 
 import com.kryeit.Missions;
+import com.kryeit.missions.config.ConfigReader;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -9,8 +10,9 @@ import java.util.List;
 public class Coins {
     public static int EXCHANGE_RATE;
     public static List<ItemStack> getCoins() {
-        if (Missions.getConfig() == null) return null;
-        return Missions.getConfig().exchange();
+        ConfigReader config = Missions.getConfig();
+        if (config == null) return List.of();
+        return config.exchange();
     }
 
     public static ItemStack getCoin(int index) {
