@@ -10,9 +10,7 @@ import java.util.List;
 public class Coins {
     public static int EXCHANGE_RATE;
     public static List<ItemStack> getCoins() {
-        ConfigReader config = Missions.getConfig();
-        if (config == null) return List.of();
-        return config.exchange();
+        return Missions.getConfig().exchange();
     }
 
     public static ItemStack getCoin(int index) {
