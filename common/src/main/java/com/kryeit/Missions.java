@@ -24,7 +24,6 @@ import com.kryeit.registry.*;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.fabricmc.fabric.api.networking.v1.S2CPlayChannelEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
