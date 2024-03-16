@@ -43,10 +43,6 @@ import static com.kryeit.missions.config.ConfigReader.*;
 public class MissionManager {
     private static final DataStorage STORAGE = new DataStorage();
 
-    static {
-        Runtime.getRuntime().addShutdownHook(new Thread(MissionManager.getStorage()::save));
-    }
-
     public static DataStorage getStorage() {
         return STORAGE;
     }
