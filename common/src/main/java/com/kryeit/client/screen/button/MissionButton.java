@@ -31,7 +31,7 @@ public class MissionButton extends Button {
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderButtonTexture(guiGraphics);
         drawText(guiGraphics);
-        if (isHoveredOrFocused()) {
+        if (isHovered) {
             guiGraphics.renderTooltip(Minecraft.getInstance().font, MissionScreen.getTooltip(mission), Optional.empty(), mouseX, mouseY);
         }
     }

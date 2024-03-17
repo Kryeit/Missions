@@ -1,0 +1,8 @@
+{
+  "mission_complete": {
+    "subtitle": "sounds.missions.mission_complete",
+    "sounds": [
+      "missions:mission_complete"
+    ]
+  }
+}

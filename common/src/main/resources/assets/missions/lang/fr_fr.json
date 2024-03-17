@@ -45,5 +45,6 @@
   "missions.difficulty.hard": "Difficile",
   "block.missions.mechanical_exchanger": "Mechanical Exchanger",
   "missions.message.hard_mission_completed": "%s vient de compléter une mission difficile!",
-  "missions.reassign": "Vos missions ont été redistribuées! Vous pouvez vérifier vos nouvelles missions dans le menu des missions"
+  "missions.reassign": "Vos missions ont été redistribuées comme chaque semaine ! Vous pouvez vérifier vos nouvelles missions avec /missions ou la touche missions"
+  "sounds.missions.mission_complete": "Mission complétée"
 }

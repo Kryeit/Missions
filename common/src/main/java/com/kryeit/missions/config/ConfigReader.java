@@ -23,6 +23,10 @@ import static com.kryeit.coins.Coins.EXCHANGE_RATE;
 public class ConfigReader {
     private final Map<MissionType, Mission> missions;
     private final List<ItemStack> exchange;
+    public static double EXCHANGER_DROP_RATE;
+    public static int FIRST_REROLL_CURRENCY;
+    public static int FREE_REROLLS;
+    public static String COMMAND_UPON_MISSION;
 
     private ConfigReader(Map<MissionType, Mission> missions, List<ItemStack> exchange) {
         this.missions = missions;
@@ -33,9 +37,9 @@ public class ConfigReader {
 
         String content;
         if (CompatAddon.CREATE_DECO.isLoaded()) {
-            content = readOrCopyFile(path.resolve("missions.json"), "/createdeco/example_config.json");
+            content = readOrCopyFile(path.resolve("missions.json"), "/createdeco/missions.json");
         } else {
-            content = readOrCopyFile(path.resolve("missions.json"), "/example_config.json");
+            content = readOrCopyFile(path.resolve("missions.json"), "/missions.json");
         }
 
         Map<MissionType, Mission> missions = new HashMap<>();
@@ -58,18 +62,23 @@ public class ConfigReader {
 
         String exchange;
         if (CompatAddon.CREATE_DECO.isLoaded()) {
-            exchange = readOrCopyFile(path.resolve("currency.json"), "/createdeco/example_currency.json");
+            exchange = readOrCopyFile(path.resolve("currency.json"), "/createdeco/currency.json");
         } else {
-            exchange = readOrCopyFile(path.resolve("currency.json"), "/example_currency.json");
+            exchange = readOrCopyFile(path.resolve("currency.json"), "/currency.json");
         }
         List<ItemStack> items = new JSONArray(exchange).asList((array, integer) -> {
             ResourceLocation location = new ResourceLocation(array.getString(integer));
             return Utils.getItem(location);
         });
 
-        String config = readOrCopyFile(path.resolve("config.json"), "/example_modconfig.json");
+        String config = readOrCopyFile(path.resolve("config.json"), "/config.json");
         JSONObject configObject = new JSONObject(config);
+
         EXCHANGE_RATE = Integer.parseInt(configObject.getString("exchange-rate"));
+        EXCHANGER_DROP_RATE = Double.parseDouble(configObject.getString("exchanger-drop-rate"));
+        FIRST_REROLL_CURRENCY = Integer.parseInt(configObject.getString("first-reroll-currency"));
+        FREE_REROLLS = Integer.parseInt(configObject.getString("free-rerolls"));
+        COMMAND_UPON_MISSION = configObject.getString("command-upon-mission");
 
         return new ConfigReader(missions, items);
     }

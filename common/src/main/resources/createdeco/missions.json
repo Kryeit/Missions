@@ -1,0 +1,546 @@
+{
+  "cut": {
+    "reward": {
+      "amount": "5-15",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "create:brass_scaffolding": "100-400",
+      "create:brass_bars": "200-800",
+      "create:brass_ladder": "100-400",
+      "create:industrial_iron_block": "500-1500",
+      "create:rose_quartz_block": "300-900",
+      "create:rose_quartz_tiles": "200-700",
+      "create:copper_tiles": "300-700",
+      "create:andesite_scaffolding": "200-800",
+      "create:andesite_bars": "300-1200",
+      "create:andesite_ladder": "200-800",
+      "create:framed_glass": "500-2500",
+      "create:copycat_panel": "600-1800",
+      "create:copycat_step": "600-1800"
+    },
+    "titles": [
+      "Cutting edge technology",
+      "Pochita",
+      "Chainsaw man",
+      "Risky endeavour",
+      "Safety first",
+      "Precision incision",
+      "Cuts like a knife",
+      "Blade runner",
+      "Slice of life"
+    ]
+  },
+  "compact": {
+    "reward": {
+      "amount": "1-15",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "polished_blackstone": "500-1500",
+      "create:andesite_alloy_block": "200-700",
+      "create:experience_block": "150-800",
+      "blue_ice": "300-800",
+      "iron_block": "100-600",
+      "iron_ingot": "1000-3000",
+      "gold_ingot": "500-1500",
+      "packed_ice": "500-1200"
+    },
+    "titles": [
+      "Dense topic",
+      "Industrial diamonds",
+      "Pack n' go",
+      "Wall-e works",
+      "Compact and conquer",
+      "Miniature marvels",
+      "Compact craftsmanship",
+      "Size doesn't matter",
+      "Small-scale success",
+      "Mission miniaturized",
+      "Pocket-sized pursuit",
+      "Downsizing dilemma"
+    ]
+  },
+  "break": {
+    "reward": {
+      "amount": "5-30",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "andesite": "500-3000",
+      "create:ochrum": "500-2000",
+      "calcite": "500-1500",
+      "create:asurine": "500-2000",
+      "create:scoria": "500-2000",
+      "blackstone": "1000-3000",
+      "netherrack": "2000-5000"
+    },
+    "titles": [
+      "Block buster",
+      "Demolition derby",
+      "Minecrafty mayhem",
+      "Terrain takedown",
+      "Debris dozer",
+      "A good project's starters",
+      "Smash and Grab",
+      "Hammer Time"
+    ]
+  },
+  "craft": {
+    "reward": {
+      "amount": "10-30",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "create:crushing_wheel": "10-100",
+      "stick": "500-1500",
+      "create:gearbox": "300-1000",
+      "create:shaft": "1000-5000",
+      "create:gearshift": "100-500",
+      "create:mechanical_arm": "100-500",
+      "create:brass_funnel": "200-800",
+      "create:large_water_wheel": "20-50"
+    },
+    "titles": [
+      "Masterful manufacture",
+      "Blueprint builder",
+      "Creation crusade",
+      "Widget wizard",
+      "Artisanal assembly",
+      "Crafting chronicles",
+      "Crafting chaos",
+      "Crafting crusaders",
+      "Craftsmanship challenge"
+    ]
+  },
+  "kill": {
+    "reward": {
+      "amount": "1-3",
+      "item": "createdeco:copper_coin"
+    },
+    "missions": {
+      "minecraft:wither_skeleton": "50-150",
+      "zombie": "100-300",
+      "endermite": "5-50",
+      "skeleton": "100-250",
+      "ender_dragon": "1-10",
+      "hoglin": "15-40"
+    },
+    "titles": [
+      "Plague extermination",
+      "Make doomsday happen",
+      "Creature massacre",
+      "Beast busting",
+      "Slaying ride",
+      "Monsters, Inc."
+    ]
+  },
+  "ride": {
+    "reward": {
+      "amount": "15-35",
+      "item": "createdeco:copper_coin"
+    },
+    "missions": {
+      "missions:statistic": "3-10"
+    },
+    "titles": [
+      "Rodeo",
+      "Old town road",
+      "Tireless odyssey",
+      "Good ol' days",
+      "Beast rider's challenge",
+      "Animal adventure",
+      "How much Horsepower does it have?",
+      "Riding on sunshine",
+      "Saddle safari",
+      "Piggyback pilgrimage",
+      "Steed of speed"
+    ]
+  },
+  "sail": {
+    "reward": {
+      "amount": "1-8",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "missions:statistic": "5-20"
+    },
+    "titles": [
+      "Sea of pirates",
+      "Sailing the seas",
+      "Seeking treasures",
+      "Nautical adventure",
+      "Sail the Seven Seas",
+      "Journey to the Deep Blue",
+      "Pirate's Cruise"
+    ]
+  },
+  "fly": {
+    "reward": {
+      "amount": "1-6",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "missions:statistic": "5-30"
+    },
+    "titles": [
+      "Cloud skipping",
+      "Breeze lover",
+      "Free Bird",
+      "Wings of Freedom",
+      "Up, Up, and Away",
+      "To infinity and beyond",
+      "Eagle Eye",
+      "Ascension"
+    ]
+  },
+  "mill": {
+    "reward": {
+      "amount": "15-30",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "gravel": "200-400",
+      "green_dye": "100-200",
+      "clay_ball": "100-200",
+      "yellow_dye": "100-200",
+      "red_dye": "100-200"
+    },
+    "titles": [
+      "Soft crushing",
+      "Starter machinery",
+      "Mill of fortune",
+      "Almost as fun as Crushing Wheels",
+      "Flour power",
+      "Milling marvels",
+      "Wheat whirlwind"
+    ]
+  },
+  "minecart": {
+    "reward": {
+      "amount": "5-10",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "missions:statistic": "1-3"
+    },
+    "titles": [
+      "Roller coaster",
+      "Rudimentary transport",
+      "Smol tracks",
+      "Minecart mania",
+      "Rails to riches",
+      "Minecart magic",
+      "Rollercoaster roadtrip",
+      "Cartwheel carnival"
+    ]
+  },
+  "crush": {
+    "reward": {
+      "amount": "5-13",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "create:crushed_raw_gold": "150-300",
+      "quartz": "200-500",
+      "create:experience_nugget": "300-1000",
+      "string": "200-500",
+      "create:powdered_obsidian": "300-1500",
+      "gravel": "500-3000",
+      "red_sand": "200-800"
+    },
+    "titles": [
+      "Superlative milling",
+      "Worse than stepping on lego",
+      "Ore obliteration",
+      "Crush and conquer",
+      "Stone smasher",
+      "The gravel grind"
+    ]
+  },
+  "fish": {
+    "reward": {
+      "amount": "5-27",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "minecraft:cod": "20-50",
+      "salmon": "15-40",
+      "tropical_fish": "10-20",
+      "pufferfish": "15-35",
+      "lily_pad": "3-8",
+      "leather_boots": "2-4",
+      "bowl": "3-6"
+    },
+    "titles": [
+      "Fisherman",
+      "Lucky retrieving",
+      "Reel in the fun",
+      "Fisherman's fortune",
+      "Fishing frenzy",
+      "Tales of the tackle",
+      "Splashing success"
+    ]
+  },
+  "eat": {
+    "reward": {
+      "amount": "1-15",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "create:chocolate_glazed_berries": "100-300",
+      "create:honeyed_apple": "100-300",
+      "create:builders_tea": "30-100",
+      "create:sweet_roll": "100-300",
+      "create:bar_of_chocolate": "150-400",
+      "cooked_beef": "80-250",
+      "golden_carrot": "150-360"
+    },
+    "titles": [
+      "Chomp chomp",
+      "Gobble gobble",
+      "Epicurean expedition",
+      "Feast of frenzy",
+      "Culinary conqueror",
+      "Stuffed to the brim",
+      "Minecraft munchies",
+      "Satisfying the stomach",
+      "Foodie's Delight",
+      "don't forget the diet soda"
+    ]
+  },
+  "place": {
+    "reward": {
+      "amount": "1-8",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "create:track_signal": "20-50",
+      "coarse_dirt": "100-300",
+      "fern": "50-100",
+      "grass": "50-100"
+    },
+    "titles": [
+      "Master builder",
+      "Finest detailing",
+      "Last touchups",
+      "Laying the foundations",
+      "Setting the stage",
+      "Arrangement adventure",
+      "Places to place"
+    ]
+  },
+  "press": {
+    "reward": {
+      "amount": "5-35",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "create:iron_sheet": "200-700",
+      "create:brass_sheet": "100-500",
+      "create:golden_sheet": "100-300"
+    },
+    "titles": [
+      "Bonk",
+      "Factory noise",
+      "Basic machinery",
+      "Pressing predicament",
+      "The power of compression",
+      "Under pressure",
+      "Press it to impress"
+    ]
+  },
+  "mix": {
+    "reward": {
+      "amount": "5-20",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "create:brass_ingot": "400-2000",
+      "create:andesite_alloy": "300-1500",
+      "create:dough": "300-600"
+    },
+    "titles": [
+      "Stressful mix",
+      "Solid brewery",
+      "Wizard crafting",
+      "Brewing and stewing",
+      "Minecraft Mix Master",
+      "Cauldron chaos",
+      "Bubbling background noise",
+      "Blend and mend"
+    ]
+  },
+  "walk": {
+    "reward": {
+      "amount": "1-9",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "missions:statistic": "5-20"
+    },
+    "titles": [
+      "Marathon",
+      "Farlands enjoyer",
+      "Warden bothering",
+      "Walking simulator",
+      "They call me the wanderer",
+      "Pathfinder's pursuit",
+      "Wanderlust quest",
+      "The Walking Challenge",
+      "The walking dead"
+    ]
+  },
+  "swim": {
+    "reward": {
+      "amount": "5-15",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "missions:statistic": "3-15"
+    },
+    "titles": [
+      "Squid hunter",
+      "Trident believer",
+      "Dolphin manners",
+      "Dive into adventure",
+      "Waterworld wanderlust",
+      "Deep dive discovery",
+      "Submerged saga"
+    ]
+  },
+  "train-driver": {
+    "reward": {
+      "amount": "5-15",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "missions:distance": "3-10"
+    },
+    "titles": [
+      "Training",
+      "Rails of fortune",
+      "Locomotion commotion",
+      "Rails rally",
+      "Engineer's excellence",
+      "Train troubles"
+    ]
+  },
+  "train-passenger": {
+    "reward": {
+      "amount": "5-13",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "missions:distance": "3-10"
+    },
+    "titles": [
+      "All aboard!",
+      "Trust the driver",
+      "Passenger's paradise",
+      "Ticket to adventure",
+      "Traveler's tale",
+      "Relaxing ride",
+      "Passenger's perspective",
+      "Don't tell me how to drive!",
+      "Secondary character"
+    ]
+  },
+  "train-driver-passenger": {
+    "reward": {
+      "amount": "8-25",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "missions:distance": "3-10"
+    },
+    "requirements": {
+      "missions:passengers": "2"
+    },
+    "titles": [
+      "Flesh cargo",
+      "Passive companionship",
+      "Symbiosis",
+      "Onboard teamwork",
+      "Copilot",
+      "Driver's Assistant to the R. Manager",
+      "Train partnership"
+    ]
+  },
+  "dive": {
+    "reward": {
+      "amount": "30-50",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "lava": "10-80",
+      "water": "30-120"
+    },
+    "titles": [
+      "Depths",
+      "Deep discovery",
+      "Exploring the abyss",
+      "Treasures of the deep"
+    ]
+  },
+  "drill": {
+    "reward": {
+      "amount": "5-20",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "stone": "1400-6000",
+      "cobblestone": "300-1500",
+      "andesite": "500-2000",
+      "create:ochrum": "500-3000",
+      "calcite": "500-2500",
+      "create:asurine": "500-3000",
+      "create:scoria": "500-3000",
+      "blackstone": "1000-2000",
+      "netherrack": "2000-7000"
+    },
+    "titles": [
+      "Never-ending breaking",
+      "Hand me the Contraption-4",
+      "Bore and explore",
+      "Archeology speedrun"
+    ]
+  },
+  "saw": {
+    "reward": {
+      "amount": "2-10",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "oak_log": "400-2000",
+      "spruce_log": "1000-3000",
+      "spruce_leaves": "500-1000",
+      "bamboo": "500-2000"
+    },
+    "titles": [
+      "Scary business",
+      "Go back to your roots",
+      "Sawdust and glory"
+    ]
+  },
+  "harvester": {
+    "reward": {
+      "amount": "8-30",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "wheat_seeds": "1000-3000",
+      "carrot": "1000-3000",
+      "potato": "1000-3000",
+      "cocoa_beans": "400-1200",
+      "kelp": "500-1300",
+      "sugar_cane": "400-1000",
+      "nether_wart": "300-800"
+    },
+    "titles": [
+      "Becoming sufficient",
+      "Hunger demands",
+      "Stardew quirks"
+    ]
+  }
+}

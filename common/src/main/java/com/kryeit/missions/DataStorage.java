@@ -1,6 +1,6 @@
 package com.kryeit.missions;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.config.Range;
@@ -16,9 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class DataStorage {
-    public static final File FILE = new File("mods/missions/mission_data.nbt");
-    public static final DataStorage INSTANCE = new DataStorage();
+public class DataStorage implements AutoCloseable {
+    private static final File FILE = new File("mods/missions/mission_data.nbt");
     private final CompoundTag data;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -95,9 +94,6 @@ public class DataStorage {
         }
     }
 
-    /*
-    This method should not be used. Use MissionManager#reassignMissions(UUID player) instead
-     */
     public void reassignActiveMissions(Map<MissionType, ConfigReader.Mission> missions, UUID player) {
         ListTag list = getActiveMissionsTag(player);
         list.clear();
@@ -195,6 +191,11 @@ public class DataStorage {
         return list;
     }
 
+    @Override
+    public void close() {
+        save();
+    }
+
     public static class ActiveMission {
         private final ResourceLocation item;
         private final boolean isCompleted;
@@ -228,7 +229,7 @@ public class DataStorage {
 
         public ClientsideActiveMission toClientMission(UUID player) {
             MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
-            ConfigReader.Mission configMission = Main.getConfig().getMissions().get(type);
+            ConfigReader.Mission configMission = Missions.getConfig().getMissions().get(type);
             return new ClientsideActiveMission(
                     Component.nullToEmpty(title),
                     type.difficulty(),

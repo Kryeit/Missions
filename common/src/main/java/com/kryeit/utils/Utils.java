@@ -1,5 +1,10 @@
 package com.kryeit.utils;
 
+import com.kryeit.MinecraftServerSupplier;
+import com.kryeit.client.ClientMissionData;
+import com.kryeit.missions.MissionType;
+import com.kryeit.missions.MissionTypeRegistry;
+import com.mojang.brigadier.ParseResults;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,11 +13,14 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -30,7 +38,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class Utils {
-    private static final ItemStack DEFAULT_SPAWN_EGG = BuiltInRegistries.ITEM.get(new ResourceLocation("phantom_spawn_egg")).getDefaultInstance();
+    private static final ItemStack DEFAULT_SPAWN_EGG = BuiltInRegistries.ITEM.get(new ResourceLocation("player_head")).getDefaultInstance();
 
     public static int getDay() {
         return (int) (System.currentTimeMillis() / 86_400_000);
@@ -183,8 +191,14 @@ public class Utils {
         return truncatedString.append("...").toString();
     }
 
-    public static Component getMessage(String key, ChatFormatting color, Object... args) {
-        String translation = Component.translatable(key).getString();
+    public static Component getMissionMessage(ClientMissionData.ClientsideActiveMission mission, ChatFormatting color, Object... args) {
+        String key = "missions.menu.main.tooltip.task." + mission.missionType();
+        String translation = I18n.get(key).replace("Format error: ", "");
+
+        if (translation.equals(key) && isAddonMission(mission)) {
+            translation = mission.missionString().getString();
+        }
+
         String[] parts = translation.split("%s", -1);
 
         if (parts.length == 0) {
@@ -203,5 +217,25 @@ public class Utils {
         }
 
         return result;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static boolean isAddonMission(ClientMissionData.ClientsideActiveMission mission) {
+        for (MissionType type : MissionTypeRegistry.INSTANCE.getAllTypes()) {
+            if (type.id().equals(mission.missionType())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void executeCommandAsServer(String command) {
+        MinecraftServer minecraftServer = MinecraftServerSupplier.getServer();
+        CommandSourceStack commandSource = minecraftServer.createCommandSourceStack();
+        Commands commandManager = minecraftServer.getCommands();
+
+        ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSource.withSuppressedOutput());
+
+        MinecraftServerSupplier.getServer().getCommands().performCommand(parseResults, command);
     }
 }

@@ -10,7 +10,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.kryeit.Main.cachedTrainPlayerPositions;
+import java.util.Iterator;
+import java.util.Map;
+
+import static com.kryeit.Missions.cachedTrainPlayerPositions;
 
 @Mixin(value = AbstractContraptionEntity.class)
 public class AbstractContraptionEntityMixin {
@@ -19,9 +22,15 @@ public class AbstractContraptionEntityMixin {
     private void onDismount(LivingEntity entityLiving, CallbackInfoReturnable<Vec3> cir) {
         if (entityLiving instanceof ServerPlayer user) {
             if (cachedTrainPlayerPositions.isEmpty() && MinecraftServerSupplier.getServer() != null) return;
-            for (ServerPlayer player : cachedTrainPlayerPositions.keySet()) {
+
+            Iterator<Map.Entry<ServerPlayer, Vec3>> iterator = cachedTrainPlayerPositions.entrySet().iterator();
+
+            while (iterator.hasNext()) {
+                Map.Entry<ServerPlayer, Vec3> entry = iterator.next();
+                ServerPlayer player = entry.getKey();
+
                 if (player.getUUID().equals(user.getUUID())) {
-                    cachedTrainPlayerPositions.remove(player);
+                    iterator.remove();
                 }
             }
         }

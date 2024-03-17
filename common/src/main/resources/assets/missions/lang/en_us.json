@@ -19,10 +19,6 @@
   "missions.menu.main.tooltip.task.press": "Gather %s of %s by pressing",
   "missions.menu.main.tooltip.task.compact": "Gather %s of %s by compacting",
   "missions.menu.main.tooltip.task.mix": "Gather %s of %s by mixing",
-  "missions.menu.main.tooltip.task.blast": "Gather %s of %s by fan blasting",
-  "missions.menu.main.tooltip.task.haunt": "Gather %s of %s by fan haunting",
-  "missions.menu.main.tooltip.task.smoke": "Gather %s of %s by fan smoking",
-  "missions.menu.main.tooltip.task.splash": "Gather %s of %s by fan splashing/washing",
   "missions.menu.main.tooltip.task.walk": "Walk for %s km",
   "missions.menu.main.tooltip.task.swim": "Swim for %s km",
   "missions.menu.main.tooltip.task.minecart": "Use a minecart for %s km",
@@ -35,6 +31,7 @@
   "missions.menu.main.tooltip.task.dive": "Dive in %s for %s min with a Diving Helmet",
   "missions.menu.main.tooltip.task.drill": "Break %s of %s with a drill",
   "missions.menu.main.tooltip.task.saw": "Break %s of %s with a saw",
+  "missions.menu.main.tooltip.task.harvester": "Harvest %s of %s with a harvester",
   "missions.menu.main.tooltip.difficulty": "Difficulty: %s",
   "missions.menu.main.tooltip.itemRequired": "Item Required: %s",
   "missions.menu.main.tooltip.reward": "Reward: %s %s(s)",
@@ -48,5 +45,6 @@
   "missions.difficulty.hard": "Hard",
   "block.missions.mechanical_exchanger": "Mechanical Exchanger",
   "missions.message.hard_mission_completed": "%s has just completed a hard mission!",
-  "missions.reassign": "Your missions have been reassigned just like every week! Open the missions menu with /missions or the missions key"
+  "missions.reassign": "Your missions have been reassigned just like every week! Open the missions menu with /missions or the missions key",
+  "sounds.missions.mission_complete": "Mission completed"
 }

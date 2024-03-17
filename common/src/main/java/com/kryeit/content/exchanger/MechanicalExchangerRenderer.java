@@ -13,13 +13,13 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
+import static com.kryeit.content.exchanger.MechanicalExchangerBlock.FACING;
 
 public class MechanicalExchangerRenderer extends KineticBlockEntityRenderer<MechanicalExchangerBlockEntity> {
     public MechanicalExchangerRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
-
+    
     @Override
     protected void renderSafe(MechanicalExchangerBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {

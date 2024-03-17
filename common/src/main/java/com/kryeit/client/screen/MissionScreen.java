@@ -1,7 +1,6 @@
 package com.kryeit.client.screen;
 
-import com.kryeit.Main;
-import com.kryeit.MinecraftServerSupplier;
+import com.kryeit.Missions;
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
@@ -29,7 +28,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class MissionScreen extends Screen {
-    public static final ResourceLocation MISSIONS_TITLE = new ResourceLocation(Main.MOD_ID, "textures/gui/title.png");
+    public static final ResourceLocation MISSIONS_TITLE = Missions.asResource("textures/gui/title.png");
     public static final Component CLOSE = Components.translatable("missions.menu.close");
     private ClientMissionData data = null;
 
@@ -90,7 +89,9 @@ public class MissionScreen extends Screen {
 
     private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
         return new MissionButton(x, y, title, mission, button -> {
-            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR && (MinecraftServerSupplier.getServer() == null || MinecraftServerSupplier.getServer().isSingleplayer())) Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice, mission.difficulty()));
+            if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR) {
+                Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice, mission.difficulty()));
+            }
         });
     }
 
@@ -128,12 +129,12 @@ public class MissionScreen extends Screen {
 
             if (Objects.equals(mission.missionType(), "train-driver-passenger")) {
                 components.add(
-                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                        Utils.getMissionMessage(mission,
                                 ChatFormatting.WHITE, mission.requiredAmount(), TrainDriverPassengerMissionType.passengersNeeded())
                 );
             } else {
                 components.add(
-                        Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                        Utils.getMissionMessage(mission,
                                 ChatFormatting.WHITE, mission.requiredAmount())
                 );
             }
@@ -141,17 +142,17 @@ public class MissionScreen extends Screen {
         } else if (mission.itemRequired().getItem() instanceof SpawnEggItem) {
             // This cannot be backported, 1.20+ contains a spawn egg for every mob
             components.add(
-                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                    Utils.getMissionMessage(mission,
                             ChatFormatting.WHITE, mission.requiredAmount(), Utils.getEntityOfSpawnEggForTooltip(mission.itemRequired()))
             );
         } else if (mission.itemRequired().getItem() instanceof BucketItem) {
             components.add(
-                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                    Utils.getMissionMessage(mission,
                             ChatFormatting.WHITE, Utils.getFluidFromBucketForTooltip(mission.itemRequired()), mission.requiredAmount())
             );
         } else {
             components.add(
-                    Utils.getMessage("missions.menu.main.tooltip.task." + mission.missionType(),
+                    Utils.getMissionMessage(mission,
                             ChatFormatting.WHITE, mission.requiredAmount(), itemName)
             );
         }

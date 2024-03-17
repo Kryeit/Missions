@@ -49,15 +49,12 @@ body:
         label: Mod Version
         description: The version of the mod you were using when the bug occurred
         options:
-          - "0.1.1.e"
-          - "0.1.3"
-          - "0.1.3a"
-          - "0.1.4"
-          - "0.1.5"
-          - "0.1.6"
-          - "0.1.7"
-          - "0.1.8"
-          - "0.2"
+          - "0.2.10"
+          - "0.2.11"
+          - "0.2.12"
+          - "0.2.13"
+          - "0.3"
+          - "0.3.1"
       validations:
         required: false
   -   type: dropdown
@@ -66,9 +63,7 @@ body:
         description: The version of **Create Mod** you were using when the bug occurred
         options:
           - "0.5.1f"
-          - "0.5.1e"
           - "0.5.1d"
-          - "0.5.1c"
       validations:
         required: true
   -   type: dropdown

@@ -13,8 +13,8 @@ public interface MultiResourceMissionType extends MissionType {
     }
 
     @Override
-    default void reset(UUID player) {
-        getData(player).getAllKeys().clear();
+    default void reset(UUID player, ResourceLocation item) {
+        getData(player).remove(item.toString());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.kryeit.content.exchanger;
 
-import com.kryeit.entry.ModBlockEntities;
+import com.kryeit.registry.ModBlockEntities;
 import com.kryeit.utils.BlockUtils;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -70,6 +69,7 @@ public class MechanicalExchangerBlock extends DirectionalKineticBlock implements
         super.onRemove(state, level, pos, newState, isMoving);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos,
                                  Player player, InteractionHand hand, BlockHitResult hit) {
@@ -99,18 +99,6 @@ public class MechanicalExchangerBlock extends DirectionalKineticBlock implements
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new MechanicalExchangerBlockEntity(ModBlockEntities.MECHANICAL_EXCHANGER.get(), pos, state);
-    }
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if (level.isClientSide) {
-            return null;
-        }
-        return (level1, blockPos, blockState, t) -> {
-            if (t instanceof MechanicalExchangerBlockEntity be) {
-                be.tick(level1, blockPos, blockState, be);
-            }
-        };
     }
 
     @Override

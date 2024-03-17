@@ -20,8 +20,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 @Mixin(value = BlockBreakingMovementBehaviour.class, remap = false)
 public class BlockBreakingMovementBehaviourMixin {
 
@@ -29,7 +27,6 @@ public class BlockBreakingMovementBehaviourMixin {
     protected void destroyBlock(MovementContext context, BlockPos breakingPos, CallbackInfo ci) {
         Block block = context.state.getBlock();
         Class<? extends MultiResourceMissionType> mission;
-        AtomicInteger count = new AtomicInteger(1);
 
         if (block instanceof DrillBlock) {
             mission = DrillMission.class;
@@ -42,11 +39,11 @@ public class BlockBreakingMovementBehaviourMixin {
         Level level = context.world;
         Player closestPlayer = MixinUtils.getClosestPlayer(level, breakingPos);
 
-        ItemStack result = context.world.getBlockState(breakingPos).getBlock().asItem().getDefaultInstance();
+        ItemStack result = block.asItem().getDefaultInstance();
 
         if (closestPlayer != null) {
             MissionManager.incrementMission(closestPlayer.getUUID(), mission, BuiltInRegistries.ITEM.getKey(result.getItem()),
-                    count.get());
+                    1);
         }
     }
 }

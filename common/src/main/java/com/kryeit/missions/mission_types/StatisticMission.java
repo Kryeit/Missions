@@ -1,6 +1,6 @@
 package com.kryeit.missions.mission_types;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class StatisticMission {
-    private static final ResourceLocation IDENTIFIER = new ResourceLocation(Main.MOD_ID, "statistic");
+    private static final ResourceLocation IDENTIFIER = new ResourceLocation(Missions.MOD_ID, "statistic");
     private static final Map<ResourceLocation, StatisticMissionType> missions = new HashMap<>();
 
     public static void handleStatisticChange(UUID player, int difference, ResourceLocation statistic) {
@@ -58,7 +58,7 @@ public class StatisticMission {
         }
 
         @Override
-        public void reset(UUID player) {
+        public void reset(UUID player, ResourceLocation item) {
             getData(player).remove("value");
         }
 

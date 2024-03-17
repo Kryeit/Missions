@@ -1,6 +1,6 @@
 package com.kryeit.client.screen.button;
 
-import com.kryeit.Main;
+import com.kryeit.Missions;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
@@ -15,8 +15,8 @@ import java.util.Optional;
 
 public class RewardsButton extends Button {
     private static final Component REWARDS = Components.literal("    ").append(Components.translatable("missions.menu.main.rewards"));
-    private static final ResourceLocation CHEST_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/christmas_chest.png");
-    private static final ResourceLocation OPEN_CHEST_TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/gui/open_christmas_chest.png");
+    public static final ResourceLocation CHEST_TEXTURE = Missions.asResource("textures/gui/christmas_chest.png");
+    private static final ResourceLocation OPEN_CHEST_TEXTURE = Missions.asResource("textures/gui/open_christmas_chest.png");
     private boolean rewardsAvailable;
 
     public RewardsButton(int x, int y, final boolean rewardsAvailable) {
@@ -39,12 +39,10 @@ public class RewardsButton extends Button {
         int textureY = getY() + height / 2 - 19;
         guiGraphics.blit(rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);
 
-        if (isHoveredOrFocused()) {
-            if (!rewardsAvailable) {
-                guiGraphics.renderTooltip(Minecraft.getInstance().font,
-                        List.of(Component.translatable("missions.menu.main.rewards.tooltip.empty").withStyle(ChatFormatting.DARK_GRAY)),
-                        Optional.empty(), mouseX, mouseY);
-            }
+        if (isHovered && !rewardsAvailable) {
+            guiGraphics.renderTooltip(Minecraft.getInstance().font,
+                    List.of(Component.translatable("missions.menu.main.rewards.tooltip.empty").withStyle(ChatFormatting.DARK_GRAY)),
+                    Optional.empty(), mouseX, mouseY);
         }
     }
 }
