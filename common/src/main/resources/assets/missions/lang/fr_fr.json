@@ -37,7 +37,7 @@
   "missions.menu.main.tooltip.reward": "Récompense: %s %s",
   "missions.menu.main.tooltip.progress": "Votre progrès: %s",
   "missions.menu.main.tooltip.progress.completed": "Complété",
-  "missions.menu.main.tooltip.click": "Cliquer pour renouveler la mission",
+  "missions.menu.main.tooltip.click": "Cliquez pour renouveler la mission",
   "missions.menu.main.rewards.tooltip.empty": "Rien à récupérer",
   "missions.menu.main.reward": "Vous avez été récompensé %s de %s",
   "missions.difficulty.easy": "Simple",
