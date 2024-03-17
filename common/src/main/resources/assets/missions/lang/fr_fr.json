@@ -19,10 +19,6 @@
   "missions.menu.main.tooltip.task.press": "Obtenir %s de %s en pressant",
   "missions.menu.main.tooltip.task.compact": "Obtenir %s de %s en compactant",
   "missions.menu.main.tooltip.task.mix": "Obtenir %s de %s en mixant",
-  "missions.menu.main.tooltip.task.blast": "Obtenir %s de %s en brûlant avec un ventilateur",
-  "missions.menu.main.tooltip.task.haunt": "Obtenir %s de %s en hantant avec un ventilateur",
-  "missions.menu.main.tooltip.task.smoke": "Obtenir %s de %s en fumant avec un ventilateur",
-  "missions.menu.main.tooltip.task.splash": "Obtenir %s de %s en lavant",
   "missions.menu.main.tooltip.task.walk": "Marcher pendant %s km",
   "missions.menu.main.tooltip.task.swim": "Nager pendant %s km",
   "missions.menu.main.tooltip.task.minecart": "Utiliser un wagon pour %s km",
@@ -45,6 +41,6 @@
   "missions.difficulty.hard": "Difficile",
   "block.missions.mechanical_exchanger": "Mechanical Exchanger",
   "missions.message.hard_mission_completed": "%s vient de compléter une mission difficile!",
-  "missions.reassign": "Vos missions ont été redistribuées comme chaque semaine ! Vous pouvez vérifier vos nouvelles missions avec /missions ou la touche missions"
+  "missions.reassign": "Vos missions ont été redistribuées comme chaque semaine ! Vous pouvez vérifier vos nouvelles missions avec /missions ou la touche missions",
   "sounds.missions.mission_complete": "Mission complétée"
 }
