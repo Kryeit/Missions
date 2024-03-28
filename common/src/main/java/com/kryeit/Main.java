@@ -1,10 +1,7 @@
 package com.kryeit;
 
 
-import com.kryeit.entry.ModBlockEntities;
-import com.kryeit.entry.ModBlocks;
-import com.kryeit.entry.ModCreativeTabs;
-import com.kryeit.entry.ModMenuTypes;
+import com.kryeit.entry.*;
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
@@ -59,6 +56,7 @@ public class Main {
         ModBlocks.register();
         ModMenuTypes.register();
         ModBlockEntities.register();
+        ModSounds.register();
     }
 
     public static void readConfig() {

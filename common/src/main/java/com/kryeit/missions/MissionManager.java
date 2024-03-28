@@ -8,6 +8,7 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.coins.Coins;
 import com.kryeit.compat.CompatAddon;
 import com.kryeit.entry.ModBlocks;
+import com.kryeit.entry.ModSounds;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
@@ -189,6 +190,7 @@ public class MissionManager {
 
         Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
 
+        serverPlayer.playSound(ModSounds.MISSION_COMPLETE.get(), 1, 1);
         showToast(serverPlayer, mission.toClientMission(player));
 
         if (type.difficulty() == MissionDifficulty.HARD) {
