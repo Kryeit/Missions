@@ -59,8 +59,7 @@ public class Main {
         ModBlocks.register();
         ModMenuTypes.register();
         ModBlockEntities.register();
-
-        Runtime.getRuntime().addShutdownHook(new Thread(MissionManager.getStorage()::save));    }
+    }
 
     public static void readConfig() {
         try {
