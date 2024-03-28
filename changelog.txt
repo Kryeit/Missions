@@ -1,3 +1,8 @@
+0.3.1
+- Patch F for Fabric
+- Fixed missions sometimes not saving, in certain types of servers
+- Fixed mechanical exchanger not being dropped broken with pickaxe
+
 0.1.5
 - Added Create Deco compat: if you load the mod for the first time, a missions.json and currency.json for createdeco will be created
 
