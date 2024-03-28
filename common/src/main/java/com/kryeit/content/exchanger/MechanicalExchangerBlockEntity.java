@@ -175,6 +175,9 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
     @Override
     public void tick() {
         super.tick();
+
+        if (level.isClientSide) return;
+
         updateMode();
         if (hasRecipe()) {
             progress++;
