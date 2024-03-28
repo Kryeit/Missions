@@ -57,7 +57,7 @@ public class MissionManager {
             int rewardAmount = mission.rewardAmount().getRandomValue();
             String rewardItem = mission.rewardItem();
 
-            type.reset(player);
+            type.reset(player, item);
             STORAGE.addReward(player, rewardItem, rewardAmount);
             STORAGE.setCompleted(player, item, type.id());
 
@@ -121,7 +121,7 @@ public class MissionManager {
 
     public static void reassignMissions(UUID player) {
         for (DataStorage.ActiveMission mission : getActiveMissions(player)) {
-            MissionTypeRegistry.INSTANCE.getType(mission.missionID()).reset(player);
+            MissionTypeRegistry.INSTANCE.getType(mission.missionID()).reset(player, mission.item());
         }
 
         STORAGE.reassignActiveMissions(Main.getConfig().getMissions(), player);
@@ -154,11 +154,11 @@ public class MissionManager {
 
         if (price.amount == 1) {
             STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
-            MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
+            MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player, activeMission.item());
             STORAGE.incrementReassignmentsSinceLastReset(player);
         } else if (Utils.removeItems(serverPlayer.getInventory(), price.item(), price.amount())) {
             STORAGE.reassignActiveMission(Main.getConfig().getMissions(), player, index);
-            MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player);
+            MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player, activeMission.item());
             STORAGE.incrementReassignmentsSinceLastReset(player);
         }
     }

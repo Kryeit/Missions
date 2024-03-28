@@ -58,7 +58,7 @@ public class StatisticMission {
         }
 
         @Override
-        public void reset(UUID player) {
+        public void reset(UUID player, ResourceLocation item) {
             getData(player).remove("value");
         }
 

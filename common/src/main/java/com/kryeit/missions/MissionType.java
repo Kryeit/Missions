@@ -17,7 +17,7 @@ public interface MissionType {
 
     int getProgress(UUID player, ResourceLocation item);
 
-    void reset(UUID player);
+    void reset(UUID player, ResourceLocation item);
 
     default CompoundTag getData(UUID player) {
         return MissionManager.getStorage().getMissionData(id(), player);
