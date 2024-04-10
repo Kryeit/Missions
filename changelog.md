@@ -1,3 +1,6 @@
+# 0.3.2
+- Now train, dive, vote and statistic-based missions can only appear once
+
 # 0.2.7
 - Added compat with Create: Missions' addons
 - Deleted fan missions

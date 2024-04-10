@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DataStorage implements AutoCloseable {
     private static final File FILE = new File("mods/missions/mission_data.nbt");
@@ -105,7 +106,20 @@ public class DataStorage implements AutoCloseable {
 
     private static CompoundTag createActiveMissionTag(Map<MissionType, ConfigReader.Mission> missions) {
         CompoundTag tag = new CompoundTag();
-        ConfigReader.Mission randomEntry = getRandomEntry(missions.values());
+
+        Set<MissionType> activeLonelyMissions = missions.keySet().stream()
+                .filter(MissionType::isLonely)
+                .collect(Collectors.toSet());
+
+        List<ConfigReader.Mission> availableMissions = missions.values().stream()
+                .filter(mission -> !activeLonelyMissions.contains(mission.missionType()))
+                .collect(Collectors.toList());
+
+        if (availableMissions.isEmpty()) {
+            availableMissions = new ArrayList<>(missions.values());
+        }
+
+        ConfigReader.Mission randomEntry = getRandomEntry(availableMissions);
         Map.Entry<String, Range> item = getRandomEntry(randomEntry.items().entrySet());
 
         tag.putString("item", item.getKey());
