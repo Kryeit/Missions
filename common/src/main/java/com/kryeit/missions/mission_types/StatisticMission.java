@@ -43,6 +43,11 @@ public class StatisticMission {
         }
 
         @Override
+        public boolean isLonely() {
+            return true;
+        }
+
+        @Override
         public MissionDifficulty difficulty() {
             return difficulty;
         }

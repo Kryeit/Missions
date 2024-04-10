@@ -11,6 +11,8 @@ import java.util.UUID;
 public interface MissionType {
     String id();
 
+    boolean isLonely();
+
     MissionDifficulty difficulty();
 
     Component description();

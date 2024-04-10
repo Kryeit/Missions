@@ -26,6 +26,11 @@ public class TrainDriverMissionType implements MissionType {
     }
 
     @Override
+    public boolean isLonely() {
+        return true;
+    }
+
+    @Override
     public MissionDifficulty difficulty() {
         return MissionDifficulty.NORMAL;
     }
