@@ -290,7 +290,6 @@
     "missions": {
       "create:chocolate_glazed_berries": "100-300",
       "create:honeyed_apple": "100-300",
-      "create:builders_tea": "30-100",
       "create:sweet_roll": "100-300",
       "create:bar_of_chocolate": "150-400",
       "cooked_beef": "80-250",
@@ -542,5 +541,14 @@
       "Hunger demands",
       "Stardew quirks"
     ]
+  },
+  "drink": {
+    "reward": {
+      "amount": "8-30",
+      "item": "createdeco:iron_coin"
+    },
+    "missions": {
+      "create:builders_tea": "30-100"
+    }
   }
 }

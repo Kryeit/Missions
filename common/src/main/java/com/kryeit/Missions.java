@@ -62,6 +62,7 @@ public class Missions {
         ModBlockEntities.register();
         ModCreativeTabs.register();
         ModSounds.register();
+        ModTags.register();
 
         useBaseTab();
         finalizeRegistrate();
@@ -89,6 +90,7 @@ public class Missions {
         MissionTypeRegistry.INSTANCE.register(new CrushMission());
         MissionTypeRegistry.INSTANCE.register(new CutMission());
         MissionTypeRegistry.INSTANCE.register(new EatMission());
+        MissionTypeRegistry.INSTANCE.register(new DrinkMission());
         MissionTypeRegistry.INSTANCE.register(new FishMission());
         MissionTypeRegistry.INSTANCE.register(new KillMission());
         MissionTypeRegistry.INSTANCE.register(new MillMission());
