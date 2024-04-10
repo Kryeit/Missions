@@ -32,6 +32,7 @@
   "missions.menu.main.tooltip.task.drill": "Сломай %s %s с помощью дрели",
   "missions.menu.main.tooltip.task.saw": "Сломай %s %s с помощью пилы",
   "missions.menu.main.tooltip.task.harvester": "Harvest %s of %s with a harvester",
+  "missions.menu.main.tooltip.task.drink": "Drink %s of %s",
   "missions.menu.main.tooltip.difficulty": "Сложность: %s",
   "missions.menu.main.tooltip.itemRequired": "Необходимые предметы: %s",
   "missions.menu.main.tooltip.reward": "Награда: %s %s",
