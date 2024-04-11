@@ -6,7 +6,11 @@ import com.kryeit.compat.CompatAddon;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.utils.Utils;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.io.File;
@@ -99,9 +103,27 @@ public class ConfigReader {
     private static Map<String, Range> getItems(JSONObject items) {
         Map<String, Range> itemsMap = new HashMap<>();
         for (String itemKey : items.keySet()) {
-            itemsMap.put(itemKey, Range.fromString(items.getString(itemKey)));
+
+            if (itemKey.startsWith("#")) {
+                String tagName = itemKey.replace("#", "");
+                TagKey<Item> tag = TagKey.create(Registries.ITEM, new ResourceLocation(tagName));
+                List<String> taggedItems = getItemsFromTag(tag);
+                for (String taggedItem : taggedItems) {
+                    itemsMap.put(taggedItem, Range.fromString(items.getString(itemKey)));
+                }
+            } else {
+                itemsMap.put(itemKey, Range.fromString(items.getString(itemKey)));
+            }
         }
         return itemsMap;
+    }
+
+    private static List<String> getItemsFromTag(TagKey<Item> tag) {
+
+        return BuiltInRegistries.ITEM.stream()
+                .filter(item -> item.getDefaultInstance().is(tag))
+                .map(item -> BuiltInRegistries.ITEM.getKey(item).toString())
+                .toList();
     }
 
     public Map<MissionType, Mission> getMissions() {
