@@ -45,7 +45,7 @@ import static com.kryeit.registry.ModCreativeTabs.useBaseTab;
 
 public class Missions {
     public static final String MOD_ID = "missions";
-    public static final String NAME = "Missions";
+    public static final String NAME = "Create: Missions";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
     private static ConfigReader configReader;
 

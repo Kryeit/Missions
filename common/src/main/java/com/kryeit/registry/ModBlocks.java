@@ -7,6 +7,7 @@ import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.kryeit.registry.ModCreativeTabs.useBaseTab;
@@ -28,6 +29,7 @@ public class ModBlocks {
             .transform(axeOrPickaxe())
             .blockstate(BlockStateGen.horizontalBlockProvider(true))
             .item()
+            .properties(p -> p.rarity(Rarity.UNCOMMON))
             .transform(customItemModel())
             .register();
 
