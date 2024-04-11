@@ -548,7 +548,11 @@
       "item": "diamond"
     },
     "missions": {
-      "create:builders_tea": "30-100"
-    }
+      "#c:drinks": "30-100"
+    },
+    "titles": [
+      "Sköl",
+      "Refreshing moment"
+    ]
   }
 }

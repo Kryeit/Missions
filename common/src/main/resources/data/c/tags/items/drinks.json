@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#c:potions",
+    "#brewinandchewin:drinks",
     "minecraft:honey_bottle",
     "minecraft:milk_bucket",
     "create:builders_tea"
