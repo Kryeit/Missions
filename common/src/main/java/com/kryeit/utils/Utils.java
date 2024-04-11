@@ -32,10 +32,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Utils {
     private static final ItemStack DEFAULT_SPAWN_EGG = BuiltInRegistries.ITEM.get(new ResourceLocation("player_head")).getDefaultInstance();
@@ -55,6 +59,8 @@ public class Utils {
         return BuiltInRegistries.ITEM.get(item).getDefaultInstance();
     }
 
+    @SuppressWarnings("Contract")
+    @Contract("_ -> !null")
     @ExpectPlatform
     public static boolean isModLoaded(String id) {
         throw new AssertionError();
@@ -96,6 +102,28 @@ public class Utils {
         return out;
     }
 
+    public static <T> List<T> filter(Collection<T> collection, Predicate<T> predicate) {
+        List<T> out = new ArrayList<>();
+        for (T t : collection) {
+            if (predicate.test(t)) {
+                out.add(t);
+            }
+        }
+        return out;
+    }
+
+    public static <T> T biggestMatching(Collection<T> collection, Predicate<T> predicate, Comparator<T> comparator) {
+        T largest = null;
+        for (T t : collection) {
+            if (predicate.test(t)) {
+                if (largest == null || comparator.compare(t, largest) > 0) {
+                    largest = t;
+                }
+            }
+        }
+        return largest;
+    }
+
     public static ItemStack getSpawnEggOfEntity(ResourceLocation entity) {
         EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(entity);
 
@@ -106,6 +134,7 @@ public class Utils {
         }
         return DEFAULT_SPAWN_EGG;
     }
+
     public static String getEntityOfSpawnEggForTooltip(ItemStack item) {
         String entityName = "";
         if (item.getItem() instanceof SpawnEggItem egg) {
@@ -146,9 +175,11 @@ public class Utils {
 
         return translationKey;
     }
+
     public static double log(int base, int value) {
         return Math.log(value) / Math.log(base);
     }
+
     public static boolean removeItems(Inventory inventory, Item item, int amount) {
         if (inventory.countItem(item) < amount) return false;
 
