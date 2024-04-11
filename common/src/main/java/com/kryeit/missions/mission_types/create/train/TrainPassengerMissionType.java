@@ -28,7 +28,7 @@ public class TrainPassengerMissionType implements MissionType {
     }
 
     @Override
-    public boolean isLonely() {
+    public boolean assignOnlyOnce() {
         return true;
     }
 

@@ -11,7 +11,9 @@ import java.util.UUID;
 public interface MissionType {
     String id();
 
-    boolean isLonely();
+    default boolean assignOnlyOnce() {
+        return false;
+    }
 
     MissionDifficulty difficulty();
 

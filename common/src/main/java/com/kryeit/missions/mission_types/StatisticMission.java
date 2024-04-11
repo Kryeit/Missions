@@ -43,7 +43,7 @@ public class StatisticMission {
         }
 
         @Override
-        public boolean isLonely() {
+        public boolean assignOnlyOnce() {
             return true;
         }
 

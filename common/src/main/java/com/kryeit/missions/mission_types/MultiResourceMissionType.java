@@ -22,9 +22,4 @@ public interface MultiResourceMissionType extends MissionType {
         String itemString = item.toString();
         data.putInt(itemString, data.getInt(itemString) + amount);
     }
-
-    @Override
-    default boolean isLonely() {
-        return false;
-    }
 }
