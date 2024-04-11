@@ -101,13 +101,13 @@ public class DataStorage implements AutoCloseable {
         if (missions.size() < length) {
             for (int i = 0; i < length; i++) {
                 double randomNumber = Math.random();
-                shuffled.add(Utils.biggestMatching(missions, filter.and(m -> m.weight() < randomNumber), Comparator.comparing(ConfigReader.Mission::weight)));
+                shuffled.add(Utils.biggestMatching(missions, filter.and(m -> m.weight() >= randomNumber), Comparator.comparing(ConfigReader.Mission::weight)));
             }
         } else {
             List<ConfigReader.Mission> remaining = new LinkedList<>(missions);
             for (int i = 0; i < length; i++) {
                 double randomNumber = Math.random();
-                ConfigReader.Mission randomMission = Utils.biggestMatching(remaining, filter.and(m -> m.weight() < randomNumber), Comparator.comparing(ConfigReader.Mission::weight));
+                ConfigReader.Mission randomMission = Utils.biggestMatching(remaining, filter.and(m -> m.weight() >= randomNumber), Comparator.comparing(ConfigReader.Mission::weight));
                 shuffled.add(randomMission);
                 remaining.remove(randomMission);
             }
