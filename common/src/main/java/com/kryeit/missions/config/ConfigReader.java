@@ -48,6 +48,8 @@ public class ConfigReader {
         for (String key : object.keySet()) {
             JSONObject value = object.getObject(key);
             JSONObject reward = value.getObject("reward");
+            float weight = value.optFloat("weight").orElse(1f);
+            if (weight == 0) continue;
 
             MissionType missionType = MissionTypeRegistry.INSTANCE.getType(key);
             Mission mission = new Mission(
@@ -55,7 +57,8 @@ public class ConfigReader {
                     reward.getString("item"),
                     missionType,
                     getItems(value.getObject("missions")),
-                    value.getArray("titles").asList(JSONArray::getString)
+                    value.getArray("titles").asList(JSONArray::getString),
+                    weight
             );
             missions.put(missionType, mission);
         }
@@ -113,6 +116,6 @@ public class ConfigReader {
     }
 
     public record Mission(Range rewardAmount, String rewardItem, MissionType missionType, Map<String, Range> items,
-                          List<String> titles) {
+                          List<String> titles, float weight) {
     }
 }

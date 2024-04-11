@@ -52,6 +52,15 @@ public class JSONObject {
         return data.keySet();
     }
 
+    public float getFloat(String key) {
+        return (float) data.get(key);
+    }
+
+    public Optional<Float> optFloat(String key) {
+        Object value = data.get(key);
+        return value == null ? Optional.empty() : Optional.of((float) value);
+    }
+
     public static class JSONArray implements Iterable<Object> {
         private final List<Object> data;
 
