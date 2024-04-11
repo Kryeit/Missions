@@ -2,6 +2,7 @@
 - Now train, dive, vote and statistic-based missions can only appear once
 - Deleted drinks from Eating mission, and created a new Drinking mission.
 - Added a new tag, `#c:drinks`
+- Added support for tags in missions.json
 
 # 0.2.7
 - Added compat with Create: Missions' addons
