@@ -15,7 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
 public class DataStorage implements AutoCloseable {
     private static final File FILE = new File("mods/missions/mission_data.nbt");
@@ -95,47 +95,57 @@ public class DataStorage implements AutoCloseable {
         }
     }
 
+    private static List<ConfigReader.Mission> shuffleWeighted(Collection<ConfigReader.Mission> missions, int length) {
+        List<ConfigReader.Mission> shuffled = new ArrayList<>(length);
+        Predicate<ConfigReader.Mission> filter = mission -> !mission.missionType().assignOnlyOnce() || !shuffled.contains(mission);
+        if (missions.size() < length) {
+            for (int i = 0; i < length; i++) {
+                double randomNumber = Math.random();
+                shuffled.add(Utils.biggestMatching(missions, filter.and(m -> m.weight() < randomNumber), Comparator.comparing(ConfigReader.Mission::weight)));
+            }
+        } else {
+            List<ConfigReader.Mission> remaining = new LinkedList<>(missions);
+            for (int i = 0; i < length; i++) {
+                double randomNumber = Math.random();
+                ConfigReader.Mission randomMission = Utils.biggestMatching(remaining, filter.and(m -> m.weight() < randomNumber), Comparator.comparing(ConfigReader.Mission::weight));
+                shuffled.add(randomMission);
+                remaining.remove(randomMission);
+            }
+        }
+        return shuffled;
+    }
+
     public void reassignActiveMissions(Map<MissionType, ConfigReader.Mission> missions, UUID player) {
         ListTag list = getActiveMissionsTag(player);
         list.clear();
 
-        for (int i = 0; i < 10; i++) {
-            list.add(createActiveMissionTag(missions));
+        for (ConfigReader.Mission mission : shuffleWeighted(missions.values(), 10)) {
+            list.add(createActiveMissionTag(mission));
         }
     }
 
-    private static CompoundTag createActiveMissionTag(Map<MissionType, ConfigReader.Mission> missions) {
+    private static CompoundTag createActiveMissionTag(ConfigReader.Mission mission) {
         CompoundTag tag = new CompoundTag();
 
-        Set<MissionType> activeLonelyMissions = missions.keySet().stream()
-                .filter(MissionType::isLonely)
-                .collect(Collectors.toSet());
+        Map.Entry<String, Range> requiredItem = getRandomEntry(mission.items().entrySet());
 
-        List<ConfigReader.Mission> availableMissions = missions.values().stream()
-                .filter(mission -> !activeLonelyMissions.contains(mission.missionType()))
-                .collect(Collectors.toList());
-
-        if (availableMissions.isEmpty()) {
-            availableMissions = new ArrayList<>(missions.values());
-        }
-
-        ConfigReader.Mission randomEntry = getRandomEntry(availableMissions);
-        Map.Entry<String, Range> item = getRandomEntry(randomEntry.items().entrySet());
-
-        tag.putString("item", item.getKey());
+        tag.putString("item", requiredItem.getKey());
         tag.putBoolean("completed", false);
-        tag.putString("mission_id", randomEntry.missionType().id());
-        tag.putInt("required_amount", item.getValue().getRandomValue());
-        tag.putString("title", getRandomEntry(randomEntry.titles()));
+        tag.putString("mission_id", mission.missionType().id());
+        tag.putInt("required_amount", requiredItem.getValue().getRandomValue());
+        tag.putString("title", getRandomEntry(mission.titles()));
         return tag;
     }
 
-    /*
-    This method should not be used. Use MissionManager#reassignMission(ServerPlayer player, int index) instead
-     */
     public void reassignActiveMission(Map<MissionType, ConfigReader.Mission> missions, UUID player, int index) {
         ListTag list = getActiveMissionsTag(player);
-        list.set(index, createActiveMissionTag(missions));
+        String idToReassign = list.getCompound(index).getString("mission_id");
+
+        List<ConfigReader.Mission> assignedTypes = new ArrayList<>(missions.values());
+        assignedTypes.removeIf(m -> m.missionType().id().equals(idToReassign));
+
+        ConfigReader.Mission mission = shuffleWeighted(assignedTypes, 1).get(0);
+        list.set(index, createActiveMissionTag(mission));
     }
 
     public int getReassignmentsSinceLastReset(UUID player) {

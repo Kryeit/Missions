@@ -188,11 +188,17 @@ public class Missions {
 
             if (!unusedTypes.isEmpty()) {
                 LOGGER.warn(
-                        "The following mission types are available but ignored due to their absence in the config file: {}",
+                        "The following mission types are available but ignored due to having a weight of 0 or being absent in the config file: {}",
                         Utils.map(unusedTypes, MissionType::id)
                 );
             }
-
+            if (configReader.getMissions().size() < 10) {
+                if (Utils.filter(configReader.getMissions().keySet(), MissionType::assignOnlyOnce).size() < configReader.getMissions().size()) {
+                    LOGGER.warn("Mission types will be assigned more than once per player since less than 10 missions are active");
+                } else {
+                    throw new RuntimeException("10 missions can not be selected per player since less than 10 mission types that can be assigned at most once are enabled and no multiple assignable type is enabled.");
+                }
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
