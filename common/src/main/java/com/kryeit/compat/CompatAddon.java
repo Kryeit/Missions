@@ -4,6 +4,7 @@ import com.kryeit.utils.Utils;
 
 public enum CompatAddon {
     CREATE_DECO("createdeco"),
+    BREWIN_AND_CHEWIN("brewinandchewin"),
     LUCKPERMS("luckperms");
 
     private final String id;
