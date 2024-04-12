@@ -5,19 +5,9 @@
       "item": "diamond"
     },
     "missions": {
-      "create:brass_scaffolding": "100-400",
-      "create:brass_bars": "200-800",
-      "create:brass_ladder": "100-400",
-      "create:industrial_iron_block": "500-1500",
-      "create:rose_quartz_block": "300-900",
-      "create:rose_quartz_tiles": "200-700",
-      "create:copper_tiles": "300-700",
-      "create:andesite_scaffolding": "200-800",
-      "create:andesite_bars": "300-1200",
-      "create:andesite_ladder": "200-800",
-      "create:framed_glass": "500-2500",
-      "create:copycat_panel": "600-1800",
-      "create:copycat_step": "600-1800"
+      "#create:ladders": "300-1500",
+      "#create:bars": "200-1000",
+      "#create:scaffoldings": "200-4000"
     },
     "titles": [
       "Cutting edge technology",
@@ -194,47 +184,6 @@
       "Ascension"
     ]
   },
-  "mill": {
-    "reward": {
-      "amount": "2-23",
-      "item": "diamond"
-    },
-    "missions": {
-      "gravel": "200-400",
-      "green_dye": "100-200",
-      "clay_ball": "100-200",
-      "yellow_dye": "100-200",
-      "red_dye": "100-200"
-    },
-    "titles": [
-      "Soft crushing",
-      "Starter machinery",
-      "Mill of fortune",
-      "Almost as fun as Crushing Wheels",
-      "Flour power",
-      "Milling marvels",
-      "Wheat whirlwind"
-    ]
-  },
-  "minecart": {
-    "reward": {
-      "amount": "2-23",
-      "item": "diamond"
-    },
-    "missions": {
-      "missions:statistic": "2-6"
-    },
-    "titles": [
-      "Roller coaster",
-      "Rudimentary transport",
-      "Smol tracks",
-      "Minecart mania",
-      "Rails to riches",
-      "Minecart magic",
-      "Rollercoaster roadtrip",
-      "Cartwheel carnival"
-    ]
-  },
   "crush": {
     "reward": {
       "amount": "2-23",
@@ -388,24 +337,6 @@
       "Wanderlust quest",
       "The Walking Challenge",
       "The walking dead"
-    ]
-  },
-  "swim": {
-    "reward": {
-      "amount": "2-23",
-      "item": "diamond"
-    },
-    "missions": {
-      "missions:statistic": "3-15"
-    },
-    "titles": [
-      "Squid hunter",
-      "Trident believer",
-      "Dolphin manners",
-      "Dive into adventure",
-      "Waterworld wanderlust",
-      "Deep dive discovery",
-      "Submerged saga"
     ]
   },
   "train-driver": {

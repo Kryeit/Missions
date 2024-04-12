@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "create:andesite_scaffolding",
+    "create:brass_scaffolding",
+    "create:copper_scaffolding"
+  ]
+}
