@@ -75,7 +75,8 @@
       "create:asurine": "500-2000",
       "create:scoria": "500-2000",
       "blackstone": "1000-3000",
-      "netherrack": "2000-5000"
+      "netherrack": "2000-5000",
+      "#minecraft:dirt": "1000-3000"
     },
     "titles": [
       "Block buster",
@@ -99,9 +100,11 @@
       "create:gearbox": "300-1000",
       "create:shaft": "1000-5000",
       "create:gearshift": "100-500",
-      "create:mechanical_arm": "100-500",
-      "create:brass_funnel": "200-800",
-      "create:large_water_wheel": "20-50"
+      "create:mechanical_arm": "30-50",
+      "create:brass_funnel": "50-150",
+      "create:large_water_wheel": "20-50",
+      "paper": "200-500",
+      "create:item_vault": "100-400"
     },
     "titles": [
       "Masterful manufacture",
@@ -121,12 +124,19 @@
       "item": "diamond"
     },
     "missions": {
-      "minecraft:wither_skeleton": "50-150",
+      "wither_skeleton": "50-150",
       "zombie": "100-300",
-      "endermite": "5-50",
+      "cave_spider": "50-100",
       "skeleton": "100-250",
-      "ender_dragon": "1-10",
-      "hoglin": "15-40"
+      "ender_dragon": "1-2",
+      "hoglin": "15-40",
+      "creeper": "70-120",
+      "ghast": "20-50",
+      "stray": "70-170",
+      "wither": "1-3",
+      "blaze": "50-100",
+      "enderman": "50-100",
+      "#minecraft:animals": "30-80"
     },
     "titles": [
       "Plague extermination",
@@ -165,7 +175,7 @@
       "item": "diamond"
     },
     "missions": {
-      "missions:statistic": "5-20"
+      "missions:statistic": "3-10"
     },
     "titles": [
       "Sea of pirates",
@@ -183,7 +193,7 @@
       "item": "diamond"
     },
     "missions": {
-      "missions:statistic": "5-30"
+      "missions:statistic": "7-30"
     },
     "titles": [
       "Cloud skipping",
@@ -202,7 +212,7 @@
       "item": "diamond"
     },
     "missions": {
-      "create:crushed_raw_gold": "150-300",
+      "#create:crushed_raw_materials": "150-300",
       "quartz": "200-500",
       "create:experience_nugget": "300-1000",
       "string": "200-500",
@@ -296,7 +306,8 @@
       "item": "diamond"
     },
     "missions": {
-      "#c:plates": "100-600"
+      "#c:plates": "100-600",
+      "create:track": "300-600"
     },
     "titles": [
       "Bonk",
@@ -316,7 +327,8 @@
     "missions": {
       "create:brass_ingot": "400-2000",
       "create:andesite_alloy": "300-1500",
-      "create:dough": "300-600"
+      "create:dough": "300-600",
+      "mud": "300-600"
     },
     "titles": [
       "Stressful mix",
