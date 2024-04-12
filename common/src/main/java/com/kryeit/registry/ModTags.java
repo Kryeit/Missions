@@ -26,7 +26,10 @@ public class ModTags {
     public static TagKey<Item> CREATEDECO_HULLS = TagKey.create(Registries.ITEM, new ResourceLocation("createdeco", "hulls"));
     public static TagKey<Item> CREATEDECO_COINS = TagKey.create(Registries.ITEM, new ResourceLocation("createdeco", "coins"));
 
-
+    // Railways Tags
+    public static TagKey<Item> RAILWAYS_TRACKS = TagKey.create(Registries.ITEM, new ResourceLocation("railways", "tracks"));
+    public static TagKey<Item> RAILWAYS_NARROW_TRACKS = TagKey.create(Registries.ITEM, new ResourceLocation("railways", "narrow_tracks"));
+    public static TagKey<Item> RAILWAYS_WIDE_TRACKS = TagKey.create(Registries.ITEM, new ResourceLocation("railways", "wide_tracks"));
 
     public static void register() {
 
