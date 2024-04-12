@@ -27,13 +27,25 @@
       "item": "diamond"
     },
     "missions": {
-      "polished_blackstone": "500-1500",
-      "create:andesite_alloy_block": "200-700",
-      "create:experience_block": "150-800",
-      "blue_ice": "300-800",
       "iron_block": "100-600",
       "iron_ingot": "1000-3000",
-      "gold_ingot": "500-1500",
+      "gold_block": "100-600",
+      "gold_ingot": "1000-3000",
+      "create:zinc_block": "100-600",
+      "create:zinc_ingot": "100-600",
+
+      "redstone_block": "100-600",
+      "emerald_block": "100-600",
+      "lapis_block": "100-600",
+      "diamond_block": "100-600",
+      "netherite_block": "100-600",
+      "create:andesite_alloy_block": "100-600",
+      "create:experience_block": "100-600",
+      "create:industrial_iron_block": "100-600",
+
+      "polished_blackstone": "500-1500",
+      "blue_ice": "300-800",
+
       "packed_ice": "500-1200"
     },
     "titles": [
@@ -284,9 +296,7 @@
       "item": "diamond"
     },
     "missions": {
-      "create:iron_sheet": "200-700",
-      "create:brass_sheet": "100-500",
-      "create:golden_sheet": "100-300"
+      "#c:plates": "100-600"
     },
     "titles": [
       "Bonk",
