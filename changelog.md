@@ -2,7 +2,7 @@
 - Now train, dive, vote and statistic-based missions can only appear once
 - Deleted drinks from Eating mission, and created a new Drinking mission.
 - Added new tags, `#c:drinks`,`#brewinandchewin:drinks`, `#createdeco:catwalks`, `#createdeco:ladders`, `#create:ladders`, `#createdeco:hulls`, `#createdeco:bars`, `#createdeco:coins`, `#create:bars` and `#create:scaffoldings`
-- - Added support for tags in missions.json
+- Added support for tags in missions.json
 
 # 0.2.7
 - Added compat with Create: Missions' addons
