@@ -47,5 +47,9 @@
   "block.missions.mechanical_exchanger": "Mechanical Exchanger",
   "missions.message.hard_mission_completed": "%s vient de compléter une mission difficile!",
   "missions.reassign": "Vos missions ont été redistribuées comme chaque semaine ! Vous pouvez vérifier vos nouvelles missions avec /missions ou la touche missions",
-  "sounds.missions.mission_complete": "Mission complétée"
+  "sounds.missions.mission_complete": "Mission complétée",
+  "missions.ponder.mechanical_exchanger.header": "Getting new kind of currencies with the Mechanical Exchanger",
+  "missions.ponder.mechanical_exchanger.text_1": "A exchanger can have 2 different modes: to a smaller currency or to a bigger currency",
+  "missions.ponder.mechanical_exchanger.text_2": "Changing the rotation direction will change the mode of the exchanger",
+  "missions.ponder.mechanical_exchanger.text_3": "Insert items by right clicking the exchanger or with other blocks like hoppers"
 }

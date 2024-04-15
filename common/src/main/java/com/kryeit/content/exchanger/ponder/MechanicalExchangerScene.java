@@ -41,6 +41,12 @@ public class MechanicalExchangerScene {
                 .pointAt(util.vector.topOf(2, 1, 2));
         scene.idle(30);
 
+        scene.overlay.showText(150)
+                .placeNearTarget()
+                .text("Insert items by right clicking the exchanger or with other blocks like hoppers")
+                .pointAt(util.vector.topOf(2, 1, 2));
+        scene.idle(30);
+
         scene.markAsFinished();
     }
 }
