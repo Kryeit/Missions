@@ -4,6 +4,8 @@
 - Added new tags: `#railways:tracks`, `#railways:wide_tracks`, `#railways:narrow_tracks`, `#c:drinks`,`#brewinandchewin:drinks`, `#createdeco:catwalks`, `#createdeco:ladders`, `#create:ladders`, `#createdeco:hulls`, `#createdeco:bars`, `#createdeco:coins`, `#create:bars` and `#create:scaffoldings`
 - Added support for tags in missions.json
 - Added blockstates to Exchanger mode, and colors to the nixies
+- Added support for Weights in `missions.json`
+- Added a Ponder for the Mechanical Exchanger
 
 # 0.2.7
 - Added compat with Create: Missions' addons
