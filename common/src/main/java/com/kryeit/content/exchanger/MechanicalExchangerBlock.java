@@ -23,15 +23,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 
 public class MechanicalExchangerBlock extends DirectionalKineticBlock implements IBE<MechanicalExchangerBlockEntity> {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final EnumProperty<MechanicalExchangerBlockEntity.Mode> MODE = EnumProperty.create("mode", MechanicalExchangerBlockEntity.Mode.class);
 
     public MechanicalExchangerBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(MODE, MechanicalExchangerBlockEntity.Mode.OFF));
     }
 
     /* FACING */
@@ -54,6 +57,7 @@ public class MechanicalExchangerBlock extends DirectionalKineticBlock implements
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
+        builder.add(MODE);
     }
 
     /* BLOCK ENTITY */

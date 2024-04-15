@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -35,10 +36,15 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
 
     Mode mode = Mode.OFF;
 
-    enum Mode {
+    public enum Mode implements StringRepresentable {
         TO_SMALLER,
         TO_BIGGER,
-        OFF
+        OFF;
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase();
+        }
     }
 
     public MechanicalExchangerBlockEntity(BlockEntityType<?> blockEntityType, BlockPos worldPosition, BlockState blockState) {
@@ -67,8 +73,8 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
     }
 
     @Override
-    public int [] getSlotsForFace(Direction direction) {
-        return new int[] {0, 1};
+    public int[] getSlotsForFace(Direction direction) {
+        return new int[]{0, 1};
     }
 
     @Override
@@ -191,14 +197,14 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
 
     private boolean hasRecipe() {
 
-        if(this.mode == Mode.TO_BIGGER) {
+        if (this.mode == Mode.TO_BIGGER) {
 
             ItemStack result = Coins.getExchange(getItem(0), true);
 
             return result != null && canInsertAmountIntoOutputSlot(1)
                     && canInsertItemIntoOutputSlot(result)
                     && getItem(0).getCount() >= EXCHANGE_RATE;
-        } else if(this.mode == Mode.TO_SMALLER) {
+        } else if (this.mode == Mode.TO_SMALLER) {
 
             ItemStack result = Coins.getExchange(getItem(0), false);
 
@@ -211,18 +217,18 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
 
     private void craftItem() {
 
-        if(this.mode == Mode.TO_BIGGER) {
+        if (this.mode == Mode.TO_BIGGER) {
             ItemStack result = Coins.getExchange(getItem(0), true);
-            if(result != null) {
+            if (result != null) {
                 removeItem(0, EXCHANGE_RATE);
                 setItem(1, new ItemStack(result.getItem(), getItem(1).getCount() + 1));
 
                 resetProgress();
             }
 
-        } else if(this.mode == Mode.TO_SMALLER) {
+        } else if (this.mode == Mode.TO_SMALLER) {
             ItemStack result = Coins.getExchange(getItem(0), false);
-            if(result != null) {
+            if (result != null) {
                 removeItem(0, 1);
                 setItem(1, new ItemStack(result.getItem(), getItem(1).getCount() + result.getCount()));
 
@@ -243,10 +249,16 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         return getItem(1).getMaxStackSize() > getItem(1).getCount() + (amount - 1);
     }
 
-    public void updateMode() {
-        if (getSpeed() >= 100) mode = Mode.TO_BIGGER;
-        else if (getSpeed() <= -100) mode = Mode.TO_SMALLER;
-        else mode = Mode.OFF;
+    private void updateMode() {
+        double speed = getSpeed();
+        this.mode = speed >= 100 ? Mode.TO_BIGGER : (speed <= -100 ? Mode.TO_SMALLER : Mode.OFF);
+        updateState();
     }
 
+    public void updateState() {
+        if (this.level != null && !this.level.isClientSide) {
+            BlockState state = this.level.getBlockState(this.worldPosition);
+            this.level.setBlock(this.worldPosition, state.setValue(MechanicalExchangerBlock.MODE, mode), 3);
+        }
+    }
 }

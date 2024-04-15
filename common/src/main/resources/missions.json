@@ -285,10 +285,12 @@
       "item": "diamond"
     },
     "missions": {
+      "#c:glass_blocks": "20-100",
       "create:track_signal": "20-50",
-      "coarse_dirt": "100-300",
+      "#minecraft:dirt": "100-300",
       "fern": "50-100",
-      "grass": "50-100"
+      "grass": "50-100",
+      "#c:flowers": "5-20"
     },
     "titles": [
       "Master builder",

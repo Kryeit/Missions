@@ -1,8 +1,16 @@
 {
   "variants": {
-    "facing=north": { "model": "missions:block/mechanical_exchanger" },
-    "facing=east": { "model": "missions:block/mechanical_exchanger", "y": 90 },
-    "facing=south": { "model": "missions:block/mechanical_exchanger", "y": 180 },
-    "facing=west": { "model": "missions:block/mechanical_exchanger", "y": 270 }
+    "facing=north,mode=off": { "model": "missions:block/mechanical_exchanger" },
+    "facing=east,mode=off": { "model": "missions:block/mechanical_exchanger", "y": 90 },
+    "facing=south,mode=off": { "model": "missions:block/mechanical_exchanger", "y": 180 },
+    "facing=west,mode=off": { "model": "missions:block/mechanical_exchanger", "y": 270 },
+    "facing=north,mode=to_smaller": { "model": "missions:block/mechanical_exchanger_to_smaller" },
+    "facing=east,mode=to_smaller": { "model": "missions:block/mechanical_exchanger_to_smaller", "y": 90 },
+    "facing=south,mode=to_smaller": { "model": "missions:block/mechanical_exchanger_to_smaller", "y": 180 },
+    "facing=west,mode=to_smaller": { "model": "missions:block/mechanical_exchanger_to_smaller", "y": 270 },
+    "facing=north,mode=to_bigger": { "model": "missions:block/mechanical_exchanger_to_bigger" },
+    "facing=east,mode=to_bigger": { "model": "missions:block/mechanical_exchanger_to_bigger", "y": 90 },
+    "facing=south,mode=to_bigger": { "model": "missions:block/mechanical_exchanger_to_bigger", "y": 180 },
+    "facing=west,mode=to_bigger": { "model": "missions:block/mechanical_exchanger_to_bigger", "y": 270 }
   }
 }
