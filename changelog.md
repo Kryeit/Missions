@@ -6,6 +6,7 @@
 - Added blockstates to Exchanger mode, and colors to the nixies
 - Added support for Weights in `missions.json`
 - Added a Ponder for the Mechanical Exchanger
+- Now the Exchanger inventory is compatible with Chutes and Funnels
 
 # 0.2.7
 - Added compat with Create: Missions' addons

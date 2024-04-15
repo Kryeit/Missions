@@ -2,6 +2,7 @@ package com.kryeit.content.exchanger.fabric;
 
 import com.kryeit.content.exchanger.MechanicalExchangerBlockEntity;
 import io.github.fabricators_of_create.porting_lib.transfer.StorageViewArrayIterator;
+import io.github.fabricators_of_create.porting_lib.transfer.item.ItemHandlerHelper;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
@@ -23,21 +24,11 @@ public class MechanicalExchangerContainerInterface extends SnapshotParticipant<M
 	public MechanicalExchangerContainerInterface(MechanicalExchangerBlockEntity be) {
         this.be = be;
 		this.views = new MechanicalExchangerContainerSlotView[2];
-		this.views[0] = new MechanicalExchangerContainerSlotView(this, 0);
-		this.views[1] = new MechanicalExchangerContainerSlotView(this, 1);
+		this.views[0] = new MechanicalExchangerContainerSlotView(this, 1);
+		this.views[1] = new MechanicalExchangerContainerSlotView(this, 0);
 
 	}
 
-
-	// TODO: Fix insert and extract methods
-
-	// For some reason que ItemVariant is always the Item in the slot 0
-	// Test with the extract() method first
-	// This causes the "long" return value to be aplicated to the wrong slot,
-	// so the Item type that is in the slot 0 is the one that is being spawned by a chute for example
-
-	// Example: 1 diamond -> 16 gold, ends up outputting the 16 diamonds and deletes the 16 gold
-	// The only issue is the "return remove" line, which makes Diamonds to be dropped by a chute
 	@Override
 	public long insert(ItemVariant resource, long maxAmount, TransactionContext transaction) {
 		long total = 0;
@@ -47,8 +38,7 @@ public class MechanicalExchangerContainerInterface extends SnapshotParticipant<M
 		if (maxInsert > 0) {
 			int add = Math.min((int) maxAmount, maxInsert);
 			if (add > 0 && be.canInsertItemIntoSlot(0, resource.toStack())) {
-				resource.toStack().shrink(add);
-				be.inventory.set(0, be.inventory.get(0).copy());
+				be.inventory.set(0, ItemHandlerHelper.copyStackWithSize(resource.toStack(), be.inventory.get(0).getCount() + add));
 				total += add;
 			}
 		}
