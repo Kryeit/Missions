@@ -17,7 +17,6 @@ public class MechanicalExchangerScene {
         Selection body = util.select.cuboid(new BlockPos(0, 1, 0), new Vec3i(5, 1, 5));
         Selection belt = util.select.cuboid(new BlockPos(3, 2, 2), new BlockPos(3, 2, 4));
 
-        Selection exchanger = util.select.position(2, 1, 2);
         scene.world.showSection(body, Direction.UP);
         scene.world.showSection(belt, Direction.UP);
         scene.idle(20);
@@ -39,13 +38,13 @@ public class MechanicalExchangerScene {
                 .placeNearTarget()
                 .text("Changing the rotation direction will change the mode of the exchanger")
                 .pointAt(util.vector.topOf(2, 1, 2));
-        scene.idle(30);
+        scene.idle(180);
 
         scene.overlay.showText(150)
                 .placeNearTarget()
                 .text("Insert items by right clicking the exchanger or with other blocks like hoppers")
                 .pointAt(util.vector.topOf(2, 1, 2));
-        scene.idle(30);
+        scene.idle(150);
 
         scene.markAsFinished();
     }
