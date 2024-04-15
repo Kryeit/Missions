@@ -28,12 +28,14 @@ import static com.kryeit.coins.Coins.EXCHANGE_RATE;
 public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         implements MenuProvider, WorldlyContainer {
 
+    public static final int INPUT_SLOT = 0;
+    public static final int OUTPUT_SLOT = 1;
+
     public NonNullList<ItemStack> inventory;
 
     public final ContainerData data;
     private int progress = 0;
     private int maxProgress = 64;
-
     Mode mode = Mode.OFF;
 
     public enum Mode implements StringRepresentable {
@@ -199,17 +201,17 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
 
         if (this.mode == Mode.TO_BIGGER) {
 
-            ItemStack result = Coins.getExchange(getItem(0), true);
+            ItemStack result = Coins.getExchange(getItem(INPUT_SLOT), true);
 
-            return result != null && canInsertAmountIntoOutputSlot(1)
-                    && canInsertItemIntoOutputSlot(result)
-                    && getItem(0).getCount() >= EXCHANGE_RATE;
+            return result != null && canInsertAmountIntoSlot(OUTPUT_SLOT, 1)
+                    && canInsertItemIntoSlot(OUTPUT_SLOT, result)
+                    && getItem(INPUT_SLOT).getCount() >= EXCHANGE_RATE;
         } else if (this.mode == Mode.TO_SMALLER) {
 
-            ItemStack result = Coins.getExchange(getItem(0), false);
+            ItemStack result = Coins.getExchange(getItem(INPUT_SLOT), false);
 
-            return result != null && canInsertAmountIntoOutputSlot(result.getCount())
-                    && canInsertItemIntoOutputSlot(result);
+            return result != null && canInsertAmountIntoSlot(OUTPUT_SLOT, result.getCount())
+                    && canInsertItemIntoSlot(OUTPUT_SLOT, result);
         }
 
         return false;
@@ -218,19 +220,19 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
     private void craftItem() {
 
         if (this.mode == Mode.TO_BIGGER) {
-            ItemStack result = Coins.getExchange(getItem(0), true);
+            ItemStack result = Coins.getExchange(getItem(INPUT_SLOT), true);
             if (result != null) {
-                removeItem(0, EXCHANGE_RATE);
-                setItem(1, new ItemStack(result.getItem(), getItem(1).getCount() + 1));
+                removeItem(INPUT_SLOT, EXCHANGE_RATE);
+                setItem(OUTPUT_SLOT, new ItemStack(result.getItem(), getItem(OUTPUT_SLOT).getCount() + 1));
 
                 resetProgress();
             }
 
         } else if (this.mode == Mode.TO_SMALLER) {
-            ItemStack result = Coins.getExchange(getItem(0), false);
+            ItemStack result = Coins.getExchange(getItem(INPUT_SLOT), false);
             if (result != null) {
-                removeItem(0, 1);
-                setItem(1, new ItemStack(result.getItem(), getItem(1).getCount() + result.getCount()));
+                removeItem(INPUT_SLOT, 1);
+                setItem(OUTPUT_SLOT, new ItemStack(result.getItem(), getItem(OUTPUT_SLOT).getCount() + result.getCount()));
 
                 resetProgress();
             }
@@ -241,12 +243,12 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         this.progress = 0;
     }
 
-    private boolean canInsertItemIntoOutputSlot(ItemStack output) {
-        return getItem(1).getItem() == output.getItem() || getItem(1).isEmpty();
+    public boolean canInsertItemIntoSlot(int slot, ItemStack output) {
+        return getItem(slot).getItem() == output.getItem() || getItem(slot).isEmpty();
     }
 
-    private boolean canInsertAmountIntoOutputSlot(int amount) {
-        return getItem(1).getMaxStackSize() > getItem(1).getCount() + (amount - 1);
+    public boolean canInsertAmountIntoSlot(int slot, int amount) {
+        return getItem(slot).getMaxStackSize() > getItem(slot).getCount() + (amount - 1);
     }
 
     private void updateMode() {
