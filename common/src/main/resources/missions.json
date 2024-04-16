@@ -33,7 +33,6 @@
       "gold_ingot": "1000-3000",
       "create:zinc_block": "100-600",
       "create:zinc_ingot": "100-600",
-
       "redstone_block": "100-600",
       "emerald_block": "100-600",
       "lapis_block": "100-600",
@@ -42,10 +41,8 @@
       "create:andesite_alloy_block": "100-600",
       "create:experience_block": "100-600",
       "create:industrial_iron_block": "100-600",
-
       "polished_blackstone": "500-1500",
       "blue_ice": "300-800",
-
       "packed_ice": "500-1200"
     },
     "titles": [
