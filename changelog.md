@@ -1,4 +1,5 @@
 # 0.3.2
+- Fixed some dedicated servers not saving properly the mission data
 - Now train, dive, vote and statistic-based missions can only appear once
 - Deleted drinks from Eating mission, and created a new Drinking mission.
 - Added new tags: `#railways:tracks`, `#railways:wide_tracks`, `#railways:narrow_tracks`, `#c:drinks`,`#brewinandchewin:drinks`, `#createdeco:catwalks`, `#createdeco:ladders`, `#create:ladders`, `#createdeco:hulls`, `#createdeco:bars`, `#createdeco:coins`, `#create:bars` and `#create:scaffoldings`
@@ -7,6 +8,8 @@
 - Added support for Weights in `missions.json`
 - Added a Ponder for the Mechanical Exchanger
 - Now the Exchanger inventory is compatible with Chutes and Funnels
+- Update fr_fr.json by __Tesseract
+- Other minor fixes
 
 # 0.2.7
 - Added compat with Create: Missions' addons
