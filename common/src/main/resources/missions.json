@@ -4,6 +4,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "#create:ladders": "300-1500",
       "#create:bars": "200-1000",
@@ -26,6 +27,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "iron_block": "100-600",
       "iron_ingot": "1000-3000",
@@ -65,6 +67,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "andesite": "500-3000",
       "create:ochrum": "500-2000",
@@ -91,6 +94,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "create:crushing_wheel": "10-100",
       "stick": "500-1500",
@@ -120,6 +124,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "wither_skeleton": "50-150",
       "zombie": "100-300",
@@ -149,6 +154,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "missions:statistic": "3-10"
     },
@@ -171,6 +177,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "missions:statistic": "3-10"
     },
@@ -189,6 +196,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "missions:statistic": "7-30"
     },
@@ -208,6 +216,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "#create:crushed_raw_materials": "150-300",
       "quartz": "200-500",
@@ -231,6 +240,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "minecraft:cod": "20-50",
       "salmon": "15-40",
@@ -255,6 +265,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "create:chocolate_glazed_berries": "100-300",
       "create:honeyed_apple": "100-300",
@@ -281,6 +292,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "#c:glass_blocks": "20-100",
       "create:track_signal": "20-50",
@@ -304,6 +316,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "#c:plates": "100-600",
       "create:track": "300-600"
@@ -323,6 +336,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "create:brass_ingot": "400-2000",
       "create:andesite_alloy": "300-1500",
@@ -345,6 +359,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "missions:statistic": "5-20"
     },
@@ -365,6 +380,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "missions:distance": "3-10"
     },
@@ -382,6 +398,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "missions:distance": "3-10"
     },
@@ -402,6 +419,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "missions:distance": "3-10"
     },
@@ -423,6 +441,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "lava": "10-80",
       "water": "30-120"
@@ -439,6 +458,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "stone": "1400-6000",
       "cobblestone": "300-1500",
@@ -462,6 +482,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "#c:logs": "400-2000",
       "#c:leaves": "500-1000",
@@ -478,6 +499,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "wheat_seeds": "1000-3000",
       "carrot": "1000-3000",
@@ -498,6 +520,7 @@
       "amount": "2-23",
       "item": "diamond"
     },
+    "weight": 1.0,
     "missions": {
       "#c:drinks": "30-100"
     },
