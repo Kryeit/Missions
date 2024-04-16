@@ -9,10 +9,8 @@
 	<a href="https://discord.gg/3Mq6E2tRBU"><img src="https://img.shields.io/discord/1100446990590034041?color=5865f2&label=Discord&style=flat" alt="Discord"></a>
 	<a href="https://www.curseforge.com/minecraft/mc-mods/missions"><img src="http://cf.way2muchnoise.eu/missions.svg" alt="CF"></a>
     <a href="https://modrinth.com/mod/missions"><img src="https://img.shields.io/modrinth/dt/missions?logo=modrinth&label=&suffix=%20&style=flat&color=242629&labelColor=5ca424&logoColor=1c1c1c" alt="Modrinth"></a>
-    <br><br>
+    <br>
 </h1>
-
-![Alt](https://repobeats.axiom.co/api/embed/1748da4aacf50a306cf62b32d6807ae7ab5438fb.svg "Repobeats analytics image")
 
 # What's this addon?
 It works by giving **10 random missions per player per week**. These missions can be vanilla missions like **"Break X Veridium"** or Create mod related like **"Drive a train for 4 km with at least 2 passengers"**. You can also reroll the missions, and claim prices by completing them.
@@ -31,11 +29,13 @@ This file can be found in `config\missions\missions.json`.
 An example mission configuration:
 
 ```json
-"place": {
+{
+  "place": {
     "reward": {
       "amount": "2-23",
       "item": "createdeco:iron_coin"
     },
+    "weight": 1.0,
     "missions": {
       "create:track_signal": "20-50"
     },
@@ -43,6 +43,7 @@ An example mission configuration:
       "Example title"
     ]
   }
+}
 ```
 
 Ranges like 2-23 mean a number at random from 2 to 23, both included.
