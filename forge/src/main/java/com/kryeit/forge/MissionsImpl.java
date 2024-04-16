@@ -3,6 +3,7 @@ package com.kryeit.forge;
 import com.kryeit.Missions;
 import com.kryeit.registry.forge.KeyInit;
 import com.kryeit.registry.forge.ModCreativeTabsImpl;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -10,8 +11,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import java.util.function.Consumer;
 
 import static com.kryeit.Missions.REGISTRATE;
 
@@ -32,7 +31,11 @@ public class MissionsImpl {
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.register(new MissionHandler());
-        forgeEventBus.addListener((Consumer<PlayerLoggedInEvent>) event -> Missions.handlePlayerLogin(event.getEntity()));
+
+        forgeEventBus.addListener((PlayerLoggedInEvent event) -> {
+            Player player = event.getEntity();
+            Missions.handlePlayerLogin(player);
+        });
     }
 
     public static void finalizeRegistrate() {

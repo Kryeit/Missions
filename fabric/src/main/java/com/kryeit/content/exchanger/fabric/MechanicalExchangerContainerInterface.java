@@ -34,11 +34,11 @@ public class MechanicalExchangerContainerInterface extends SnapshotParticipant<M
 		long total = 0;
 		this.updateSnapshots(transaction);
 
-		int maxInsert = be.inventory.get(0).getMaxStackSize() - be.inventory.get(0).getCount();
+		int maxInsert = be.getItem(0).getMaxStackSize() - be.getItem(0).getCount();
 		if (maxInsert > 0) {
 			int add = Math.min((int) maxAmount, maxInsert);
 			if (add > 0 && be.canInsertItemIntoSlot(0, resource.toStack())) {
-				be.inventory.set(0, ItemHandlerHelper.copyStackWithSize(resource.toStack(), be.inventory.get(0).getCount() + add));
+				be.setItem(0, ItemHandlerHelper.copyStackWithSize(resource.toStack(), be.getItem(0).getCount() + add));
 				total += add;
 			}
 		}
@@ -49,11 +49,11 @@ public class MechanicalExchangerContainerInterface extends SnapshotParticipant<M
 	public long extract(ItemVariant resource, long maxAmount, TransactionContext transaction) {
 		this.updateSnapshots(transaction);
 
-		int maxExtract = be.inventory.get(1).getCount();
+		int maxExtract = be.getItem(1).getCount();
 		if (maxExtract > 0) {
 			int remove = Math.min((int) maxAmount, maxExtract);
 			if (remove > 0) {
-				be.inventory.get(1).split(remove);
+				be.getItem(1).split(remove);
 				return remove;
 			}
 		}
@@ -62,7 +62,7 @@ public class MechanicalExchangerContainerInterface extends SnapshotParticipant<M
 
 	@Nonnull
 	public ItemStack getStack(int slot) {
-		return this.be.inventory.get(slot);
+		return this.be.getItem(slot);
 	}
 
 	@Override
@@ -73,11 +73,11 @@ public class MechanicalExchangerContainerInterface extends SnapshotParticipant<M
 
 
 	public int getCapacityForSlot(int slot) {
-		return this.be.inventory.get(slot).getMaxStackSize() - this.be.inventory.get(slot).getCount();
+		return this.be.getItem(slot).getMaxStackSize() - this.be.getItem(slot).getCount();
 	}
 
 	public void restoreViewSnapshot(int slot, ItemStack snapshot) {
-		be.inventory.set(slot, snapshot);
+		be.setItem(slot, snapshot);
 	}
 
 	@Override
