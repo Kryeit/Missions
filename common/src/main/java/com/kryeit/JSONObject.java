@@ -58,7 +58,10 @@ public class JSONObject {
 
     public Optional<Float> optFloat(String key) {
         Object value = data.get(key);
-        return value == null ? Optional.empty() : Optional.of((float) value);
+        if (value instanceof Number) {
+            return Optional.of(((Number) value).floatValue());
+        }
+        return Optional.empty();
     }
 
     public static class JSONArray implements Iterable<Object> {
