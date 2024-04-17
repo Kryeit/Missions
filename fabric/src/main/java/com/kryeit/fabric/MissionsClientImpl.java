@@ -1,6 +1,7 @@
 package com.kryeit.fabric;
 
 import com.kryeit.Missions;
+import com.kryeit.MissionsClient;
 import com.kryeit.client.screen.MissionScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
@@ -18,6 +19,8 @@ public class MissionsClientImpl implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        MissionsClient.initializeClient();
+
         missionGuiKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("missions.menu.key", GLFW.GLFW_KEY_H, "missions.key.category"));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

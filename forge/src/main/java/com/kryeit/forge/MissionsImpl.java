@@ -1,6 +1,7 @@
 package com.kryeit.forge;
 
 import com.kryeit.Missions;
+import com.kryeit.MissionsClient;
 import com.kryeit.registry.forge.KeyInit;
 import com.kryeit.registry.forge.ModCreativeTabsImpl;
 import net.minecraft.world.entity.player.Player;
@@ -47,6 +48,8 @@ public class MissionsImpl {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
+        MissionsClient.initializeClient();
+
         MinecraftForge.EVENT_BUS.register(new KeyInit());
     }
 }
