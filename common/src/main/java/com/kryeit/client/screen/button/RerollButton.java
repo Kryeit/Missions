@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -48,9 +49,14 @@ public class RerollButton extends Button {
     public void renderItem(GuiGraphics guiGraphics) {
         renderBelowItem(guiGraphics);
 
-        ResourceLocation item = BuiltInRegistries.ITEM.getKey(rerollPrice.getItem());
-        ResourceLocation textureLocation = new ResourceLocation(item.getNamespace(), "textures/item/" + item.getPath() + ".png");
+        BakedModel bakedModel = Minecraft.getInstance().getItemRenderer().getModel(rerollPrice, Minecraft.getInstance().level, Minecraft.getInstance().player, 0);
+        ResourceLocation auxLocation = bakedModel.getParticleIcon().contents().name();
+        String namespace = auxLocation.getNamespace();
+        String path = auxLocation.getPath();
 
+        ResourceLocation textureLocation = new ResourceLocation(namespace, "textures/" + path + ".png");
+
+        System.out.println(textureLocation);
         if (rerollPrice.getCount() == 1)
             textureLocation = RewardsButton.CHEST_TEXTURE;
 
