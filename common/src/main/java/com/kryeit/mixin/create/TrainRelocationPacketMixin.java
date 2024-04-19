@@ -5,6 +5,7 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.trains.entity.Train;
 import com.simibubi.create.content.trains.entity.TrainRelocationPacket;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
+import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,9 +38,9 @@ public class TrainRelocationPacketMixin {
 		BlockPos from = train.carriages.stream().findFirst().get().anyAvailableEntity().blockPosition();
 		BlockPos to = pos;
 
-		System.out.println("Train relocation from " + from + " to " + to);
 		int distance = (int) Math.sqrt(from.distSqr(to));
-		System.out.println("Distance: " + distance);
+
+		if (distance > AllConfigs.server().trains.maxTrackPlacementLength.get() * 2) return;
 		TrainRelocateMission.handleDistanceChange(player.getUUID(), distance);
 	}
 
