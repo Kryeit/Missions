@@ -1,10 +1,7 @@
 package com.kryeit.utils;
 
 import com.kryeit.MinecraftServerSupplier;
-import com.kryeit.Missions;
 import com.kryeit.client.ClientMissionData;
-import com.kryeit.missions.DataStorage;
-import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.registry.ModStats;
@@ -29,9 +26,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stat;
-import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -276,5 +271,13 @@ public class Utils {
         ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSource.withSuppressedOutput());
 
         MinecraftServerSupplier.getServer().getCommands().performCommand(parseResults, command);
+    }
+
+    public static int getTotalMissions() {
+        return getClientStat(ModStats.EASY_MISSIONS_COMPLETED) + getClientStat(ModStats.NORMAL_MISSIONS_COMPLETED) + getClientStat(ModStats.HARD_MISSIONS_COMPLETED);
+    }
+
+    public static int getClientStat(ResourceLocation stat) {
+        return Minecraft.getInstance().player.getStats().getValue(Stats.CUSTOM.get(stat));
     }
 }

@@ -1,11 +1,14 @@
 package com.kryeit.client.screen.button;
 
+import com.kryeit.registry.ModStats;
+import com.kryeit.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.stats.Stats;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +36,11 @@ public class InfoButton extends Button {
     public static List<Component> getInfoTooltip() {
         List<Component> components = new ArrayList<>();
 
-        components.add(Component.literal("This tooltip is Work In Progress").withStyle(ChatFormatting.AQUA));
-        components.add(Component.literal("We plan to add different player stats here").withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("Stats:").withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("Total missions completed: " + Utils.getTotalMissions()).withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("- Easy: " + Utils.getClientStat(ModStats.EASY_MISSIONS_COMPLETED)).withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("- Normal: " + Utils.getClientStat(ModStats.NORMAL_MISSIONS_COMPLETED)).withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("- Hard: " + Utils.getClientStat(ModStats.HARD_MISSIONS_COMPLETED)).withStyle(ChatFormatting.AQUA));
 
         return components;
     }
