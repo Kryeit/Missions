@@ -8,7 +8,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.stats.Stats;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +36,7 @@ public class InfoButton extends Button {
         List<Component> components = new ArrayList<>();
 
         components.add(Component.literal("Stats:").withStyle(ChatFormatting.AQUA));
+        components.add(Component.literal("Missions rerolled: " + Utils.getClientStat(ModStats.MISSIONS_REROLLED)).withStyle(ChatFormatting.AQUA));
         components.add(Component.literal("Total missions completed: " + Utils.getTotalMissions()).withStyle(ChatFormatting.AQUA));
         components.add(Component.literal("- Easy: " + Utils.getClientStat(ModStats.EASY_MISSIONS_COMPLETED)).withStyle(ChatFormatting.AQUA));
         components.add(Component.literal("- Normal: " + Utils.getClientStat(ModStats.NORMAL_MISSIONS_COMPLETED)).withStyle(ChatFormatting.AQUA));

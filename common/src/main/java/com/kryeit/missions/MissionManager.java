@@ -157,6 +157,7 @@ public class MissionManager {
             STORAGE.reassignActiveMission(Missions.getConfig().getMissions(), player, index);
             MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player, activeMission.item());
             STORAGE.incrementReassignmentsSinceLastReset(player);
+            serverPlayer.awardStat(ModStats.MISSIONS_REROLLED);
         }
     }
 

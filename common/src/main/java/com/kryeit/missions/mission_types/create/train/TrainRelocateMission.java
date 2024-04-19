@@ -1,4 +1,4 @@
-package com.kryeit.missions.mission_types.create;
+package com.kryeit.missions.mission_types.create.train;
 
 import com.kryeit.Missions;
 import com.kryeit.missions.MissionDifficulty;
@@ -27,7 +27,7 @@ public class TrainRelocateMission implements MissionType {
 
     @Override
     public boolean assignOnlyOnce() {
-        return false;
+        return true;
     }
 
     @Override
