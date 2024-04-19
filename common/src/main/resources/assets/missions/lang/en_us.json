@@ -52,5 +52,8 @@
   "missions.ponder.mechanical_exchanger.header": "Getting new kind of currencies with the Mechanical Exchanger",
   "missions.ponder.mechanical_exchanger.text_1": "A exchanger can have 2 different modes: to a smaller currency or to a bigger currency",
   "missions.ponder.mechanical_exchanger.text_2": "Changing the rotation direction will change the mode of the exchanger",
-  "missions.ponder.mechanical_exchanger.text_3": "Insert items by right clicking the exchanger or with other blocks like hoppers"
+  "missions.ponder.mechanical_exchanger.text_3": "Insert items by right clicking the exchanger or with other blocks like hoppers",
+  "stat.missions.easy_missions_completed": "Easy missions completed",
+  "stat.missions.normal_missions_completed": "Normal missions completed",
+  "stat.missions.hard_missions_completed": "Hard missions completed"
 }

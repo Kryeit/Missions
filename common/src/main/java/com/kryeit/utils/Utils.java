@@ -1,7 +1,9 @@
 package com.kryeit.utils;
 
 import com.kryeit.MinecraftServerSupplier;
+import com.kryeit.Missions;
 import com.kryeit.client.ClientMissionData;
+import com.kryeit.missions.DataStorage;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.mojang.brigadier.ParseResults;
@@ -24,6 +26,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -268,5 +271,10 @@ public class Utils {
         ParseResults<CommandSourceStack> parseResults = commandManager.getDispatcher().parse(command, commandSource.withSuppressedOutput());
 
         MinecraftServerSupplier.getServer().getCommands().performCommand(parseResults, command);
+    }
+
+    public static void increaseMissionStat(ServerPlayer serverPlayer, DataStorage.ActiveMission mission) {
+        String difficulty = mission.toClientMission(serverPlayer.getUUID()).difficulty().toString();
+        serverPlayer.getStats().increment(serverPlayer, Stats.CUSTOM.get(Missions.asResource(difficulty + "_missions_completed")), 1);
     }
 }

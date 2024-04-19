@@ -1,7 +1,6 @@
 package com.kryeit.mixin.create;
 
 import com.kryeit.missions.mission_types.create.TrainRelocateMission;
-import com.kryeit.missions.mission_types.create.train.TrainPassengerMission;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.trains.entity.Train;
 import com.simibubi.create.content.trains.entity.TrainRelocationPacket;

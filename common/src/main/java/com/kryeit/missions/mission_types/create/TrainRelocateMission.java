@@ -4,7 +4,6 @@ import com.kryeit.Missions;
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
