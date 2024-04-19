@@ -1,5 +1,6 @@
 # 0.3.3
 - Fix #32: Certain modded items not rendering in Reroll Button
+- Added Relocate Mission type
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data

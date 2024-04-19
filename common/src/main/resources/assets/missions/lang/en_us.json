@@ -33,6 +33,7 @@
   "missions.menu.main.tooltip.task.saw": "Break %s of %s with a saw",
   "missions.menu.main.tooltip.task.harvester": "Harvest %s of %s with a harvester",
   "missions.menu.main.tooltip.task.drink": "Drink %s of %s",
+  "missions.menu.main.tooltip.task.relocate": "Move your train for %s blocks... by relocating it with a Wrench",
   "missions.menu.main.tooltip.difficulty": "Difficulty: %s",
   "missions.menu.main.tooltip.itemRequired": "Item Required: %s",
   "missions.menu.main.tooltip.reward": "Reward: %s %s(s)",

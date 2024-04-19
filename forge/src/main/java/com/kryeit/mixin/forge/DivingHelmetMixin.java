@@ -1,6 +1,6 @@
 package com.kryeit.mixin.forge;
 
-import com.kryeit.missions.mission_types.create.diving.DivingMissionType;
+import com.kryeit.missions.mission_types.create.diving.DivingMission;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.armor.DivingHelmetItem;
 import net.minecraft.core.BlockPos;
@@ -41,11 +41,11 @@ public class DivingHelmetMixin {
             return;
 
         if (lavaDiving) {
-            DivingMissionType.handleTimeChange(player.getUUID(), 1, new ResourceLocation("minecraft", "lava"));
+            DivingMission.handleTimeChange(player.getUUID(), 1, new ResourceLocation("minecraft", "lava"));
         } else {
             BlockState blockState = event.getEntity().level().getBlockState(BlockPos.containing(event.getEntity().getEyePosition()));
 
-            DivingMissionType.handleTimeChange(player.getUUID(), 1,
+            DivingMission.handleTimeChange(player.getUUID(), 1,
                     ForgeRegistries.FLUID_TYPES.get().getKey(blockState.getFluidState().getFluidType()));
         }
     }

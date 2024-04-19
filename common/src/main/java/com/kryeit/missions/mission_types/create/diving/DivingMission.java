@@ -12,10 +12,10 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.UUID;
 
-public class DivingMissionType implements MissionType {
+public class DivingMission implements MissionType {
 
     public static void handleTimeChange(UUID player, int difference, ResourceLocation fluid) {
-        MissionManager.incrementMission(player, DivingMissionType.class, fluid, difference);
+        MissionManager.incrementMission(player, DivingMission.class, fluid, difference);
     }
 
     @Override

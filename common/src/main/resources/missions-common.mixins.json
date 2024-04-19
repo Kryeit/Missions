@@ -19,6 +19,7 @@
     "create.MechanicalCrafterBlockEntityMixin",
     "create.MechanicalPressBlockEntityMixin",
     "create.TrainMixin",
+    "create.TrainRelocationPacketMixin",
     "create.TreeMixin",
     "events.DrinkHandler",
     "interfaces.BlockEntityAccessor"

@@ -1,8 +1,8 @@
 package com.kryeit.mixin.create;
 
-import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
-import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
-import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
+import com.kryeit.missions.mission_types.create.train.TrainDriverMission;
+import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMission;
+import com.kryeit.missions.mission_types.create.train.TrainPassengerMission;
 import com.kryeit.utils.MixinUtils;
 import com.simibubi.create.content.trains.entity.Carriage;
 import com.simibubi.create.content.trains.entity.Train;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 import static com.kryeit.Missions.cachedTrainPlayerPositions;
-import static com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType.passengersNeeded;
+import static com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMission.passengersNeeded;
 
 @Mixin(value = Train.class, remap = false)
 public abstract class TrainMixin {
@@ -49,13 +49,13 @@ public abstract class TrainMixin {
                             cachedTrainPlayerPositions.replace(player, player.position());
 
                             if (e.getControllingPlayer().isPresent() && e.getControllingPlayer().get().equals(player.getUUID())) {
-                                TrainDriverMissionType.handleDistanceChange(player.getUUID(), 50);
+                                TrainDriverMission.handleDistanceChange(player.getUUID(), 50);
 
                                 if (passengersNeeded() <= countPlayerPassengers() - 1) {
-                                    TrainDriverPassengerMissionType.handleDistanceChange(player.getUUID(), 50);
+                                    TrainDriverPassengerMission.handleDistanceChange(player.getUUID(), 50);
                                 }
                             } else {
-                                TrainPassengerMissionType.handleDistanceChange(player.getUUID(), 50);
+                                TrainPassengerMission.handleDistanceChange(player.getUUID(), 50);
                             }
                         }
                     }));

@@ -7,7 +7,7 @@ import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.client.screen.button.InfoButton;
 import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
-import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
+import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMission;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
@@ -130,7 +130,7 @@ public class MissionScreen extends Screen {
             if (Objects.equals(mission.missionType(), "train-driver-passenger")) {
                 components.add(
                         Utils.getMissionMessage(mission,
-                                ChatFormatting.WHITE, mission.requiredAmount(), TrainDriverPassengerMissionType.passengersNeeded())
+                                ChatFormatting.WHITE, mission.requiredAmount(), TrainDriverPassengerMission.passengersNeeded())
                 );
             } else {
                 components.add(

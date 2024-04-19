@@ -6,19 +6,16 @@ import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.StatisticMission;
-import com.kryeit.missions.mission_types.create.CrushMission;
-import com.kryeit.missions.mission_types.create.CutMission;
-import com.kryeit.missions.mission_types.create.MillMission;
-import com.kryeit.missions.mission_types.create.PressMission;
+import com.kryeit.missions.mission_types.create.*;
 import com.kryeit.missions.mission_types.create.basin.CompactMission;
 import com.kryeit.missions.mission_types.create.basin.MixMission;
 import com.kryeit.missions.mission_types.create.contraption.DrillMission;
 import com.kryeit.missions.mission_types.create.contraption.HarvestMission;
 import com.kryeit.missions.mission_types.create.contraption.SawMission;
-import com.kryeit.missions.mission_types.create.diving.DivingMissionType;
-import com.kryeit.missions.mission_types.create.train.TrainDriverMissionType;
-import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMissionType;
-import com.kryeit.missions.mission_types.create.train.TrainPassengerMissionType;
+import com.kryeit.missions.mission_types.create.diving.DivingMission;
+import com.kryeit.missions.mission_types.create.train.TrainDriverMission;
+import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMission;
+import com.kryeit.missions.mission_types.create.train.TrainPassengerMission;
 import com.kryeit.missions.mission_types.vanilla.*;
 import com.kryeit.registry.*;
 import com.kryeit.utils.Utils;
@@ -102,12 +99,13 @@ public class Missions {
         MissionTypeRegistry.INSTANCE.register(new MixMission());
 
         // Train
-        MissionTypeRegistry.INSTANCE.register(new TrainDriverMissionType());
-        MissionTypeRegistry.INSTANCE.register(new TrainPassengerMissionType());
-        MissionTypeRegistry.INSTANCE.register(new TrainDriverPassengerMissionType());
+        MissionTypeRegistry.INSTANCE.register(new TrainDriverMission());
+        MissionTypeRegistry.INSTANCE.register(new TrainPassengerMission());
+        MissionTypeRegistry.INSTANCE.register(new TrainDriverPassengerMission());
+        MissionTypeRegistry.INSTANCE.register(new TrainRelocateMission());
 
         // Dive
-        MissionTypeRegistry.INSTANCE.register(new DivingMissionType());
+        MissionTypeRegistry.INSTANCE.register(new DivingMission());
 
         // Contraption
         MissionTypeRegistry.INSTANCE.register(new DrillMission());

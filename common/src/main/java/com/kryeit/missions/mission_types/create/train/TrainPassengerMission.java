@@ -15,11 +15,11 @@ import net.minecraft.world.item.Items;
 import java.util.Random;
 import java.util.UUID;
 
-public class TrainPassengerMissionType implements MissionType {
+public class TrainPassengerMission implements MissionType {
     private static final ResourceLocation IDENTIFIER = new ResourceLocation(Missions.MOD_ID, "distance");
 
     public static void handleDistanceChange(UUID player, int difference) {
-        MissionManager.incrementMission(player, TrainPassengerMissionType.class, IDENTIFIER, difference);
+        MissionManager.incrementMission(player, TrainPassengerMission.class, IDENTIFIER, difference);
     }
 
     @Override

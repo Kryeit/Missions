@@ -528,5 +528,19 @@
       "Sköl",
       "Refreshing moment"
     ]
+  },
+  "relocate": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "weight": 1.0,
+    "missions": {
+      "missions:distance": "170-350"
+    },
+    "titles": [
+      "I'd walk 500 miles",
+      "Towing towers"
+    ]
   }
 }
