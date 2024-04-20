@@ -542,5 +542,20 @@
       "I'd walk 500 miles",
       "Towing towers"
     ]
+  },
+  "feed": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "weight": 1.0,
+    "missions": {
+      "wheat": "1-3"
+    },
+    "titles": [
+      "Sharing is caring",
+      "Feeding the masses",
+      "Feeder but in a good way"
+    ]
   }
 }

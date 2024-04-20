@@ -97,6 +97,7 @@ public class Missions {
         MissionTypeRegistry.INSTANCE.register(new KillMission());
         MissionTypeRegistry.INSTANCE.register(new MillMission());
         MissionTypeRegistry.INSTANCE.register(new PlaceMission());
+        MissionTypeRegistry.INSTANCE.register(new FeedMission());
         MissionTypeRegistry.INSTANCE.register(new PressMission());
 
         // Basin
