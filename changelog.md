@@ -4,6 +4,7 @@
 - Added Vanilla stats for: Easy, normal and hard total completed missions
 - Added stats as tooltip of InfoButton
 - Added vanilla stat for missions rerolled
+- Added FeedMission
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data
