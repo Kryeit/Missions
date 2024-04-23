@@ -193,7 +193,7 @@ public class MissionManager {
             case HARD -> serverPlayer.awardStat(ModStats.HARD_MISSIONS_COMPLETED);
         }
 
-        serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(ModSounds.MISSION_COMPLETE.get()), SoundSource.NEUTRAL, serverPlayer.position().x, serverPlayer.position().y, serverPlayer.position().z, 1, 1, 1));
+        serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(ModSounds.MISSION_COMPLETE.get()), SoundSource.MASTER, serverPlayer.position().x, serverPlayer.position().y, serverPlayer.position().z, 1, 1, 1));
         Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
 
         showToast(serverPlayer, mission.toClientMission(player));
