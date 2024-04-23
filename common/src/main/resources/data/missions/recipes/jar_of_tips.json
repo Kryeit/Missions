@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GMG",
+    "G G",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "M": {
+      "item": "minecraft:brown_mushroom_block"
+    }
+  },
+  "result": {
+    "item": "missions:jar_of_tips",
+    "count": 6
+  }
+}

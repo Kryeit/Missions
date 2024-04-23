@@ -42,4 +42,15 @@ public class Coins {
         return new ItemStack(getCoins().get(index).getItem(), toBigger ? 1 : EXCHANGE_RATE);
     }
 
+    public static boolean isCoin(ItemStack itemStack) {
+        boolean bool = false;
+        for (ItemStack coin : getCoins()) {
+            if (coin.getItem().equals(itemStack.getItem())) {
+                bool = true;
+                break;
+            }
+        }
+        return bool;
+    }
+
 }

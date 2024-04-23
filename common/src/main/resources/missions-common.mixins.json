@@ -8,6 +8,7 @@
   ],
   "mixins": [
     "ClientboundCustomPayloadMixin",
+    "FallingBlockEntityMixin",
     "MinecraftServerMixin",
     "ServerboundCustomPayloadMixin",
     "StatsCounterMixin",

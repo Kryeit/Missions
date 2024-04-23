@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "missions:mechanical_exchanger"
+    "missions:mechanical_exchanger",
+    "missions:jar_of_tips"
   ]
 }

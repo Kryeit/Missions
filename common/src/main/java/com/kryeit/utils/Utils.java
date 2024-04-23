@@ -68,6 +68,13 @@ public class Utils {
         throw new AssertionError();
     }
 
+    public static void broadcastMessage(Component message) {
+        MinecraftServer server = MinecraftServerSupplier.getServer();
+        if (server != null) {
+            server.getPlayerList().broadcastSystemMessage(message, false);
+        }
+    }
+
     public static void giveItem(ItemStack stack, ServerPlayer player) {
         int stackSize = stack.getMaxStackSize();
         int l = stack.getCount();

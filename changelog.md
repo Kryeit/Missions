@@ -6,6 +6,8 @@
 - Added vanilla stat for missions rerolled
 - Added FeedMission
 - Fix Mechanical Exchanger item model
+- Fix Mission Complete sound being stuck to a block position
+- New block: Jar of Tips! 
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data
