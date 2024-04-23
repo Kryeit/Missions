@@ -5,6 +5,7 @@
 - Added stats as tooltip of InfoButton
 - Added vanilla stat for missions rerolled
 - Added FeedMission
+- Fix Mechanical Exchanger item model
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data
