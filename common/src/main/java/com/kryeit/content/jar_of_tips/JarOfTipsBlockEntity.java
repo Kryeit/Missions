@@ -6,6 +6,8 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.WorldlyContainer;
@@ -141,6 +143,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
 
                 for (int i = 0; i < getContainerSize(); i++) {
                     if (addItemToInventory(itemStack, i)) {
+                        level.playSound(null, worldPosition, SoundEvents.ALLAY_ITEM_TAKEN, SoundSource.BLOCKS, 1.0F, 1.0F);
                         itemEntity.setItem(ItemStack.EMPTY);
                         itemEntity.discard();
                         pickedUpAnItem = true;
