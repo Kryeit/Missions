@@ -32,6 +32,9 @@ public class ModTags {
     public static TagKey<Item> RAILWAYS_NARROW_TRACKS = TagKey.create(Registries.ITEM, new ResourceLocation("railways", "narrow_tracks"));
     public static TagKey<Item> RAILWAYS_WIDE_TRACKS = TagKey.create(Registries.ITEM, new ResourceLocation("railways", "wide_tracks"));
 
+    // Farmer's Delight Tags
+    public static TagKey<Item> FARMERSDELIGHT_DRINKS = TagKey.create(Registries.ITEM, new ResourceLocation("farmersdelight", "drinks"));
+
     public static void register() {
 
     }
