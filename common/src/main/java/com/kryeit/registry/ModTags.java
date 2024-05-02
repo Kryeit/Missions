@@ -21,11 +21,11 @@ public class ModTags {
     public static final TagKey<Item> CREATE_BARS = TagKey.create(Registries.ITEM, new ResourceLocation("create", "bars"));
 
     // Create Deco Tags
-    public static TagKey<Item> CREATEDECO_LADDERS = TagKey.create(Registries.ITEM, new ResourceLocation("numismatics", "ladders"));
-    public static TagKey<Item> CREATEDECO_BARS = TagKey.create(Registries.ITEM, new ResourceLocation("numismatics", "bars"));
-    public static TagKey<Item> CREATEDECO_CATWALKS = TagKey.create(Registries.ITEM, new ResourceLocation("numismatics", "catwalks"));
-    public static TagKey<Item> CREATEDECO_HULLS = TagKey.create(Registries.ITEM, new ResourceLocation("numismatics", "hulls"));
-    public static TagKey<Item> CREATEDECO_COINS = TagKey.create(Registries.ITEM, new ResourceLocation("numismatics", "coins"));
+    public static TagKey<Item> CREATEDECO_LADDERS = TagKey.create(Registries.ITEM, new ResourceLocation("createdeco", "ladders"));
+    public static TagKey<Item> CREATEDECO_BARS = TagKey.create(Registries.ITEM, new ResourceLocation("createdeco", "bars"));
+    public static TagKey<Item> CREATEDECO_CATWALKS = TagKey.create(Registries.ITEM, new ResourceLocation("createdeco", "catwalks"));
+    public static TagKey<Item> CREATEDECO_HULLS = TagKey.create(Registries.ITEM, new ResourceLocation("createdeco", "hulls"));
+    public static TagKey<Item> CREATEDECO_COINS = TagKey.create(Registries.ITEM, new ResourceLocation("createdeco", "coins"));
 
     // Railways Tags
     public static TagKey<Item> RAILWAYS_TRACKS = TagKey.create(Registries.ITEM, new ResourceLocation("railways", "tracks"));
