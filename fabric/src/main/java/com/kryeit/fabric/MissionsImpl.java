@@ -18,7 +18,7 @@ public class MissionsImpl implements ModInitializer {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> Missions.handlePlayerLogin(handler.getPlayer()));
 
         ServerLifecycleEvents.SERVER_STARTED.register(server ->
-            Missions.readConfig()
+                Missions.readConfig()
         );
     }
 

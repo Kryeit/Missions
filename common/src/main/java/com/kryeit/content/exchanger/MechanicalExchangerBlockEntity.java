@@ -23,8 +23,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-import static com.kryeit.coins.Coins.EXCHANGE_RATE;
-
 public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         implements MenuProvider, WorldlyContainer {
 
@@ -199,19 +197,27 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
 
     private boolean hasRecipe() {
 
+        if (getItem(INPUT_SLOT).isEmpty() || !Coins.isCoin(getItem(INPUT_SLOT))) return false;
+
         if (this.mode == Mode.TO_BIGGER) {
+
+            if (Coins.indexOf(getItem(INPUT_SLOT)) == Coins.getCoins().size() - 1) return false;
 
             ItemStack result = Coins.getExchange(getItem(INPUT_SLOT), true);
 
             return result != null && canInsertAmountIntoSlot(OUTPUT_SLOT, 1)
                     && canInsertItemIntoSlot(OUTPUT_SLOT, result)
-                    && getItem(INPUT_SLOT).getCount() >= EXCHANGE_RATE;
+                    && getItem(INPUT_SLOT).getCount() >= Coins.getCoin(getItem(INPUT_SLOT)).getCount();
         } else if (this.mode == Mode.TO_SMALLER) {
 
-            ItemStack result = Coins.getExchange(getItem(INPUT_SLOT), false);
+            if (Coins.indexOf(getItem(INPUT_SLOT)) == 0) return false;
 
-            return result != null && canInsertAmountIntoSlot(OUTPUT_SLOT, result.getCount())
-                    && canInsertItemIntoSlot(OUTPUT_SLOT, result);
+            ItemStack result = Coins.getExchange(getItem(INPUT_SLOT), false);
+            int requiredCount = Coins.getCoin(Coins.indexOf(getItem(INPUT_SLOT)) - 1).getCount();
+
+            return result != null && canInsertAmountIntoSlot(OUTPUT_SLOT, requiredCount)
+                    && canInsertItemIntoSlot(OUTPUT_SLOT, result)
+                    && getItem(INPUT_SLOT).getCount() >= 1;
         }
 
         return false;
@@ -222,7 +228,7 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         if (this.mode == Mode.TO_BIGGER) {
             ItemStack result = Coins.getExchange(getItem(INPUT_SLOT), true);
             if (result != null) {
-                removeItem(INPUT_SLOT, EXCHANGE_RATE);
+                removeItem(INPUT_SLOT, Coins.getCoin(getItem(INPUT_SLOT)).getCount());
                 setItem(OUTPUT_SLOT, new ItemStack(result.getItem(), getItem(OUTPUT_SLOT).getCount() + 1));
 
                 resetProgress();
@@ -231,9 +237,9 @@ public class MechanicalExchangerBlockEntity extends KineticBlockEntity
         } else if (this.mode == Mode.TO_SMALLER) {
             ItemStack result = Coins.getExchange(getItem(INPUT_SLOT), false);
             if (result != null) {
+                int requiredCount = Coins.getCoin(Coins.indexOf(getItem(INPUT_SLOT)) - 1).getCount();
                 removeItem(INPUT_SLOT, 1);
-                setItem(OUTPUT_SLOT, new ItemStack(result.getItem(), getItem(OUTPUT_SLOT).getCount() + result.getCount()));
-
+                setItem(OUTPUT_SLOT, new ItemStack(result.getItem(), getItem(OUTPUT_SLOT).getCount() + requiredCount));
                 resetProgress();
             }
         }

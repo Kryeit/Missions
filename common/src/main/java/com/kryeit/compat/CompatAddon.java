@@ -3,7 +3,7 @@ package com.kryeit.compat;
 import com.kryeit.utils.Utils;
 
 public enum CompatAddon {
-    CREATE_DECO("createdeco"),
+    NUMISMATICS("numismatics"),
     LUCKPERMS("luckperms");
 
     private final String id;

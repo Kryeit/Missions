@@ -1,4 +1,7 @@
 # 0.3.3
+## Update from 0.3.2
+- Delete currency.json
+## Changelog
 - Fix #32: Certain modded items not rendering in Reroll Button
 - Added Relocate Mission type
 - Added Vanilla stats for: Easy, normal and hard total completed missions
@@ -7,7 +10,9 @@
 - Added FeedMission
 - Fix Mechanical Exchanger item model
 - Fix Mission Complete sound being stuck to a block position
-- New block: Jar of Tips! 
+- New block: Jar of Tips!
+- Reworked currency.json, and removed "exchange-rate" config option: It's all configured per currency in the currency.json now!
+- Removed Create deco stuff, and added Create: Numismatics configs for currency.json
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data

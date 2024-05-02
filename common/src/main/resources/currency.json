@@ -1,5 +1,5 @@
 [
-  "minecraft:iron_ingot",
-  "minecraft:gold_ingot",
-  "minecraft:diamond"
+  {"minecraft:iron_ingot": "16"},
+  {"minecraft:gold_ingot": "32"},
+  {"minecraft:diamond": "1"}
 ]

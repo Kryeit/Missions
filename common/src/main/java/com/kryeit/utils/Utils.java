@@ -61,6 +61,12 @@ public class Utils {
         return BuiltInRegistries.ITEM.get(item).getDefaultInstance();
     }
 
+    public static ItemStack getItem(ResourceLocation item, int amount) {
+        ItemStack stack = getItem(item);
+        stack.setCount(amount);
+        return stack;
+    }
+
     @SuppressWarnings("Contract")
     @Contract("_ -> !null")
     @ExpectPlatform

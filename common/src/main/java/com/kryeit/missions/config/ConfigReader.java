@@ -18,11 +18,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.kryeit.coins.Coins.EXCHANGE_RATE;
 
 public class ConfigReader {
     private final Map<MissionType, Mission> missions;
@@ -39,12 +38,7 @@ public class ConfigReader {
 
     public static ConfigReader readFile(Path path) throws IOException {
 
-        String content;
-        if (CompatAddon.CREATE_DECO.isLoaded()) {
-            content = readOrCopyFile(path.resolve("missions.json"), "/createdeco/missions.json");
-        } else {
-            content = readOrCopyFile(path.resolve("missions.json"), "/missions.json");
-        }
+        String content = readOrCopyFile(path.resolve("missions.json"), "/missions.json");
 
         Map<MissionType, Mission> missions = new HashMap<>();
         JSONObject object = new JSONObject(content);
@@ -68,20 +62,27 @@ public class ConfigReader {
         }
 
         String exchange;
-        if (CompatAddon.CREATE_DECO.isLoaded()) {
-            exchange = readOrCopyFile(path.resolve("currency.json"), "/createdeco/currency.json");
+        if (CompatAddon.NUMISMATICS.isLoaded()) {
+            exchange = readOrCopyFile(path.resolve("currency.json"), "/numismatics/currency.json");
         } else {
             exchange = readOrCopyFile(path.resolve("currency.json"), "/currency.json");
         }
-        List<ItemStack> items = new JSONArray(exchange).asList((array, integer) -> {
-            ResourceLocation location = new ResourceLocation(array.getString(integer));
-            return Utils.getItem(location);
-        });
+
+        JSONArray jsonArray = new JSONArray(exchange);
+        List<ItemStack> items = new ArrayList<>();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject itemObj = jsonArray.getObject(i);
+            itemObj.keySet().forEach(key -> {
+                int quantity = Integer.parseInt(itemObj.getString(key));
+                ResourceLocation location = new ResourceLocation(key);
+                ItemStack itemStack = Utils.getItem(location, quantity);
+                items.add(itemStack);
+            });
+        }
 
         String config = readOrCopyFile(path.resolve("config.json"), "/config.json");
         JSONObject configObject = new JSONObject(config);
 
-        EXCHANGE_RATE = Integer.parseInt(configObject.getString("exchange-rate"));
         EXCHANGER_DROP_RATE = Double.parseDouble(configObject.getString("exchanger-drop-rate"));
         FIRST_REROLL_CURRENCY = Integer.parseInt(configObject.getString("first-reroll-currency"));
         FREE_REROLLS = Integer.parseInt(configObject.getString("free-rerolls"));
