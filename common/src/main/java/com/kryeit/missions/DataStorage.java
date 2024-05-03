@@ -261,6 +261,22 @@ public class DataStorage implements AutoCloseable {
         public ClientsideActiveMission toClientMission(UUID player) {
             MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
             ConfigReader.Mission configMission = Missions.getConfig().getMissions().get(type);
+
+            if (configMission == null) {
+                List<ActiveMission> activeMissions = MissionManager.getActiveMissions(player);
+                int index = -1;
+
+                for (int i = 0; i < activeMissions.size(); i++) {
+                    if (activeMissions.get(i).missionID().equals(missionID())) {
+                        index = i;
+                        break;
+                    }
+                }
+
+                MissionManager.getStorage().reassignActiveMission(Missions.getConfig().getMissions(), player, index);
+                // TODO: The player will get kicked still, but relogging for a second time will fix it, since configMission is still null
+            }
+
             return new ClientsideActiveMission(
                     Component.nullToEmpty(title),
                     type.difficulty(),
