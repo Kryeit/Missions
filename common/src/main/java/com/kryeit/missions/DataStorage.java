@@ -98,22 +98,29 @@ public class DataStorage implements AutoCloseable {
     private static List<ConfigReader.Mission> shuffleWeighted(Collection<ConfigReader.Mission> missions, int length) {
         List<ConfigReader.Mission> shuffled = new ArrayList<>(length);
         Predicate<ConfigReader.Mission> filter = mission -> !mission.missionType().assignOnlyOnce() || !shuffled.contains(mission);
-        if (missions.size() < length) {
-            for (int i = 0; i < length; i++) {
-                double randomNumber = Math.random();
-                shuffled.add(Utils.biggestMatching(missions, filter.and(m -> m.weight() >= randomNumber), Comparator.comparing(ConfigReader.Mission::weight)));
-            }
-        } else {
-            List<ConfigReader.Mission> remaining = new LinkedList<>(missions);
-            for (int i = 0; i < length; i++) {
-                double randomNumber = Math.random();
-                ConfigReader.Mission randomMission = Utils.biggestMatching(remaining, filter.and(m -> m.weight() >= randomNumber), Comparator.comparing(ConfigReader.Mission::weight));
-                shuffled.add(randomMission);
-                remaining.remove(randomMission);
+
+        List<ConfigReader.Mission> selectable = new ArrayList<>(missions);
+        while (shuffled.size() < length && !selectable.isEmpty()) {
+            double totalWeight = selectable.stream().mapToDouble(ConfigReader.Mission::weight).sum();
+            double randomNumber = Math.random() * totalWeight;
+            double weightSum = 0;
+
+            for (ConfigReader.Mission mission : selectable) {
+                weightSum += mission.weight();
+                if (weightSum >= randomNumber) {
+                    if (filter.test(mission)) {
+                        shuffled.add(mission);
+                        if (mission.missionType().assignOnlyOnce()) {
+                            selectable.remove(mission);
+                        }
+                        break;
+                    }
+                }
             }
         }
         return shuffled;
     }
+
 
     public void reassignActiveMissions(Map<MissionType, ConfigReader.Mission> missions, UUID player) {
         ListTag list = getActiveMissionsTag(player);
