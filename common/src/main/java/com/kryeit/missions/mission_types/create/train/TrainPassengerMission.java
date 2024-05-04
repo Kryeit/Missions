@@ -16,7 +16,7 @@ import java.util.Random;
 import java.util.UUID;
 
 public class TrainPassengerMission implements MissionType {
-    private static final ResourceLocation IDENTIFIER = new ResourceLocation(Missions.MOD_ID, "distance");
+    private static final ResourceLocation IDENTIFIER = Missions.asResource("distance");
 
     public static void handleDistanceChange(UUID player, int difference) {
         MissionManager.incrementMission(player, TrainPassengerMission.class, IDENTIFIER, difference);

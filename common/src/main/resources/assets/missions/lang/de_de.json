@@ -35,6 +35,7 @@
   "missions.menu.main.tooltip.task.drink": "Drink %s of %s",
   "missions.menu.main.tooltip.task.relocate": "Move your train for %s blocks... by relocating it with a Wrench",
   "missions.menu.main.tooltip.task.feed": "Feed %s of %s to an animal",
+  "missions.menu.main.tooltip.task.belt-walk": "Walk in a mechanical belt for %s blocks",
   "missions.menu.main.tooltip.difficulty": "Schwierigkeit: %s",
   "missions.menu.main.tooltip.itemRequired": "Benötigtes Item: %s",
   "missions.menu.main.tooltip.reward": "Reward: %s %s(s)",

@@ -14,7 +14,7 @@ import net.minecraft.world.item.Items;
 import java.util.UUID;
 
 public class TrainDriverMission implements MissionType {
-    private static final ResourceLocation IDENTIFIER = new ResourceLocation(Missions.MOD_ID, "distance");
+    private static final ResourceLocation IDENTIFIER = Missions.asResource("distance");
 
     public static void handleDistanceChange(UUID player, int difference) {
         MissionManager.incrementMission(player, TrainDriverMission.class, IDENTIFIER, difference);

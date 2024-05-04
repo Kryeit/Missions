@@ -20,8 +20,8 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 public class TrainDriverPassengerMission implements MissionType {
-    private static final ResourceLocation IDENTIFIER = new ResourceLocation(Missions.MOD_ID, "distance");
-    private static final ResourceLocation PASSENGERS = new ResourceLocation(Missions.MOD_ID, "passengers");
+    private static final ResourceLocation IDENTIFIER = Missions.asResource("distance");
+    private static final ResourceLocation PASSENGERS = Missions.asResource("passengers");
 
     public static void handleDistanceChange(UUID player, int difference) {
         MissionManager.incrementMission(player, TrainDriverPassengerMission.class, IDENTIFIER, difference);

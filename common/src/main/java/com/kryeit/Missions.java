@@ -12,6 +12,7 @@ import com.kryeit.missions.mission_types.create.MillMission;
 import com.kryeit.missions.mission_types.create.PressMission;
 import com.kryeit.missions.mission_types.create.basin.CompactMission;
 import com.kryeit.missions.mission_types.create.basin.MixMission;
+import com.kryeit.missions.mission_types.create.belt.BeltWalkMission;
 import com.kryeit.missions.mission_types.create.contraption.DrillMission;
 import com.kryeit.missions.mission_types.create.contraption.HarvestMission;
 import com.kryeit.missions.mission_types.create.contraption.SawMission;
@@ -51,6 +52,8 @@ public class Missions {
     private static ConfigReader configReader;
 
     public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();
+    public static HashMap<ServerPlayer, Vec3> cachedBeltPlayerPositions = new HashMap<>();
+
 
     public static CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
@@ -99,6 +102,7 @@ public class Missions {
         MissionTypeRegistry.INSTANCE.register(new PlaceMission());
         MissionTypeRegistry.INSTANCE.register(new FeedMission());
         MissionTypeRegistry.INSTANCE.register(new PressMission());
+        MissionTypeRegistry.INSTANCE.register(new BeltWalkMission());
 
         // Basin
         MissionTypeRegistry.INSTANCE.register(new CompactMission());

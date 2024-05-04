@@ -1,5 +1,5 @@
 # 0.3.3
-## Update from 0.3.2
+## IMPORTANT: Update from 0.3.2 or lower
 - Delete `config/missions/currency.json`
 ## Changelog
 - Fix #32: Certain modded items not rendering in Reroll Button
@@ -15,6 +15,7 @@
 - Removed Create deco stuff, and added Create: Numismatics configs for currency.json
 - Fix #36: Mission reassignment makes all 10 missions of the same type
 - Fix #29: missions_data.nbt now gets saved when world autosaves
+- Added BeltWalkMission
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data

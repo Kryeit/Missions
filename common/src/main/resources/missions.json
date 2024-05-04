@@ -557,5 +557,18 @@
       "Feeding the masses",
       "Feeder but in a good way"
     ]
+  },
+  "belt-walk": {
+    "reward": {
+      "amount": "2-23",
+      "item": "diamond"
+    },
+    "weight": 1.0,
+    "missions": {
+      "missions:distance": "500-1000"
+    },
+    "titles": [
+      "Lugage companionship"
+    ]
   }
 }
