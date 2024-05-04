@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MinecraftServer.class)
 public abstract class MinecraftServerMixin {
@@ -16,8 +15,8 @@ public abstract class MinecraftServerMixin {
         MinecraftServerSupplier.setServer((MinecraftServer) (Object) this);
     }
 
-    @Inject(method = "saveAllChunks", at = @At("TAIL"))
-    private void onChunkSaving(boolean bl, boolean bl2, boolean bl3, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "stopServer", at = @At("TAIL"))
+    private void onStop(CallbackInfo ci) {
         MissionManager.getStorage().save();
     }
 }
