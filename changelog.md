@@ -14,6 +14,7 @@
 - Reworked currency.json, and removed "exchange-rate" config option: It's all configured per currency in the currency.json now!
 - Removed Create deco stuff, and added Create: Numismatics configs for currency.json
 - Fix #36: Mission reassignment makes all 10 missions of the same type
+- Fix #35: missions_data.nbt now also gets saved when world autosave is ran
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data
