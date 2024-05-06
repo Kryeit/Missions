@@ -54,7 +54,6 @@ public class Missions {
     public static HashMap<ServerPlayer, Vec3> cachedTrainPlayerPositions = new HashMap<>();
     public static HashMap<ServerPlayer, Vec3> cachedBeltPlayerPositions = new HashMap<>();
 
-
     public static CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
     public static void init() {

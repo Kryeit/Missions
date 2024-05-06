@@ -15,13 +15,26 @@
 # What's this addon?
 It works by giving **10 random missions per player per week**. These missions can be vanilla missions like **"Break X Veridium"** or Create mod related like **"Drive a train for 4 km with at least 2 passengers"**. You can also reroll the missions, and claim prices by completing them.
 
-**Open the mission GUI pressing H key (by default)**
+**Open the mission GUI pressing H key (by default) or using `/missions` command**
 
 ## Needed for server owners
 <details>
 <summary>Spoilers</summary>
 
-Select the currency in `config\missions\currency.json`, it will be 64 -> 1 in the same order the list is in, by default. You can change it by going to `config\missions\config.json` and changing the value of "exchange-rate". This **only** affects the exchange rate of the Exchange ATM Block, which is the only way of exchanging coins this mod gives.
+Select the currencies and their exchange in `config\missions\currency.json`
+
+As an example with [Create: Numismatics](https://modrinth.com/mod/create-numismatics) it would look like this:
+
+```json
+[
+  {"numismatics:spur": "8"},
+  {"numismatics:bevel": "2"},
+  {"numismatics:sprocket": "4"},
+  {"numismatics:cog": "8"},
+  {"numismatics:crown": "8"},
+  {"numismatics:sun": "1"}
+]
+```
 
 <details>
 <summary>missions.json -> How to configure the missions? </summary>
@@ -33,11 +46,12 @@ An example mission configuration:
   "place": {
     "reward": {
       "amount": "2-23",
-      "item": "createdeco:iron_coin"
+      "item": "numismatics:bevel"
     },
-    "weight": 1.0,
+    "weight": 0.7,
     "missions": {
-      "create:track_signal": "20-50"
+      "create:track_signal": "20-50",
+      "#minecraft:logs": "20-50"
     },
     "titles": [
       "Example title"
@@ -47,44 +61,25 @@ An example mission configuration:
 ```
 
 Ranges like 2-23 mean a number at random from 2 to 23, both included.
-Mission example: Place 35 Track Signal(s)
+Mission example: Place 35 Acacia Log(s)
 Reward example: 2-23 Iron Coin(s)
 
-As you can see, the action number is randomly selected from its range at the time of receiving that mission, whereas the reward range is randomly selected from its range at the moment of *redeeming/claiming* the completed mission.
+Action number is determined when you RECEIVE the mission, and rewards are determined when you COMPLETE the mission.
 
-#
+The "weight" is the chance of this mission to be selected. From 0 to 1.
 
 You can add as many item id's to the "missions" bracket, and add as many titles to "titles" bracket, for a mission to be granted one item and one title, both randomly from those inside the bracket.
 
 </details>
 <details>
-<summary>Mechanical Exchanger Block </summary>
+<summary>Mechanical Exchanger</summary>
 
 <p align="center">
   <img width="200" src="https://cdn.modrinth.com/data/KN33kvHF/images/c3e00905e1082e33477a90274f27b09ec4919f3a.png">
 
-The Mechanical Exchanger doesn't have a crafting recipe, and can only be obtained with a 1% change after compleating a hard mission.
+The Mechanical Exchanger doesn't have a crafting recipe, and can only be obtained with a 5% chance (default) after completing a hard mission.
 
 It lets you to exchange currencies from smaller to bigger currency. Depends on which rotation direction the shaft has. It also requires 100 rpm, and consumes much more SU.
 </p>
 </details>
-<details>
-<summary>Suggestions </summary>
-
-- I suggest changing the default `config\missions\currency.json` to coin items that you have in your modpack. In my case, I use Create Deco coins (when using Create deco, this currency.json will be created instead):
-
-```json
-[
-  "createdeco:zinc_coin",
-  "createdeco:copper_coin",
-  "createdeco:brass_coin"
-]
-```
-
-- Incentive in your server an economy with no virtual balance or top lists
-- Modify from time to time the missions to they get refreshed for the players, also touchups to the missions ranges are really needed for balancing. If someone uses a better mission config file and more balanced feel free to share it with me!
-- Have in mind always the ability for a player to reroll a mission, dont give them money to infinitely reroll missions as that takes fun away. Build your economy balancing having that cost in mind.
-- Use the Mechanical Exchanger to build a public bank!
-</details>
-
 </details>
