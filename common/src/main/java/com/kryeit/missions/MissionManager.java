@@ -186,11 +186,7 @@ public class MissionManager {
 
         if (serverPlayer == null) return;
 
-        switch (difficulty) {
-            case EASY -> serverPlayer.awardStat(ModStats.EASY_MISSIONS_COMPLETED);
-            case NORMAL -> serverPlayer.awardStat(ModStats.NORMAL_MISSIONS_COMPLETED);
-            case HARD -> serverPlayer.awardStat(ModStats.HARD_MISSIONS_COMPLETED);
-        }
+        serverPlayer.awardStat(difficulty.stat());
 
         Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
 
