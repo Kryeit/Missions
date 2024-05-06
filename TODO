@@ -1,14 +1,4 @@
 # TODO
-# give collaborators free rerolls
-# display information about rerolls in reroll screen: price, free rerolls left, ability to reroll
-# implement missing mission types
-
-# Stats:
-Shown when hovering the InfoButton
-- missions completed:
-  - easy
-  - normal
-  - hard
 
 # Advancements - Not priority
 # First time you complete a hard mission
@@ -16,4 +6,3 @@ Shown when hovering the InfoButton
 # Reroll a mission
 # Reroll 5 missions in the same week
 # Claim the rewards of 10 missions at the same time
-# implement missions handlers in fabric too
