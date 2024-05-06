@@ -1,6 +1,7 @@
 package com.kryeit.client.screen.toasts;
 
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
+import com.kryeit.registry.ModSounds;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
@@ -8,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 
 import static com.kryeit.client.screen.button.MissionButton.ADVANCEMENT_WIDGETS;
@@ -74,6 +76,8 @@ public class MissionCompletedToast implements Toast {
         ToastComponent toastComponent = Minecraft.getInstance().getToasts();
         MissionCompletedToast toast = new MissionCompletedToast(mission);
         toastComponent.addToast(toast);
+
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ModSounds.MISSION_COMPLETE.get(), 1, 1));
     }
 }
 

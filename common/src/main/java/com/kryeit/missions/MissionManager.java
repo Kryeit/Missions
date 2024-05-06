@@ -9,7 +9,6 @@ import com.kryeit.coins.Coins;
 import com.kryeit.compat.CompatAddon;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.registry.ModBlocks;
-import com.kryeit.registry.ModSounds;
 import com.kryeit.registry.ModStats;
 import com.kryeit.utils.Utils;
 import com.simibubi.create.foundation.utility.Components;
@@ -193,7 +192,6 @@ public class MissionManager {
             case HARD -> serverPlayer.awardStat(ModStats.HARD_MISSIONS_COMPLETED);
         }
 
-        serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(ModSounds.MISSION_COMPLETE.get()), SoundSource.MASTER, serverPlayer.position().x, serverPlayer.position().y, serverPlayer.position().z, 1, 1, 1));
         Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
 
         showToast(serverPlayer, mission.toClientMission(player));
