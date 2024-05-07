@@ -16,6 +16,7 @@
 - Fix #36: Mission reassignment makes all 10 missions of the same type
 - Fix #29: missions_data.nbt now gets saved when world autosaves
 - Added BeltWalkMission
+- Added #farmersdelight:drinks tag
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data
