@@ -17,6 +17,13 @@ It works by giving **10 random missions per player per week**. These missions ca
 
 **Open the mission GUI pressing H key (by default) or using `/missions` command**
 
+# Special thanks to:
+- TheLegendofSaram, Mexican translation
+- __Tesseract, French translation
+- MrRedRhino, German translation
+- глебикс, Russian translation
+- Starlotte, mission complete sound
+
 ## Needed for server owners
 <details>
 <summary>Spoilers</summary>

@@ -17,6 +17,7 @@
 - Fix #29: missions_data.nbt now gets saved when world autosaves
 - Added BeltWalkMission
 - Added #farmersdelight:drinks tag
+- Mexican translation by TheLegendofSaram
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data
