@@ -18,6 +18,8 @@
 - Added BeltWalkMission
 - Added #farmersdelight:drinks tag
 - Mexican translation by TheLegendofSaram
+- Fix players being kicked when they had a mission that no longer was on missions.json
+- Fix missions of the same type as the one rerolled losing their progress
 
 # 0.3.2
 - Fixed some dedicated servers not saving properly the mission data
