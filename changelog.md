@@ -12,7 +12,7 @@
 - Fix Mission Complete sound being stuck to a block position
 - New block: Jar of Tips!
 - Reworked currency.json, and removed "exchange-rate" config option: It's all configured per currency in the currency.json now!
-- Removed Create deco stuff, and added Create: Numismatics configs for currency.json
+- Removed Create deco stuff, and added Create: Numismatics configs for possible default currency.json
 - Fix #36: Mission reassignment makes all 10 missions of the same type
 - Fix #29: missions_data.nbt now gets saved when world autosaves
 - Added BeltWalkMission
