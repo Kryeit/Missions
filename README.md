@@ -90,3 +90,9 @@ It lets you to exchange currencies from smaller to bigger currency. Depends on w
 </p>
 </details>
 </details>
+
+# For developers
+It's really possible to add new missions for Create: Missions. You have examples here
+- [Create: Missions Template Addon (Fabric)](https://github.com/muriplz/missions-fabric-example-addon)
+- [VoteMission](https://legacy.curseforge.com/minecraft/mc-mods/votemission)
+- [TelepostMissions](https://legacy.curseforge.com/minecraft/mc-mods/telepostmissions)
