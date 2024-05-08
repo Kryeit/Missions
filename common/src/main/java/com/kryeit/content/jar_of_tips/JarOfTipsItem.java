@@ -1,21 +1,19 @@
 package com.kryeit.content.jar_of_tips;
 
 import com.kryeit.registry.ModBlocks;
-import com.simibubi.create.AllEntityTypes;
-import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileEntity;
-import com.simibubi.create.content.equipment.zapper.ShootableGadgetItemMethods;
+import com.kryeit.registry.ModEntityTypes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.phys.Vec3;
 
 public class JarOfTipsItem extends BlockItem {
 
@@ -60,20 +58,20 @@ public class JarOfTipsItem extends BlockItem {
         super.use(level, player, hand);
 
         if (!level.isClientSide) {
-            PotatoProjectileEntity projectile = AllEntityTypes.POTATO_PROJECTILE.create(level);
-            projectile.setItem(this.getDefaultInstance());
+            Entity entity = ModEntityTypes.JAR_OF_TIPS_PROJECTILE.create(level);
 
-            Vec3 handPos = ShootableGadgetItemMethods.getGunBarrelVec(player, hand == InteractionHand.MAIN_HAND,
-                    new Vec3(0f, 0f, 0f));
+            if (entity instanceof JarOfTipsProjectile projectile) {
+                projectile.setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
+                projectile.setOwner(player);
+                projectile.setInventory(inventory);
 
-            // Calculate the motion of the projectile
-            double speed = 1.5; // Adjust this value as needed
-            Vec3 splitMotion = player.getLookAngle().scale(speed);
+                float pitch = player.getXRot();
+                float yaw = player.getYRot();
+                projectile.shootFromRotation(player, pitch, yaw, 0.0F, 0.5F, 0.3F);
+                level.addFreshEntity(projectile);
+                player.getCooldowns().addCooldown(this, 20);
+            }
 
-            projectile.setPos(handPos.x, handPos.y, handPos.z);
-            projectile.setDeltaMovement(splitMotion);
-            projectile.setOwner(player);
-            level.addFreshEntity(projectile);
         }
 
         return new InteractionResultHolder<>(InteractionResult.SUCCESS, player.getItemInHand(hand));
