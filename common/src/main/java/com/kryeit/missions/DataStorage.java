@@ -74,13 +74,7 @@ public class DataStorage implements AutoCloseable {
 
         List<ActiveMission> output = new ArrayList<>();
         for (Tag tag : list) {
-            CompoundTag compound = (CompoundTag) tag;
-            ResourceLocation item = new ResourceLocation(compound.getString("item"));
-            boolean isCompleted = compound.getBoolean("completed");
-            String missionID = compound.getString("mission_id");
-            int requiredAmount = compound.getInt("required_amount");
-            String title = compound.getString("title");
-            output.add(new ActiveMission(item, isCompleted, missionID, requiredAmount, title));
+            output.add(new ActiveMission((CompoundTag) tag));
         }
         return output;
     }
@@ -144,7 +138,7 @@ public class DataStorage implements AutoCloseable {
         return tag;
     }
 
-    public void reassignActiveMission(Map<MissionType, ConfigReader.Mission> missions, UUID player, int index) {
+    public ConfigReader.Mission reassignActiveMission(Map<MissionType, ConfigReader.Mission> missions, UUID player, int index) {
         ListTag list = getActiveMissionsTag(player);
         String idToReassign = list.getCompound(index).getString("mission_id");
 
@@ -152,7 +146,9 @@ public class DataStorage implements AutoCloseable {
         assignedTypes.removeIf(m -> m.missionType().id().equals(idToReassign));
 
         ConfigReader.Mission mission = shuffleWeighted(assignedTypes, 1).get(0);
-        list.set(index, createActiveMissionTag(mission));
+        CompoundTag newTag = createActiveMissionTag(mission);
+        list.set(index, newTag);
+        return mission;
     }
 
     public int getReassignmentsSinceLastReset(UUID player) {
@@ -242,6 +238,14 @@ public class DataStorage implements AutoCloseable {
             this.title = title;
         }
 
+        private ActiveMission(CompoundTag tag) {
+            this(new ResourceLocation(tag.getString("item")),
+                    tag.getBoolean("completed"),
+                    tag.getString("mission_id"),
+                    tag.getInt("required_amount"),
+                    tag.getString("title"));
+        }
+
         public int requiredAmount() {
             return requiredAmount;
         }
@@ -273,8 +277,7 @@ public class DataStorage implements AutoCloseable {
                     }
                 }
 
-                MissionManager.getStorage().reassignActiveMission(Missions.getConfig().getMissions(), player, index);
-                // TODO: The player will get kicked still, but relogging for a second time will fix it, since configMission is still null
+                configMission = MissionManager.getStorage().reassignActiveMission(Missions.getConfig().getMissions(), player, index);
             }
 
             return new ClientsideActiveMission(

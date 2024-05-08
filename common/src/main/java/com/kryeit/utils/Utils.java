@@ -139,6 +139,15 @@ public class Utils {
         return largest;
     }
 
+    public static <T> boolean contains(Collection<T> collection, Predicate<T> predicate) {
+        for (T t : collection) {
+            if (predicate.test(t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static ItemStack getSpawnEggOfEntity(ResourceLocation entity) {
         EntityType<?> entityType = BuiltInRegistries.ENTITY_TYPE.get(entity);
 
@@ -214,7 +223,7 @@ public class Utils {
     }
 
     public static String removeBrackets(String text) {
-        return text.replaceAll("\\[", "").replaceAll("\\]", "");
+        return text.replaceAll("[\\[\\]]", "");
     }
 
     public static String adjustStringToWidth(String input, int maxWidth) {
@@ -227,7 +236,7 @@ public class Utils {
         for (int i = 0; i < input.length(); i++) {
             char currentChar = input.charAt(i);
             String currentCharAsString = String.valueOf(currentChar);
-            if (fontRenderer.width(truncatedString.toString() + currentCharAsString + "...") <= maxWidth) {
+            if (fontRenderer.width(truncatedString + currentCharAsString + "...") <= maxWidth) {
                 truncatedString.append(currentCharAsString);
             } else {
                 break;
