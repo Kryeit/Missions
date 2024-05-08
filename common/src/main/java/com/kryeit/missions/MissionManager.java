@@ -99,7 +99,7 @@ public class MissionManager {
             player.sendSystemMessage(Components.translatable("missions.menu.main.reward",
                             itemStack.getCount(),
                             Utils.removeBrackets(itemStack.getDisplayName().getString()))
-                            .withStyle(ChatFormatting.GREEN)
+                    .withStyle(ChatFormatting.GREEN)
             );
         }
         STORAGE.claimRewards(uuid);
@@ -154,7 +154,11 @@ public class MissionManager {
 
         if (price.amount == 1 || Utils.removeItems(serverPlayer.getInventory(), price.item, price.amount)) {
             STORAGE.reassignActiveMission(Missions.getConfig().getMissions(), player, index);
-            MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player, activeMission.item());
+
+            if (!Utils.contains(getActiveMissions(player), m -> m.missionID().equals(activeMission.missionID()) && m.item().equals(activeMission.item()))) {
+                MissionTypeRegistry.INSTANCE.getType(activeMission.missionID()).reset(player, activeMission.item());
+            }
+
             STORAGE.incrementReassignmentsSinceLastReset(player);
             serverPlayer.awardStat(ModStats.MISSIONS_REROLLED);
         }
@@ -241,7 +245,6 @@ public class MissionManager {
         }
     }
 
-    @SuppressWarnings("UnreachableCode")
     private static int getTotalFreeRerolls(UUID player) {
         int defaultValue = FREE_REROLLS;
 
