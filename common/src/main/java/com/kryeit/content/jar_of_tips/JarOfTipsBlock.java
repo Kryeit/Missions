@@ -113,7 +113,7 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
             return;
         }
 
-        if (!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) > 0)) {
+        if (!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) > 0) && !player.isCreative()) {
             jar.drops();
             return;
         }
