@@ -48,7 +48,7 @@
   "missions.difficulty.normal": "Normal",
   "missions.difficulty.hard": "Difícil",
   "block.missions.mechanical_exchanger": "Intercambiador mecánico",
-  "block.missions.jar_of_tips": "Tarro de consejos",
+  "block.missions.jar_of_tips": "Tarro de propinas",
   "missions.message.hard_mission_completed": "¡%s acaba de completar una misión difícil!",
   "missions.reassign": "¡Tus misiones han sido reasignadas como cada semana! Abre el menú de misiones con /missions o la tecla de misiones",
   "sounds.missions.mission_complete": "Misión completada",
