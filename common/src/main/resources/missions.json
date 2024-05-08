@@ -74,9 +74,14 @@
       "calcite": "500-1500",
       "create:asurine": "500-2000",
       "create:scoria": "500-2000",
+      "create:scorchia": "500-2000",
+      "create:veridium": "500-2000",
+      "create:crimsite": "500-2000",
       "blackstone": "1000-3000",
       "netherrack": "2000-5000",
-      "dirt": "1000-3000"
+      "dirt": "1000-3000",
+      "tuff": "1000-3000",
+      "create:limestone": "500-2000"
     },
     "titles": [
       "Block buster",
