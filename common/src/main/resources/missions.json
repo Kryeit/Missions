@@ -76,7 +76,7 @@
       "create:scoria": "500-2000",
       "blackstone": "1000-3000",
       "netherrack": "2000-5000",
-      "#minecraft:dirt": "1000-3000"
+      "dirt": "1000-3000"
     },
     "titles": [
       "Block buster",
