@@ -22,16 +22,16 @@ public class BeltMovementHandlerMixin {
     private static void onBeltTransportEntity(BeltBlockEntity beltBE, Entity entityIn, BeltMovementHandler.TransportedEntityInfo info, CallbackInfo ci) {
 
         if (entityIn instanceof ServerPlayer player) {
-            double distance = MixinUtils.getDistance(cachedBeltPlayerPositions.get(player), player.position());
+            double distance = MixinUtils.getDistance(cachedBeltPlayerPositions.get(player.getUUID()), player.position());
 
-            if (!cachedBeltPlayerPositions.containsKey(player) || distance > 10 || info.getTicksSinceLastCollision() > 20) {
-                cachedBeltPlayerPositions.put(player, player.position());
+            if (!cachedBeltPlayerPositions.containsKey(player.getUUID()) || distance > 10 || info.getTicksSinceLastCollision() > 20) {
+                cachedBeltPlayerPositions.put(player.getUUID(), player.position());
                 return;
             }
 
             if (distance < 5) return;
 
-            cachedBeltPlayerPositions.replace(player, player.position());
+            cachedBeltPlayerPositions.replace(player.getUUID(), player.position());
 
             BeltWalkMission.handleDistanceChange(player.getUUID(), 5);
         }

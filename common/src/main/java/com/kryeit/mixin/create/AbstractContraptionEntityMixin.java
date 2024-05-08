@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
 
 import static com.kryeit.Missions.cachedTrainPlayerPositions;
 
@@ -23,13 +24,13 @@ public class AbstractContraptionEntityMixin {
         if (entityLiving instanceof ServerPlayer user) {
             if (cachedTrainPlayerPositions.isEmpty() && MinecraftServerSupplier.getServer() != null) return;
 
-            Iterator<Map.Entry<ServerPlayer, Vec3>> iterator = cachedTrainPlayerPositions.entrySet().iterator();
+            Iterator<Map.Entry<UUID, Vec3>> iterator = cachedTrainPlayerPositions.entrySet().iterator();
 
             while (iterator.hasNext()) {
-                Map.Entry<ServerPlayer, Vec3> entry = iterator.next();
-                ServerPlayer player = entry.getKey();
+                Map.Entry<UUID, Vec3> entry = iterator.next();
+                UUID player = entry.getKey();
 
-                if (player.getUUID().equals(user.getUUID())) {
+                if (player.equals(user.getUUID())) {
                     iterator.remove();
                 }
             }

@@ -37,16 +37,16 @@ public abstract class TrainMixin {
             carriage.forEachPresentEntity(e -> e.getIndirectPassengers()
                     .forEach(p -> {
                         if (p instanceof ServerPlayer player) {
-                            double distance = MixinUtils.getDistance(cachedTrainPlayerPositions.get(player), player.position());
+                            double distance = MixinUtils.getDistance(cachedTrainPlayerPositions.get(player.getUUID()), player.position());
 
-                            if (!cachedTrainPlayerPositions.containsKey(player) || distance > 100) {
-                                cachedTrainPlayerPositions.put(player, player.position());
+                            if (!cachedTrainPlayerPositions.containsKey(player.getUUID()) || distance > 100) {
+                                cachedTrainPlayerPositions.put(player.getUUID(), player.position());
                                 return;
                             }
 
                             if (distance < 50) return;
 
-                            cachedTrainPlayerPositions.replace(player, player.position());
+                            cachedTrainPlayerPositions.replace(player.getUUID(), player.position());
 
                             if (e.getControllingPlayer().isPresent() && e.getControllingPlayer().get().equals(player.getUUID())) {
                                 TrainDriverMission.handleDistanceChange(player.getUUID(), 50);
