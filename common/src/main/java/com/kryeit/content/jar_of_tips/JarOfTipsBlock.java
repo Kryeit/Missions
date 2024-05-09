@@ -124,20 +124,21 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
     }
 
     @Override
-    public void attack(BlockState state, Level world, BlockPos pos, Player player) {
+    public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         if (!world.isClientSide && player.isCreative()) {
+            System.out.println("Creative player broke jar");
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof JarOfTipsBlockEntity jar) {
-                if (jar.inventory.isEmpty()) {
+                if (!jar.isEmpty()) {
                     ItemStack jarItem = new ItemStack(ModItems.JAR_OF_TIPS.get());
                     JarOfTipsItem.initInventory(jarItem, jar.inventory);
                     popResource(world, pos, jarItem);
-                    world.removeBlock(pos, false);
                 }
             }
         }
-        super.attack(state, world, pos, player);
+        super.playerWillDestroy(world, pos, state, player);
     }
+    
     @Override
     public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, @Nullable LivingEntity livingEntity, ItemStack itemStack) {
         super.setPlacedBy(level, blockPos, blockState, livingEntity, itemStack);
