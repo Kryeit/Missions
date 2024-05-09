@@ -11,6 +11,7 @@
     "MechanicalExchangerBlockEntityMixin",
     "MillstoneBlockEntityMixin",
     "SawBlockEntityMixin",
+    "TrainRelocationPacketMixin",
     "event.CraftHandler",
     "event.FishHandler"
   ],
