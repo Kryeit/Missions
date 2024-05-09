@@ -43,7 +43,6 @@ public class JarOfTipsProjectileRenderer extends EntityRenderer<JarOfTipsProject
 
     @Override
     public ResourceLocation getTextureLocation(JarOfTipsProjectile entity) {
-        // Return null since the rendering uses an ItemStack and not a direct texture
         return null;
     }
 }
