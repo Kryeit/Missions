@@ -15,7 +15,7 @@ public class ModEntityTypes {
 
     public static final EntityEntry<JarOfTipsProjectile> JAR_OF_TIPS_PROJECTILE = REGISTRATE.<JarOfTipsProjectile>entity("jar_of_tips_projectile", JarOfTipsProjectile::new, MobCategory.MISC)
             .renderer(() -> JarOfTipsProjectileRenderer::new)
-            .properties(configure(c -> c.size(.25f, .25f)))
+            .properties(configure(c -> c.size(.35f, .35f)))
             .lang("Jar of Tips")
             .register();
 

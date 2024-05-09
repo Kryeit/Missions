@@ -181,19 +181,19 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
 
         if (fallingBlockEntity instanceof JarOfTipsFallingBlockEntity fallingJar) {
             if ((fallingBlockEntity.getStartPos().getY() - fallingBlockEntity.getY()) > 3) {
-                level.removeBlock(blockPos, false);
                 jar.drops();
+                level.removeBlock(blockPos, false);
                 level.playSound(null, blockPos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
 
                 level.getServer().execute(() -> {
                     BlockPos downPos = blockPos.below();
                     BlockState downState = level.getBlockState(downPos);
                     if (downState.getBlock() instanceof JarOfTipsBlock) {
-                        level.removeBlock(downPos, false);
                         JarOfTipsBlockEntity downJar = (JarOfTipsBlockEntity) level.getBlockEntity(downPos);
                         if (downJar != null) {
                             downJar.drops();
                         }
+                        level.removeBlock(downPos, false);
                         level.playSound(null, downPos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
                 });

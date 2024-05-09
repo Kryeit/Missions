@@ -1,46 +1,46 @@
 {
-	"credit": "Made with Blockbench, textured by Thaumcraft 6",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [64, 64],
 	"textures": {
-		"0": "missions:block/jar_side",
-		"1": "missions:block/jar_top",
-		"2": "missions:block/jar_bottom",
-		"particle": "missions:block/jar_side"
+		"0": "missions:block/jar",
+		"particle": "missions:block/jar"
 	},
 	"elements": [
 		{
 			"from": [1, 0, 1],
 			"to": [15, 16, 15],
 			"faces": {
-				"north": {"uv": [3, 4, 13, 16], "texture": "#0"},
-				"east": {"uv": [3, 4, 13, 16], "texture": "#0"},
-				"south": {"uv": [3, 4, 13, 16], "texture": "#0"},
-				"west": {"uv": [3, 4, 13, 16], "texture": "#0"},
-				"up": {"uv": [3, 3, 13, 13], "texture": "#1"},
-				"down": {"uv": [3, 3, 13, 13], "texture": "#2"}
+				"north": {"uv": [3.5, 3.5, 7, 7.5], "texture": "#0"},
+				"east": {"uv": [0, 3.5, 3.5, 7.5], "texture": "#0"},
+				"south": {"uv": [10.5, 3.5, 14, 7.5], "texture": "#0"},
+				"west": {"uv": [7, 3.5, 10.5, 7.5], "texture": "#0"},
+				"up": {"uv": [7, 3.5, 3.5, 0], "texture": "#0"},
+				"down": {"uv": [10.5, 0, 7, 3.5], "texture": "#0"}
 			}
 		},
 		{
 			"from": [5, 16, 5],
 			"to": [11, 17, 11],
 			"faces": {
-				"north": {"uv": [5, 3, 11, 4], "texture": "#0"},
-				"east": {"uv": [5, 3, 11, 4], "texture": "#0"},
-				"south": {"uv": [5, 3, 11, 4], "texture": "#0"},
-				"west": {"uv": [5, 3, 11, 4], "texture": "#0"},
-				"up": {"uv": [0, 0, 6, 6], "texture": "#missing"},
-				"down": {"uv": [5, 5, 11, 11], "texture": "#1"}
+				"north": {"uv": [7.5, 9, 9, 9.25], "texture": "#0"},
+				"east": {"uv": [6, 9, 7.5, 9.25], "texture": "#0"},
+				"south": {"uv": [10.5, 9, 12, 9.25], "texture": "#0"},
+				"west": {"uv": [9, 9, 10.5, 9.25], "texture": "#0"},
+				"up": {"uv": [9, 9, 7.5, 7.5], "texture": "#0"},
+				"down": {"uv": [10.5, 7.5, 9, 9], "texture": "#0"}
 			}
 		},
 		{
 			"from": [4, 17, 4],
 			"to": [12, 20, 12],
 			"faces": {
-				"north": {"uv": [5, 2, 11, 4], "texture": "#0"},
-				"east": {"uv": [5, 2, 11, 4], "texture": "#0"},
-				"south": {"uv": [5, 2, 11, 4], "texture": "#0"},
-				"west": {"uv": [5, 2, 11, 4], "texture": "#0"},
-				"up": {"uv": [5, 5, 11, 11], "texture": "#1"},
-				"down": {"uv": [5, 5, 11, 11], "texture": "#1"}
+				"north": {"uv": [2, 9.5, 4, 10.25], "texture": "#0"},
+				"east": {"uv": [0, 9.5, 2, 10.25], "texture": "#0"},
+				"south": {"uv": [6, 9.5, 8, 10.25], "texture": "#0"},
+				"west": {"uv": [4, 9.5, 6, 10.25], "texture": "#0"},
+				"up": {"uv": [4, 9.5, 2, 7.5], "texture": "#0"},
+				"down": {"uv": [6, 7.5, 4, 9.5], "texture": "#0"}
 			}
 		}
 	],
@@ -49,6 +49,7 @@
 			"name": "jar_of_tips",
 			"origin": [8, 8, 8],
 			"color": 0,
+			"nbt": "{}",
 			"children": [0, 1, 2]
 		}
 	]

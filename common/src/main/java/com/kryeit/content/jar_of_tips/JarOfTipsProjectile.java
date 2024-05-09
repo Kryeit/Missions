@@ -61,6 +61,8 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
 
+        if (level().isClientSide) return;
+
         this.kill();
         BlockPos hitPos = blockHitResult.getBlockPos();
         BlockPos placePos = blockHitResult.getBlockPos().offset(blockHitResult.getDirection().getNormal());
@@ -76,9 +78,17 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
                 level().setBlockAndUpdate(placePos, placedBlockState);
                 level().playSound(null, placePos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
+                BlockEntity blockEntity = level().getBlockEntity(placePos);
+
+                if (blockEntity instanceof JarOfTipsBlockEntity) {
+                    JarOfTipsBlockEntity jarEntity = (JarOfTipsBlockEntity) blockEntity;
+                    jarEntity.setInventory(this.inventory);
+                }
+
                 if (!level().getBlockState(placePos).is(ModBlocks.JAR_OF_TIPS.get())) {
                     this.drops();
                     this.kill();
+
                     return;
                 }
             }

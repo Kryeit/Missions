@@ -115,7 +115,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
 
     public void drops() {
         assert this.level != null;
-        Containers.dropContents(this.level, this.worldPosition, this);
+        Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
     @Override

@@ -29,7 +29,6 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
@@ -67,7 +66,6 @@ public class Missions {
         ModCreativeTabs.register();
         ModSounds.register();
         ModTags.register();
-        ModStats.register();
         ModEntityTypes.register();
         
         useBaseTab();
