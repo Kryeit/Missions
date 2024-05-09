@@ -113,7 +113,7 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
             return;
         }
 
-        if (!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) > 0) && !player.isCreative()) {
+        if (!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) > 0)) {
             jar.drops();
             return;
         }
@@ -123,6 +123,21 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
         popResource(level, blockPos, jarItem);
     }
 
+    @Override
+    public void attack(BlockState state, Level world, BlockPos pos, Player player) {
+        if (!world.isClientSide && player.isCreative()) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof JarOfTipsBlockEntity jar) {
+                if (jar.inventory.isEmpty()) {
+                    ItemStack jarItem = new ItemStack(ModItems.JAR_OF_TIPS.get());
+                    JarOfTipsItem.initInventory(jarItem, jar.inventory);
+                    popResource(world, pos, jarItem);
+                    world.removeBlock(pos, false);
+                }
+            }
+        }
+        super.attack(state, world, pos, player);
+    }
     @Override
     public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, @Nullable LivingEntity livingEntity, ItemStack itemStack) {
         super.setPlacedBy(level, blockPos, blockState, livingEntity, itemStack);
