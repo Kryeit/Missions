@@ -9,18 +9,23 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class JarOfTipsProjectile extends ThrowableItemProjectile {
 
@@ -65,9 +70,14 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
         Block block = level().getBlockState(placePos).getBlock();
 
         if (block == Blocks.WATER || block == Blocks.AIR) {
-            level().setBlock(placePos, ModBlocks.JAR_OF_TIPS.get().defaultBlockState(), 3);
-            level().playSound(null, placePos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            Player owner = (Player) this.getOwner();
+            BlockPlaceContext context = new BlockPlaceContext(new UseOnContext(owner, InteractionHand.MAIN_HAND, new BlockHitResult(Vec3.atCenterOf(placePos), blockHitResult.getDirection(), placePos, false)));
+            BlockState placedBlockState = ModBlocks.JAR_OF_TIPS.get().getStateForPlacement(context);
 
+            if (placedBlockState != null) {
+                level().setBlockAndUpdate(placePos, placedBlockState);
+                level().playSound(null, placePos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
         } else {
             level().playSound(null, placePos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
 
