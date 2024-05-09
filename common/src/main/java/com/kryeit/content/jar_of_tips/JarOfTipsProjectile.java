@@ -77,6 +77,12 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
             if (placedBlockState != null) {
                 level().setBlockAndUpdate(placePos, placedBlockState);
                 level().playSound(null, placePos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                if (!level().getBlockState(placePos).is(ModBlocks.JAR_OF_TIPS.get())) {
+                    this.drops();
+                    this.kill();
+                    return;
+                }
             }
         } else {
             level().playSound(null, placePos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
