@@ -18,6 +18,13 @@ Create: Missions is a Create addon focused for Create mod servers. It will also 
 It works by giving 10 random missions per player per week. These missions can be vanilla missions like "Break X Veridium" or Create mod related like "Drive a train for 4 km with at least 2 passengers". You can also reroll the missions, and claim prices by completing them.
 **Open the mission GUI pressing H key (by default) or using `/missions` command**
 
+# Mission types:
+As time goes on, more missions will be added. Some missions can have lots of variation like breaking a block, while others are simpler like walking.
+
+There are in total 16 Mission Types that use Create-related mechanics.
+
+cut, compact, sail, craft, ride, harvester, train-driver-passenger, crush, eat, train-passenger, place, dive, press, mix, train-driver, break, saw, kill, drill, drink, mill, minecart, fly, relocate, fish, walk, swim, feed, belt-walk
+
 # Special thanks to:
 - TheLegendofSaram, Mexican translation
 - __Tesseract, French translation
