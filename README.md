@@ -31,6 +31,7 @@ cut, compact, sail, craft, ride, harvester, train-driver-passenger, crush, eat, 
 - MrRedRhino, German translation
 - глебикс, Russian translation
 - Starlotte, mission complete sound
+- Seboso, Jar of Tips texture
 
 ## Needed for server owners
 <details>
