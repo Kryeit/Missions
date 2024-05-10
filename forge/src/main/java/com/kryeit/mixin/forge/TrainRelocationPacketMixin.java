@@ -27,7 +27,6 @@ public class TrainRelocationPacketMixin {
 
     @Inject(method = "handle", remap = false, at = @At("HEAD"))
     private void onHandle(NetworkEvent.Context context, CallbackInfoReturnable<Boolean> cir){
-        System.out.println("Train relocated at " + pos.toString());
         ServerPlayer player = context.getSender();
         if (player == null)
             return;

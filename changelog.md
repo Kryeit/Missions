@@ -1,3 +1,8 @@
+# 0.3.4
+- Fix forge not loading
+- Fix lots of jar issues
+- Added a new texture for the Jar of Tips (Made by Seboso)
+- 
 # 0.3.3
 ## IMPORTANT: Update from 0.3.2 or lower
 - Delete `config/missions/currency.json`
