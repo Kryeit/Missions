@@ -88,7 +88,6 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
                 if (!level().getBlockState(placePos).is(ModBlocks.JAR_OF_TIPS.get())) {
                     this.drops();
                     this.kill();
-
                     return;
                 }
             }

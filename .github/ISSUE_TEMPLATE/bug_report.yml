@@ -27,7 +27,7 @@ body:
         required: false
   -   type: textarea
       attributes:
-        label: Additional Context
+        label: Additional Context, Mod version and loader
         description: Add any extra context about the bug here
       validations:
         required: false

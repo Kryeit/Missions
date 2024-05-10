@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
@@ -126,7 +127,6 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
     @Override
     public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         if (!world.isClientSide && player.isCreative()) {
-            System.out.println("Creative player broke jar");
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof JarOfTipsBlockEntity jar) {
                 if (!jar.isEmpty()) {
@@ -181,7 +181,7 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
 
         if (fallingBlockEntity instanceof JarOfTipsFallingBlockEntity fallingJar) {
             if ((fallingBlockEntity.getStartPos().getY() - fallingBlockEntity.getY()) > 3) {
-                jar.drops();
+                Containers.dropContents(level, blockPos, fallingJar.getInventory());
                 level.removeBlock(blockPos, false);
                 level.playSound(null, blockPos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
 
