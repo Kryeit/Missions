@@ -204,6 +204,7 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
         }
     }
 
+    /* WATERLOGGED */
 
     @Override
     public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
@@ -218,6 +219,5 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
     public FluidState getFluidState(BlockState blockState) {
         return (Boolean)blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
-
 
 }
