@@ -13,7 +13,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
-import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +37,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEntity>, SimpleWaterloggedBlock, Nameable {
+public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEntity>, SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -121,6 +120,11 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
 
         ItemStack jarItem = new ItemStack(ModItems.JAR_OF_TIPS.get());
         JarOfTipsItem.initInventory(jarItem, jar.inventory);
+
+        if (jar.hasCustomName()) {
+            jarItem.setHoverName(jar.getCustomName());
+        }
+
         popResource(level, blockPos, jarItem);
     }
 
@@ -132,6 +136,10 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
                 if (!jar.isEmpty()) {
                     ItemStack jarItem = new ItemStack(ModItems.JAR_OF_TIPS.get());
                     JarOfTipsItem.initInventory(jarItem, jar.inventory);
+
+                    if (jar.hasCustomName()) {
+                        jarItem.setHoverName(jar.getCustomName());
+                    }
                     popResource(world, pos, jarItem);
                 }
             }
@@ -144,12 +152,13 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
         super.setPlacedBy(level, blockPos, blockState, livingEntity, itemStack);
         if (!level.isClientSide) {
             BlockEntity be = level.getBlockEntity(blockPos);
-            if (be instanceof JarOfTipsBlockEntity) {
+            if (be instanceof JarOfTipsBlockEntity jar) {
                 if (itemStack.hasTag() && itemStack.getTag().contains("Items")) {
                     CompoundTag itemsTag = itemStack.getTag().getCompound("Items");
                     NonNullList<ItemStack> inventory = NonNullList.withSize(9, ItemStack.EMPTY);
                     ContainerHelper.loadAllItems(itemsTag, inventory);
-                    ((JarOfTipsBlockEntity) be).setInventory(inventory);
+                    jar.setInventory(inventory);
+                    jar.setCustomName(itemStack.getHoverName());
                 }
             }
         }
