@@ -1,3 +1,6 @@
+# 0.3.5
+- Fix Stats (by TurnDev)
+
 # 0.3.4
 - Fix forge not loading
 - Fix lots of jar issues
