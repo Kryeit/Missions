@@ -67,8 +67,7 @@ public class Missions {
         ModSounds.register();
         ModTags.register();
         ModEntityTypes.register();
-        ModStats.register();
-        
+
         useBaseTab();
         finalizeRegistrate();
     }

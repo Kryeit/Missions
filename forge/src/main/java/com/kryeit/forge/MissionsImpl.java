@@ -2,6 +2,7 @@ package com.kryeit.forge;
 
 import com.kryeit.Missions;
 import com.kryeit.MissionsClient;
+import com.kryeit.registry.ModStats;
 import com.kryeit.registry.forge.KeyInit;
 import com.kryeit.registry.forge.ModCreativeTabsImpl;
 import net.minecraft.world.entity.player.Player;
@@ -45,6 +46,7 @@ public class MissionsImpl {
 
     private void onConfigRead(final FMLCommonSetupEvent event) {
         Missions.readConfig();
+        ModStats.register();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
