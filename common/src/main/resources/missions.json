@@ -6,9 +6,8 @@
     },
     "weight": 1.0,
     "missions": {
-      "#create:ladders": "300-1500",
-      "#create:bars": "200-1000",
-      "#create:scaffoldings": "200-4000"
+      "create:andesite_ladder": "300-1500",
+      "create:brass_ladder": "300-1500",
     },
     "titles": [
       "Cutting edge technology",
@@ -222,7 +221,6 @@
     },
     "weight": 1.0,
     "missions": {
-      "#create:crushed_raw_materials": "150-300",
       "quartz": "200-500",
       "create:experience_nugget": "300-1000",
       "string": "200-500",
@@ -300,7 +298,7 @@
     "missions": {
       "glass": "20-100",
       "create:track_signal": "20-50",
-      "#minecraft:dirt": "100-300",
+      "minecraft:dirt": "100-300",
       "fern": "50-100",
       "grass": "50-100"
     },
@@ -524,7 +522,8 @@
     },
     "weight": 1.0,
     "missions": {
-      "#c:drinks": "30-100"
+      "minecraft:honey_bottle": "3-10",
+      "create:builders_tea": "3-10"
     },
     "titles": [
       "Sköl",

@@ -91,27 +91,36 @@ public class DataStorage implements AutoCloseable {
 
     private static List<ConfigReader.Mission> shuffleWeighted(Collection<ConfigReader.Mission> missions, int length) {
         List<ConfigReader.Mission> shuffled = new ArrayList<>(length);
-        Predicate<ConfigReader.Mission> filter = mission -> !mission.missionType().assignOnlyOnce() || !shuffled.contains(mission);
+        List<ConfigReader.Mission> remaining = new LinkedList<>(missions);
 
-        List<ConfigReader.Mission> selectable = new ArrayList<>(missions);
-        while (shuffled.size() < length && !selectable.isEmpty()) {
-            double totalWeight = selectable.stream().mapToDouble(ConfigReader.Mission::weight).sum();
+        for (int i = 0; i < length; i++) {
+            Predicate<ConfigReader.Mission> filter = mission ->
+                    !mission.missionType().assignOnlyOnce() || !shuffled.contains(mission) || remaining.stream().noneMatch(m -> !m.missionType().assignOnlyOnce());
+
+            double totalWeight = remaining.stream()
+                    .mapToDouble(ConfigReader.Mission::weight)
+                    .sum();
             double randomNumber = Math.random() * totalWeight;
             double weightSum = 0;
 
-            for (ConfigReader.Mission mission : selectable) {
+            for (int j = 0; j < remaining.size(); j++) {
+                ConfigReader.Mission mission = remaining.get(j);
                 weightSum += mission.weight();
-                if (weightSum >= randomNumber) {
-                    if (filter.test(mission)) {
-                        shuffled.add(mission);
-                        if (mission.missionType().assignOnlyOnce()) {
-                            selectable.remove(mission);
-                        }
-                        break;
+                if (weightSum >= randomNumber && filter.test(mission)) {
+                    shuffled.add(mission);
+                    if (mission.missionType().assignOnlyOnce()) {
+                        remaining.remove(j);  // Remove the mission to prevent it from being selected again
                     }
+                    break;
                 }
             }
+
+            // If no mission was selected because all were filtered out, select the first mission
+            if (shuffled.isEmpty() && i == length - 1) {
+                shuffled.add(remaining.get(0));
+            }
         }
+
         return shuffled;
     }
 

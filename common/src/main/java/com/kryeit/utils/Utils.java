@@ -26,6 +26,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -300,5 +301,13 @@ public class Utils {
 
     public static int getClientStat(ResourceLocation stat) {
         return Minecraft.getInstance().player.getStats().getValue(Stats.CUSTOM.get(stat));
+    }
+
+    public static List<String> getItemsFromTag(TagKey<Item> tag) {
+
+        return BuiltInRegistries.ITEM.stream()
+                .filter(item -> item.getDefaultInstance().is(tag))
+                .map(item -> BuiltInRegistries.ITEM.getKey(item).toString())
+                .toList();
     }
 }
