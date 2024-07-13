@@ -6,5 +6,6 @@ public class MissionsClient {
 
     public static void initializeClient() {
         ModPonders.register();
+
     }
 }

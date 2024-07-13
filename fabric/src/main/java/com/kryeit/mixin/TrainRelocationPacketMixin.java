@@ -1,4 +1,4 @@
-package com.kryeit.mixin.create;
+package com.kryeit.mixin;
 
 import com.kryeit.missions.mission_types.create.train.TrainRelocateMission;
 import com.simibubi.create.Create;

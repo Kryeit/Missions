@@ -10,7 +10,8 @@
     "DivingHelmetMixin",
     "MechanicalExchangerBlockEntityMixin",
     "MillstoneBlockEntityMixin",
-    "SawBlockEntityMixin"
+    "SawBlockEntityMixin",
+    "TrainRelocationPacketMixin"
   ],
   "injectors": {
     "defaultRequire": 1

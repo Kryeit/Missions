@@ -111,7 +111,7 @@ public class ConfigReader {
             if (itemKey.startsWith("#")) {
                 String tagName = itemKey.replace("#", "");
                 TagKey<Item> tag = TagKey.create(Registries.ITEM, new ResourceLocation(tagName));
-                List<String> taggedItems = getItemsFromTag(tag);
+                List<String> taggedItems = Utils.getItemsFromTag(tag);
                 for (String taggedItem : taggedItems) {
                     itemsMap.put(taggedItem, Range.fromString(items.getString(itemKey)));
                 }
@@ -120,14 +120,6 @@ public class ConfigReader {
             }
         }
         return itemsMap;
-    }
-
-    private static List<String> getItemsFromTag(TagKey<Item> tag) {
-
-        return BuiltInRegistries.ITEM.stream()
-                .filter(item -> item.getDefaultInstance().is(tag))
-                .map(item -> BuiltInRegistries.ITEM.getKey(item).toString())
-                .toList();
     }
 
     public Map<MissionType, Mission> getMissions() {

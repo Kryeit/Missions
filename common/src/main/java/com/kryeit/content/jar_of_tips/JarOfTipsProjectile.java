@@ -3,24 +3,27 @@ package com.kryeit.content.jar_of_tips;
 import com.kryeit.registry.ModBlocks;
 import com.kryeit.registry.ModEntityTypes;
 import com.kryeit.registry.ModItems;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
-import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class JarOfTipsProjectile extends ThrowableItemProjectile {
 
@@ -58,6 +61,8 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
 
+        if (level().isClientSide) return;
+
         this.kill();
         BlockPos hitPos = blockHitResult.getBlockPos();
         BlockPos placePos = blockHitResult.getBlockPos().offset(blockHitResult.getDirection().getNormal());
@@ -65,9 +70,27 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
         Block block = level().getBlockState(placePos).getBlock();
 
         if (block == Blocks.WATER || block == Blocks.AIR) {
-            level().setBlock(placePos, ModBlocks.JAR_OF_TIPS.get().defaultBlockState(), 3);
-            level().playSound(null, placePos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            Player owner = (Player) this.getOwner();
+            BlockPlaceContext context = new BlockPlaceContext(new UseOnContext(owner, InteractionHand.MAIN_HAND, new BlockHitResult(Vec3.atCenterOf(placePos), blockHitResult.getDirection(), placePos, false)));
+            BlockState placedBlockState = ModBlocks.JAR_OF_TIPS.get().getStateForPlacement(context);
 
+            if (placedBlockState != null) {
+                level().setBlockAndUpdate(placePos, placedBlockState);
+                level().playSound(null, placePos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                BlockEntity blockEntity = level().getBlockEntity(placePos);
+
+                if (blockEntity instanceof JarOfTipsBlockEntity) {
+                    JarOfTipsBlockEntity jarEntity = (JarOfTipsBlockEntity) blockEntity;
+                    jarEntity.setInventory(this.inventory);
+                }
+
+                if (!level().getBlockState(placePos).is(ModBlocks.JAR_OF_TIPS.get())) {
+                    this.drops();
+                    this.kill();
+                    return;
+                }
+            }
         } else {
             level().playSound(null, placePos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
 
@@ -84,11 +107,6 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
 
     public void drops() {
         Containers.dropContents(level(), blockPosition(), inventory);
-    }
-
-    @SuppressWarnings("unchecked")
-    public static FabricEntityTypeBuilder<?> build(FabricEntityTypeBuilder<?> builder) {
-        return builder.dimensions(EntityDimensions.fixed(0.25f, 0.25f));
     }
 
     @Override

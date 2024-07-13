@@ -6,9 +6,8 @@
     },
     "weight": 1.0,
     "missions": {
-      "#create:ladders": "300-1500",
-      "#create:bars": "200-1000",
-      "#create:scaffoldings": "200-4000"
+      "create:andesite_ladder": "300-1500",
+      "create:brass_ladder": "300-1500"
     },
     "titles": [
       "Cutting edge technology",
@@ -142,8 +141,7 @@
       "stray": "70-170",
       "wither": "1-3",
       "blaze": "50-100",
-      "enderman": "50-100",
-      "#minecraft:animals": "30-80"
+      "enderman": "50-100"
     },
     "titles": [
       "Plague extermination",
@@ -223,7 +221,6 @@
     },
     "weight": 1.0,
     "missions": {
-      "#create:crushed_raw_materials": "150-300",
       "quartz": "200-500",
       "create:experience_nugget": "300-1000",
       "string": "200-500",
@@ -299,12 +296,11 @@
     },
     "weight": 1.0,
     "missions": {
-      "#c:glass_blocks": "20-100",
+      "glass": "20-100",
       "create:track_signal": "20-50",
-      "#minecraft:dirt": "100-300",
+      "minecraft:dirt": "100-300",
       "fern": "50-100",
-      "grass": "50-100",
-      "#c:flowers": "5-20"
+      "grass": "50-100"
     },
     "titles": [
       "Master builder",
@@ -323,7 +319,7 @@
     },
     "weight": 1.0,
     "missions": {
-      "#c:plates": "100-600",
+      "create:iron_sheet": "100-600",
       "create:track": "300-600"
     },
     "titles": [
@@ -494,8 +490,8 @@
     },
     "weight": 1.0,
     "missions": {
-      "#c:logs": "400-2000",
-      "#c:leaves": "500-1000",
+      "oak_log": "400-2000",
+      "oak_leaves": "500-1000",
       "bamboo": "500-2000"
     },
     "titles": [
@@ -511,7 +507,7 @@
     },
     "weight": 1.0,
     "missions": {
-      "#c:crops": "300-800"
+      "carrot": "300-800"
     },
     "titles": [
       "Becoming sufficient",
@@ -526,7 +522,8 @@
     },
     "weight": 1.0,
     "missions": {
-      "#c:drinks": "30-100"
+      "minecraft:honey_bottle": "3-10",
+      "create:builders_tea": "3-10"
     },
     "titles": [
       "Sköl",
@@ -572,7 +569,7 @@
       "missions:distance": "500-1000"
     },
     "titles": [
-      "Lugage companionship"
+      "Luggage companionship"
     ]
   }
 }

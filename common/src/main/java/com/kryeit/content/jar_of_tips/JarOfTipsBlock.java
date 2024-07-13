@@ -12,7 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.Nameable;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
@@ -37,7 +37,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEntity>, SimpleWaterloggedBlock, Nameable {
+@SuppressWarnings("deprecation")
+public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEntity>, SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -113,27 +114,52 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
             return;
         }
 
-        if (!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) > 0) && !player.isCreative()) {
+        if (!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) > 0)) {
             jar.drops();
             return;
         }
 
         ItemStack jarItem = new ItemStack(ModItems.JAR_OF_TIPS.get());
         JarOfTipsItem.initInventory(jarItem, jar.inventory);
+
+        if (jar.hasCustomName()) {
+            jarItem.setHoverName(jar.getCustomName());
+        }
+
         popResource(level, blockPos, jarItem);
     }
 
+    @Override
+    public void playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+        if (!world.isClientSide && player.isCreative()) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof JarOfTipsBlockEntity jar) {
+                if (!jar.isEmpty()) {
+                    ItemStack jarItem = new ItemStack(ModItems.JAR_OF_TIPS.get());
+                    JarOfTipsItem.initInventory(jarItem, jar.inventory);
+
+                    if (jar.hasCustomName()) {
+                        jarItem.setHoverName(jar.getCustomName());
+                    }
+                    popResource(world, pos, jarItem);
+                }
+            }
+        }
+        super.playerWillDestroy(world, pos, state, player);
+    }
+    
     @Override
     public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, @Nullable LivingEntity livingEntity, ItemStack itemStack) {
         super.setPlacedBy(level, blockPos, blockState, livingEntity, itemStack);
         if (!level.isClientSide) {
             BlockEntity be = level.getBlockEntity(blockPos);
-            if (be instanceof JarOfTipsBlockEntity) {
+            if (be instanceof JarOfTipsBlockEntity jar) {
                 if (itemStack.hasTag() && itemStack.getTag().contains("Items")) {
                     CompoundTag itemsTag = itemStack.getTag().getCompound("Items");
                     NonNullList<ItemStack> inventory = NonNullList.withSize(9, ItemStack.EMPTY);
                     ContainerHelper.loadAllItems(itemsTag, inventory);
-                    ((JarOfTipsBlockEntity) be).setInventory(inventory);
+                    jar.setInventory(inventory);
+                    jar.setCustomName(itemStack.getHoverName());
                 }
             }
         }
@@ -165,19 +191,19 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
 
         if (fallingBlockEntity instanceof JarOfTipsFallingBlockEntity fallingJar) {
             if ((fallingBlockEntity.getStartPos().getY() - fallingBlockEntity.getY()) > 3) {
+                Containers.dropContents(level, blockPos, fallingJar.getInventory());
                 level.removeBlock(blockPos, false);
-                jar.drops();
                 level.playSound(null, blockPos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
 
                 level.getServer().execute(() -> {
                     BlockPos downPos = blockPos.below();
                     BlockState downState = level.getBlockState(downPos);
                     if (downState.getBlock() instanceof JarOfTipsBlock) {
-                        level.removeBlock(downPos, false);
                         JarOfTipsBlockEntity downJar = (JarOfTipsBlockEntity) level.getBlockEntity(downPos);
                         if (downJar != null) {
                             downJar.drops();
                         }
+                        level.removeBlock(downPos, false);
                         level.playSound(null, downPos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
                 });
@@ -188,6 +214,7 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
         }
     }
 
+    /* WATERLOGGED */
 
     @Override
     public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
@@ -202,6 +229,5 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
     public FluidState getFluidState(BlockState blockState) {
         return (Boolean)blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
-
 
 }

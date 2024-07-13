@@ -18,12 +18,20 @@ Create: Missions is a Create addon focused for Create mod servers. It will also 
 It works by giving 10 random missions per player per week. These missions can be vanilla missions like "Break X Veridium" or Create mod related like "Drive a train for 4 km with at least 2 passengers". You can also reroll the missions, and claim prices by completing them.
 **Open the mission GUI pressing H key (by default) or using `/missions` command**
 
+# Mission types:
+As time goes on, more missions will be added. Some missions can have lots of variation like breaking a block, while others are simpler like walking.
+
+There are in total 16 Mission Types that use Create-related mechanics.
+
+cut, compact, sail, craft, ride, harvester, train-driver-passenger, crush, eat, train-passenger, place, dive, press, mix, train-driver, break, saw, kill, drill, drink, mill, minecart, fly, relocate, fish, walk, swim, feed, belt-walk
+
 # Special thanks to:
 - TheLegendofSaram, Mexican translation
 - __Tesseract, French translation
 - MrRedRhino, German translation
 - глебикс, Russian translation
 - Starlotte, mission complete sound
+- Seboso, Jar of Tips texture
 
 ## Needed for server owners
 <details>
@@ -95,5 +103,5 @@ It lets you to exchange currencies from smaller to bigger currency. Depends on w
 # For developers
 It's really possible to add new missions for Create: Missions. You have examples here
 - [Create: Missions Template Addon (Fabric)](https://github.com/muriplz/missions-fabric-example-addon)
-- [VoteMission](https://legacy.curseforge.com/minecraft/mc-mods/votemission)
-- [TelepostMissions](https://legacy.curseforge.com/minecraft/mc-mods/telepostmissions)
+- [VoteMission](https://modrinth.com/mod/votemission)
+- [TelepostMissions](https://modrinth.com/mod/telepostmissions)

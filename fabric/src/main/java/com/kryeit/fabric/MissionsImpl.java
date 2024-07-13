@@ -2,6 +2,7 @@ package com.kryeit.fabric;
 
 import com.kryeit.MissionHandler;
 import com.kryeit.Missions;
+import com.kryeit.registry.ModStats;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -13,6 +14,9 @@ public class MissionsImpl implements ModInitializer {
     @Override
     public void onInitialize() {
         Missions.init();
+
+        ModStats.register();
+
         MissionHandler.registerEvents();
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> Missions.handlePlayerLogin(handler.getPlayer()));

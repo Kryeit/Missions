@@ -6,10 +6,12 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
+import net.minecraft.world.Nameable;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -17,13 +19,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyContainer {
+public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyContainer, Nameable {
 
     public NonNullList<ItemStack> inventory ;
     private int cooldown = 0;
+
+    @Nullable
+    private Component name;
 
 
     public JarOfTipsBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
@@ -115,7 +121,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
 
     public void drops() {
         assert this.level != null;
-        Containers.dropContents(this.level, this.worldPosition, this);
+        Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
     @Override
@@ -181,5 +187,29 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
 
     public NonNullList<ItemStack> getInventory() {
         return this.inventory;
+    }
+
+    /* Nameable */
+
+    protected Component getDefaultName() {
+        return Component.translatable("block.missions.jar_of_tips");
+    }
+
+    @Override
+    public Component getName() {
+        return this.name != null ? this.name : this.getDefaultName();
+    }
+
+    public void setCustomName(Component component) {
+        this.name = component;
+    }
+
+    public Component getDisplayName() {
+        return this.getName();
+    }
+
+    @Nullable
+    public Component getCustomName() {
+        return this.name;
     }
 }
