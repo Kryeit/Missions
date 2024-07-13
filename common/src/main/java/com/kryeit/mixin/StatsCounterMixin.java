@@ -1,5 +1,6 @@
 package com.kryeit.mixin;
 
+import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.missions.mission_types.StatisticMission;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stat;
@@ -20,7 +21,7 @@ public abstract class StatsCounterMixin {
 
     @Inject(method = "setValue", at = @At("HEAD"))
     public void onValueChanged(Player player, Stat<?> stat, int newValue, CallbackInfo ci) {
-        if (stat.getValue() instanceof ResourceLocation resourceLocation) {
+        if (stat.getValue() instanceof ResourceLocation resourceLocation && MinecraftServerSupplier.getServer() != null) {
             int value = getValue(Stats.CUSTOM, resourceLocation);
             StatisticMission.handleStatisticChange(player.getUUID(), newValue - value, resourceLocation);
         }
