@@ -126,7 +126,7 @@ public class Missions {
                         "walk",
                         MissionDifficulty.EASY,
                         Component.nullToEmpty("Walking mission"),
-                        100_000,
+                        100,
                         Items.LEATHER_BOOTS,
                         Stats.WALK_ONE_CM,
                         Stats.SPRINT_ONE_CM,
@@ -136,7 +136,7 @@ public class Missions {
                         "swim",
                         MissionDifficulty.HARD,
                         Component.nullToEmpty("Swimming mission"),
-                        100_000,
+                        100,
                         Items.TURTLE_HELMET,
                         Stats.SWIM_ONE_CM
                 ),
@@ -144,7 +144,7 @@ public class Missions {
                         "minecart",
                         MissionDifficulty.NORMAL,
                         Component.nullToEmpty("Minecart mission"),
-                        100_000,
+                        100,
                         Items.MINECART,
                         Stats.MINECART_ONE_CM
                 ),
@@ -152,7 +152,7 @@ public class Missions {
                         "ride",
                         MissionDifficulty.HARD,
                         Component.nullToEmpty("Riding mission"),
-                        100_000,
+                        100,
                         Items.SADDLE,
                         Stats.HORSE_ONE_CM,
                         Stats.PIG_ONE_CM,
@@ -162,7 +162,7 @@ public class Missions {
                         "fly",
                         MissionDifficulty.EASY,
                         Component.nullToEmpty("Flying mission"),
-                        100_000,
+                        100,
                         Items.ELYTRA,
                         Stats.AVIATE_ONE_CM
                 ),
@@ -170,7 +170,7 @@ public class Missions {
                         "sail",
                         MissionDifficulty.NORMAL,
                         Component.nullToEmpty("Sailing mission"),
-                        100_000,
+                        100,
                         Items.OAK_BOAT,
                         Stats.BOAT_ONE_CM
                 )
