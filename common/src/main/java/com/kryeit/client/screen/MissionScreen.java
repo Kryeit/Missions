@@ -157,7 +157,11 @@ public class MissionScreen extends Screen {
             );
         }
 
-        components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper(),
+        String reward = mission.rewardAmount().lower() == mission.rewardAmount().upper() ?
+                mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper() :
+                String.valueOf(mission.rewardAmount().lower());
+
+        components.add(Components.translatable("missions.menu.main.tooltip.reward", reward,
                 Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
 
