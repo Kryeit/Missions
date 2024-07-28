@@ -24,14 +24,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigReader {
-    private final Map<MissionType, List<Mission>> missions;
+    private final Map<MissionType, Mission> missions;
     private final List<ItemStack> exchange;
     public static double EXCHANGER_DROP_RATE;
     public static int FIRST_REROLL_CURRENCY;
     public static int FREE_REROLLS;
     public static String COMMAND_UPON_MISSION;
 
-    private ConfigReader(Map<MissionType, List<Mission>> missions, List<ItemStack> exchange) {
+    private ConfigReader(Map<MissionType, Mission> missions, List<ItemStack> exchange) {
         this.missions = missions;
         this.exchange = exchange;
     }
@@ -40,31 +40,25 @@ public class ConfigReader {
 
         String content = readOrCopyFile(path.resolve("missions.json"), "/missions.json");
 
-        Map<MissionType, List<Mission>> missions = new HashMap<>();
+        Map<MissionType, Mission> missions = new HashMap<>();
         JSONObject object = new JSONObject(content);
 
         for (String key : object.keySet()) {
+            JSONObject value = object.getObject(key);
+            JSONObject reward = value.getObject("reward");
+            float weight = value.optFloat("weight").orElse(1f);
+            if (weight == 0) continue;
+
             MissionType missionType = MissionTypeRegistry.INSTANCE.getType(key);
-
-            JSONArray values = object.getArray(key);
-            List<Mission> missionList = new ArrayList<>();
-            for (int i = 0; i < values.size(); i++) {
-                JSONObject value = values.getObject(i);
-                JSONObject reward = value.getObject("rewards");
-                float weight = value.optFloat("weight").orElse(1f);
-                if (weight == 0) continue;
-
-                Mission mission = new Mission(
-                        getItems(reward),
-                        missionType,
-                        getItems(value.getObject("items")),
-                        value.getArray("titles").asList(JSONArray::getString),
-                        weight
-                );
-
-                missionList.add(mission);
-            }
-            missions.put(missionType, missionList);
+            Mission mission = new Mission(
+                    Range.fromString(reward.getString("amount")),
+                    reward.getString("item"),
+                    missionType,
+                    getItems(value.getObject("missions")),
+                    value.getArray("titles").asList(JSONArray::getString),
+                    weight
+            );
+            missions.put(missionType, mission);
         }
 
         String exchange;
@@ -128,7 +122,7 @@ public class ConfigReader {
         return itemsMap;
     }
 
-    public Map<MissionType, List<Mission>> getMissions() {
+    public Map<MissionType, Mission> getMissions() {
         return missions;
     }
 
@@ -136,20 +130,7 @@ public class ConfigReader {
         return exchange;
     }
 
-    public record Mission(Map<String, Range> rewardItems, MissionType missionType, Map<String, Range> items,
+    public record Mission(Range rewardAmount, String rewardItem, MissionType missionType, Map<String, Range> items,
                           List<String> titles, float weight) {
-
-        private static Map<String, Range> getItems(JSONArray items) {
-            Map<String, Range> itemsMap = new HashMap<>();
-            for (int i = 0; i < items.size(); i++) {
-                JSONObject itemObj = items.getObject(i);
-                for (String itemKey : itemObj.keySet()) {
-                    String rangeString = itemObj.getString(itemKey);
-                    Range range = Range.fromString(rangeString);
-                    itemsMap.put(itemKey, range);
-                }
-            }
-            return itemsMap;
-        }
     }
 }
