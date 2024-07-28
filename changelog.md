@@ -1,4 +1,8 @@
 # 0.4
+# *IMPORTANT* Updating from 0.3.6 or lower:
+- Move your `mods/missions/missions_data.nbt` to `config/missions/missions_data.nbt`, although losing this is not that bad
+
+## Changelog
 - All distance missions are now in meters (must be rebalanced in your configs)
 - Fix farmer delight foods not counting for Eat mission in Fabric
 - Delete drink mission, add the drinks in the Eat mission too

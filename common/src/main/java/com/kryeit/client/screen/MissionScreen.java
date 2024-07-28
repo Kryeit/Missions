@@ -158,8 +158,8 @@ public class MissionScreen extends Screen {
         }
 
         String reward = mission.rewardAmount().lower() == mission.rewardAmount().upper() ?
-                mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper() :
-                String.valueOf(mission.rewardAmount().lower());
+                String.valueOf(mission.rewardAmount().lower()) :
+                mission.rewardAmount().lower() + "-" + mission.rewardAmount().upper();
 
         components.add(Components.translatable("missions.menu.main.tooltip.reward", reward,
                 Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))

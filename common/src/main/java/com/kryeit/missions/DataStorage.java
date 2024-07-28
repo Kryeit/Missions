@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class DataStorage implements AutoCloseable {
-    private static final File FILE = new File("mods/missions/mission_data.nbt");
+    private static final File FILE = new File("config/missions/mission_data.nbt");
     private final CompoundTag data;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
