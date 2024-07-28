@@ -32,7 +32,6 @@
   "missions.menu.main.tooltip.task.drill": "Сломай %s %s с помощью дрели",
   "missions.menu.main.tooltip.task.saw": "Сломай %s %s с помощью пилы",
   "missions.menu.main.tooltip.task.harvester": "Harvest %s of %s with a harvester",
-  "missions.menu.main.tooltip.task.drink": "Drink %s of %s",
   "missions.menu.main.tooltip.task.relocate": "Move your train for %s blocks... by relocating it with a Wrench",
   "missions.menu.main.tooltip.task.feed": "Feed %s of %s to an animal",
   "missions.menu.main.tooltip.task.belt-walk": "Walk in a mechanical belt for %s blocks",

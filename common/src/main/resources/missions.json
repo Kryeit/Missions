@@ -515,21 +515,6 @@
       "Stardew quirks"
     ]
   },
-  "drink": {
-    "reward": {
-      "amount": "2-23",
-      "item": "diamond"
-    },
-    "weight": 1.0,
-    "missions": {
-      "minecraft:honey_bottle": "3-10",
-      "create:builders_tea": "3-10"
-    },
-    "titles": [
-      "Sköl",
-      "Refreshing moment"
-    ]
-  },
   "relocate": {
     "reward": {
       "amount": "2-23",
