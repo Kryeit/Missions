@@ -45,6 +45,12 @@ public class Range {
         buf.writeInt(upper);
     }
 
+    public String asString() {
+        return lower == upper ?
+                String.valueOf(lower) :
+                lower + "-" + upper;
+    }
+
     @Override
     public String toString() {
         return "Range{" +

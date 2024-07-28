@@ -6,6 +6,7 @@
 - All distance missions are now in meters (must be rebalanced in your configs)
 - Fix farmer delight foods not counting for Eat mission in Fabric
 - Delete drink mission, add the drinks in the Eat mission too
+- Only show "Click to reroll" if mission not completed
 
 # 0.3.5
 - Fix Stats (by TurnDev)
