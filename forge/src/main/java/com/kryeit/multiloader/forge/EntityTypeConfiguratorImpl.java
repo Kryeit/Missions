@@ -3,6 +3,7 @@ package com.kryeit.multiloader.forge;
 import com.kryeit.multiloader.EntityTypeConfigurator;
 import net.minecraft.world.entity.EntityType;
 
+// Code from https://github.com/Layers-of-Railways/Railway
 public class EntityTypeConfiguratorImpl extends EntityTypeConfigurator {
     private final EntityType.Builder<?> builder;
 
