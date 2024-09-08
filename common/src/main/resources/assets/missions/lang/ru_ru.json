@@ -1,7 +1,6 @@
 {
   "itemGroup.missions": "Create: Задания",
-  "missions.menu.key": "Открой интерфейс заданий",
-  "missions.key.category": "Задания",
+  "missions.keyinfo.missions_menu": "Открой интерфейс заданий",
   "missions.menu.reroll.title": "Меню обновления заданий",
   "missions.menu.reroll.reroll": "Обновить задание",
   "missions.menu.close": "Закрыть",

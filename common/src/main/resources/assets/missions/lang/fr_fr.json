@@ -1,7 +1,6 @@
 {
   "itemGroup.missions": "Create: Missions",
-  "missions.menu.key": "Ouvrir interface de missions",
-  "missions.key.category": "Missions",
+  "missions.keyinfo.missions_menu": "Open Missions Menu",
   "missions.menu.reroll.title": "Menu de renouvellement des missions",
   "missions.menu.reroll.reroll": "Renouveler",
   "missions.menu.close": "Fermer",

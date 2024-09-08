@@ -1,7 +1,6 @@
 {
   "itemGroup.missions": "Create: Misiones",
-  "missions.menu.key": "Abrir interfaz de misiones",
-  "missions.key.category": "Misiones",
+  "missions.keyinfo.missions_menu": "Open Missions Menu",
   "missions.menu.reroll.title": "Menú de cambio de misión",
   "missions.menu.reroll.reroll": "Cambiar",
   "missions.menu.close": "Cerrar",

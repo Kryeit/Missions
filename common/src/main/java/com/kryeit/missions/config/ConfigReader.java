@@ -6,7 +6,6 @@ import com.kryeit.compat.CompatAddon;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.utils.Utils;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
