@@ -7,7 +7,6 @@ import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.client.ClientsideMissionPacketUtils;
 import com.kryeit.coins.Coins;
 import com.kryeit.compat.CompatAddon;
-import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.registry.ModBlocks;
 import com.kryeit.registry.ModStats;
 import com.kryeit.utils.Utils;
@@ -38,8 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.kryeit.missions.config.ConfigReader.*;
-
 public class MissionManager {
     private static final DataStorage STORAGE = new DataStorage();
 
@@ -53,12 +50,8 @@ public class MissionManager {
 
         int itemsLeft = activeMission.requiredAmount() - type.getProgress(player, activeMission.item());
         if (itemsLeft <= 0) {
-            ConfigReader.Mission mission = Missions.getConfig().getMissions().get(type);
-            int rewardAmount = mission.rewardAmount().getRandomValue();
-            String rewardItem = mission.rewardItem();
-
             type.reset(player, item);
-            STORAGE.addReward(player, rewardItem, rewardAmount);
+            STORAGE.addReward(player, activeMission.rewardItem(), activeMission.rewardAmount());
             STORAGE.setCompleted(player, item, type.id());
 
             onMissionComplete(player, activeMission, type);
@@ -110,13 +103,16 @@ public class MissionManager {
     }
 
     public static boolean reassignMissionsIfNecessary(UUID player) {
-        int lastSunday = Utils.getDay() - Utils.getDayOfWeek();
-        int assignedDay = STORAGE.getLastAssignedDay(player);
-        if (assignedDay < lastSunday) {
+        int lastAssignedDay = STORAGE.getLastAssignedDay(player);
+
+        boolean reassign = switch (Missions.getConfig().reassignInterval) {
+            case DAILY -> lastAssignedDay != Utils.getDay();
+            case WEEKLY -> lastAssignedDay < Utils.getDay() - Utils.getDayOfWeek();
+        };
+        if (reassign) {
             reassignMissions(player);
-            return true;
         }
-        return false;
+        return reassign;
     }
 
     public static void reassignMissions(UUID player) {
@@ -142,7 +138,7 @@ public class MissionManager {
 
         int coinAmount = (int) (price / Math.pow(64, coinIndex));
 
-        return new ReassignmentPrice(Coins.getCoin(coinIndex + FIRST_REROLL_CURRENCY).getItem(), coinAmount);
+        return new ReassignmentPrice(Coins.getCoin(coinIndex + Missions.getConfig().firstRerollCurrency).getItem(), coinAmount);
     }
 
     public static void tryReassignMission(ServerPlayer serverPlayer, int index) {
@@ -192,7 +188,7 @@ public class MissionManager {
 
         serverPlayer.awardStat(difficulty.stat());
 
-        Utils.executeCommandAsServer(COMMAND_UPON_MISSION.replace("%player%", serverPlayer.getName().getString()));
+        Utils.executeCommandAsServer(Missions.getConfig().commandUponMission.replace("%player%", serverPlayer.getName().getString()));
 
         showToast(serverPlayer, mission.toClientMission(player));
 
@@ -201,7 +197,7 @@ public class MissionManager {
                     .withStyle(ChatFormatting.GOLD);
             playerList.broadcastSystemMessage(message, false);
 
-            if (Math.random() <= EXCHANGER_DROP_RATE) {
+            if (Math.random() <= Missions.getConfig().exchangerDropRate) {
                 MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.MECHANICAL_EXCHANGER.asStack(), serverPlayer));
             }
         }
@@ -246,7 +242,7 @@ public class MissionManager {
     }
 
     private static int getTotalFreeRerolls(UUID player) {
-        int defaultValue = FREE_REROLLS;
+        int defaultValue = Missions.getConfig().freeRerolls;
 
         if (!CompatAddon.LUCKPERMS.isLoaded())
             return defaultValue;

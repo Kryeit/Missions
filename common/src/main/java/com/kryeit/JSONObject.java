@@ -56,6 +56,26 @@ public class JSONObject {
         return (float) data.get(key);
     }
 
+    public int getInt(String key) {
+        return (int) data.get(key);
+    }
+
+    public Optional<Integer> optInt(String key) {
+        Object value = data.get(key);
+        if (value instanceof Number) {
+            return Optional.of(((Number) value).intValue());
+        }
+        return Optional.empty();
+    }
+
+    public Optional<String> optString(String key) {
+        Object value = data.get(key);
+        if (value instanceof String) {
+            return Optional.of((String) value);
+        }
+        return Optional.empty();
+    }
+
     public Optional<Float> optFloat(String key) {
         Object value = data.get(key);
         if (value instanceof Number) {
@@ -203,7 +223,11 @@ public class JSONObject {
                 incrementPosition();
             }
             pos--;
-            return Double.parseDouble(number.toString());
+            if (number.toString().contains(".")) {
+                return Double.parseDouble(number.toString());
+            } else {
+                return Long.parseLong(number.toString());
+            }
         }
 
         private Map<String, Object> parseKeyValue() {

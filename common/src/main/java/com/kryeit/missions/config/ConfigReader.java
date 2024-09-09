@@ -6,7 +6,6 @@ import com.kryeit.compat.CompatAddon;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.utils.Utils;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -24,41 +23,36 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigReader {
-    private final Map<MissionType, Mission> missions;
+    private final Map<MissionType, MissionTypeConfig> missions;
     private final List<ItemStack> exchange;
-    public static double EXCHANGER_DROP_RATE;
-    public static int FIRST_REROLL_CURRENCY;
-    public static int FREE_REROLLS;
-    public static String COMMAND_UPON_MISSION;
+    public final float exchangerDropRate;
+    public final int firstRerollCurrency;
+    public final int freeRerolls;
+    public final String commandUponMission;
+    public final int numberOfMissions;
+    public final ReassignInterval reassignInterval;
 
-    private ConfigReader(Map<MissionType, Mission> missions, List<ItemStack> exchange) {
+    private ConfigReader(Map<MissionType, MissionTypeConfig> missions, List<ItemStack> exchange, float exchangerDropRate, int firstRerollCurrency, int freeRerolls, String commandUponMission, int numberOfMissions, ReassignInterval reassignInterval) {
         this.missions = missions;
         this.exchange = exchange;
+        this.exchangerDropRate = exchangerDropRate;
+        this.firstRerollCurrency = firstRerollCurrency;
+        this.freeRerolls = freeRerolls;
+        this.commandUponMission = commandUponMission;
+        this.numberOfMissions = numberOfMissions;
+        this.reassignInterval = reassignInterval;
     }
 
     public static ConfigReader readFile(Path path) throws IOException {
-
         String content = readOrCopyFile(path.resolve("missions.json"), "/missions.json");
 
-        Map<MissionType, Mission> missions = new HashMap<>();
         JSONObject object = new JSONObject(content);
+        int configVersion = object.optInt("config-version").orElse(1);
 
-        for (String key : object.keySet()) {
-            JSONObject value = object.getObject(key);
-            JSONObject reward = value.getObject("reward");
-            float weight = value.optFloat("weight").orElse(1f);
-            if (weight == 0) continue;
-
-            MissionType missionType = MissionTypeRegistry.INSTANCE.getType(key);
-            Mission mission = new Mission(
-                    Range.fromString(reward.getString("amount")),
-                    reward.getString("item"),
-                    missionType,
-                    getItems(value.getObject("missions")),
-                    value.getArray("titles").asList(JSONArray::getString),
-                    weight
-            );
-            missions.put(missionType, mission);
+        Map<MissionType, MissionTypeConfig> missionConfig = new HashMap<>();
+        switch (configVersion) {
+            case 1 -> parseConfigVersion1(object, missionConfig);
+            case 2 -> parseConfigVersion2(object, missionConfig);
         }
 
         String exchange;
@@ -83,12 +77,82 @@ public class ConfigReader {
         String config = readOrCopyFile(path.resolve("config.json"), "/config.json");
         JSONObject configObject = new JSONObject(config);
 
-        EXCHANGER_DROP_RATE = Double.parseDouble(configObject.getString("exchanger-drop-rate"));
-        FIRST_REROLL_CURRENCY = Integer.parseInt(configObject.getString("first-reroll-currency"));
-        FREE_REROLLS = Integer.parseInt(configObject.getString("free-rerolls"));
-        COMMAND_UPON_MISSION = configObject.getString("command-upon-mission");
+        float exchangerDropRate = configObject.getFloat("exchanger-drop-rate");
+        int firstRerollCurrency = configObject.getInt("first-reroll-currency");
+        int freeRerolls = configObject.getInt("free-rerolls");
+        String commandUponMission = configObject.getString("command-upon-mission");
+        int numberOfMissions = configObject.optInt("number-of-missions").orElse(10); // TODO implement
+        String reassignmentInterval = configObject.optString("reassignment-interval (DAILY or WEEKLY)").orElse("WEEKLY");
 
-        return new ConfigReader(missions, items);
+        return new ConfigReader(missionConfig, items, exchangerDropRate, firstRerollCurrency, freeRerolls, commandUponMission, numberOfMissions, ReassignInterval.valueOf(reassignmentInterval));
+    }
+
+    private static void parseConfigVersion2(JSONObject config, Map<MissionType, MissionTypeConfig> missions) {
+        for (String key : config.keySet()) {
+            JSONObject value = config.getObject(key);
+            float weight = value.optFloat("weight").orElse(1f);
+            if (weight == 0) continue;
+
+            MissionType missionType = MissionTypeRegistry.INSTANCE.getType(key);
+
+            Map<Map<String, Range>, SubMissionConfig> subMissions = new HashMap<>();
+
+            List<SubMissionConfig> subMissionConfigList = value.getArray("missions").asList((array, i) -> {
+                JSONObject entry = array.getObject(i);
+                return new SubMissionConfig(
+                        entry.getArray("titles").asList(JSONArray::getString),
+                        getItems(entry.getObject("items")),
+                        getRewards(entry.getArray("rewards"))
+                );
+            });
+            for (SubMissionConfig subMissionConfig : subMissionConfigList) {
+                subMissions.put(subMissionConfig.items(), subMissionConfig);
+            }
+
+            MissionTypeConfig missionTypeConfig = new MissionTypeConfig(
+                    missionType,
+                    weight,
+                    subMissions
+            );
+            missions.put(missionType, missionTypeConfig);
+        }
+    }
+
+    private static void parseConfigVersion1(JSONObject config, Map<MissionType, MissionTypeConfig> missions) {
+        for (String key : config.keySet()) {
+            JSONObject value = config.getObject(key);
+            JSONObject reward = value.getObject("reward");
+            float weight = value.optFloat("weight").orElse(1f);
+            if (weight == 0) continue;
+
+            MissionType missionType = MissionTypeRegistry.INSTANCE.getType(key);
+
+            Map<String, Range> items = getItems(value.getObject("missions"));
+
+            MissionTypeConfig mtc = new MissionTypeConfig(
+                    missionType,
+                    weight,
+                    Map.of(
+                            items, new SubMissionConfig(
+                                    value.getArray("titles").asList(JSONArray::getString),
+                                    items,
+                                    List.of(new Reward(reward.getString("item"), Range.fromString(reward.getString("amount"))))
+                            )
+                    )
+            );
+
+            missions.put(missionType, mtc);
+        }
+    }
+
+    private static List<Reward> getRewards(JSONArray rewards) {
+        return rewards.asList((array, i) -> {
+            JSONObject entry = rewards.getObject(i);
+            return new Reward(
+                    entry.getString("item"),
+                    Range.fromString(entry.getString("amount"))
+            );
+        });
     }
 
     public static String readOrCopyFile(Path path, String exampleFile) throws IOException {
@@ -122,7 +186,7 @@ public class ConfigReader {
         return itemsMap;
     }
 
-    public Map<MissionType, Mission> getMissions() {
+    public Map<MissionType, MissionTypeConfig> getMissions() {
         return missions;
     }
 
@@ -130,7 +194,21 @@ public class ConfigReader {
         return exchange;
     }
 
-    public record Mission(Range rewardAmount, String rewardItem, MissionType missionType, Map<String, Range> items,
-                          List<String> titles, float weight) {
+    public record MissionTypeConfig(
+            MissionType missionType,
+            float weight,
+            Map<Map<String, Range>, SubMissionConfig> subMissions
+    ) {
+    }
+
+    public enum ReassignInterval {
+        DAILY,
+        WEEKLY
+    }
+
+    public record SubMissionConfig(List<String> titles, Map<String, Range> items, List<Reward> rewards) {
+    }
+
+    public record Reward(String item, Range count) {
     }
 }

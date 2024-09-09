@@ -37,14 +37,12 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Contract;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class Utils {
+    private static final Random RANDOM = new Random();
     private static final ItemStack DEFAULT_SPAWN_EGG = BuiltInRegistries.ITEM.get(new ResourceLocation("player_head")).getDefaultInstance();
 
     public static int getDay() {
@@ -309,5 +307,19 @@ public class Utils {
                 .filter(item -> item.getDefaultInstance().is(tag))
                 .map(item -> BuiltInRegistries.ITEM.getKey(item).toString())
                 .toList();
+    }
+
+    public static <T> T getRandomEntry(Collection<T> collection) {
+        int num = (int) (Math.random() * collection.size());
+        for (T t : collection) if (--num < 0) return t;
+        throw new AssertionError();
+    }
+
+    public static <T> T getRandomEntry(List<T> collection) {
+        return collection.get(RANDOM.nextInt(0, collection.size()));
+    }
+
+    public static <T> T getRandomEntry(Map<?, T> map) {
+        return getRandomEntry(map.values());
     }
 }

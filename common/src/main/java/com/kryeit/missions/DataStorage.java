@@ -1,6 +1,5 @@
 package com.kryeit.missions;
 
-import com.kryeit.Missions;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.config.Range;
@@ -34,12 +33,6 @@ public class DataStorage implements AutoCloseable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static <T> T getRandomEntry(Collection<T> collection) {
-        int num = (int) (Math.random() * collection.size());
-        for (T t : collection) if (--num < 0) return t;
-        throw new AssertionError();
     }
 
     public void save() {
@@ -89,26 +82,26 @@ public class DataStorage implements AutoCloseable {
         }
     }
 
-    private static List<ConfigReader.Mission> shuffleWeighted(Collection<ConfigReader.Mission> missions, int length) {
-        List<ConfigReader.Mission> shuffled = new ArrayList<>(length);
-        List<ConfigReader.Mission> remaining = new LinkedList<>(missions);
+    private static List<ConfigReader.MissionTypeConfig> shuffleWeighted(Collection<ConfigReader.MissionTypeConfig> missionTypeConfigs, int length) {
+        List<ConfigReader.MissionTypeConfig> shuffled = new ArrayList<>(length);
+        List<ConfigReader.MissionTypeConfig> remaining = new LinkedList<>(missionTypeConfigs);
 
         for (int i = 0; i < length; i++) {
-            Predicate<ConfigReader.Mission> filter = mission ->
-                    !mission.missionType().assignOnlyOnce() || !shuffled.contains(mission) || remaining.stream().noneMatch(m -> !m.missionType().assignOnlyOnce());
+            Predicate<ConfigReader.MissionTypeConfig> filter = missionTypeConfig ->
+                    !missionTypeConfig.missionType().assignOnlyOnce() || !shuffled.contains(missionTypeConfig) || remaining.stream().allMatch(m -> m.missionType().assignOnlyOnce());
 
             double totalWeight = remaining.stream()
-                    .mapToDouble(ConfigReader.Mission::weight)
+                    .mapToDouble(ConfigReader.MissionTypeConfig::weight)
                     .sum();
             double randomNumber = Math.random() * totalWeight;
             double weightSum = 0;
 
             for (int j = 0; j < remaining.size(); j++) {
-                ConfigReader.Mission mission = remaining.get(j);
-                weightSum += mission.weight();
-                if (weightSum >= randomNumber && filter.test(mission)) {
-                    shuffled.add(mission);
-                    if (mission.missionType().assignOnlyOnce()) {
+                ConfigReader.MissionTypeConfig missionTypeConfig = remaining.get(j);
+                weightSum += missionTypeConfig.weight();
+                if (weightSum >= randomNumber && filter.test(missionTypeConfig)) {
+                    shuffled.add(missionTypeConfig);
+                    if (missionTypeConfig.missionType().assignOnlyOnce()) {
                         remaining.remove(j);  // Remove the mission to prevent it from being selected again
                     }
                     break;
@@ -125,39 +118,43 @@ public class DataStorage implements AutoCloseable {
     }
 
 
-    public void reassignActiveMissions(Map<MissionType, ConfigReader.Mission> missions, UUID player) {
+    public void reassignActiveMissions(Map<MissionType, ConfigReader.MissionTypeConfig> missions, UUID player) {
         ListTag list = getActiveMissionsTag(player);
         list.clear();
 
-        for (ConfigReader.Mission mission : shuffleWeighted(missions.values(), 10)) {
-            list.add(createActiveMissionTag(mission));
+        for (ConfigReader.MissionTypeConfig missionTypeConfig : shuffleWeighted(missions.values(), 10)) {
+            list.add(createActiveMissionTag(missionTypeConfig));
         }
     }
 
-    private static CompoundTag createActiveMissionTag(ConfigReader.Mission mission) {
+    private static CompoundTag createActiveMissionTag(ConfigReader.MissionTypeConfig missionTypeConfig) {
         CompoundTag tag = new CompoundTag();
-
-        Map.Entry<String, Range> requiredItem = getRandomEntry(mission.items().entrySet());
+        ConfigReader.SubMissionConfig subMission = Utils.getRandomEntry(missionTypeConfig.subMissions());
+        ConfigReader.Reward reward = Utils.getRandomEntry(subMission.rewards());
+        Map.Entry<String, Range> requiredItem = Utils.getRandomEntry(subMission.items().entrySet());
 
         tag.putString("item", requiredItem.getKey());
         tag.putBoolean("completed", false);
-        tag.putString("mission_id", mission.missionType().id());
+        tag.putString("mission_id", missionTypeConfig.missionType().id());
         tag.putInt("required_amount", requiredItem.getValue().getRandomValue());
-        tag.putString("title", getRandomEntry(mission.titles()));
+        tag.putString("title", Utils.getRandomEntry(subMission.titles()));
+        tag.putString("reward_item", reward.item());
+        tag.putInt("reward_amount", reward.count().getRandomValue());
+
         return tag;
     }
 
-    public ConfigReader.Mission reassignActiveMission(Map<MissionType, ConfigReader.Mission> missions, UUID player, int index) {
+    public ConfigReader.MissionTypeConfig reassignActiveMission(Map<MissionType, ConfigReader.MissionTypeConfig> missions, UUID player, int index) {
         ListTag list = getActiveMissionsTag(player);
         String idToReassign = list.getCompound(index).getString("mission_id");
 
-        List<ConfigReader.Mission> assignedTypes = new ArrayList<>(missions.values());
+        List<ConfigReader.MissionTypeConfig> assignedTypes = new ArrayList<>(missions.values());
         assignedTypes.removeIf(m -> m.missionType().id().equals(idToReassign));
 
-        ConfigReader.Mission mission = shuffleWeighted(assignedTypes, 1).get(0);
-        CompoundTag newTag = createActiveMissionTag(mission);
+        ConfigReader.MissionTypeConfig missionTypeConfig = shuffleWeighted(assignedTypes, 1).get(0);
+        CompoundTag newTag = createActiveMissionTag(missionTypeConfig);
         list.set(index, newTag);
-        return mission;
+        return missionTypeConfig;
     }
 
     public int getReassignmentsSinceLastReset(UUID player) {
@@ -238,13 +235,26 @@ public class DataStorage implements AutoCloseable {
         private final String missionID;
         private final int requiredAmount;
         private final String title;
+        private final String rewardItem;
 
-        private ActiveMission(ResourceLocation item, boolean isCompleted, String missionID, int requiredAmount, String title) {
+        public int rewardAmount() {
+            return rewardAmount;
+        }
+
+        public String rewardItem() {
+            return rewardItem;
+        }
+
+        private final int rewardAmount;
+
+        private ActiveMission(ResourceLocation item, boolean isCompleted, String missionID, int requiredAmount, String title, String rewardItem, int rewardAmount) {
             this.item = item;
             this.isCompleted = isCompleted;
             this.missionID = missionID;
             this.requiredAmount = requiredAmount;
             this.title = title;
+            this.rewardItem = rewardItem;
+            this.rewardAmount = rewardAmount;
         }
 
         private ActiveMission(CompoundTag tag) {
@@ -252,7 +262,10 @@ public class DataStorage implements AutoCloseable {
                     tag.getBoolean("completed"),
                     tag.getString("mission_id"),
                     tag.getInt("required_amount"),
-                    tag.getString("title"));
+                    tag.getString("title"),
+                    tag.getString("reward_item"),
+                    tag.getInt("reward_amount")
+            );
         }
 
         public int requiredAmount() {
@@ -273,21 +286,6 @@ public class DataStorage implements AutoCloseable {
 
         public ClientsideActiveMission toClientMission(UUID player) {
             MissionType type = MissionTypeRegistry.INSTANCE.getType(missionID());
-            ConfigReader.Mission configMission = Missions.getConfig().getMissions().get(type);
-
-            if (configMission == null) {
-                List<ActiveMission> activeMissions = MissionManager.getActiveMissions(player);
-                int index = -1;
-
-                for (int i = 0; i < activeMissions.size(); i++) {
-                    if (activeMissions.get(i).missionID().equals(missionID())) {
-                        index = i;
-                        break;
-                    }
-                }
-
-                configMission = MissionManager.getStorage().reassignActiveMission(Missions.getConfig().getMissions(), player, index);
-            }
 
             return new ClientsideActiveMission(
                     Component.nullToEmpty(title),
@@ -299,8 +297,8 @@ public class DataStorage implements AutoCloseable {
                     type.getItemStack(item()),
                     type.description(),
                     isCompleted(),
-                    configMission.rewardAmount(),
-                    configMission.rewardItem()
+                    rewardAmount,
+                    rewardItem
             );
         }
     }

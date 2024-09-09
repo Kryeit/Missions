@@ -14,10 +14,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.CreativeModeTab.TabVisibility;
 import net.minecraft.world.level.block.Block;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -146,10 +143,7 @@ public class ModCreativeTabs {
 
             return item -> {
                 TabVisibility visibility = visibilities.get(item);
-                if (visibility != null) {
-                    return visibility;
-                }
-                return TabVisibility.PARENT_AND_SEARCH_TABS;
+                return Objects.requireNonNullElse(visibility, TabVisibility.PARENT_AND_SEARCH_TABS);
             };
         }
 
@@ -252,7 +246,7 @@ public class ModCreativeTabs {
 
             public enum Type {
                 BEFORE,
-                AFTER;
+                AFTER
             }
         }
     }

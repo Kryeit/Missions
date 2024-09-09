@@ -1,7 +1,6 @@
 package com.kryeit.client;
 
 import com.kryeit.missions.MissionDifficulty;
-import com.kryeit.missions.config.Range;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +12,7 @@ public record ClientMissionData(boolean hasUnclaimedRewards, List<ClientsideActi
 
     public record ClientsideActiveMission(Component titleString, MissionDifficulty difficulty, int requiredAmount,
                                           String missionType, int progress, ItemStack previewItem, ItemStack itemRequired,
-                                          Component missionString, boolean isCompleted, Range rewardAmount,
+                                          Component missionString, boolean isCompleted, int rewardAmount,
                                           String rewardItemLocation) {
 
         public static ClientsideActiveMission fromBuffer(FriendlyByteBuf buf) {
@@ -26,7 +25,7 @@ public record ClientMissionData(boolean hasUnclaimedRewards, List<ClientsideActi
                     buf.readItem(),
                     buf.readComponent(),
                     buf.readBoolean(),
-                    Range.fromBuf(buf),
+                    buf.readInt(),
                     buf.readUtf());
         }
 
@@ -40,7 +39,7 @@ public record ClientMissionData(boolean hasUnclaimedRewards, List<ClientsideActi
             buf.writeItem(itemRequired());
             buf.writeComponent(missionString());
             buf.writeBoolean(isCompleted());
-            rewardAmount().writeToBuf(buf);
+            buf.writeInt(rewardAmount());
             buf.writeUtf(rewardItemLocation());
         }
     }
