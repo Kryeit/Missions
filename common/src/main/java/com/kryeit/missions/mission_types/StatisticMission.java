@@ -44,7 +44,7 @@ public class StatisticMission {
 
         @Override
         public boolean assignOnlyOnce() {
-            return true;
+            return false;
         }
 
         @Override

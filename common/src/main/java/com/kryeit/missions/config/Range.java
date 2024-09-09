@@ -34,6 +34,12 @@ public class Range {
         return Range.of(int1, int2);
     }
 
+    public String asString() {
+        return lower == upper ?
+                String.valueOf(lower) :
+                lower + "-" + upper;
+    }
+
     @Override
     public String toString() {
         return "Range{" +

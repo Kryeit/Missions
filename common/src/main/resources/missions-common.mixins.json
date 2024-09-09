@@ -22,7 +22,6 @@
     "create.MechanicalPressBlockEntityMixin",
     "create.TrainMixin",
     "create.TreeMixin",
-    "events.DrinkHandler",
     "events.FeedHandler",
     "interfaces.BlockEntityAccessor"
   ],

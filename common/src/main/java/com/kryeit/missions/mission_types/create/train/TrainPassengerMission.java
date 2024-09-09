@@ -44,7 +44,7 @@ public class TrainPassengerMission implements MissionType {
 
     @Override
     public int getProgress(UUID player, ResourceLocation item) {
-        return getData(player).getInt("value") / 1_000;
+        return getData(player).getInt("value");
     }
 
     @Override

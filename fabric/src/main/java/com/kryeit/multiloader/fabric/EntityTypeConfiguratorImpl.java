@@ -4,6 +4,7 @@ import com.kryeit.multiloader.EntityTypeConfigurator;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.world.entity.EntityDimensions;
 
+// Code from https://github.com/Layers-of-Railways/Railway
 public class EntityTypeConfiguratorImpl extends EntityTypeConfigurator {
     private final FabricEntityTypeBuilder<?> builder;
 
