@@ -82,6 +82,7 @@ public class DataStorage implements AutoCloseable {
         }
     }
 
+    // TODO: Bug when there's less than 10 different mission types
     private static List<ConfigReader.MissionTypeConfig> shuffleWeighted(Collection<ConfigReader.MissionTypeConfig> missionTypeConfigs, int length) {
         List<ConfigReader.MissionTypeConfig> shuffled = new ArrayList<>(length);
         List<ConfigReader.MissionTypeConfig> remaining = new LinkedList<>(missionTypeConfigs);

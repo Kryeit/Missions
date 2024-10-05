@@ -77,9 +77,9 @@ public class ConfigReader {
         String config = readOrCopyFile(path.resolve("config.json"), "/config.json");
         JSONObject configObject = new JSONObject(config);
 
-        float exchangerDropRate = configObject.getFloat("exchanger-drop-rate");
-        int firstRerollCurrency = configObject.getInt("first-reroll-currency");
-        int freeRerolls = configObject.getInt("free-rerolls");
+        float exchangerDropRate = Float.parseFloat(configObject.getString("exchanger-drop-rate"));
+        int firstRerollCurrency = Integer.parseInt(configObject.getString("first-reroll-currency"));
+        int freeRerolls = Integer.parseInt(configObject.getString("free-rerolls"));
         String commandUponMission = configObject.getString("command-upon-mission");
         int numberOfMissions = configObject.optInt("number-of-missions").orElse(10); // TODO implement
         String reassignmentInterval = configObject.optString("reassignment-interval (DAILY or WEEKLY)").orElse("WEEKLY");
@@ -89,6 +89,8 @@ public class ConfigReader {
 
     private static void parseConfigVersion2(JSONObject config, Map<MissionType, MissionTypeConfig> missions) {
         for (String key : config.keySet()) {
+            if (key.equals("config-version")) continue;
+
             JSONObject value = config.getObject(key);
             float weight = value.optFloat("weight").orElse(1f);
             if (weight == 0) continue;
