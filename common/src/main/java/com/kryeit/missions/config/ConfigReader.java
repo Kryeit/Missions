@@ -6,10 +6,7 @@ import com.kryeit.compat.CompatAddon;
 import com.kryeit.missions.MissionType;
 import com.kryeit.missions.MissionTypeRegistry;
 import com.kryeit.utils.Utils;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.io.File;
@@ -174,16 +171,7 @@ public class ConfigReader {
         Map<String, Range> itemsMap = new HashMap<>();
         for (String itemKey : items.keySet()) {
 
-            if (itemKey.startsWith("#")) {
-                String tagName = itemKey.replace("#", "");
-                TagKey<Item> tag = TagKey.create(Registries.ITEM, new ResourceLocation(tagName));
-                List<String> taggedItems = Utils.getItemsFromTag(tag);
-                for (String taggedItem : taggedItems) {
-                    itemsMap.put(taggedItem, Range.fromString(items.getString(itemKey)));
-                }
-            } else {
-                itemsMap.put(itemKey, Range.fromString(items.getString(itemKey)));
-            }
+            itemsMap.put(itemKey, Range.fromString(items.getString(itemKey)));
         }
         return itemsMap;
     }
