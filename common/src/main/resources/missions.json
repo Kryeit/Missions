@@ -5,24 +5,33 @@
     "missions": [
       {
         "items": {
-          "andesite": "500-3000",
-          "diorite": "500-3000",
+          "stone": "500-3000",
           "granite": "500-3000",
-          "create:ochrum": "500-2000",
-          "calcite": "500-1500",
+          "diorite": "500-3000",
+          "andesite": "500-3000",
+          "deepslate": "500-3000",
+          "sandstone": "500-3000",
+          "red_sandstone": "500-3000",
+          "netherrack": "500-3000",
+          "basalt": "500-3000",
+          "blackstone": "500-3000",
+          "end_stone": "500-3000",
+          "calcite": "500-3000",
+          "tuff": "500-3000",
+          "dripstone_block": "500-3000",
           "create:asurine": "500-2000",
+          "create:crimsite": "500-2000",
+          "create:limestone": "500-2000",
+          "create:ochrum": "500-2000",
           "create:scoria": "500-2000",
           "create:scorchia": "500-2000",
-          "create:veridium": "500-2000",
-          "create:crimsite": "500-2000",
-          "blackstone": "1000-3000",
-          "netherrack": "2000-5000",
-          "tuff": "1000-3000",
-          "create:limestone": "500-2000"
+          "create:veridium": "500-2000"
         },
         "titles": [
-          "Your Mom",
-          "This is a title"
+          "Solid thoughts",
+          "Mining boredom",
+          "Chunk destroyer",
+          "Bare handed job"
         ],
         "rewards": [
           {
@@ -33,14 +42,49 @@
       },
       {
         "items": {
+          "grass_block": "500-3000",
           "dirt": "1000-3000",
-          "sand": "1000-3000",
+          "mud": "1000-3000",
+          "clay": "1000-3000",
           "gravel": "1000-3000",
-          "grass_block": "1000-3000",
-          "coarse_dirt": "1000-3000",
-          "podzol": "1000-3000",
+          "sand": "1000-3000",
+          "red_sand": "1000-3000",
+          "snow_block": "1000-3000",
+          "moss_block": "1000-3000",
           "crimson_nylium": "1000-3000",
-          "warped_nylium": "1000-3000"
+          "warped_nylium": "1000-3000",
+          "soul_sand": "1000-3000",
+          "soul_soil": "1000-3000"
+        },
+        "titles": [
+          "Dusty surroundings",
+          "Dirty work",
+          "Shovel knight",
+          "Grounded"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:emerald",
+            "amount": "100-1000"
+          }
+        ]
+      },
+      {
+        "items": {
+          "oak_log": "1000-3000",
+          "spruce_log": "1000-3000",
+          "birch_log": "1000-3000",
+          "jungle_log": "1000-3000",
+          "acacia_log": "1000-3000",
+          "dark_oak_log": "1000-3000",
+          "mangrove_log": "1000-3000",
+          "cherry_log": "1000-3000",
+          "crimson_stem": "1000-3000",
+          "warped_stem": "1000-3000",
+          "mushroom_stem": "1000-3000",
+          "brown_mushroom_block": "1000-3000",
+          "red_mushroom_block": "1000-3000",
+          "shroomlight": "1000-3000"
         },
         "titles": [
           "This is a more advanced mission",
@@ -50,6 +94,131 @@
           {
             "item": "minecraft:emerald",
             "amount": "100-1000"
+          }
+        ]
+      },
+      {
+        "items": {
+          "dandelion": "1000-3000",
+          "poppy": "1000-3000",
+          "blue_orchid": "1000-3000",
+          "allium": "1000-3000",
+          "azure_bluet": "1000-3000",
+          "red_tulip": "1000-3000",
+          "orange_tulip": "1000-3000",
+          "white_tulip": "1000-3000",
+          "pink_tulip": "1000-3000",
+          "oxeye_daisy": "1000-3000",
+          "cornflower": "1000-3000",
+          "lily_of_the_valley": "1000-3000",
+          "pink_petals": "1000-3000",
+          "sugar_cane": "1000-3000",
+          "cactus": "1000-3000",
+          "vine": "1000-3000",
+          "tall_grass": "1000-3000",
+          "large_fern": "1000-3000",
+          "sunflower": "1000-3000",
+          "lilac": "1000-3000",
+          "rose_bush": "1000-3000",
+          "peony": "1000-3000",
+          "glow_lichen": "1000-3000",
+          "seagrass": "1000-3000"
+        },
+        "titles": [
+          "Botanical expedition",
+          "Flower power",
+          "Nature's haircut",
+          "Decoration harvesting",
+          "Green wanderer"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:emerald",
+            "amount": "100-1000"
+          }
+        ]
+      }
+    ]
+  },
+  "eat": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "glow_berries": "500-2000",
+          "sweet_berries": "500-2000",
+          "apple": "500-2000",
+          "melon_slice": "500-2000",
+          "carrot": "500-2000",
+          "golden_carrot": "500-2000",
+          "baked_potato": "500-2000",
+          "beetroot": "500-2000",
+          "dried_kelp": "500-2000",
+          "cooked_beef": "500-2000",
+          "cooked_porkchop": "500-2000",
+          "cooked_mutton": "500-2000",
+          "cooked_chicken": "500-2000",
+          "cooked_cod": "500-2000",
+          "cooked_salmon": "500-2000",
+          "bread": "500-2000",
+          "cookie": "500-2000",
+          "pumpkin_pie": "500-2000",
+          "mushroom_stew": "500-2000",
+          "beetroot_soup": "500-2000",
+          "create:sweet_roll": "500-2000",
+          "create:chocolate_glazed_berries": "500-2000",
+          "create:honeyed_apple": "500-2000"
+        },
+        "titles": [
+          "Daily charge",
+          "Food for thought",
+          "Munchies",
+          "Mr. Feast",
+          "Flavorless pixels",
+          "EAT UP",
+          "Nom nom nom",
+          "Forced meal"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "honey_bottle": "500-2000",
+          "milk_bucket": "500-2000",
+          "create:builders_tea": "500-2000"
+        },
+        "titles": [
+          "Refreshing beverages",
+          "Drink up",
+          "Thirsty?",
+          "Desired hydration",
+          "Chugging pixels"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "cake": "500-2000"
+        },
+        "titles": [
+          "Wilderness eating",
+          "Celebration",
+          "Munchin' barehanded"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
           }
         ]
       }
