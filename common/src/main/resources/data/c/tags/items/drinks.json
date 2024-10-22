@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "minecraft:honey_bottle",
-    "minecraft:milk_bucket",
-    "create:builders_tea"
-  ]
-}

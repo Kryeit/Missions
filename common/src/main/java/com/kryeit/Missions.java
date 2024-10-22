@@ -65,7 +65,6 @@ public class Missions {
         ModBlockEntities.register();
         ModCreativeTabs.register();
         ModSounds.register();
-        ModTags.register();
         ModEntityTypes.register();
 
         useBaseTab();
