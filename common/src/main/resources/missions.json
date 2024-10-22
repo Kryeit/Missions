@@ -223,5 +223,173 @@
         ]
       }
     ]
+  },
+  "craft": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "create:shaft": "500-2000",
+          "create:cogwheel": "500-2000",
+          "create:large_cogwheel": "500-2000",
+          "create:gearbox": "500-2000",
+          "create:clutch": "500-2000",
+          "create:gearshift": "500-2000",
+          "create:encased_chain_drive": "500-2000",
+          "create:adjustable_chain_gearshift": "500-2000",
+          "create:belt_connector": "500-2000",
+          "create:water_wheel": "500-2000",
+          "create:large_water_wheel": "500-2000",
+          "create:encased_fan": "500-2000",
+          "create:crushing_wheel": "500-2000",
+          "create:mechanical_press": "500-2000",
+          "create:mechanical_mixer": "500-2000",
+          "create:basin": "500-2000",
+          "create:empty_blaze_burner": "500-2000",
+          "create:depot": "500-2000",
+          "create:weighted_ejector": "500-2000",
+          "create:chute": "500-2000",
+          "create:smart_chute": "500-2000",
+          "create:windmill_bearing": "500-2000",
+          "create:mechanical_bearing": "500-2000",
+          "create:rope_pulley": "500-2000",
+          "create:elevator_pulley": "500-2000",
+          "create:cart_assembler": "500-2000",
+          "create:linear_chassis": "500-2000",
+          "create:secondary_linear_chassis": "500-2000",
+          "create:radial_chassis": "500-2000",
+          "create:mechanical_drill": "500-2000",
+          "create:mechanical_saw": "500-2000",
+          "create:deployer": "500-2000",
+          "create:redstone_contact": "500-2000",
+          "create:mechanical_harvester": "500-2000",
+          "create:white_sail": "500-2000",
+          "create:mechanical_crafter": "500-2000",
+          "create:rotation_speed_controller": "500-2000",
+          "create:mechanical_arm": "500-2000",
+          "create:contraption_controls": "500-2000",
+          "create:item_vault": "500-2000",
+          "create:andesite_funnel": "500-2000",
+          "create:brass_funnel": "500-2000",
+          "create:andesite_tunnel": "500-2000",
+          "create:brass_tunnel": "500-2000",
+          "create:rose_quartz": "500-2000",
+          "create:andesite_alloy": "500-2000",
+          "create:filter": "500-2000",
+          "create:attribute_filter": "500-2000"
+        },
+        "titles": [
+          "Kinetic requirements",
+          "Creating with Create",
+          "Rotatory religion"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "create:schematicannon": "500-2000",
+          "create:schematic_table": "500-2000",
+          "create:schematic_and_quill": "500-2000",
+          "create:empty_schematic": "500-2000"
+        },
+        "titles": [
+          "Blueprint ghosts",
+          "Your own schema",
+          "Schematics for dummies"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "create:fluid_pipe": "500-2000",
+          "create:mechanical_pump": "500-2000",
+          "create:fluid_tank": "500-2000",
+          "create:hose_pulley": "500-2000",
+          "create:item_drain": "500-2000",
+          "create:spout": "500-2000",
+          "create:steam_whistle": "500-2000"
+        },
+        "titles": [
+          "Liquid bender",
+          "No pressure",
+          "Crafting with flow"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "create:schedule": "500-2000",
+          "create:track_station": "500-2000",
+          "create:track_signal": "500-2000",
+          "create:track_observer": "500-2000",
+          "create:controls": "500-2000"
+        },
+        "titles": [
+          "Training preparations",
+          "The way of the rail",
+          "Crafting training"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "create:super_glue": "500-2000",
+          "create:goggles": "500-2000",
+          "create:wrench": "500-2000",
+          "create:extendo_grip": "500-2000",
+          "create:potato_cannon": "500-2000",
+          "create:wand_of_symmetry": "500-2000",
+          "create:linked_controller": "500-2000"
+        },
+        "titles": [
+          "For your own good",
+          "A must have"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "shulker_box": "500-2000",
+          "end_crystal": "500-2000",
+          "beacon": "500-2000",
+          "ender_chest": "500-2000"
+        },
+        "titles": [
+          "End game crafting",
+          "Pro crafting"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
   }
 }
