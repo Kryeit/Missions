@@ -482,8 +482,7 @@
           "wither_skeleton": "500-2000",
           "zoglin": "500-2000",
           "zombified_piglin": "500-2000"
-        }
-      ,
+        },
         "titles": [
           "Nether haunting"
         ],
@@ -762,6 +761,213 @@
         },
         "titles": [
           "Long walk"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "train-driver": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:distance": "3500-7000"
+        },
+        "titles": [
+          "Small train drive"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:distance": "8500-11000"
+        },
+        "titles": [
+          "Medium train drive"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:distance": "12500-18000"
+        },
+        "titles": [
+          "Long train drive"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "train-passenger": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:distance": "5500-9000"
+        },
+        "titles": [
+          "Small train passenger"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:distance": "11500-16000"
+        },
+        "titles": [
+          "Medium train passenger"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:distance": "17500-21000"
+        },
+        "titles": [
+          "Long train passenger"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "train-driver-passenger": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:distance": "2500-5000"
+        },
+        "titles": [
+          "Small train driver passenger"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:distance": "6500-9000"
+        },
+        "titles": [
+          "Medium train drive passenger"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:distance": "10500-12000"
+        },
+        "titles": [
+          "Long train driver passenger"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "relocate": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:distance": "100-500"
+        },
+        "titles": [
+          "Train relocate"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "belt-walk": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:distance": "2500-5000"
+        },
+        "titles": [
+          "Small belt walk"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:distance": "6500-9000"
+        },
+        "titles": [
+          "Medium belt walk"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:distance": "10500-12000"
+        },
+        "titles": [
+          "Long belt walk"
         ],
         "rewards": [
           {
