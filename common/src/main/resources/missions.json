@@ -481,7 +481,7 @@
           "piglin": "500-2000",
           "wither_skeleton": "500-2000",
           "zoglin": "500-2000",
-          "zombified_piglin": "500-2000",
+          "zombified_piglin": "500-2000"
         }
       ,
         "titles": [
@@ -582,6 +582,194 @@
         ]
       }
 
+    ]
+  },
+  "ride": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:statistic": "500-2000"
+        },
+        "titles": [
+          "Small ride"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "1500-5000"
+        },
+        "titles": [
+          "Medium ride"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "5500-12000"
+        },
+        "titles": [
+          "Long ride"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "sail": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:statistic": "1500-4000"
+        },
+        "titles": [
+          "Small sail"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "3500-7000"
+        },
+        "titles": [
+          "Medium sail"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "5500-9000"
+        },
+        "titles": [
+          "Long sail"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "fly": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:statistic": "5500-12000"
+        },
+        "titles": [
+          "Small fly"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "11500-25000"
+        },
+        "titles": [
+          "Medium fly"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "25500-42000"
+        },
+        "titles": [
+          "Long fly"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "walk": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:statistic": "2500-5000"
+        },
+        "titles": [
+          "Small walk"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "6500-10000"
+        },
+        "titles": [
+          "Medium walk"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "10500-16000"
+        },
+        "titles": [
+          "Long walk"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
     ]
   }
 }
