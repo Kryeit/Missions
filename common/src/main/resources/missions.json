@@ -87,8 +87,9 @@
           "shroomlight": "1000-3000"
         },
         "titles": [
-          "This is a more advanced mission",
-          "This is a title"
+          "Punching wood",
+          "Returning to roots",
+          "Solid knuckles"
         ],
         "rewards": [
           {
@@ -382,6 +383,57 @@
         "titles": [
           "End game crafting",
           "Pro crafting"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "compact": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "nether_bricks": "1000-3000",
+          "bamboo_block": "1000-3000",
+          "melon": "1000-3000",
+          "honey_block": "1000-3000",
+          "hay_block": "1000-3000",
+          "snow_block": "1000-3000",
+          "clay": "1000-3000",
+          "dried_kelp_block": "1000-3000",
+          "white_wool": "1000-3000",
+          "sandstone": "1000-3000"
+        },
+        "titles": [
+          "Resource compression",
+          "Gatherer",
+          "Clean storage"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "gold_ingot": "1000-3000",
+          "gold_block": "1000-3000",
+          "iron_ingot": "1000-3000",
+          "iron_block": "1000-3000",
+          "slime_block": "1000-3000",
+          "redstone_block": "1000-3000"
+        },
+        "titles": [
+          "Pressured goods",
+          "No pressure",
+          "Denser valuables"
         ],
         "rewards": [
           {

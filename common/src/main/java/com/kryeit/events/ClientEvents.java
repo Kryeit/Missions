@@ -5,12 +5,8 @@ import com.kryeit.client.MissionsMenuEventsHandler;
 import com.kryeit.registry.ModKeys;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.ApiStatus;
 
 public class ClientEvents {
-
-    @ApiStatus.Internal
-    public static boolean previousDevCapeSetting = false;
 
     @MultiLoaderEvent
     public static void onClientTickStart(Minecraft mc) {
