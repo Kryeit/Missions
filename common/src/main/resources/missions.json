@@ -443,5 +443,145 @@
         ]
       }
     ]
+  },
+  "kill": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "creeper": "500-2000",
+          "drowned": "500-2000",
+          "guardian": "500-2000",
+          "husk": "500-2000",
+          "phantom": "500-2000",
+          "silverfish": "500-2000",
+          "skeleton": "500-2000",
+          "slime": "500-2000",
+          "spider": "500-2000",
+          "stray": "500-2000",
+          "witch": "500-2000",
+          "zombie": "500-2000"
+        },
+        "titles": [
+          "Basic extermination"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "blaze": "500-2000",
+          "ghast": "500-2000",
+          "hoglin": "500-2000",
+          "magma_cube": "500-2000",
+          "piglin": "500-2000",
+          "wither_skeleton": "500-2000",
+          "zoglin": "500-2000",
+          "zombified_piglin": "500-2000",
+        }
+      ,
+        "titles": [
+          "Nether haunting"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "endermite": "500-2000",
+          "enderman": "500-2000",
+          "shulker": "500-2000"
+        },
+        "titles": [
+          "End haunting"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "wither": "500-2000",
+          "ender_dragon": "500-2000"
+        },
+        "titles": [
+          "Boss battle"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "pillager": "500-2000",
+          "ravager": "500-2000",
+          "vex": "500-2000",
+          "evoker": "500-2000",
+          "vindicator": "500-2000"
+        },
+        "titles": [
+          "Raiding party"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "horse": "500-2000",
+          "donkey": "500-2000",
+          "mule": "500-2000",
+          "strider": "500-2000",
+          "llama": "500-2000",
+          "camel": "500-2000"
+        },
+        "titles": [
+          "Killing a friend",
+          "Non-sense murdering"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "cow": "500-2000",
+          "sheep": "500-2000",
+          "pig": "500-2000",
+          "chicken": "500-2000",
+          "bee": "500-2000"
+        },
+        "titles": [
+          "Farm animals"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+
+    ]
   }
 }
