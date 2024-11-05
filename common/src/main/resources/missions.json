@@ -364,7 +364,8 @@
         },
         "titles": [
           "For your own good",
-          "A must have"
+          "A must have",
+          "Metal gear"
         ],
         "rewards": [
           {
@@ -382,7 +383,7 @@
         },
         "titles": [
           "End game crafting",
-          "Pro crafting"
+          "Late game"
         ],
         "rewards": [
           {
@@ -433,7 +434,8 @@
         "titles": [
           "Pressured goods",
           "No pressure",
-          "Denser valuables"
+          "Denser valuables",
+          "No downsides, just downsizing"
         ],
         "rewards": [
           {
@@ -463,7 +465,9 @@
           "zombie": "500-2000"
         },
         "titles": [
-          "Basic extermination"
+          "Basic extermination",
+          "Night wandering",
+          "Monster hunter"
         ],
         "rewards": [
           {
@@ -484,7 +488,9 @@
           "zombified_piglin": "500-2000"
         },
         "titles": [
-          "Nether haunting"
+          "Hot murdering",
+          "Boiling sweep",
+          "Nether hunter"
         ],
         "rewards": [
           {
@@ -500,7 +506,9 @@
           "shulker": "500-2000"
         },
         "titles": [
-          "End haunting"
+          "Void rampage",
+          "Endless killing",
+          "Darkness reconquer"
         ],
         "rewards": [
           {
@@ -515,7 +523,8 @@
           "ender_dragon": "500-2000"
         },
         "titles": [
-          "Boss battle"
+          "Boss battle",
+          "Best way to die"
         ],
         "rewards": [
           {
@@ -533,7 +542,10 @@
           "vindicator": "500-2000"
         },
         "titles": [
-          "Raiding party"
+          "Raiding party",
+          "Protecting your legacy",
+          "Age of empires",
+          "City unbuilder simulator"
         ],
         "rewards": [
           {
@@ -553,7 +565,8 @@
         },
         "titles": [
           "Killing a friend",
-          "Non-sense murdering"
+          "Non-sense murdering",
+          "Animal cruelty"
         ],
         "rewards": [
           {
@@ -571,7 +584,9 @@
           "bee": "500-2000"
         },
         "titles": [
-          "Farm animals"
+          "Farm animals",
+          "Decreasing harvest",
+          "Population density"
         ],
         "rewards": [
           {
@@ -580,7 +595,6 @@
           }
         ]
       }
-
     ]
   },
   "ride": {
@@ -591,7 +605,10 @@
           "missions:statistic": "500-2000"
         },
         "titles": [
-          "Small ride"
+          "Short ride",
+          "Preventive gallop",
+          "Maintenance run",
+          "Brief trot"
         ],
         "rewards": [
           {
@@ -602,10 +619,13 @@
       },
       {
         "items": {
-          "missions:statistic": "1500-5000"
+          "missions:statistic": "2500-5000"
         },
         "titles": [
-          "Medium ride"
+          "Moderated hesitation",
+          "Daily ride",
+          "Ride along",
+          "Rodeo"
         ],
         "rewards": [
           {
@@ -619,7 +639,11 @@
           "missions:statistic": "5500-12000"
         },
         "titles": [
-          "Long ride"
+          "Endurance testing",
+          "Bothering your buddy",
+          "MOT inspection",
+          "Finding the limits",
+          "Brutal ride"
         ],
         "rewards": [
           {
@@ -638,7 +662,9 @@
           "missions:statistic": "1500-4000"
         },
         "titles": [
-          "Small sail"
+          "Sunday sailing",
+          "Short voyage",
+          "They sail me rolling"
         ],
         "rewards": [
           {
@@ -652,7 +678,10 @@
           "missions:statistic": "3500-7000"
         },
         "titles": [
-          "Medium sail"
+          "Pirating minecraft",
+          "Blackbeard",
+          "Brittany Ferries",
+          "Sailor moon"
         ],
         "rewards": [
           {
@@ -666,7 +695,8 @@
           "missions:statistic": "5500-9000"
         },
         "titles": [
-          "Long sail"
+          "Finding nemo",
+          "One piece"
         ],
         "rewards": [
           {
@@ -685,7 +715,9 @@
           "missions:statistic": "5500-12000"
         },
         "titles": [
-          "Small fly"
+          "Abusing brokenness",
+          "Base takeoff",
+          "Moving around"
         ],
         "rewards": [
           {
@@ -699,7 +731,9 @@
           "missions:statistic": "11500-25000"
         },
         "titles": [
-          "Medium fly"
+          "Rocket league",
+          "Sporadic visiting",
+          "Flying free"
         ],
         "rewards": [
           {
@@ -713,7 +747,9 @@
           "missions:statistic": "25500-42000"
         },
         "titles": [
-          "Long fly"
+          "Rocket minmaxing",
+          "Gunpowder abuse",
+          "Taylor swift"
         ],
         "rewards": [
           {
@@ -732,7 +768,9 @@
           "missions:statistic": "2500-5000"
         },
         "titles": [
-          "Small walk"
+          "Wandering thoughts",
+          "Stretching legs",
+          "Healthy endeavor"
         ],
         "rewards": [
           {
@@ -746,7 +784,10 @@
           "missions:statistic": "6500-10000"
         },
         "titles": [
-          "Medium walk"
+          "Warden bothering",
+          "Take a hike",
+          "Pigstep",
+          "Big stepper"
         ],
         "rewards": [
           {
@@ -760,7 +801,9 @@
           "missions:statistic": "10500-16000"
         },
         "titles": [
-          "Long walk"
+          "Farlands enjoyer",
+          "Forest Gump",
+          "Herobrine stalker"
         ],
         "rewards": [
           {
@@ -779,7 +822,8 @@
           "missions:distance": "3500-7000"
         },
         "titles": [
-          "Small train drive"
+          "Training",
+          "Unneeded license"
         ],
         "rewards": [
           {
@@ -793,7 +837,9 @@
           "missions:distance": "8500-11000"
         },
         "titles": [
-          "Medium train drive"
+          "Mob tackling",
+          "Stay on track",
+          "Railway runner"
         ],
         "rewards": [
           {
@@ -807,7 +853,9 @@
           "missions:distance": "12500-18000"
         },
         "titles": [
-          "Long train drive"
+          "Prohibited automation",
+          "Signal skipper",
+          "Thomas the train"
         ],
         "rewards": [
           {
@@ -826,7 +874,8 @@
           "missions:distance": "5500-9000"
         },
         "titles": [
-          "Small train passenger"
+          "Passive travelling",
+          "Enslaved blaze"
         ],
         "rewards": [
           {
@@ -840,7 +889,8 @@
           "missions:distance": "11500-16000"
         },
         "titles": [
-          "Medium train passenger"
+          "Don't miss the stop",
+          "Undisturbed driver"
         ],
         "rewards": [
           {
@@ -854,7 +904,10 @@
           "missions:distance": "17500-21000"
         },
         "titles": [
-          "Long train passenger"
+          "Admiring the world",
+          "Is there service?",
+          "I hope the train has wifi",
+          "Overnight interrail"
         ],
         "rewards": [
           {
@@ -873,7 +926,10 @@
           "missions:distance": "2500-5000"
         },
         "titles": [
-          "Small train driver passenger"
+          "Unpaid service",
+          "Free favors",
+          "Getting on time",
+          "Brief journey"
         ],
         "rewards": [
           {
@@ -887,7 +943,9 @@
           "missions:distance": "6500-9000"
         },
         "titles": [
-          "Medium train drive passenger"
+          "All aboard",
+          "Strangers on a train",
+          "Runaway train"
         ],
         "rewards": [
           {
@@ -901,7 +959,10 @@
           "missions:distance": "10500-12000"
         },
         "titles": [
-          "Long train driver passenger"
+          "All tracks lead to Rome",
+          "Bullet train",
+          "Long departure",
+          "The polar express"
         ],
         "rewards": [
           {
@@ -913,14 +974,15 @@
     ]
   },
   "relocate": {
-    "weight": 1,
+    "weight": 0.5,
     "missions": [
       {
         "items": {
           "missions:distance": "100-500"
         },
         "titles": [
-          "Train relocate"
+          "Manual locomotion",
+          "Strongest person alive"
         ],
         "rewards": [
           {
@@ -936,10 +998,11 @@
     "missions": [
       {
         "items": {
-          "missions:distance": "2500-5000"
+          "missions:distance": "200-500"
         },
         "titles": [
-          "Small belt walk"
+          "Mall escalators",
+          "Automatic walking"
         ],
         "rewards": [
           {
@@ -950,10 +1013,11 @@
       },
       {
         "items": {
-          "missions:distance": "6500-9000"
+          "missions:distance": "800-1200"
         },
         "titles": [
-          "Medium belt walk"
+          "Airport escalators",
+          "Luggage impersonation"
         ],
         "rewards": [
           {
@@ -964,10 +1028,11 @@
       },
       {
         "items": {
-          "missions:distance": "10500-12000"
+          "missions:distance": "1500-2500"
         },
         "titles": [
-          "Long belt walk"
+          "Industrial conveyors",
+          "Are you the product?"
         ],
         "rewards": [
           {
