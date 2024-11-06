@@ -755,6 +755,43 @@
       }
     ]
   },
+  "dive": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "water": "1000-3000"
+        },
+        "titles": [
+          "Your last breath",
+          "Blue planet",
+          "Subnautica"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "lava": "1000-3000"
+        },
+        "titles": [
+          "Temperature regulation",
+          "Strider's CPR",
+          "Floor is lava"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
   "ride": {
     "weight": 1,
     "missions": [
