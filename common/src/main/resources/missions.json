@@ -446,6 +446,100 @@
       }
     ]
   },
+  "feed": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "wheat": "1000-3000",
+          "carrot": "1000-3000",
+          "potato": "1000-3000",
+          "beetroot": "1000-3000",
+          "seeds": "1000-3000"
+        },
+        "titles": [
+          "Feeding the usuals",
+          "Sturdy economy",
+          "Farm life",
+          "Starter livestock"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "hay_bale": "1000-3000",
+          "golden_carrot": "1000-3000",
+          "golden_apple": "1000-3000",
+          "sugar": "1000-3000"
+        },
+        "titles": [
+          "Feeding your carry",
+          "Equidae diet",
+          "Expensive taste"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "cooked_porkchop": "1000-3000",
+          "cooked_beef": "1000-3000",
+          "cooked_mutton": "1000-3000",
+          "cooked_chicken": "1000-3000",
+          "rottent_flesh": "1000-3000",
+          "cod": "1000-3000",
+          "salmon": "1000-3000"
+        },
+        "titles": [
+          "Pet caring",
+          "Carnivore diet",
+          "Petty pets",
+          "Food for thought"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "seagrass": "1000-3000",
+          "melon_seeds": "1000-3000",
+          "pumpkin_seeds": "1000-3000",
+          "beetroot_seeds": "1000-3000",
+          "warped_fungus": "1000-3000",
+          "tropical_fish_bucket": "1000-3000",
+          "bamboo": "1000-3000",
+          "sweet_berries": "1000-3000",
+          "glow_berries": "1000-3000",
+          "slime_ball": "1000-3000",
+          "cactus": "1000-3000"
+        },
+        "titles": [
+          "Explorer needs",
+          "Weird living things",
+          "Biologist"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
   "fish": {
     "weight": 1,
     "missions": [
