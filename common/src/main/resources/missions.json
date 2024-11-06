@@ -136,6 +136,55 @@
             "amount": "100-1000"
           }
         ]
+      },
+      {
+        "items": {
+          "coal_ore": "500-3000",
+          "iron_ore": "1000-3000",
+          "copper_ore": "1000-3000",
+          "gold_ore": "1000-3000",
+          "redstone_ore": "1000-3000",
+          "emerald_ore": "1000-3000",
+          "lapis_ore": "1000-3000",
+          "diamond_ore": "1000-3000",
+          "create:zinc_ore": "1000-3000"
+        },
+        "titles": [
+          "Peaceful mining",
+          "Going through stone",
+          "Stone Moses",
+          "Lichen whisperer"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:emerald",
+            "amount": "100-1000"
+          }
+        ]
+      },
+      {
+        "items": {
+          "deepslate_coal_ore": "500-3000",
+          "deepslate_iron_ore": "1000-3000",
+          "deepslate_copper_ore": "1000-3000",
+          "deepslate_gold_ore": "1000-3000",
+          "deepslate_redstone_ore": "1000-3000",
+          "deepslate_emerald_ore": "1000-3000",
+          "deepslate_lapis_ore": "1000-3000",
+          "deepslate_diamond_ore": "1000-3000",
+          "create:deepslate_zinc_ore": "1000-3000"
+        },
+        "titles": [
+          "Tough surroundings",
+          "Warden tickling",
+          "Deepest depths"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:emerald",
+            "amount": "100-1000"
+          }
+        ]
       }
     ]
   },
@@ -188,6 +237,55 @@
           "Shaping surroundings",
           "Fast drilling",
           "Noisy pleasure"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:emerald",
+            "amount": "100-1000"
+          }
+        ]
+      },
+      {
+        "items": {
+          "coal_ore": "500-3000",
+          "iron_ore": "1000-3000",
+          "copper_ore": "1000-3000",
+          "gold_ore": "1000-3000",
+          "redstone_ore": "1000-3000",
+          "emerald_ore": "1000-3000",
+          "lapis_ore": "1000-3000",
+          "diamond_ore": "1000-3000",
+          "create:zinc_ore": "1000-3000"
+        },
+        "titles": [
+          "Peaceful drilling",
+          "Going through stone",
+          "Plundering automation",
+          "Wiping mineshafts"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:emerald",
+            "amount": "100-1000"
+          }
+        ]
+      },
+      {
+        "items": {
+          "deepslate_coal_ore": "500-3000",
+          "deepslate_iron_ore": "1000-3000",
+          "deepslate_copper_ore": "1000-3000",
+          "deepslate_gold_ore": "1000-3000",
+          "deepslate_redstone_ore": "1000-3000",
+          "deepslate_emerald_ore": "1000-3000",
+          "deepslate_lapis_ore": "1000-3000",
+          "deepslate_diamond_ore": "1000-3000",
+          "create:deepslate_zinc_ore": "1000-3000"
+        },
+        "titles": [
+          "Tough surroundings",
+          "Warden torturing",
+          "Deepest depths"
         ],
         "rewards": [
           {
@@ -555,7 +653,7 @@
         },
         "titles": [
           "Preparations",
-          "Forecasting needings"
+          "Forecasting needs"
         ],
         "rewards": [
           {
