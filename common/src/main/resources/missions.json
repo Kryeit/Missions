@@ -591,6 +591,60 @@
       }
     ]
   },
+  "mix": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "create:brass_ingot": "1000-3000",
+          "create:andesite_alloy": "1000-3000"
+        },
+        "titles": [
+          "Tinkering alloys",
+          "Metallic mix",
+          "Alloying"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "create:dough": "1000-3000"
+        },
+        "titles": [
+          "Beaker",
+          "Breaking bread",
+          "Dough times"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "mud": "1000-3000",
+          "netherrack": "1000-3000"
+        },
+        "titles": [
+          "Resource medley",
+          "Just in case"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
   "compact": {
     "weight": 1,
     "missions": [

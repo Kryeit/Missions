@@ -9,7 +9,11 @@
 - Only show "Click to reroll" if mission not completed
 - Quilt support
 - Fix stats resetting upon server restart
-- Added new config formar, version 2. This makes missions to have different tiers or types inside the same mission type.
+- Added new config format, version 2. This makes missions to have different tiers or types inside the same mission type.
+- Removed tag support and the new added tags by this mod, there's nothing regarding tags in the mod
+- Updated logo
+- Fix keybind not working in Forge
+- If a range is same upper as lower (e.g. 24-24) then it will render as "24" in the missions menu
 
 # 0.3.5
 - Fix Stats (by TurnDev)
