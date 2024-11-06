@@ -446,6 +446,72 @@
       }
     ]
   },
+  "fish": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "cod": "1000-3000",
+          "salmon": "1000-3000",
+          "tropical_fish": "1000-3000",
+          "pufferfish": "1000-3000"
+        },
+        "titles": [
+          "Normie fishing",
+          "Forced oxygenation"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "lily_pad": "1000-3000",
+          "leather_boots": "1000-3000",
+          "leather": "1000-3000",
+          "bone": "1000-3000",
+          "string": "1000-3000",
+          "bowl": "1000-3000",
+          "stick": "1000-3000",
+          "ink_sac": "1000-3000",
+          "tripwire_hook": "1000-3000",
+          "rotten_flesh": "1000-3000"
+        },
+        "titles": [
+          "Desired misfortune",
+          "Unwanted catch",
+          "Ocean cleanup"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "name_tag": "1000-3000",
+          "saddle": "1000-3000",
+          "nautilus_shell": "1000-3000"
+        },
+        "titles": [
+          "Rate limited treasures",
+          "Inedible fish",
+          "Open seas"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
   "kill": {
     "weight": 1,
     "missions": [
