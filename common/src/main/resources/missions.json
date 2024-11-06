@@ -467,7 +467,8 @@
         "titles": [
           "Basic extermination",
           "Night wandering",
-          "Monster hunter"
+          "Monster hunter",
+          "Slay"
         ],
         "rewards": [
           {
@@ -814,6 +815,60 @@
       }
     ]
   },
+  "swim": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:statistic": "500-1500"
+        },
+        "titles": [
+          "Waterlogged shoes",
+          "In and out",
+          "Salmon's nightmare"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "2500-3500"
+        },
+        "titles": [
+          "Drowned slayer",
+          "Encountering guardians",
+          "Befriending dolphins"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "missions:statistic": "4000-5000"
+        },
+        "titles": [
+          "Deepest dive",
+          "Trident seeker",
+          "Aquaman",
+          "Strider antithesis"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
   "train-driver": {
     "weight": 1,
     "missions": [
@@ -981,8 +1036,9 @@
           "missions:distance": "100-500"
         },
         "titles": [
-          "Manual locomotion",
-          "Strongest person alive"
+          "Manual steering",
+          "Strongest person alive",
+          "Avoiding derailment"
         ],
         "rewards": [
           {
