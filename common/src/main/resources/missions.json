@@ -488,6 +488,47 @@
       }
     ]
   },
+  "press": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "paper": "1000-3000",
+          "create:track": "1000-3000"
+        },
+        "titles": [
+          "Preparations",
+          "Forecasting needings"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "create:iron_sheet": "1000-3000",
+          "create:copper_sheet": "1000-3000",
+          "create:brass_sheet": "1000-3000",
+          "create:golden_sheet": "1000-3000"
+        },
+        "titles": [
+          "Pressing metals",
+          "Denser metals",
+          "Forging the future",
+          "Bonkness"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
   "feed": {
     "weight": 1,
     "missions": [
