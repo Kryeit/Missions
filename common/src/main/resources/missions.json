@@ -11,14 +11,12 @@
           "andesite": "500-3000",
           "deepslate": "500-3000",
           "sandstone": "500-3000",
-          "red_sandstone": "500-3000",
           "netherrack": "500-3000",
           "basalt": "500-3000",
           "blackstone": "500-3000",
           "end_stone": "500-3000",
           "calcite": "500-3000",
           "tuff": "500-3000",
-          "dripstone_block": "500-3000",
           "create:asurine": "500-2000",
           "create:crimsite": "500-2000",
           "create:limestone": "500-2000",
@@ -131,6 +129,65 @@
           "Nature's haircut",
           "Decoration harvesting",
           "Green wanderer"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:emerald",
+            "amount": "100-1000"
+          }
+        ]
+      }
+    ]
+  },
+  "drill": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "stone": "500-3000",
+          "granite": "500-3000",
+          "diorite": "500-3000",
+          "andesite": "500-3000",
+          "deepslate": "500-3000",
+          "sandstone": "500-3000",
+          "netherrack": "500-3000",
+          "basalt": "500-3000",
+          "blackstone": "500-3000",
+          "end_stone": "500-3000",
+          "calcite": "500-3000",
+          "tuff": "500-3000",
+          "create:asurine": "500-2000",
+          "create:crimsite": "500-2000",
+          "create:limestone": "500-2000",
+          "create:ochrum": "500-2000",
+          "create:scoria": "500-2000",
+          "create:scorchia": "500-2000",
+          "create:veridium": "500-2000"
+        },
+        "titles": [
+          "Automating world destruction",
+          "Quarry freedom",
+          "Drilling strongholds"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "grass_block": "500-3000",
+          "dirt": "1000-3000",
+          "gravel": "1000-3000",
+          "sand": "1000-3000"
+        },
+        "titles": [
+          "Worst landscaping",
+          "Shaping surroundings",
+          "Fast drilling",
+          "Noisy pleasure"
         ],
         "rewards": [
           {
