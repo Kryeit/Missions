@@ -394,6 +394,48 @@
       }
     ]
   },
+  "harvester": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "wheat_seeds": "1000-3000",
+          "beetroot_seeds": "1000-3000",
+          "carrot": "1000-3000",
+          "potato": "1000-3000",
+          "sugar_cane": "1000-3000"
+        },
+        "titles": [
+          "Must have harvesting",
+          "Farm life",
+          "Starter automation"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "cocoa_beans": "1000-3000",
+          "sweet_berries": "1000-3000",
+          "glow_berries": "1000-3000"
+        },
+        "titles": [
+          "Awkward harvest",
+          "Automating the weird"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
   "compact": {
     "weight": 1,
     "missions": [
