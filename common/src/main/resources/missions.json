@@ -495,7 +495,7 @@
           "cooked_beef": "1000-3000",
           "cooked_mutton": "1000-3000",
           "cooked_chicken": "1000-3000",
-          "rottent_flesh": "1000-3000",
+          "rotten_flesh": "1000-3000",
           "cod": "1000-3000",
           "salmon": "1000-3000"
         },
@@ -515,9 +515,6 @@
       {
         "items": {
           "seagrass": "1000-3000",
-          "melon_seeds": "1000-3000",
-          "pumpkin_seeds": "1000-3000",
-          "beetroot_seeds": "1000-3000",
           "warped_fungus": "1000-3000",
           "tropical_fish_bucket": "1000-3000",
           "bamboo": "1000-3000",
