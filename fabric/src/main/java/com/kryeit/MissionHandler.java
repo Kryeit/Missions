@@ -11,7 +11,9 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
+@SuppressWarnings("deprecation")
 public class MissionHandler {
+
     public static void registerEvents() {
         PlayerBlockBreakEvents.AFTER.register(new BreakHandler());
         BlockEvents.AFTER_PLACE.register(new PlaceHandler());

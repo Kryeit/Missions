@@ -489,7 +489,7 @@
     ]
   },
   "press": {
-    "weight": 1,
+    "weight": 0.6,
     "missions": [
       {
         "items": {
@@ -519,6 +519,75 @@
           "Denser metals",
           "Forging the future",
           "Bonkness"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
+  "crush": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "create:crushed_raw_iron": "1000-3000",
+          "create:crushed_raw_gold": "1000-3000",
+          "create:crushed_raw_copper": "1000-3000",
+          "create:crushed_raw_zinc": "1000-3000",
+          "create:experience_nugget": "1000-3000"
+        },
+        "titles": [
+          "Mining rewards",
+          "Your real crush",
+          "Crushing it",
+          "Superlative milling",
+          "Ore obliteration"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "redstone": "1000-3000",
+          "lapis_lazuli": "1000-3000",
+          "quartz": "1000-3000",
+          "string": "1000-3000",
+          "create:cinder_flour": "1000-3000",
+          "create:powdered_obsidian": "1000-3000",
+          "glowstone_dust": "1000-3000",
+          "create:wheat_flour": "1000-3000"
+        },
+        "titles": [
+          "Crushing addict",
+          "Superlative milling",
+          "Crushing junk"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "gravel": "1000-3000",
+          "sand": "1000-3000",
+          "red_sand": "1000-3000",
+          "clay_ball": "1000-3000"
+        },
+        "titles": [
+          "Standard crushing",
+          "Crushing the basics",
+          "Superlative milling"
         ],
         "rewards": [
           {
