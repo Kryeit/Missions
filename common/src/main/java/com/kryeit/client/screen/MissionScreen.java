@@ -17,6 +17,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ServerboundClientCommandPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
@@ -39,6 +40,9 @@ public class MissionScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+
+        // Send server stats to client
+        Minecraft.getInstance().getConnection().send(new ServerboundClientCommandPacket(ServerboundClientCommandPacket.Action.REQUEST_STATS));
 
         ClientsideMissionPacketUtils.setMissionUpdateHandler(missionData -> data = missionData);
         ClientsideMissionPacketUtils.requestMissions();
