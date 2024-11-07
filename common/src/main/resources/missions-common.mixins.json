@@ -20,6 +20,7 @@
     "create.HarvesterMovementBehaviourMixin",
     "create.MechanicalCrafterBlockEntityMixin",
     "create.MechanicalPressBlockEntityMixin",
+    "create.TrackPlacementMixin",
     "create.TrainMixin",
     "create.TreeMixin",
     "events.CakeEatHandler",
