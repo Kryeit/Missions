@@ -1,5 +1,108 @@
 {
   "config-version": 2,
+  "place": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "create:track_signal": "1000-3000",
+          "create:track": "1000-3000"
+        },
+        "titles": [
+          "Staying on track",
+          "Unavoidable sunburn",
+          "Trainworks"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "create:shaft": "1000-3000",
+          "create:cogwheel": "1000-3000",
+          "create:large_cogwheel": "1000-3000",
+          "create:white_sail": "1000-3000",
+          "create:mechanical_drill": "1000-3000",
+          "create:piston_extension_pole": "1000-3000",
+          "create:display_board": "1000-3000",
+          "create:steam_whistle": "1000-3000"
+        },
+        "titles": [
+          "Base work",
+          "Contraption doodling",
+          "Infrastructure"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "ender_chest": "1000-3000",
+          "crafting_table": "1000-3000",
+          "anvil": "1000-3000",
+          "smithing_table": "1000-3000"
+        },
+        "titles": [
+          "Spreading utility",
+          "Essentials for everyone",
+          "Equipping the world"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "dandelion": "1000-3000",
+          "poppy": "1000-3000",
+          "blue_orchid": "1000-3000",
+          "allium": "1000-3000",
+          "azure_bluet": "1000-3000",
+          "red_tulip": "1000-3000",
+          "orange_tulip": "1000-3000",
+          "white_tulip": "1000-3000",
+          "pink_tulip": "1000-3000",
+          "oxeye_daisy": "1000-3000",
+          "cornflower": "1000-3000",
+          "lily_of_the_valley": "1000-3000",
+          "pink_petals": "1000-3000",
+          "sugar_cane": "1000-3000",
+          "cactus": "1000-3000",
+          "vine": "1000-3000",
+          "tall_grass": "1000-3000",
+          "large_fern": "1000-3000",
+          "sunflower": "1000-3000",
+          "lilac": "1000-3000",
+          "rose_bush": "1000-3000",
+          "peony": "1000-3000",
+          "glow_lichen": "1000-3000"
+        },
+        "titles": [
+          "Botanical enhancement",
+          "Nature restoration",
+          "Nature decor",
+          "Bee happy"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:emerald",
+            "amount": "100-1000"
+          }
+        ]
+      }
+    ]
+  },
   "break": {
     "weight": 1,
     "missions": [
