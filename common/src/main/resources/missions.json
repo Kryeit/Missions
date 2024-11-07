@@ -291,6 +291,74 @@
       }
     ]
   },
+  "saw": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "oak_log": "1000-3000",
+          "spruce_log": "1000-3000",
+          "birch_log": "1000-3000",
+          "jungle_log": "1000-3000",
+          "acacia_log": "1000-3000",
+          "dark_oak_log": "1000-3000",
+          "mangrove_log": "1000-3000",
+          "cherry_log": "1000-3000",
+          "crimson_stem": "1000-3000",
+          "warped_stem": "1000-3000"
+        },
+        "titles": [
+          "Automated lumberjack",
+          "Wooden extinction",
+          "Mechanical termite"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "oak_leaves": "1000-3000",
+          "spruce_leaves": "1000-3000",
+          "birch_leaves": "1000-3000",
+          "jungle_leaves": "1000-3000",
+          "acacia_leaves": "1000-3000",
+          "dark_oak_leaves": "1000-3000",
+          "mangrove_leaves": "1000-3000",
+          "cherry_leaves": "1000-3000"
+        },
+        "titles": [
+          "Leaf me alone",
+          "Saw that leaf fall"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "bamboo": "1000-3000",
+          "sugar_cane": "1000-3000"
+        },
+        "titles": [
+          "Avoiding flying machines",
+          "Excessive growth"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      }
+    ]
+  },
   "drill": {
     "weight": 1,
     "missions": [
@@ -661,7 +729,8 @@
           "beetroot_seeds": "1000-3000",
           "carrot": "1000-3000",
           "potato": "1000-3000",
-          "sugar_cane": "1000-3000"
+          "sugar_cane": "1000-3000",
+          "kelp": "1000-3000"
         },
         "titles": [
           "Must have harvesting",
