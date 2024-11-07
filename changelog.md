@@ -14,6 +14,8 @@
 - Updated logo
 - Fix keybind not working in Forge
 - If a range is same upper as lower (e.g. 24-24) then it will render as "24" in the missions menu
+- Added support for Track placement in Place missions. Supports SnR tracks, any type of track counts for create:tracks item
+- Added support for the ghost placement helper (cogs, shafts, sails, etc) in Place missions
 
 # 0.3.5
 - Fix Stats (by TurnDev)
