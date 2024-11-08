@@ -145,17 +145,14 @@ public class DataStorage implements AutoCloseable {
         return tag;
     }
 
-    public ConfigReader.MissionTypeConfig reassignActiveMission(Map<MissionType, ConfigReader.MissionTypeConfig> missions, UUID player, int index) {
+    public void reassignActiveMission(Map<MissionType, ConfigReader.MissionTypeConfig> missions, UUID player, int index) {
         ListTag list = getActiveMissionsTag(player);
-        String idToReassign = list.getCompound(index).getString("mission_id");
 
-        List<ConfigReader.MissionTypeConfig> assignedTypes = new ArrayList<>(missions.values());
-        assignedTypes.removeIf(m -> m.missionType().id().equals(idToReassign));
+        List<ConfigReader.MissionTypeConfig> assignableTypes = new ArrayList<>(missions.values());
 
-        ConfigReader.MissionTypeConfig missionTypeConfig = shuffleWeighted(assignedTypes, 1).get(0);
+        ConfigReader.MissionTypeConfig missionTypeConfig = shuffleWeighted(assignableTypes, 1).get(0);
         CompoundTag newTag = createActiveMissionTag(missionTypeConfig);
         list.set(index, newTag);
-        return missionTypeConfig;
     }
 
     public int getReassignmentsSinceLastReset(UUID player) {
