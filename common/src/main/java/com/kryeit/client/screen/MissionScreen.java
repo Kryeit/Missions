@@ -24,6 +24,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -118,9 +121,19 @@ public class MissionScreen extends Screen {
     }
 
     public static List<Component> getTooltip(ClientsideActiveMission mission) {
+
+        // mission.requiredAmount formatted so thousands are like 1,000
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        DecimalFormatSymbols symbols = ((DecimalFormat) numberFormat).getDecimalFormatSymbols();
+        symbols.setGroupingSeparator(',');
+        symbols.setDecimalSeparator('.');
+        ((DecimalFormat) numberFormat).setDecimalFormatSymbols(symbols);
+        String requiredAmount = numberFormat.format(mission.requiredAmount());
+
+
         Component progress = mission.isCompleted()
                 ? Components.translatable("missions.menu.main.tooltip.progress.completed")
-                : Components.translatable(mission.progress() + "/" + mission.requiredAmount());
+                : Components.translatable(mission.progress() + "/" + requiredAmount);
 
         List<Component> components = new ArrayList<>();
         components.add(Components.translatable("missions.menu.main.tooltip.details")
@@ -134,12 +147,12 @@ public class MissionScreen extends Screen {
             if (Objects.equals(mission.missionType(), "train-driver-passenger")) {
                 components.add(
                         Utils.getMissionMessage(mission,
-                                ChatFormatting.WHITE, mission.requiredAmount(), TrainDriverPassengerMission.passengersNeeded())
+                                ChatFormatting.WHITE, requiredAmount, TrainDriverPassengerMission.passengersNeeded())
                 );
             } else {
                 components.add(
                         Utils.getMissionMessage(mission,
-                                ChatFormatting.WHITE, mission.requiredAmount())
+                                ChatFormatting.WHITE, requiredAmount)
                 );
             }
 
@@ -147,17 +160,17 @@ public class MissionScreen extends Screen {
             // This cannot be backported, 1.20+ contains a spawn egg for every mob
             components.add(
                     Utils.getMissionMessage(mission,
-                            ChatFormatting.WHITE, mission.requiredAmount(), Utils.getEntityOfSpawnEggForTooltip(mission.itemRequired()))
+                            ChatFormatting.WHITE, requiredAmount, Utils.getEntityOfSpawnEggForTooltip(mission.itemRequired()))
             );
         } else if (mission.itemRequired().getItem() instanceof BucketItem) {
             components.add(
                     Utils.getMissionMessage(mission,
-                            ChatFormatting.WHITE, Utils.getFluidFromBucketForTooltip(mission.itemRequired()), mission.requiredAmount())
+                            ChatFormatting.WHITE, Utils.getFluidFromBucketForTooltip(mission.itemRequired()), requiredAmount)
             );
         } else {
             components.add(
                     Utils.getMissionMessage(mission,
-                            ChatFormatting.WHITE, mission.requiredAmount(), itemName)
+                            ChatFormatting.WHITE, requiredAmount, itemName)
             );
         }
 
