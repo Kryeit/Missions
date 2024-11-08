@@ -26,17 +26,15 @@ public class ConfigReader {
     public final int firstRerollCurrency;
     public final int freeRerolls;
     public final String commandUponMission;
-    public final int numberOfMissions;
     public final ReassignInterval reassignInterval;
 
-    private ConfigReader(Map<MissionType, MissionTypeConfig> missions, List<ItemStack> exchange, float exchangerDropRate, int firstRerollCurrency, int freeRerolls, String commandUponMission, int numberOfMissions, ReassignInterval reassignInterval) {
+    private ConfigReader(Map<MissionType, MissionTypeConfig> missions, List<ItemStack> exchange, float exchangerDropRate, int firstRerollCurrency, int freeRerolls, String commandUponMission, ReassignInterval reassignInterval) {
         this.missions = missions;
         this.exchange = exchange;
         this.exchangerDropRate = exchangerDropRate;
         this.firstRerollCurrency = firstRerollCurrency;
         this.freeRerolls = freeRerolls;
         this.commandUponMission = commandUponMission;
-        this.numberOfMissions = numberOfMissions;
         this.reassignInterval = reassignInterval;
     }
 
@@ -78,10 +76,9 @@ public class ConfigReader {
         int firstRerollCurrency = Integer.parseInt(configObject.getString("first-reroll-currency"));
         int freeRerolls = Integer.parseInt(configObject.getString("free-rerolls"));
         String commandUponMission = configObject.getString("command-upon-mission");
-        int numberOfMissions = configObject.optInt("number-of-missions").orElse(10); // TODO implement
         String reassignmentInterval = configObject.optString("reassignment-interval (DAILY or WEEKLY)").orElse("WEEKLY");
 
-        return new ConfigReader(missionConfig, items, exchangerDropRate, firstRerollCurrency, freeRerolls, commandUponMission, numberOfMissions, ReassignInterval.valueOf(reassignmentInterval));
+        return new ConfigReader(missionConfig, items, exchangerDropRate, firstRerollCurrency, freeRerolls, commandUponMission, ReassignInterval.valueOf(reassignmentInterval));
     }
 
     private static void parseConfigVersion2(JSONObject config, Map<MissionType, MissionTypeConfig> missions) {
