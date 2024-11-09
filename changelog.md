@@ -13,9 +13,11 @@
 - Removed tag support and the new added tags by this mod, there's nothing regarding tags in the mod
 - Updated logo
 - Fix keybind not working in Forge
-- If a range is same upper as lower (e.g. 24-24) then it will render as "24" in the missions menu
+- Now the reward range is decided when a mission is assigned, not when it's completed
 - Added support for Track placement in Place missions. Supports SnR tracks, any type of track counts for create:tracks item
 - Added support for the ghost placement helper (cogs, shafts, sails, etc) in Place missions
+- Fixed a crash when rerolling a mission
+- Added formatting to the action number in the mission tooltip (1,000 instead of 1000)
 
 # 0.3.5
 - Fix Stats (by TurnDev)

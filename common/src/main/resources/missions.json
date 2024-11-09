@@ -5,8 +5,8 @@
     "missions": [
       {
         "items": {
-          "create:track_signal": "1000-3000",
-          "create:track": "1000-3000"
+          "create:track_signal": "20-50",
+          "create:track": "400-1500"
         },
         "titles": [
           "Staying on track",
@@ -22,14 +22,14 @@
       },
       {
         "items": {
-          "create:shaft": "1000-3000",
-          "create:cogwheel": "1000-3000",
-          "create:large_cogwheel": "1000-3000",
-          "create:white_sail": "1000-3000",
-          "create:mechanical_drill": "1000-3000",
-          "create:piston_extension_pole": "1000-3000",
-          "create:display_board": "1000-3000",
-          "create:steam_whistle": "1000-3000"
+          "create:shaft": "100-300",
+          "create:cogwheel": "40-100",
+          "create:large_cogwheel": "40-80",
+          "create:white_sail": "50-100",
+          "create:mechanical_drill": "20-50",
+          "create:piston_extension_pole": "30-50",
+          "create:display_board": "20-40",
+          "create:steam_whistle": "10-20"
         },
         "titles": [
           "Base work",
@@ -45,10 +45,10 @@
       },
       {
         "items": {
-          "ender_chest": "1000-3000",
-          "crafting_table": "1000-3000",
-          "anvil": "1000-3000",
-          "smithing_table": "1000-3000"
+          "ender_chest": "8-15",
+          "crafting_table": "20-40",
+          "anvil": "10-25",
+          "smithing_table": "15-30"
         },
         "titles": [
           "Spreading utility",
@@ -64,29 +64,27 @@
       },
       {
         "items": {
-          "dandelion": "1000-3000",
-          "poppy": "1000-3000",
-          "blue_orchid": "1000-3000",
-          "allium": "1000-3000",
-          "azure_bluet": "1000-3000",
-          "red_tulip": "1000-3000",
-          "orange_tulip": "1000-3000",
-          "white_tulip": "1000-3000",
-          "pink_tulip": "1000-3000",
-          "oxeye_daisy": "1000-3000",
-          "cornflower": "1000-3000",
-          "lily_of_the_valley": "1000-3000",
-          "pink_petals": "1000-3000",
-          "sugar_cane": "1000-3000",
-          "cactus": "1000-3000",
-          "vine": "1000-3000",
-          "tall_grass": "1000-3000",
-          "large_fern": "1000-3000",
-          "sunflower": "1000-3000",
-          "lilac": "1000-3000",
-          "rose_bush": "1000-3000",
-          "peony": "1000-3000",
-          "glow_lichen": "1000-3000"
+          "dandelion": "10-30",
+          "poppy": "10-30",
+          "blue_orchid": "10-30",
+          "allium": "10-30",
+          "azure_bluet": "10-30",
+          "red_tulip": "10-30",
+          "orange_tulip": "10-30",
+          "white_tulip": "10-30",
+          "pink_tulip": "10-30",
+          "oxeye_daisy": "10-30",
+          "cornflower": "10-30",
+          "lily_of_the_valley": "10-30",
+          "pink_petals": "10-30",
+          "cactus": "10-30",
+          "vine": "10-30",
+          "large_fern": "10-30",
+          "sunflower": "10-30",
+          "lilac": "10-30",
+          "rose_bush": "10-30",
+          "peony": "10-30",
+          "glow_lichen": "10-30"
         },
         "titles": [
           "Botanical enhancement",
@@ -108,18 +106,18 @@
     "missions": [
       {
         "items": {
-          "stone": "500-3000",
-          "granite": "500-3000",
-          "diorite": "500-3000",
-          "andesite": "500-3000",
-          "deepslate": "500-3000",
-          "sandstone": "500-3000",
-          "netherrack": "500-3000",
-          "basalt": "500-3000",
-          "blackstone": "500-3000",
-          "end_stone": "500-3000",
-          "calcite": "500-3000",
-          "tuff": "500-3000",
+          "stone": "1000-2000",
+          "granite": "500-1500",
+          "diorite": "500-1500",
+          "andesite": "500-1800",
+          "deepslate": "500-1000",
+          "sandstone": "500-1000",
+          "netherrack": "1500-3000",
+          "basalt": "500-1000",
+          "blackstone": "500-1000",
+          "end_stone": "500-800",
+          "calcite": "500-900",
+          "tuff": "500-900",
           "create:asurine": "500-2000",
           "create:crimsite": "500-2000",
           "create:limestone": "500-2000",
@@ -143,19 +141,18 @@
       },
       {
         "items": {
-          "grass_block": "500-3000",
-          "dirt": "1000-3000",
-          "mud": "1000-3000",
-          "clay": "1000-3000",
-          "gravel": "1000-3000",
-          "sand": "1000-3000",
-          "red_sand": "1000-3000",
-          "snow_block": "1000-3000",
-          "moss_block": "1000-3000",
-          "crimson_nylium": "1000-3000",
-          "warped_nylium": "1000-3000",
-          "soul_sand": "1000-3000",
-          "soul_soil": "1000-3000"
+          "grass_block": "500-1000",
+          "dirt": "1500-3000",
+          "mud": "100-400",
+          "clay": "200-600",
+          "gravel": "300-1000",
+          "sand": "300-1000",
+          "red_sand": "100-700",
+          "snow_block": "100-700",
+          "crimson_nylium": "100-700",
+          "warped_nylium": "100-700",
+          "soul_sand": "200-900",
+          "soul_soil": "200-900"
         },
         "titles": [
           "Dusty surroundings",
@@ -172,20 +169,20 @@
       },
       {
         "items": {
-          "oak_log": "1000-3000",
-          "spruce_log": "1000-3000",
-          "birch_log": "1000-3000",
-          "jungle_log": "1000-3000",
-          "acacia_log": "1000-3000",
-          "dark_oak_log": "1000-3000",
-          "mangrove_log": "1000-3000",
-          "cherry_log": "1000-3000",
-          "crimson_stem": "1000-3000",
-          "warped_stem": "1000-3000",
-          "mushroom_stem": "1000-3000",
-          "brown_mushroom_block": "1000-3000",
-          "red_mushroom_block": "1000-3000",
-          "shroomlight": "1000-3000"
+          "oak_log": "200-900",
+          "spruce_log": "300-1000",
+          "birch_log": "200-900",
+          "jungle_log": "300-1000",
+          "acacia_log": "200-700",
+          "dark_oak_log": "200-900",
+          "mangrove_log": "200-600",
+          "cherry_log": "200-600",
+          "crimson_stem": "200-500",
+          "warped_stem": "200-500",
+          "mushroom_stem": "100-300",
+          "brown_mushroom_block": "100-400",
+          "red_mushroom_block": "100-400",
+          "shroomlight": "50-150"
         },
         "titles": [
           "Punching wood",
@@ -201,30 +198,30 @@
       },
       {
         "items": {
-          "dandelion": "1000-3000",
-          "poppy": "1000-3000",
-          "blue_orchid": "1000-3000",
-          "allium": "1000-3000",
-          "azure_bluet": "1000-3000",
-          "red_tulip": "1000-3000",
-          "orange_tulip": "1000-3000",
-          "white_tulip": "1000-3000",
-          "pink_tulip": "1000-3000",
-          "oxeye_daisy": "1000-3000",
-          "cornflower": "1000-3000",
-          "lily_of_the_valley": "1000-3000",
-          "pink_petals": "1000-3000",
-          "sugar_cane": "1000-3000",
-          "cactus": "1000-3000",
-          "vine": "1000-3000",
-          "tall_grass": "1000-3000",
-          "large_fern": "1000-3000",
-          "sunflower": "1000-3000",
-          "lilac": "1000-3000",
-          "rose_bush": "1000-3000",
-          "peony": "1000-3000",
-          "glow_lichen": "1000-3000",
-          "seagrass": "1000-3000"
+          "dandelion": "20-50",
+          "poppy": "20-50",
+          "blue_orchid": "20-50",
+          "allium": "20-50",
+          "azure_bluet": "20-50",
+          "red_tulip": "20-50",
+          "orange_tulip": "20-50",
+          "white_tulip": "20-50",
+          "pink_tulip": "20-50",
+          "oxeye_daisy": "20-50",
+          "cornflower": "20-50",
+          "lily_of_the_valley": "20-50",
+          "pink_petals": "20-50",
+          "sugar_cane": "40-150",
+          "cactus": "20-50",
+          "vine": "20-50",
+          "tall_grass": "20-50",
+          "large_fern": "20-50",
+          "sunflower": "20-50",
+          "lilac": "10-30",
+          "rose_bush": "20-50",
+          "peony": "20-50",
+          "glow_lichen": "20-50",
+          "seagrass": "20-50"
         },
         "titles": [
           "Botanical expedition",
@@ -242,15 +239,15 @@
       },
       {
         "items": {
-          "coal_ore": "500-3000",
-          "iron_ore": "1000-3000",
-          "copper_ore": "1000-3000",
-          "gold_ore": "1000-3000",
-          "redstone_ore": "1000-3000",
-          "emerald_ore": "1000-3000",
-          "lapis_ore": "1000-3000",
-          "diamond_ore": "1000-3000",
-          "create:zinc_ore": "1000-3000"
+          "coal_ore": "100-600",
+          "iron_ore": "100-700",
+          "copper_ore": "200-800",
+          "gold_ore": "50-300",
+          "redstone_ore": "100-600",
+          "emerald_ore": "3-15",
+          "lapis_ore": "80-350",
+          "diamond_ore": "10-90",
+          "create:zinc_ore": "100-500"
         },
         "titles": [
           "Peaceful mining",
@@ -267,15 +264,15 @@
       },
       {
         "items": {
-          "deepslate_coal_ore": "500-3000",
-          "deepslate_iron_ore": "1000-3000",
-          "deepslate_copper_ore": "1000-3000",
-          "deepslate_gold_ore": "1000-3000",
-          "deepslate_redstone_ore": "1000-3000",
-          "deepslate_emerald_ore": "1000-3000",
-          "deepslate_lapis_ore": "1000-3000",
-          "deepslate_diamond_ore": "1000-3000",
-          "create:deepslate_zinc_ore": "1000-3000"
+          "deepslate_coal_ore": "2-7",
+          "deepslate_iron_ore": "150-400",
+          "deepslate_copper_ore": "70-300",
+          "deepslate_gold_ore": "170-500",
+          "deepslate_redstone_ore": "300-800",
+          "deepslate_emerald_ore": "1-2",
+          "deepslate_lapis_ore": "100-200",
+          "deepslate_diamond_ore": "70-160",
+          "create:deepslate_zinc_ore": "80-170"
         },
         "titles": [
           "Tough surroundings",
@@ -296,16 +293,16 @@
     "missions": [
       {
         "items": {
-          "oak_log": "1000-3000",
+          "oak_log": "500-2000",
           "spruce_log": "1000-3000",
-          "birch_log": "1000-3000",
+          "birch_log": "500-2000",
           "jungle_log": "1000-3000",
-          "acacia_log": "1000-3000",
-          "dark_oak_log": "1000-3000",
-          "mangrove_log": "1000-3000",
-          "cherry_log": "1000-3000",
-          "crimson_stem": "1000-3000",
-          "warped_stem": "1000-3000"
+          "acacia_log": "500-1500",
+          "dark_oak_log": "800-2500",
+          "mangrove_log": "300-800",
+          "cherry_log": "400-1700",
+          "crimson_stem": "300-900",
+          "warped_stem": "300-900"
         },
         "titles": [
           "Automated lumberjack",
@@ -321,14 +318,14 @@
       },
       {
         "items": {
-          "oak_leaves": "1000-3000",
-          "spruce_leaves": "1000-3000",
-          "birch_leaves": "1000-3000",
-          "jungle_leaves": "1000-3000",
-          "acacia_leaves": "1000-3000",
+          "oak_leaves": "1000-4000",
+          "spruce_leaves": "800-3000",
+          "birch_leaves": "1000-4000",
+          "jungle_leaves": "800-2800",
+          "acacia_leaves": "700-2000",
           "dark_oak_leaves": "1000-3000",
-          "mangrove_leaves": "1000-3000",
-          "cherry_leaves": "1000-3000"
+          "mangrove_leaves": "800-2500",
+          "cherry_leaves": "1000-4000"
         },
         "titles": [
           "Leaf me alone",
@@ -343,12 +340,12 @@
       },
       {
         "items": {
-          "bamboo": "1000-3000",
-          "sugar_cane": "1000-3000"
+          "bamboo": "1000-3000"
         },
         "titles": [
           "Avoiding flying machines",
-          "Excessive growth"
+          "Excessive growth",
+          "Overworld's haircut"
         ],
         "rewards": [
           {
@@ -364,25 +361,21 @@
     "missions": [
       {
         "items": {
-          "stone": "500-3000",
-          "granite": "500-3000",
-          "diorite": "500-3000",
-          "andesite": "500-3000",
-          "deepslate": "500-3000",
-          "sandstone": "500-3000",
-          "netherrack": "500-3000",
-          "basalt": "500-3000",
-          "blackstone": "500-3000",
-          "end_stone": "500-3000",
+          "stone": "2500-9000",
+          "granite": "1500-4000",
+          "diorite": "1500-4000",
+          "andesite": "1800-5000",
+          "deepslate": "2000-7000",
+          "netherrack": "3500-10000",
+          "end_stone": "1500-4000",
           "calcite": "500-3000",
-          "tuff": "500-3000",
-          "create:asurine": "500-2000",
-          "create:crimsite": "500-2000",
-          "create:limestone": "500-2000",
-          "create:ochrum": "500-2000",
-          "create:scoria": "500-2000",
-          "create:scorchia": "500-2000",
-          "create:veridium": "500-2000"
+          "create:asurine": "1500-4000",
+          "create:crimsite": "1500-4000",
+          "create:limestone": "1500-4000",
+          "create:ochrum": "1500-4000",
+          "create:scoria": "1500-4000",
+          "create:scorchia": "1500-4000",
+          "create:veridium": "1500-4000"
         },
         "titles": [
           "Automating world destruction",
@@ -398,10 +391,9 @@
       },
       {
         "items": {
-          "grass_block": "500-3000",
-          "dirt": "1000-3000",
-          "gravel": "1000-3000",
-          "sand": "1000-3000"
+          "grass_block": "500-1500",
+          "dirt": "1500-4000",
+          "gravel": "1000-3500"
         },
         "titles": [
           "Worst landscaping",
@@ -418,15 +410,15 @@
       },
       {
         "items": {
-          "coal_ore": "500-3000",
-          "iron_ore": "1000-3000",
-          "copper_ore": "1000-3000",
-          "gold_ore": "1000-3000",
-          "redstone_ore": "1000-3000",
-          "emerald_ore": "1000-3000",
-          "lapis_ore": "1000-3000",
-          "diamond_ore": "1000-3000",
-          "create:zinc_ore": "1000-3000"
+          "coal_ore": "300-900",
+          "iron_ore": "400-1000",
+          "copper_ore": "500-1100",
+          "gold_ore": "70-300",
+          "redstone_ore": "100-400",
+          "emerald_ore": "8-20",
+          "lapis_ore": "100-500",
+          "diamond_ore": "10-30",
+          "create:zinc_ore": "90-200"
         },
         "titles": [
           "Peaceful drilling",
@@ -443,15 +435,15 @@
       },
       {
         "items": {
-          "deepslate_coal_ore": "500-3000",
-          "deepslate_iron_ore": "1000-3000",
-          "deepslate_copper_ore": "1000-3000",
-          "deepslate_gold_ore": "1000-3000",
-          "deepslate_redstone_ore": "1000-3000",
-          "deepslate_emerald_ore": "1000-3000",
-          "deepslate_lapis_ore": "1000-3000",
-          "deepslate_diamond_ore": "1000-3000",
-          "create:deepslate_zinc_ore": "1000-3000"
+          "deepslate_coal_ore": "4-12",
+          "deepslate_iron_ore": "100-300",
+          "deepslate_copper_ore": "90-200",
+          "deepslate_gold_ore": "130-400",
+          "deepslate_redstone_ore": "130-400",
+          "deepslate_emerald_ore": "1-2",
+          "deepslate_lapis_ore": "100-500",
+          "deepslate_diamond_ore": "100-200",
+          "create:deepslate_zinc_ore": "120-240"
         },
         "titles": [
           "Tough surroundings",
@@ -472,29 +464,25 @@
     "missions": [
       {
         "items": {
-          "glow_berries": "500-2000",
-          "sweet_berries": "500-2000",
-          "apple": "500-2000",
-          "melon_slice": "500-2000",
-          "carrot": "500-2000",
-          "golden_carrot": "500-2000",
-          "baked_potato": "500-2000",
-          "beetroot": "500-2000",
-          "dried_kelp": "500-2000",
-          "cooked_beef": "500-2000",
-          "cooked_porkchop": "500-2000",
-          "cooked_mutton": "500-2000",
-          "cooked_chicken": "500-2000",
-          "cooked_cod": "500-2000",
-          "cooked_salmon": "500-2000",
-          "bread": "500-2000",
-          "cookie": "500-2000",
-          "pumpkin_pie": "500-2000",
-          "mushroom_stew": "500-2000",
-          "beetroot_soup": "500-2000",
-          "create:sweet_roll": "500-2000",
-          "create:chocolate_glazed_berries": "500-2000",
-          "create:honeyed_apple": "500-2000"
+          "glow_berries": "70-140",
+          "sweet_berries": "70-140",
+          "apple": "120-300",
+          "melon_slice": "100-200",
+          "carrot": "100-250",
+          "golden_carrot": "300-500",
+          "baked_potato": "200-400",
+          "dried_kelp": "100-200",
+          "cooked_beef": "160-280",
+          "cooked_porkchop": "160-280",
+          "cooked_mutton": "160-280",
+          "cooked_chicken": "160-280",
+          "cooked_cod": "120-240",
+          "cooked_salmon": "120-240",
+          "bread": "120-240",
+          "pumpkin_pie": "80-150",
+          "create:sweet_roll": "120-240",
+          "create:chocolate_glazed_berries": "150-280",
+          "create:honeyed_apple": "120-240"
         },
         "titles": [
           "Daily charge",
@@ -515,9 +503,8 @@
       },
       {
         "items": {
-          "honey_bottle": "500-2000",
-          "milk_bucket": "500-2000",
-          "create:builders_tea": "500-2000"
+          "honey_bottle": "1-3",
+          "create:builders_tea": "1-3"
         },
         "titles": [
           "Refreshing beverages",
@@ -535,7 +522,7 @@
       },
       {
         "items": {
-          "cake": "500-2000"
+          "cake": "7-25"
         },
         "titles": [
           "Wilderness eating",
