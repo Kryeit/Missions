@@ -543,59 +543,43 @@
     "missions": [
       {
         "items": {
-          "create:shaft": "500-2000",
-          "create:cogwheel": "500-2000",
-          "create:large_cogwheel": "500-2000",
-          "create:gearbox": "500-2000",
-          "create:clutch": "500-2000",
-          "create:gearshift": "500-2000",
-          "create:encased_chain_drive": "500-2000",
-          "create:adjustable_chain_gearshift": "500-2000",
-          "create:belt_connector": "500-2000",
-          "create:water_wheel": "500-2000",
-          "create:large_water_wheel": "500-2000",
-          "create:encased_fan": "500-2000",
-          "create:crushing_wheel": "500-2000",
-          "create:mechanical_press": "500-2000",
-          "create:mechanical_mixer": "500-2000",
-          "create:basin": "500-2000",
-          "create:empty_blaze_burner": "500-2000",
-          "create:depot": "500-2000",
-          "create:weighted_ejector": "500-2000",
-          "create:chute": "500-2000",
-          "create:smart_chute": "500-2000",
-          "create:windmill_bearing": "500-2000",
-          "create:mechanical_bearing": "500-2000",
-          "create:rope_pulley": "500-2000",
-          "create:elevator_pulley": "500-2000",
-          "create:cart_assembler": "500-2000",
-          "create:linear_chassis": "500-2000",
-          "create:secondary_linear_chassis": "500-2000",
-          "create:radial_chassis": "500-2000",
-          "create:mechanical_drill": "500-2000",
-          "create:mechanical_saw": "500-2000",
-          "create:deployer": "500-2000",
-          "create:redstone_contact": "500-2000",
-          "create:mechanical_harvester": "500-2000",
-          "create:white_sail": "500-2000",
-          "create:mechanical_crafter": "500-2000",
-          "create:rotation_speed_controller": "500-2000",
-          "create:mechanical_arm": "500-2000",
-          "create:contraption_controls": "500-2000",
-          "create:item_vault": "500-2000",
-          "create:andesite_funnel": "500-2000",
-          "create:brass_funnel": "500-2000",
-          "create:andesite_tunnel": "500-2000",
-          "create:brass_tunnel": "500-2000",
-          "create:rose_quartz": "500-2000",
-          "create:andesite_alloy": "500-2000",
-          "create:filter": "500-2000",
-          "create:attribute_filter": "500-2000"
+          "create:shaft": "500-1000",
+          "create:cogwheel": "250-500",
+          "create:large_cogwheel": "220-450",
+          "create:gearbox": "40-180",
+          "create:encased_chain_drive": "60-100",
+          "create:belt_connector": "100-200",
+          "create:encased_fan": "20-50",
+          "create:crushing_wheel": "15-40",
+          "create:mechanical_press": "10-30",
+          "create:mechanical_mixer": "18-45",
+          "create:basin": "50-130",
+          "create:empty_blaze_burner": "70-190",
+          "create:depot": "40-100",
+          "create:weighted_ejector": "8-20",
+          "create:chute": "120-300",
+          "create:smart_chute": "8-20",
+          "create:mechanical_drill": "30-80",
+          "create:mechanical_saw": "25-70",
+          "create:deployer": "6-18",
+          "create:mechanical_harvester": "28-75",
+          "create:white_sail": "100-250",
+          "create:mechanical_crafter": "20-50",
+          "create:rotation_speed_controller": "5-15",
+          "create:mechanical_arm": "4-12",
+          "create:item_vault": "100-270",
+          "create:andesite_funnel": "100-200",
+          "create:brass_funnel": "10-35",
+          "create:andesite_tunnel": "50-100",
+          "create:brass_tunnel": "9-30",
+          "create:rose_quartz": "80-200",
+          "create:andesite_alloy": "150-500"
         },
         "titles": [
           "Kinetic requirements",
           "Creating with Create",
-          "Rotatory religion"
+          "Rotatory religion",
+          "Basic kinetic"
         ],
         "rewards": [
           {
@@ -606,10 +590,44 @@
       },
       {
         "items": {
-          "create:schematicannon": "500-2000",
-          "create:schematic_table": "500-2000",
-          "create:schematic_and_quill": "500-2000",
-          "create:empty_schematic": "500-2000"
+          "create:clutch": "10-50",
+          "create:gearshift": "8-45",
+          "create:adjustable_chain_gearshift": "5-30"
+        },
+        "titles": [
+          "Advanced contraptioning"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "create:windmill_bearing": "2-5",
+          "create:mechanical_bearing": "1-3",
+          "create:water_wheel": "10-20",
+          "create:large_water_wheel": "5-10"
+        },
+        "titles": [
+          "Moving bits",
+          "Giving life"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "1-10"
+          }
+        ]
+      },
+      {
+        "items": {
+          "create:schematicannon": "1-1",
+          "create:schematic_table": "1-1",
+          "create:schematic_and_quill": "1-3",
+          "create:empty_schematic": "1-5"
         },
         "titles": [
           "Blueprint ghosts",
@@ -625,13 +643,13 @@
       },
       {
         "items": {
-          "create:fluid_pipe": "500-2000",
-          "create:mechanical_pump": "500-2000",
-          "create:fluid_tank": "500-2000",
-          "create:hose_pulley": "500-2000",
-          "create:item_drain": "500-2000",
-          "create:spout": "500-2000",
-          "create:steam_whistle": "500-2000"
+          "create:fluid_pipe": "20-50",
+          "create:mechanical_pump": "2-5",
+          "create:fluid_tank": "5-15",
+          "create:hose_pulley": "1-1",
+          "create:item_drain": "1-3",
+          "create:spout": "2-4",
+          "create:steam_whistle": "4-5"
         },
         "titles": [
           "Liquid bender",
@@ -647,11 +665,11 @@
       },
       {
         "items": {
-          "create:schedule": "500-2000",
-          "create:track_station": "500-2000",
-          "create:track_signal": "500-2000",
-          "create:track_observer": "500-2000",
-          "create:controls": "500-2000"
+          "create:schedule": "2-3",
+          "create:track_station": "1-2",
+          "create:track_signal": "2-4",
+          "create:track_observer": "1-1",
+          "create:controls": "1-2"
         },
         "titles": [
           "Training preparations",
@@ -667,13 +685,13 @@
       },
       {
         "items": {
-          "create:super_glue": "500-2000",
-          "create:goggles": "500-2000",
-          "create:wrench": "500-2000",
-          "create:extendo_grip": "500-2000",
-          "create:potato_cannon": "500-2000",
-          "create:wand_of_symmetry": "500-2000",
-          "create:linked_controller": "500-2000"
+          "create:super_glue": "1-2",
+          "create:goggles": "1-1",
+          "create:wrench": "1-1",
+          "create:extendo_grip": "1-1",
+          "create:potato_cannon": "1-1",
+          "create:wand_of_symmetry": "1-1",
+          "create:linked_controller": "1-1"
         },
         "titles": [
           "For your own good",
@@ -689,10 +707,10 @@
       },
       {
         "items": {
-          "shulker_box": "500-2000",
-          "end_crystal": "500-2000",
-          "beacon": "500-2000",
-          "ender_chest": "500-2000"
+          "shulker_box": "2-4",
+          "end_crystal": "4-8",
+          "beacon": "1-1",
+          "ender_chest": "3-6"
         },
         "titles": [
           "End game crafting",
