@@ -1,6 +1,7 @@
 # 0.4
 # *IMPORTANT* Updating from 0.3.6 or lower:
 - Move your `mods/missions/missions_data.nbt` to `config/missions/missions_data.nbt`, although losing this is not that bad
+- Delete `config/missions/config.json`'
 
 ## Changelog
 - All distance missions are now in meters (must be rebalanced in your configs)
@@ -18,6 +19,7 @@
 - Added support for the ghost placement helper (cogs, shafts, sails, etc) in Place missions
 - Fixed a crash when rerolling a mission
 - Added formatting to the action number in the mission tooltip (1,000 instead of 1000)
+- Now missions can be reassigned weekly or daily, changing it in the config.json
 
 # 0.3.5
 - Fix Stats (by TurnDev)
