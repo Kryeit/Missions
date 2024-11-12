@@ -730,12 +730,12 @@
     "missions": [
       {
         "items": {
-          "wheat_seeds": "1000-3000",
-          "beetroot_seeds": "1000-3000",
-          "carrot": "1000-3000",
-          "potato": "1000-3000",
-          "sugar_cane": "1000-3000",
-          "kelp": "1000-3000"
+          "wheat_seeds": "250-1200",
+          "beetroot_seeds": "150-800",
+          "carrot": "250-1200",
+          "potato": "250-1200",
+          "sugar_cane": "250-1000",
+          "kelp": "250-1000"
         },
         "titles": [
           "Must have harvesting",
@@ -751,9 +751,9 @@
       },
       {
         "items": {
-          "cocoa_beans": "1000-3000",
-          "sweet_berries": "1000-3000",
-          "glow_berries": "1000-3000"
+          "cocoa_beans": "100-500",
+          "sweet_berries": "150-600",
+          "glow_berries": "100-500"
         },
         "titles": [
           "Awkward harvest",
@@ -773,8 +773,8 @@
     "missions": [
       {
         "items": {
-          "create:brass_ingot": "1000-3000",
-          "create:andesite_alloy": "1000-3000"
+          "create:brass_ingot": "100-300",
+          "create:andesite_alloy": "400-1500"
         },
         "titles": [
           "Tinkering alloys",
@@ -790,7 +790,7 @@
       },
       {
         "items": {
-          "create:dough": "1000-3000"
+          "create:dough": "200-600"
         },
         "titles": [
           "Beaker",
@@ -806,8 +806,8 @@
       },
       {
         "items": {
-          "mud": "1000-3000",
-          "netherrack": "1000-3000"
+          "mud": "300-500",
+          "netherrack": "150-300"
         },
         "titles": [
           "Resource medley",
@@ -852,12 +852,10 @@
       },
       {
         "items": {
-          "gold_ingot": "1000-3000",
-          "gold_block": "1000-3000",
-          "iron_ingot": "1000-3000",
-          "iron_block": "1000-3000",
-          "slime_block": "1000-3000",
-          "redstone_block": "1000-3000"
+          "gold_ingot": "15-50",
+          "iron_ingot": "200-500",
+          "iron_block": "30-70",
+          "slime_block": "40-100"
         },
         "titles": [
           "Pressured goods",
@@ -879,8 +877,8 @@
     "missions": [
       {
         "items": {
-          "paper": "1000-3000",
-          "create:track": "1000-3000"
+          "paper": "200-500",
+          "create:track": "300-600"
         },
         "titles": [
           "Preparations",
@@ -895,10 +893,10 @@
       },
       {
         "items": {
-          "create:iron_sheet": "1000-3000",
-          "create:copper_sheet": "1000-3000",
-          "create:brass_sheet": "1000-3000",
-          "create:golden_sheet": "1000-3000"
+          "create:iron_sheet": "150-350",
+          "create:copper_sheet": "100-300",
+          "create:brass_sheet": "20-60",
+          "create:golden_sheet": "30-80"
         },
         "titles": [
           "Pressing metals",
@@ -920,18 +918,17 @@
     "missions": [
       {
         "items": {
-          "create:crushed_raw_iron": "1000-3000",
-          "create:crushed_raw_gold": "1000-3000",
-          "create:crushed_raw_copper": "1000-3000",
-          "create:crushed_raw_zinc": "1000-3000",
-          "create:experience_nugget": "1000-3000"
+          "create:crushed_raw_iron": "150-300",
+          "create:crushed_raw_gold": "50-100",
+          "create:crushed_raw_copper": "200-500",
+          "create:crushed_raw_zinc": "150-300",
+          "create:experience_nugget": "150-300"
         },
         "titles": [
           "Mining rewards",
           "Your real crush",
           "Crushing it",
-          "Superlative milling",
-          "Ore obliteration"
+          "Superlative milling"
         ],
         "rewards": [
           {
@@ -942,14 +939,14 @@
       },
       {
         "items": {
-          "redstone": "1000-3000",
-          "lapis_lazuli": "1000-3000",
-          "quartz": "1000-3000",
-          "string": "1000-3000",
-          "create:cinder_flour": "1000-3000",
-          "create:powdered_obsidian": "1000-3000",
-          "glowstone_dust": "1000-3000",
-          "create:wheat_flour": "1000-3000"
+          "redstone": "700-1500",
+          "lapis_lazuli": "500-800",
+          "quartz": "500-1000",
+          "string": "100-200",
+          "create:cinder_flour": "400-900",
+          "create:powdered_obsidian": "100-250",
+          "glowstone_dust": "100-250",
+          "create:wheat_flour": "400-960"
         },
         "titles": [
           "Crushing addict",
@@ -965,10 +962,10 @@
       },
       {
         "items": {
-          "gravel": "1000-3000",
-          "sand": "1000-3000",
-          "red_sand": "1000-3000",
-          "clay_ball": "1000-3000"
+          "gravel": "400-1000",
+          "sand": "400-1000",
+          "red_sand": "200-500",
+          "clay_ball": "150-350"
         },
         "titles": [
           "Standard crushing",
@@ -989,11 +986,11 @@
     "missions": [
       {
         "items": {
-          "wheat": "1000-3000",
-          "carrot": "1000-3000",
-          "potato": "1000-3000",
-          "beetroot": "1000-3000",
-          "seeds": "1000-3000"
+          "wheat": "5-25",
+          "carrot": "5-25",
+          "potato": "5-25",
+          "beetroot": "5-25",
+          "seeds": "50-80"
         },
         "titles": [
           "Feeding the usuals",
@@ -1010,10 +1007,10 @@
       },
       {
         "items": {
-          "hay_bale": "1000-3000",
-          "golden_carrot": "1000-3000",
-          "golden_apple": "1000-3000",
-          "sugar": "1000-3000"
+          "hay_bale": "3-9",
+          "golden_carrot": "3-9",
+          "golden_apple": "3-9",
+          "sugar": "5-15"
         },
         "titles": [
           "Feeding your carry",
@@ -1029,13 +1026,13 @@
       },
       {
         "items": {
-          "cooked_porkchop": "1000-3000",
-          "cooked_beef": "1000-3000",
-          "cooked_mutton": "1000-3000",
-          "cooked_chicken": "1000-3000",
-          "rotten_flesh": "1000-3000",
-          "cod": "1000-3000",
-          "salmon": "1000-3000"
+          "cooked_porkchop": "2-5",
+          "cooked_beef": "2-5",
+          "cooked_mutton": "2-5",
+          "cooked_chicken": "2-5",
+          "rotten_flesh": "2-5",
+          "cod": "2-5",
+          "salmon": "2-5"
         },
         "titles": [
           "Pet caring",
@@ -1052,14 +1049,14 @@
       },
       {
         "items": {
-          "seagrass": "1000-3000",
-          "warped_fungus": "1000-3000",
-          "tropical_fish_bucket": "1000-3000",
-          "bamboo": "1000-3000",
-          "sweet_berries": "1000-3000",
-          "glow_berries": "1000-3000",
-          "slime_ball": "1000-3000",
-          "cactus": "1000-3000"
+          "seagrass": "4-8",
+          "warped_fungus": "2-4",
+          "tropical_fish_bucket": "2-4",
+          "bamboo": "2-2",
+          "sweet_berries": "2-2",
+          "glow_berries": "2-2",
+          "slime_ball": "2-2",
+          "cactus": "2-2"
         },
         "titles": [
           "Explorer needs",
@@ -1080,10 +1077,10 @@
     "missions": [
       {
         "items": {
-          "cod": "1000-3000",
-          "salmon": "1000-3000",
-          "tropical_fish": "1000-3000",
-          "pufferfish": "1000-3000"
+          "cod": "15-30",
+          "salmon": "6-13",
+          "tropical_fish": "1-3",
+          "pufferfish": "3-6"
         },
         "titles": [
           "Normie fishing",
@@ -1098,16 +1095,15 @@
       },
       {
         "items": {
-          "lily_pad": "1000-3000",
-          "leather_boots": "1000-3000",
-          "leather": "1000-3000",
-          "bone": "1000-3000",
-          "string": "1000-3000",
-          "bowl": "1000-3000",
-          "stick": "1000-3000",
-          "ink_sac": "1000-3000",
-          "tripwire_hook": "1000-3000",
-          "rotten_flesh": "1000-3000"
+          "lily_pad": "2-5",
+          "leather_boots": "1-3",
+          "leather": "1-3",
+          "bone": "1-3",
+          "string": "1-2",
+          "bowl": "1-3",
+          "stick": "1-2",
+          "tripwire_hook": "1-3",
+          "rotten_flesh": "1-3"
         },
         "titles": [
           "Desired misfortune",
@@ -1123,9 +1119,9 @@
       },
       {
         "items": {
-          "name_tag": "1000-3000",
-          "saddle": "1000-3000",
-          "nautilus_shell": "1000-3000"
+          "name_tag": "1-1",
+          "saddle": "1-1",
+          "nautilus_shell": "1-1"
         },
         "titles": [
           "Rate limited treasures",
@@ -1146,18 +1142,16 @@
     "missions": [
       {
         "items": {
-          "creeper": "500-2000",
-          "drowned": "500-2000",
-          "guardian": "500-2000",
-          "husk": "500-2000",
-          "phantom": "500-2000",
-          "silverfish": "500-2000",
-          "skeleton": "500-2000",
-          "slime": "500-2000",
-          "spider": "500-2000",
-          "stray": "500-2000",
-          "witch": "500-2000",
-          "zombie": "500-2000"
+          "creeper": "20-60",
+          "drowned": "15-40",
+          "guardian": "5-10",
+          "husk": "4-8",
+          "skeleton": "20-60",
+          "slime": "30-70",
+          "spider": "20-60",
+          "stray": "5-10",
+          "witch": "2-5",
+          "zombie": "20-60"
         },
         "titles": [
           "Basic extermination",
@@ -1174,14 +1168,14 @@
       },
       {
         "items": {
-          "blaze": "500-2000",
-          "ghast": "500-2000",
-          "hoglin": "500-2000",
-          "magma_cube": "500-2000",
-          "piglin": "500-2000",
-          "wither_skeleton": "500-2000",
-          "zoglin": "500-2000",
-          "zombified_piglin": "500-2000"
+          "blaze": "10-20",
+          "ghast": "3-8",
+          "hoglin": "4-8",
+          "magma_cube": "2-4",
+          "piglin": "10-25",
+          "wither_skeleton": "10-15",
+          "zoglin": "1-3",
+          "zombified_piglin": "1-3"
         },
         "titles": [
           "Hot murdering",
@@ -1197,9 +1191,9 @@
       },
       {
         "items": {
-          "endermite": "500-2000",
-          "enderman": "500-2000",
-          "shulker": "500-2000"
+          "endermite": "2-4",
+          "enderman": "30-70",
+          "shulker": "10-20"
         },
         "titles": [
           "Void rampage",
@@ -1215,8 +1209,8 @@
       },
       {
         "items": {
-          "wither": "500-2000",
-          "ender_dragon": "500-2000"
+          "wither": "1-1",
+          "ender_dragon": "1-1"
         },
         "titles": [
           "Boss battle",
@@ -1231,11 +1225,11 @@
       },
       {
         "items": {
-          "pillager": "500-2000",
-          "ravager": "500-2000",
-          "vex": "500-2000",
-          "evoker": "500-2000",
-          "vindicator": "500-2000"
+          "pillager": "10-15",
+          "ravager": "1-1",
+          "vex": "2-3",
+          "evoker": "1-1",
+          "vindicator": "3-5"
         },
         "titles": [
           "Raiding party",
@@ -1252,12 +1246,12 @@
       },
       {
         "items": {
-          "horse": "500-2000",
-          "donkey": "500-2000",
-          "mule": "500-2000",
-          "strider": "500-2000",
-          "llama": "500-2000",
-          "camel": "500-2000"
+          "horse": "1-1",
+          "donkey": "1-1",
+          "mule": "1-1",
+          "strider": "1-2",
+          "llama": "1-2",
+          "camel": "1-1"
         },
         "titles": [
           "Killing a friend",
@@ -1273,11 +1267,11 @@
       },
       {
         "items": {
-          "cow": "500-2000",
-          "sheep": "500-2000",
-          "pig": "500-2000",
-          "chicken": "500-2000",
-          "bee": "500-2000"
+          "cow": "10-25",
+          "sheep": "10-25",
+          "pig": "10-25",
+          "chicken": "10-25",
+          "bee": "2-4"
         },
         "titles": [
           "Farm animals",
@@ -1298,7 +1292,7 @@
     "missions": [
       {
         "items": {
-          "water": "1000-3000"
+          "water": "10-24"
         },
         "titles": [
           "Your last breath",
@@ -1314,7 +1308,7 @@
       },
       {
         "items": {
-          "lava": "1000-3000"
+          "lava": "5-15"
         },
         "titles": [
           "Temperature regulation",
