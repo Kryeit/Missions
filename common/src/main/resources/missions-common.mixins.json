@@ -25,6 +25,7 @@
     "create.TrainMixin",
     "create.TreeMixin",
     "events.CakeEatHandler",
+    "events.EatHandler",
     "events.FeedHandler",
     "interfaces.BlockEntityAccessor"
   ],

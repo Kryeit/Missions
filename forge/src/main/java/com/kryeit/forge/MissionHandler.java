@@ -7,7 +7,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.BlockEvent;
@@ -38,15 +37,6 @@ public class MissionHandler {
         for (ItemStack itemStack : event.getDrops()) {
             ResourceLocation item = ForgeRegistries.ITEMS.getKey(itemStack.getItem());
             MissionManager.incrementMission(event.getEntity().getUUID(), FishMission.class, item, 1);
-        }
-    }
-
-
-    @SubscribeEvent
-    public void eatItem(LivingEntityUseItemEvent.Finish event) {
-        if (event.getEntity() instanceof ServerPlayer player) {
-            ResourceLocation item = ForgeRegistries.ITEMS.getKey(event.getItem().getItem());
-            MissionManager.incrementMission(player.getUUID(), EatMission.class, item, 1);
         }
     }
 
