@@ -1,3 +1,7 @@
+# 0.4.1
+- Fix dupe bug with the Mechanical Exchanger in Forge side
+
+
 # 0.4
 # *IMPORTANT* Updating from 0.3.6 or lower:
 - Move your `mods/missions/missions_data.nbt` to `config/missions/missions_data.nbt`, although losing this is not that bad

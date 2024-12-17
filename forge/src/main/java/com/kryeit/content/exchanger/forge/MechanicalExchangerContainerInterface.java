@@ -39,7 +39,6 @@ public record MechanicalExchangerContainerInterface(MechanicalExchangerBlockEnti
 			} else {
 				currentStack.grow(canAdd);
 			}
-			stack.shrink(canAdd);
 			this.be.setChanged();
 		}
 
