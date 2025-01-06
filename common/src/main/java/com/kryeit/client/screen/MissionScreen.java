@@ -133,7 +133,7 @@ public class MissionScreen extends Screen {
 
         Component progress = mission.isCompleted()
                 ? Components.translatable("missions.menu.main.tooltip.progress.completed")
-                : Components.translatable(mission.progress() + "/" + requiredAmount);
+                : Components.translatable(numberFormat.format(mission.progress()) + "/" + requiredAmount);
 
         List<Component> components = new ArrayList<>();
         components.add(Components.translatable("missions.menu.main.tooltip.details")
