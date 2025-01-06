@@ -36,7 +36,7 @@ public class ModBlocks {
     public static final BlockEntry<JarOfTipsBlock> JAR_OF_TIPS = Missions.registrate()
             .block("jar_of_tips", JarOfTipsBlock::new)
             .properties(p -> p
-                    .strength(0.1F)
+                    .strength(0.0F, 0.0F)
                     .noOcclusion())
             .addLayer(() -> RenderType::translucent)
             .blockstate(BlockStateGen.horizontalBlockProvider(true))
