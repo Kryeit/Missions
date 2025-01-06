@@ -32,7 +32,6 @@ public class JarOfTipsItem extends BlockItem {
 
     }
 
-
     public static void initInventory(ItemStack itemStack, NonNullList<ItemStack> inventory) {
         if (inventory.equals(NonNullList.withSize(9, ItemStack.EMPTY))) {
             return;

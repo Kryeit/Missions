@@ -1,5 +1,6 @@
 package com.kryeit.content.jar_of_tips;
 
+import com.kryeit.coins.Coins;
 import com.kryeit.registry.ModBlockEntities;
 import com.kryeit.registry.ModItems;
 import com.simibubi.create.foundation.block.IBE;
@@ -13,6 +14,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +36,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -61,6 +65,36 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos,
+                                 Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide) {
+            ItemStack heldItem = player.getItemInHand(hand);
+            if (Coins.isCoin(heldItem)) {
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                if (blockEntity instanceof JarOfTipsBlockEntity jar) {
+                    NonNullList<ItemStack> inventory = jar.getInventory();
+                    boolean added = false;
+
+                    for (int i = 0; i < inventory.size(); i++) {
+                        ItemStack slotItem = inventory.get(i);
+                        if (slotItem.isEmpty() || (ItemStack.isSameItemSameTags(slotItem, heldItem) && slotItem.getCount() < slotItem.getMaxStackSize())) {
+                            jar.addItemToInventory(heldItem, i);
+                            player.setItemInHand(hand, ItemStack.EMPTY);
+                            added = true;
+                            break;
+                        }
+                    }
+
+                    if (added) {
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+            }
+        }
+        return InteractionResult.PASS;
     }
 
     @Override

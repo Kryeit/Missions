@@ -130,7 +130,6 @@ public class MissionScreen extends Screen {
         ((DecimalFormat) numberFormat).setDecimalFormatSymbols(symbols);
         String requiredAmount = numberFormat.format(mission.requiredAmount());
 
-
         Component progress = mission.isCompleted()
                 ? Components.translatable("missions.menu.main.tooltip.progress.completed")
                 : Components.translatable(numberFormat.format(mission.progress()) + "/" + requiredAmount);
@@ -138,7 +137,6 @@ public class MissionScreen extends Screen {
         List<Component> components = new ArrayList<>();
         components.add(Components.translatable("missions.menu.main.tooltip.details")
                 .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
-
 
         String itemName = Utils.removeBrackets(mission.itemRequired().getDisplayName().getString());
 
