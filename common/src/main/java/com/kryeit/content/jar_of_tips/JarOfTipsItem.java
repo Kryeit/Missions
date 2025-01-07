@@ -6,6 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -74,6 +75,8 @@ public class JarOfTipsItem extends BlockItem {
                 projectile.shootFromRotation(player, pitch, yaw, 0.0F, 0.5F, 0.3F);
                 level.addFreshEntity(projectile);
                 player.getCooldowns().addCooldown(this, 3);
+
+                level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW, player.getSoundSource(), 1.0F, 1.0F);
 
                 stack.shrink(1);
             }
