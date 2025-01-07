@@ -64,45 +64,10 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
         if (level().isClientSide) return;
 
         this.kill();
-        BlockPos hitPos = blockHitResult.getBlockPos();
         BlockPos placePos = blockHitResult.getBlockPos().offset(blockHitResult.getDirection().getNormal());
 
-        Block block = level().getBlockState(placePos).getBlock();
-
-        if (block == Blocks.WATER || block == Blocks.AIR) {
-            Player owner = (Player) this.getOwner();
-            BlockPlaceContext context = new BlockPlaceContext(new UseOnContext(owner, InteractionHand.MAIN_HAND, new BlockHitResult(Vec3.atCenterOf(placePos), blockHitResult.getDirection(), placePos, false)));
-            BlockState placedBlockState = ModBlocks.JAR_OF_TIPS.get().getStateForPlacement(context);
-
-            if (placedBlockState != null) {
-                level().setBlockAndUpdate(placePos, placedBlockState);
-                level().playSound(null, placePos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-
-                BlockEntity blockEntity = level().getBlockEntity(placePos);
-
-                if (blockEntity instanceof JarOfTipsBlockEntity) {
-                    JarOfTipsBlockEntity jarEntity = (JarOfTipsBlockEntity) blockEntity;
-                    jarEntity.setInventory(this.inventory);
-                }
-
-                if (!level().getBlockState(placePos).is(ModBlocks.JAR_OF_TIPS.get())) {
-                    this.drops();
-                    this.kill();
-                    return;
-                }
-            }
-        } else {
-            level().playSound(null, placePos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
-
-            this.drops();
-            this.kill();
-            return;
-        }
-
-        BlockEntity blockEntity = level().getBlockEntity(placePos);
-        if (blockEntity instanceof JarOfTipsBlockEntity) {
-            ((JarOfTipsBlockEntity) blockEntity).setInventory(this.inventory);
-        }
+        level().playSound(null, placePos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+        this.drops();
     }
 
     public void drops() {
