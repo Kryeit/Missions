@@ -1,5 +1,6 @@
 package com.kryeit.content.jar_of_tips;
 
+import com.kryeit.registry.ModItems;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
@@ -20,15 +21,13 @@ import java.util.List;
 
 public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyContainer, Nameable {
 
-    public NonNullList<ItemStack> inventory ;
+    public NonNullList<ItemStack> inventory;
 
     @Nullable
     private Component name;
 
-
     public JarOfTipsBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
-
         inventory = NonNullList.withSize(9, ItemStack.EMPTY);
     }
 
@@ -77,6 +76,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
         ItemStack itemStack = ContainerHelper.removeItem(this.inventory, i, j);
         if (!itemStack.isEmpty())
             this.setChanged();
+        updateFillLevel();
         return itemStack;
     }
 
@@ -86,6 +86,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
         if (itemStack.isEmpty())
             return ItemStack.EMPTY;
         this.inventory.set(i, ItemStack.EMPTY);
+        updateFillLevel();
         return itemStack;
     }
 
@@ -95,6 +96,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
         if (!itemStack.isEmpty() && itemStack.getCount() > this.getMaxStackSize())
             itemStack.setCount(this.getMaxStackSize());
         this.setChanged();
+        updateFillLevel();
     }
 
     @Override
@@ -111,6 +113,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
     public void clearContent() {
         inventory.clear();
         setChanged();
+        updateFillLevel();
     }
 
     public void drops() {
@@ -133,6 +136,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
                 itemStack.shrink(fit);
             }
             this.setChanged();
+            updateFillLevel();
             itemStack.isEmpty();
         }
     }
@@ -140,6 +144,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
     public void setInventory(NonNullList<ItemStack> inventory) {
         this.inventory = inventory;
         this.setChanged();
+        updateFillLevel();
     }
 
     public NonNullList<ItemStack> getInventory() {
@@ -168,5 +173,26 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
     @Nullable
     public Component getCustomName() {
         return this.name;
+    }
+
+
+    public void updateFillLevel() {
+        if (level == null || level.isClientSide) {
+            return;
+        }
+
+        // Calculate total items in the inventory
+        int totalItems = inventory.stream().mapToInt(ItemStack::getCount).sum();
+
+        // Map total items to fill level (max 4)
+        int fillLevel = Math.min(totalItems / 48, 4);
+
+        // Update block state if necessary
+        BlockState currentState = getBlockState();
+        if (currentState.getBlock() instanceof JarOfTipsBlock) {
+            if (currentState.getValue(JarOfTipsBlock.FILL_LEVEL) != fillLevel) {
+                level.setBlock(worldPosition, currentState.setValue(JarOfTipsBlock.FILL_LEVEL, fillLevel), 3);
+            }
+        }
     }
 }
