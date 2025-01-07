@@ -1,5 +1,5 @@
 {
-  "parent": "missions:block/jar_of_tips",
+  "parent": "missions:block/jar_of_tips_empty",
   "display": {
     "thirdperson_righthand": {
       "rotation": [ 0, 90, 0 ],

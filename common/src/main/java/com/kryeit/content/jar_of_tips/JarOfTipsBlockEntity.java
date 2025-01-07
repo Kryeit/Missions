@@ -181,13 +181,11 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
             return;
         }
 
-        // Calculate total items in the inventory
         int totalItems = inventory.stream().mapToInt(ItemStack::getCount).sum();
 
-        // Map total items to fill level (max 4)
-        int fillLevel = Math.min(totalItems / 48, 4);
+        int maxItems = 9 * 64;
+        int fillLevel = Math.min(totalItems * 4 / maxItems, 4);
 
-        // Update block state if necessary
         BlockState currentState = getBlockState();
         if (currentState.getBlock() instanceof JarOfTipsBlock) {
             if (currentState.getValue(JarOfTipsBlock.FILL_LEVEL) != fillLevel) {
