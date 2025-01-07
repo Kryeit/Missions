@@ -73,7 +73,7 @@ public class JarOfTipsItem extends BlockItem {
                 float yaw = player.getYRot();
                 projectile.shootFromRotation(player, pitch, yaw, 0.0F, 0.5F, 0.3F);
                 level.addFreshEntity(projectile);
-                player.getCooldowns().addCooldown(this, 14);
+                player.getCooldowns().addCooldown(this, 3);
 
                 stack.shrink(1);
             }
