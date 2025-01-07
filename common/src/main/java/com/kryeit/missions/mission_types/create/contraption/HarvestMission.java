@@ -14,6 +14,11 @@ public class HarvestMission implements MultiResourceMissionType {
     }
 
     @Override
+    public boolean assignOnlyOnce() {
+        return true;
+    }
+
+    @Override
     public MissionDifficulty difficulty() {
         return MissionDifficulty.EASY;
     }
