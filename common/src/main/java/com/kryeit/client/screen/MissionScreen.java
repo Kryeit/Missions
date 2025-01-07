@@ -197,9 +197,8 @@ public class MissionScreen extends Screen {
         int buttonWidth = 100;
         int buttonHeight = 20;
         int bottomPadding = 20;
-        int x = (this.width / 2 - buttonWidth - spacing);
+        int x = (this.width / 2 - buttonWidth - spacing - 20);
         int y = this.height - buttonHeight - bottomPadding;
-
 
         this.addRenderableWidget(Button.builder(CLOSE, button -> Minecraft.getInstance().setScreen(null))
                 .bounds(x, y, buttonWidth, buttonHeight)
@@ -207,16 +206,20 @@ public class MissionScreen extends Screen {
     }
 
     public void createInfoButton() {
-        int x = this.width / 2 - 160;
-        int y = this.height - 40;
-        this.addRenderableWidget(new InfoButton(x, y));
+        int buttonWidth = 20;
+        int buttonHeight = 20;
+        int bottomPadding = 20;
+        int x = this.width / 2 - buttonWidth / 2;
+        int y = this.height - buttonHeight - bottomPadding;
+
+        this.addRenderableWidget(new InfoButton(x, y, this));
     }
 
     public void createRewardButton(boolean rewardsAvailable) {
         int spacing = 5;
         int buttonHeight = 20;
         int bottomPadding = 20;
-        int x = this.width / 2 + spacing;
+        int x = this.width / 2 + spacing + 20;
         int y = this.height - buttonHeight - bottomPadding;
 
         this.addRenderableWidget(new RewardsButton(x, y, rewardsAvailable));
