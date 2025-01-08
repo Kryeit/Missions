@@ -47,7 +47,7 @@ import org.jetbrains.annotations.Nullable;
 public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEntity>, SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final IntegerProperty FILL_LEVEL = IntegerProperty.create("fill_level", 0, 4);
+    public static final IntegerProperty FILL_LEVEL = IntegerProperty.create("fill_level", 0, 3);
 
     private static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 

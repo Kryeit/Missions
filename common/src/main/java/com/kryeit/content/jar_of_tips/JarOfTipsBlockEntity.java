@@ -6,6 +6,9 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
@@ -184,7 +187,7 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
         int totalItems = inventory.stream().mapToInt(ItemStack::getCount).sum();
 
         int maxItems = 9 * 64;
-        int fillLevel = Math.min(totalItems * 4 / maxItems, 4);
+        int fillLevel = Math.min(totalItems * 3 / maxItems, 3);
 
         BlockState currentState = getBlockState();
         if (currentState.getBlock() instanceof JarOfTipsBlock) {
