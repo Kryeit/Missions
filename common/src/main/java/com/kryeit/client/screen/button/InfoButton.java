@@ -1,6 +1,5 @@
 package com.kryeit.client.screen.button;
 
-import com.kryeit.client.screen.MissionScreen;
 import com.kryeit.registry.ModStats;
 import com.kryeit.utils.Utils;
 import net.minecraft.ChatFormatting;

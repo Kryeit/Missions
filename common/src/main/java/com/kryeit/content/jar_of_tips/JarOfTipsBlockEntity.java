@@ -1,14 +1,11 @@
 package com.kryeit.content.jar_of_tips;
 
-import com.kryeit.registry.ModItems;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
@@ -184,10 +181,18 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
             return;
         }
 
-        int totalItems = inventory.stream().mapToInt(ItemStack::getCount).sum();
+        long filledSlots = inventory.stream().filter(itemStack -> !itemStack.isEmpty()).count();
 
-        int maxItems = 9 * 64;
-        int fillLevel = Math.min(totalItems * 3 / maxItems, 3);
+        int fillLevel;
+        if (filledSlots == 0) {
+            fillLevel = 0;
+        } else if (filledSlots == 9) {
+            fillLevel = 3;
+        } else if (filledSlots >= 5) {
+            fillLevel = 2;
+        } else {
+            fillLevel = 1;
+        }
 
         BlockState currentState = getBlockState();
         if (currentState.getBlock() instanceof JarOfTipsBlock) {
@@ -195,5 +200,17 @@ public class JarOfTipsBlockEntity extends SmartBlockEntity implements WorldlyCon
                 level.setBlock(worldPosition, currentState.setValue(JarOfTipsBlock.FILL_LEVEL, fillLevel), 3);
             }
         }
+    }
+
+    @Override
+    public void write(CompoundTag tag, boolean clientPacket) {
+        ContainerHelper.saveAllItems(tag, inventory);
+        super.write(tag, clientPacket);
+    }
+
+    @Override
+    public void read(CompoundTag tag, boolean clientPacket) {
+        ContainerHelper.loadAllItems(tag, inventory);
+        super.read(tag, clientPacket);
     }
 }

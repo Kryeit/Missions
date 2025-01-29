@@ -1,3 +1,11 @@
+# 0.4.2
+- Reworked the jar of tips, which has more models as it gets filled!
+- Fixed jar of tips not persisting its inventory
+- When thrown it will always break
+- Click with a currency item to introduce it
+- Drill, harvest and saw missions are assignOnlyOnce, although this feature is broken for rerolled missions
+- Recolated the info, reward and close button in the missions gui
+
 # 0.4.1
 - Fix dupe bug with the Mechanical Exchanger in Forge side
 
