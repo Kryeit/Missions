@@ -1,6 +1,7 @@
 # 0.4.3
 - Removed `exchanger-drop-rate` from the config.json
 - Added the exchanger drop when a player completes all 10 missions
+- Fixed filled jar model textures having z-fighting
 
 # 0.4.2
 - Reworked the jar of tips, which has more models as it gets filled!
