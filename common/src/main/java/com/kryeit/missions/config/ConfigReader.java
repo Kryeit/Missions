@@ -22,16 +22,14 @@ import java.util.Map;
 public class ConfigReader {
     private final Map<MissionType, MissionTypeConfig> missions;
     private final List<ItemStack> exchange;
-    public final float exchangerDropRate;
     public final int firstRerollCurrency;
     public final int freeRerolls;
     public final String commandUponMission;
     public final ReassignInterval reassignInterval;
 
-    private ConfigReader(Map<MissionType, MissionTypeConfig> missions, List<ItemStack> exchange, float exchangerDropRate, int firstRerollCurrency, int freeRerolls, String commandUponMission, ReassignInterval reassignInterval) {
+    private ConfigReader(Map<MissionType, MissionTypeConfig> missions, List<ItemStack> exchange, int firstRerollCurrency, int freeRerolls, String commandUponMission, ReassignInterval reassignInterval) {
         this.missions = missions;
         this.exchange = exchange;
-        this.exchangerDropRate = exchangerDropRate;
         this.firstRerollCurrency = firstRerollCurrency;
         this.freeRerolls = freeRerolls;
         this.commandUponMission = commandUponMission;
@@ -72,13 +70,12 @@ public class ConfigReader {
         String config = readOrCopyFile(path.resolve("config.json"), "/config.json");
         JSONObject configObject = new JSONObject(config);
 
-        float exchangerDropRate = Float.parseFloat(configObject.getString("exchanger-drop-rate"));
         int firstRerollCurrency = Integer.parseInt(configObject.getString("first-reroll-currency"));
         int freeRerolls = Integer.parseInt(configObject.getString("free-rerolls"));
         String commandUponMission = configObject.getString("command-upon-mission");
         String reassignmentInterval = configObject.optString("reassignment-interval (DAILY or WEEKLY)").orElse("WEEKLY");
 
-        return new ConfigReader(missionConfig, items, exchangerDropRate, firstRerollCurrency, freeRerolls, commandUponMission, ReassignInterval.valueOf(reassignmentInterval));
+        return new ConfigReader(missionConfig, items, firstRerollCurrency, freeRerolls, commandUponMission, ReassignInterval.valueOf(reassignmentInterval));
     }
 
     private static void parseConfigVersion2(JSONObject config, Map<MissionType, MissionTypeConfig> missions) {

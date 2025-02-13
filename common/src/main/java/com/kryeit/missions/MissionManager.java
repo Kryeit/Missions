@@ -184,6 +184,7 @@ public class MissionManager {
         ServerPlayer serverPlayer = playerList.getPlayer(player);
         MissionDifficulty difficulty = MissionTypeRegistry.INSTANCE.getType(mission.missionID()).difficulty();
 
+        List<DataStorage.ActiveMission> activeMissions = getActiveMissions(player);
         if (serverPlayer == null) return;
 
         serverPlayer.awardStat(difficulty.stat());
@@ -196,10 +197,10 @@ public class MissionManager {
             Component message = Components.translatable("missions.message.hard_mission_completed", serverPlayer.getName())
                     .withStyle(ChatFormatting.GOLD);
             playerList.broadcastSystemMessage(message, false);
+        }
 
-            if (Math.random() <= Missions.getConfig().exchangerDropRate) {
-                MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.MECHANICAL_EXCHANGER.asStack(), serverPlayer));
-            }
+        if (activeMissions.stream().allMatch(DataStorage.ActiveMission::isCompleted)) {
+            MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(ModBlocks.MECHANICAL_EXCHANGER.asStack(), serverPlayer));
         }
     }
 
