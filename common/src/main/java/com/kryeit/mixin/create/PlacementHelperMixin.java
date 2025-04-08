@@ -2,7 +2,7 @@ package com.kryeit.mixin.create;
 
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.vanilla.PlaceMission;
-import com.simibubi.create.foundation.placement.PlacementOffset;
+import net.createmod.catnip.placement.PlacementOffset;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

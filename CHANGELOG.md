@@ -1,3 +1,6 @@
+# 0.4.4
+- Update to Create mod 0.6 for Forge
+
 # 0.4.3
 - Removed `exchanger-drop-rate` from the config.json
 - Added the exchanger drop when a player completes all 10 missions

@@ -1,43 +1,60 @@
 package com.kryeit.content.exchanger;
 
-import com.jozufozu.flywheel.api.MaterialManager;
 import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntityInstance;
-import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityVisual;
+import com.simibubi.create.content.kinetics.base.RotatingInstance;
+import com.simibubi.create.foundation.render.AllInstanceTypes;
+import dev.engine_room.flywheel.api.instance.Instance;
+import dev.engine_room.flywheel.api.visualization.VisualizationContext;
+import dev.engine_room.flywheel.lib.model.Models;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Consumer;
 
 
-public class MechanicalExchangerInstance extends KineticBlockEntityInstance<MechanicalExchangerBlockEntity> {
+public class MechanicalExchangerInstance extends KineticBlockEntityVisual<MechanicalExchangerBlockEntity> {
 
-    protected final RotatingData shaft;
+    protected final RotatingInstance shaft;
     final Direction direction;
     private final Direction opposite;
 
-    public MechanicalExchangerInstance(MaterialManager materialManager, MechanicalExchangerBlockEntity blockEntity) {
-        super(materialManager, blockEntity);
+    public MechanicalExchangerInstance(VisualizationContext context, MechanicalExchangerBlockEntity blockEntity, float partialTick) {
+        super(context, blockEntity, partialTick);
 
-        direction = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        direction = blockEntity.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
         opposite = direction.getOpposite();
-        shaft = getRotatingMaterial().getModel(AllPartialModels.SHAFT_HALF, blockState, opposite).createInstance();
 
-        setup(shaft);
+        shaft = instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(AllPartialModels.SHAFT_HALF))
+                .createInstance();
+
+        shaft.setup(blockEntity,rotationAxis(), blockEntity.getSpeed())
+                .setPosition(getVisualPosition())
+                .rotateToFace(direction, rotationAxis())
+                .setChanged();
     }
 
     @Override
-    public void update() {
-        updateRotation(shaft);
+    public void collectCrumblingInstances(Consumer<@Nullable Instance> consumer) {
+        consumer.accept(shaft);
     }
 
     @Override
-    public void updateLight() {
+    public void update(float pt) {
+        shaft.setup(blockEntity,rotationAxis(), blockEntity.getSpeed())
+                .setChanged();
+    }
+
+    @Override
+    public void updateLight(float v) {
         BlockPos behind = pos.relative(opposite);
         relight(behind, shaft);
     }
 
     @Override
-    protected void remove() {
+    protected void _delete() {
         shaft.delete();
     }
 }

@@ -3,7 +3,7 @@ package com.kryeit.client;
 import com.kryeit.annotation.event.MultiLoaderEvent;
 import com.kryeit.client.screen.MissionScreen;
 import com.kryeit.registry.ModKeys;
-import com.simibubi.create.foundation.gui.ScreenOpener;
+import net.createmod.catnip.gui.ScreenOpener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.level.GameType;

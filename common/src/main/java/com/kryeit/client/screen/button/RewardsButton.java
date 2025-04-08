@@ -2,7 +2,6 @@ package com.kryeit.client.screen.button;
 
 import com.kryeit.Missions;
 import com.kryeit.client.ClientsideMissionPacketUtils;
-import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class RewardsButton extends Button {
-    private static final Component REWARDS = Components.literal("    ").append(Components.translatable("missions.menu.main.rewards"));
+    private static final Component REWARDS = Component.literal("    ").append(Component.translatable("missions.menu.main.rewards"));
     public static final ResourceLocation CHEST_TEXTURE = Missions.asResource("textures/gui/christmas_chest.png");
     private static final ResourceLocation OPEN_CHEST_TEXTURE = Missions.asResource("textures/gui/open_christmas_chest.png");
     private boolean rewardsAvailable;

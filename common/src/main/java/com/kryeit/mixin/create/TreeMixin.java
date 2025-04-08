@@ -2,7 +2,7 @@ package com.kryeit.mixin.create;
 
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.mission_types.create.contraption.SawMission;
-import com.simibubi.create.foundation.utility.TreeCutter;
+import com.simibubi.create.content.kinetics.saw.TreeCutter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Player;

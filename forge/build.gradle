@@ -28,17 +28,24 @@ configurations {
 }
 
 repositories {
-    maven { // Create Forge and Registrate Forge
+    maven {
         url = "https://maven.tterrag.com/"
+        content {
+            includeGroup "com.tterrag.registrate"
+            includeGroup "com.simibubi.create"
+        }
+    }
+    maven {
+        url = "https://maven.createmod.net"
     }
 }
 
 dependencies {
     forge "net.minecraftforge:forge:${forge_version}"
-
-    modImplementation("com.simibubi.create:create-${minecraft_version}:${create_version}:all") { transitive = false }
-    modImplementation("com.jozufozu.flywheel:flywheel-forge-${flywheel_version}")
-    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
+    modImplementation("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
+    modImplementation("com.simibubi.create:create-${minecraft_version}:${create_forge_version}:slim") { transitive = false }
+    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_forge_version}")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }

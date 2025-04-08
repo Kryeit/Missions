@@ -9,7 +9,6 @@ import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.client.screen.button.RewardsButton;
 import com.kryeit.missions.mission_types.create.train.TrainDriverPassengerMission;
 import com.kryeit.utils.Utils;
-import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -33,7 +32,7 @@ import java.util.Objects;
 
 public class MissionScreen extends Screen {
     public static final ResourceLocation MISSIONS_TITLE = Missions.asResource("textures/gui/title.png");
-    public static final Component CLOSE = Components.translatable("missions.menu.close");
+    public static final Component CLOSE = Component.translatable("missions.menu.close");
     private ClientMissionData data = null;
 
     public MissionScreen() {
@@ -64,7 +63,7 @@ public class MissionScreen extends Screen {
         List<ClientsideActiveMission> activeMissions = data.activeMissions();
 
         if (activeMissions.size() != 10) {
-            Minecraft.getInstance().gui.getChat().addMessage(Components.translatable("Something wrong happened, you don't have 10 missions. Contact an admin"));
+            Minecraft.getInstance().gui.getChat().addMessage(Component.translatable("Something wrong happened, you don't have 10 missions. Contact an admin"));
             return;
         }
 
@@ -131,11 +130,11 @@ public class MissionScreen extends Screen {
         String requiredAmount = numberFormat.format(mission.requiredAmount());
 
         Component progress = mission.isCompleted()
-                ? Components.translatable("missions.menu.main.tooltip.progress.completed")
-                : Components.translatable(numberFormat.format(mission.progress()) + "/" + requiredAmount);
+                ? Component.translatable("missions.menu.main.tooltip.progress.completed")
+                : Component.translatable(numberFormat.format(mission.progress()) + "/" + requiredAmount);
 
         List<Component> components = new ArrayList<>();
-        components.add(Components.translatable("missions.menu.main.tooltip.details")
+        components.add(Component.translatable("missions.menu.main.tooltip.details")
                 .withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 
         String itemName = Utils.removeBrackets(mission.itemRequired().getDisplayName().getString());
@@ -173,11 +172,11 @@ public class MissionScreen extends Screen {
         }
 
         if (!mission.isCompleted())
-            components.add(Components.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount(),
+            components.add(Component.translatable("missions.menu.main.tooltip.reward", mission.rewardAmount(),
                             Utils.removeBrackets(BuiltInRegistries.ITEM.get(new ResourceLocation(mission.rewardItemLocation())).getDefaultInstance().getDisplayName().getString()))
                     .withStyle(ChatFormatting.LIGHT_PURPLE));
 
-        components.add(Components.translatable("missions.menu.main.tooltip.progress", progress)
+        components.add(Component.translatable("missions.menu.main.tooltip.progress", progress)
                 .withStyle(ChatFormatting.GREEN));
 
         if (!mission.isCompleted())

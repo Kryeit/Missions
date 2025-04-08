@@ -2,15 +2,17 @@ package com.kryeit.registry;
 
 import com.kryeit.Missions;
 import com.kryeit.content.exchanger.ponder.MechanicalExchangerScene;
-import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
+import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import com.tterrag.registrate.util.entry.RegistryEntry;
+import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
+import net.createmod.ponder.foundation.registration.DefaultPonderSceneRegistrationHelper;
+import net.minecraft.resources.ResourceLocation;
 
 public class ModPonders {
 
-    private static final PonderRegistrationHelper HELPER = new PonderRegistrationHelper(Missions.MOD_ID);
-
-    public static void register() {
-        HELPER.forComponents(ModBlocks.MECHANICAL_EXCHANGER)
-                .addStoryBoard("mechanical_exchanger", MechanicalExchangerScene::showPonder);
+    public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
+        PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
+//        HELPER.forComponents(ModBlocks.MECHANICAL_EXCHANGER)
+//                .addStoryBoard("mechanical_exchanger", MechanicalExchangerScene::showPonder);
     }
-
 }

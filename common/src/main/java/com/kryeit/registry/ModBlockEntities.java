@@ -12,7 +12,7 @@ public class ModBlockEntities {
 
     public static final BlockEntityEntry<MechanicalExchangerBlockEntity> MECHANICAL_EXCHANGER = Missions.registrate()
             .blockEntity("mechanical_exchanger", MechanicalExchangerBlockEntity::new)
-            .instance(() -> MechanicalExchangerInstance::new)
+            .visual(() -> MechanicalExchangerInstance::new)
             .validBlocks(ModBlocks.MECHANICAL_EXCHANGER)
             .renderer(() -> MechanicalExchangerRenderer::new)
             .register();

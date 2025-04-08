@@ -3,7 +3,6 @@ package com.kryeit.client.screen.toasts;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.registry.ModSounds;
 import com.kryeit.utils.Utils;
-import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -44,7 +43,7 @@ public class MissionCompletedToast implements Toast {
         String title = Utils.adjustStringToWidth(mission.titleString().getString(), 125);
 
         // Title text
-        Component titleText = Components.translatable(title).withStyle().withStyle(ChatFormatting.WHITE);
+        Component titleText = Component.translatable(title).withStyle().withStyle(ChatFormatting.WHITE);
         guiGraphics.drawString(toastComponent.getMinecraft().font, titleText, 30, 7, -1);
 
         // Description text
