@@ -1,15 +1,18 @@
 package com.kryeit.missions;
 
+import com.kryeit.MinecraftServerSupplier;
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.config.Range;
 import com.kryeit.utils.Utils;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.LevelResource;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +20,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class DataStorage implements AutoCloseable {
-    private static final File FILE = new File("config/missions/mission_data.nbt");
+    private static final File FILE = new File(MinecraftServerSupplier.getServer().getWorldPath(LevelResource.ROOT).toFile().toString().replace(".", "") + "missions/mission_data.nbt");
     private final CompoundTag data;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
