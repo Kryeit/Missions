@@ -1,5 +1,6 @@
 # 0.4.4
 - Update to Create mod 0.6 for Forge
+- `missions_data.nbt` is now saved in the world folder to avoid singleplayers sharing the same storage
 
 # 0.4.3
 - Removed `exchanger-drop-rate` from the config.json

@@ -5,7 +5,6 @@ import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.config.Range;
 import com.kryeit.utils.Utils;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;

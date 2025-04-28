@@ -7,7 +7,6 @@ import com.kryeit.content.jar_of_tips.JarOfTipsItem;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
-import com.simibubi.create.infrastructure.config.CStress;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.Rarity;
