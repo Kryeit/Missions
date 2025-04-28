@@ -13,49 +13,57 @@ loom {
     forge {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-
-        mixinConfig "missions-common.mixins.json"
-        mixinConfig "missions.mixins.json"
     }
 }
 
 configurations {
     common
-    shadowCommon
+    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentForge.extendsFrom common
 }
 
 repositories {
-    maven {
-        url = "https://maven.tterrag.com/"
-        content {
-            includeGroup "com.tterrag.registrate"
-            includeGroup "com.simibubi.create"
-        }
-    }
-    maven {
-        url = "https://maven.createmod.net"
-    }
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${forge_version}"
-    modImplementation("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
+    forge("net.minecraftforge:forge:$minecraft_version-$forge_version")
+    common(project(path: ":common", configuration: "namedElements")) { transitive = false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+
+    // Create and its dependencies
     modImplementation("com.simibubi.create:create-${minecraft_version}:${create_forge_version}:slim") { transitive = false }
-    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
+    modImplementation("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
+    modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_forge_version}")
+    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_forge_version}")
     modImplementation("com.tterrag.registrate:Registrate:${registrate_forge_version}")
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+    implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
 }
 
 processResources {
-    inputs.property "version", project.version
+    // set up properties for filling into metadata
+    Map<String, Object> properties = [
+            "version": version,
+            "forge_version": forge_version.split("\\.")[0], // only specify major version of forge
+            "minecraft_version": minecraft_version,
+            "create_version": create_forge_version.split("-")[0] // cut off build number
+    ]
+    inputs.properties(properties)
 
     filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+        expand properties
+    }
+}
+
+loom {
+    forge {
+        mixinConfig(
+                "missions-common.mixins.json",
+                "missions.mixins.json"
+        )
     }
 }
 
@@ -64,17 +72,17 @@ shadowJar {
     exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    archiveClassifier =  "dev-shadow"
+    archiveClassifier = "dev-shadow"
 }
 
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    archiveClassifier =  null
+    archiveClassifier = null
 }
 
 jar {
-    archiveClassifier =  "dev"
+    archiveClassifier = "dev"
 }
 
 sourcesJar {
@@ -86,19 +94,5 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
-    }
-}
-
-publishing {
-    publications {
-        mavenForge(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
-            from components.java
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
     }
 }

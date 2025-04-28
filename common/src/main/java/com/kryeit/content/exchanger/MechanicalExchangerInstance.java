@@ -30,10 +30,9 @@ public class MechanicalExchangerInstance extends KineticBlockEntityVisual<Mechan
         shaft = instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(AllPartialModels.SHAFT_HALF))
                 .createInstance();
 
-        shaft.setup(blockEntity,rotationAxis(), blockEntity.getSpeed())
-                .setPosition(getVisualPosition())
-                .rotateToFace(direction, rotationAxis())
+        shaft.setup(blockEntity, rotationAxis(), blockEntity.getSpeed())
                 .setChanged();
+
     }
 
     @Override
@@ -43,7 +42,7 @@ public class MechanicalExchangerInstance extends KineticBlockEntityVisual<Mechan
 
     @Override
     public void update(float pt) {
-        shaft.setup(blockEntity,rotationAxis(), blockEntity.getSpeed())
+        shaft.setup(blockEntity, rotationAxis(), blockEntity.getSpeed())
                 .setChanged();
     }
 

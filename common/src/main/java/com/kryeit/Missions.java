@@ -181,6 +181,7 @@ public class Missions {
 
     @ExpectPlatform
     public static void finalizeRegistrate() {
+        ModBlocks.registerStresses();
         throw new AssertionError();
     }
 

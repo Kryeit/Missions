@@ -9,6 +9,6 @@ public class MissionsClient {
 
     public static void initializeClient() {
         ModKeys.register();
-        PonderIndex.addPlugin(new ModPonderPlugin());
+        //PonderIndex.addPlugin(new ModPonderPlugin());
     }
 }

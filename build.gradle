@@ -4,7 +4,7 @@ plugins {
 }
 
 architectury {
-    minecraft = rootProject.minecraft_version
+    minecraft = minecraft_version
 }
 
 subprojects {
@@ -14,8 +14,18 @@ subprojects {
         silentMojangMappingsLicense()
     }
 
+    repositories {
+        maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
+
+        maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
+        maven { url = "https://maven.tterrag.com" } // Registrate
+        maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
+    }
+
     dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        minecraft "com.mojang:minecraft:$minecraft_version"
+
+        // Can't use parchment for some reason, game ends up completely unmapped
         mappings loom.officialMojangMappings()
     }
 }
@@ -31,7 +41,6 @@ allprojects {
 
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
-        options.release = 17
     }
 
     java {

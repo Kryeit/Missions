@@ -20,37 +20,50 @@ configurations {
 }
 
 repositories {
-    maven { url = "https://api.modrinth.com/maven" } // LazyDFU
-    maven { url = "https://maven.terraformersmc.com/releases/" } // Mod Menu
-    maven { url = "https://mvn.devos.one/snapshots/" } // Create, Porting Lib, Forge Tags, Milk Lib, Registrate
-    maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
-    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge config api port
-    maven { url = "https://maven.tterrag.com/" } // Flywheel
-    maven { url = "https://jitpack.io/" } // Mixin Extras, Fabric ASM
+    // mavens for Create Fabric and dependencies
+    maven { url = "https://mvn.devos.one/releases" } // Porting Lib releases
+    maven { url = "https://mvn.devos.one/snapshots" } // Create and several dependencies
     maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
-    maven { url = "https://maven.createmod.net" }
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge Config API Port
+
+    maven { // Fabric ASM for Porting Lib
+        url = "https://jitpack.io/"
+        content { includeGroupAndSubgroups("com.github") }
+    }
+}
+
+configurations.configureEach {
+    resolutionStrategy {
+        // make sure the desired version of loader is used. Sometimes old versions are pulled in transitively.
+        force("net.fabricmc:fabric-loader:$fabric_loader_version")
+    }
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    modImplementation("net.fabricmc:fabric-loader:$fabric_loader_version")
+    common(project(path: ":common", configuration: "namedElements")) { transitive = false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive = false }
+
+    // dependencies
+    modImplementation("net.fabricmc.fabric-api:fabric-api:$fabric_api_version")
 
     // Create - dependencies are added transitively
-    modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}")
-
-    // Development QOL
-    modLocalRuntime("maven.modrinth:lazydfu:${lazydfu_version}")
-    modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
-
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+    modImplementation("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
 }
 
 processResources {
-    inputs.property "version", project.version
+    // set up properties for filling into metadata
+    Map<String, Object> properties = [
+            "version": version,
+            "fabric_loader_version": fabric_loader_version,
+            "fabric_api_version": fabric_api_version,
+            "minecraft_version": minecraft_version,
+            "create_version": create_fabric_version // on fabric, use the entire version, unlike forge
+    ]
+    inputs.properties(properties)
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand properties
     }
 }
 
@@ -81,19 +94,5 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
-    }
-}
-
-publishing {
-    publications {
-        mavenFabric(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
-            from components.java
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
     }
 }
