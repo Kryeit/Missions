@@ -1,3 +1,6 @@
+# 0.4.5
+- Fix java version
+
 # 0.4.4
 - Update to Create mod 0.6 for Forge
 - `missions_data.nbt` is now saved in the world folder to avoid singleplayers sharing the same storage
