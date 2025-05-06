@@ -1,3 +1,6 @@
+# 0.4.6
+- Fix crash when connecting to a server
+
 # 0.4.5
 - Fix java version
 
