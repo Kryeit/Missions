@@ -1,3 +1,6 @@
+# 0.4.7
+- Fix 6.0.6 compat (Forge)
+
 # 0.4.6
 - Fix crash when connecting to a server
 
