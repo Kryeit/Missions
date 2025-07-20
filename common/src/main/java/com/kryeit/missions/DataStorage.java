@@ -11,6 +11,7 @@ import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.storage.LevelResource;
 
 import java.io.File;
@@ -19,18 +20,25 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class DataStorage implements AutoCloseable {
-    private static final File FILE = new File(MinecraftServerSupplier.getServer().getWorldPath(LevelResource.ROOT).toFile(), "missions/mission_data.nbt");
+
+    private final File file;
     private final CompoundTag data;
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public DataStorage() {
+        MinecraftServer server = MinecraftServerSupplier.getServer();
+        if (server == null) {
+            throw new IllegalStateException("Cannot initialize DataStorage: MinecraftServer is null (probably running on client side)");
+        }
+
+        this.file = new File(server.getWorldPath(LevelResource.ROOT).toFile(), "missions/mission_data.nbt");
+
         try {
-            FILE.getParentFile().mkdirs();
-            if (!FILE.exists()) {
+            file.getParentFile().mkdirs();
+            if (!file.exists()) {
                 data = new CompoundTag();
                 save();
             } else {
-                data = NbtIo.readCompressed(FILE);
+                data = NbtIo.readCompressed(file);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -39,11 +47,13 @@ public class DataStorage implements AutoCloseable {
 
     public void save() {
         try {
-            NbtIo.writeCompressed(data, FILE);
+            NbtIo.writeCompressed(data, file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    // (All other methods unchanged — except FILE → file where applicable)
 
     public CompoundTag getMissionData(String missionID, UUID player) {
         CompoundTag missionData = getOrCreateTag(data, "mission_data");
@@ -77,7 +87,9 @@ public class DataStorage implements AutoCloseable {
     public void setCompleted(UUID player, ResourceLocation item, String missionTypeID) {
         for (Tag tag : getActiveMissionsTag(player)) {
             CompoundTag compound = (CompoundTag) tag;
-            if (new ResourceLocation(compound.getString("item")).equals(item) && compound.getString("mission_id").equals(missionTypeID) && !compound.getBoolean("completed")) {
+            if (new ResourceLocation(compound.getString("item")).equals(item)
+                    && compound.getString("mission_id").equals(missionTypeID)
+                    && !compound.getBoolean("completed")) {
                 compound.putBoolean("completed", true);
                 break;
             }
@@ -90,11 +102,11 @@ public class DataStorage implements AutoCloseable {
 
         for (int i = 0; i < length; i++) {
             Predicate<ConfigReader.MissionTypeConfig> filter = missionTypeConfig ->
-                    !missionTypeConfig.missionType().assignOnlyOnce() || !shuffled.contains(missionTypeConfig) || remaining.stream().allMatch(m -> m.missionType().assignOnlyOnce());
+                    !missionTypeConfig.missionType().assignOnlyOnce()
+                            || !shuffled.contains(missionTypeConfig)
+                            || remaining.stream().allMatch(m -> m.missionType().assignOnlyOnce());
 
-            double totalWeight = remaining.stream()
-                    .mapToDouble(ConfigReader.MissionTypeConfig::weight)
-                    .sum();
+            double totalWeight = remaining.stream().mapToDouble(ConfigReader.MissionTypeConfig::weight).sum();
             double randomNumber = Math.random() * totalWeight;
             double weightSum = 0;
 
@@ -104,21 +116,19 @@ public class DataStorage implements AutoCloseable {
                 if (weightSum >= randomNumber && filter.test(missionTypeConfig)) {
                     shuffled.add(missionTypeConfig);
                     if (missionTypeConfig.missionType().assignOnlyOnce()) {
-                        remaining.remove(j);  // Remove the mission to prevent it from being selected again
+                        remaining.remove(j);
                     }
                     break;
                 }
             }
 
-            // If no mission was selected because all were filtered out, select the first mission
-            if (shuffled.isEmpty() && i == length - 1) {
+            if (shuffled.isEmpty() && i == length - 1 && !remaining.isEmpty()) {
                 shuffled.add(remaining.get(0));
             }
         }
 
         return shuffled;
     }
-
 
     public void reassignActiveMissions(Map<MissionType, ConfigReader.MissionTypeConfig> missions, UUID player) {
         ListTag list = getActiveMissionsTag(player);
@@ -148,7 +158,6 @@ public class DataStorage implements AutoCloseable {
 
     public void reassignActiveMission(Map<MissionType, ConfigReader.MissionTypeConfig> missions, UUID player, int index) {
         ListTag list = getActiveMissionsTag(player);
-
         List<ConfigReader.MissionTypeConfig> assignableTypes = new ArrayList<>(missions.values());
 
         ConfigReader.MissionTypeConfig missionTypeConfig = shuffleWeighted(assignableTypes, 1).get(0);
@@ -202,11 +211,6 @@ public class DataStorage implements AutoCloseable {
         return output;
     }
 
-    /**
-     * Claims the player's rewards. Does NOT move the rewards into the player's inventory!
-     *
-     * @param player The player whose rewards to claim
-     */
     public void claimRewards(UUID player) {
         data.getCompound("rewards").remove(player.toString());
     }
@@ -235,15 +239,6 @@ public class DataStorage implements AutoCloseable {
         private final int requiredAmount;
         private final String title;
         private final String rewardItem;
-
-        public int rewardAmount() {
-            return rewardAmount;
-        }
-
-        public String rewardItem() {
-            return rewardItem;
-        }
-
         private final int rewardAmount;
 
         private ActiveMission(ResourceLocation item, boolean isCompleted, String missionID, int requiredAmount, String title, String rewardItem, int rewardAmount) {
@@ -263,8 +258,15 @@ public class DataStorage implements AutoCloseable {
                     tag.getInt("required_amount"),
                     tag.getString("title"),
                     tag.getString("reward_item"),
-                    tag.getInt("reward_amount")
-            );
+                    tag.getInt("reward_amount"));
+        }
+
+        public int rewardAmount() {
+            return rewardAmount;
+        }
+
+        public String rewardItem() {
+            return rewardItem;
         }
 
         public int requiredAmount() {

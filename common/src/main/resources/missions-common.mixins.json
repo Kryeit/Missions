@@ -14,7 +14,7 @@
     "StatsCounterMixin",
     "create.AbstractContraptionEntityMixin",
     "create.BasinOperatingBlockEntityMixin",
-    "create.BeltMovementHandlerMixin",
+    "create.BeltWalkTrackerMixin",
     "create.BlockBreakingKineticBlockEntityMixin",
     "create.BlockBreakingMovementBehaviourMixin",
     "create.HarvesterMovementBehaviourMixin",
