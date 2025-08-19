@@ -1,39 +1,61 @@
 package com.kryeit.mixin.create;
 
 import com.kryeit.missions.mission_types.create.belt.BeltWalkMission;
-import com.kryeit.utils.MixinUtils;
-import com.simibubi.create.content.kinetics.belt.BeltBlockEntity;
-import com.simibubi.create.content.kinetics.belt.transport.BeltMovementHandler;
+import com.simibubi.create.AllBlocks;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.kryeit.Missions.cachedBeltPlayerPositions;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
-@Mixin(BeltMovementHandler.class)
+@Mixin(ServerPlayer.class)
 public class BeltMovementHandlerMixin {
 
-    @Inject(method = "transportEntity(Lcom/simibubi/create/content/kinetics/belt/BeltBlockEntity;Lnet/minecraft/world/entity/Entity;Lcom/simibubi/create/content/kinetics/belt/transport/BeltMovementHandler$TransportedEntityInfo;)V",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/Entity;move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V"))
-    private static void onBeltTransportEntity(BeltBlockEntity beltBE, Entity entityIn, BeltMovementHandler.TransportedEntityInfo info, CallbackInfo ci) {
+    @Unique
+    private static final Map<UUID, Vec3> lastPositions = new HashMap<>();
 
-        if (entityIn instanceof ServerPlayer player) {
-            double distance = MixinUtils.getDistance(cachedBeltPlayerPositions.get(player.getUUID()), player.position());
+    @Unique
+    private static final Map<UUID, Double> accumulatedDistances = new HashMap<>();
 
-            if (!cachedBeltPlayerPositions.containsKey(player.getUUID()) || distance > 10 || info.getTicksSinceLastCollision() > 20) {
-                cachedBeltPlayerPositions.put(player.getUUID(), player.position());
-                return;
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void onPlayerTick(CallbackInfo ci) {
+        ServerPlayer player = (ServerPlayer) (Object) this;
+
+        // Use getOnPos to properly detect belts even if slightly below player's feet
+        BlockPos standingOn = player.getOnPos();
+        BlockState state = player.level().getBlockState(standingOn);
+
+        // Only track movement if the player is on a Create belt
+        if (!AllBlocks.BELT.has(state)) return;
+
+        UUID uuid = player.getUUID();
+        Vec3 current = player.position();
+        Vec3 last = lastPositions.get(uuid);
+
+        if (last != null) {
+            double distance = current.distanceTo(last);
+
+            if (distance > 0.01) { // Only accumulate significant movement
+                double total = accumulatedDistances.getOrDefault(uuid, 0.0) + distance;
+
+                if (total >= 1.0) {
+                    int fullBlocks = (int) total;
+                    BeltWalkMission.handleDistanceChange(uuid, fullBlocks);
+                    total -= fullBlocks;
+                }
+
+                accumulatedDistances.put(uuid, total);
             }
-
-            if (distance < 5) return;
-
-            cachedBeltPlayerPositions.replace(player.getUUID(), player.position());
-
-            BeltWalkMission.handleDistanceChange(player.getUUID(), 5);
         }
+
+        lastPositions.put(uuid, current);
     }
 }

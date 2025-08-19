@@ -132,7 +132,7 @@ public class MissionManager {
             return new ReassignmentPrice(Coins.getCoin(0).getItem(), 1);
         }
 
-        int price = 2 << rerolls - freeRerolls;
+        int price = 2 << (rerolls - freeRerolls);
         int coinIndex = (int) Utils.log(64, price - 1);
 
         int coinAmount = (int) (price / Math.pow(64, coinIndex));

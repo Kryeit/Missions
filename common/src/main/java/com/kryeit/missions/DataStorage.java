@@ -111,7 +111,7 @@ public class DataStorage implements AutoCloseable {
             }
 
             // If no mission was selected because all were filtered out, select the first mission
-            if (shuffled.isEmpty() && i == length - 1) {
+            if (shuffled.isEmpty() && i == length - 1 && !remaining.isEmpty()) {
                 shuffled.add(remaining.get(0));
             }
         }

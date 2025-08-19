@@ -52,7 +52,6 @@ public class Missions {
     private static ConfigReader configReader;
 
     public static HashMap<UUID, Vec3> cachedTrainPlayerPositions = new HashMap<>();
-    public static HashMap<UUID, Vec3> cachedBeltPlayerPositions = new HashMap<>();
 
     public static CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
