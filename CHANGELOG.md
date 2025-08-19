@@ -1,3 +1,7 @@
+# 0.4.8
+- Fix feed mission crashing clients (by swzo)
+- Improved Belt mission performance (by swzo)
+
 # 0.4.7
 - Fix 6.0.6 compat (Forge)
 
