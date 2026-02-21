@@ -21,15 +21,20 @@ configurations {
 
 repositories {
     // mavens for Create Fabric and dependencies
-    maven { url = "https://mvn.devos.one/releases" } // Porting Lib releases
-    maven { url = "https://mvn.devos.one/snapshots" } // Create and several dependencies
-    maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
-    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge Config API Port
+    maven { url = "https://maven.createmod.net/" }
+    maven { url = "https://mvn.devos.one/releases" }
+    maven { url = "https://mvn.devos.one/snapshots" }
+    maven { url = "https://maven.tterrag.com/" }
+    maven { url = "https://maven.jamieswhiteshirt.com/libs-release" }
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" }
 
     maven { // Fabric ASM for Porting Lib
         url = "https://jitpack.io/"
         content { includeGroupAndSubgroups("com.github") }
     }
+
+    maven { url = "https://maven.blamejared.com" } // JEI
+    maven { url = "https://maven.terraformersmc.com/releases" } // Mod Menu, EMI
 }
 
 configurations.configureEach {
@@ -48,7 +53,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabric_api_version")
 
     // Create - dependencies are added transitively
-    modImplementation("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
+    modImplementation("com.simibubi.create:create-fabric:${create_fabric_version}") // Create
 }
 
 processResources {
