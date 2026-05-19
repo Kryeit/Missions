@@ -1,0 +1,45 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+issueTrackerURL = "https://github.com/Kryeit/Missions/issues"
+license = "MIT"
+
+[[mods]]
+modId = "missions"
+version = "${version}"
+displayName = "Missions"
+authors = "MrRedRhino, MuriPlz"
+description = '''
+Missions here and there :P
+'''
+logoFile = "logo.png"
+
+[[dependencies.missions]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.missions]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.missions]]
+modId = "create"
+type = "required"
+versionRange = "[6.0.10,6.1.0)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.missions]]
+modId = "createdeco"
+type = "optional"
+versionRange = "[2.1.3,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config = "missions.mixins.json"

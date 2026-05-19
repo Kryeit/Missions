@@ -1,6 +1,7 @@
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.7.+" apply false
+    id 'dev.architectury.loom' version '1.11-SNAPSHOT' apply false
+    id 'architectury-plugin' version '3.4-SNAPSHOT'
+    id 'com.gradleup.shadow' version '8.3.6' apply false
 }
 
 architectury {
@@ -9,6 +10,7 @@ architectury {
 
 subprojects {
     apply plugin: "dev.architectury.loom"
+    apply plugin: 'architectury-plugin'
 
     loom {
         silentMojangMappingsLicense()
@@ -23,10 +25,21 @@ subprojects {
     }
 
     dependencies {
-        minecraft "com.mojang:minecraft:$minecraft_version"
+        minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
 
         // Can't use parchment for some reason, game ends up completely unmapped
         mappings loom.officialMojangMappings()
+    }
+
+    java {
+        withSourcesJar()
+
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        it.options.release = 21
     }
 }
 
@@ -36,17 +49,6 @@ allprojects {
     apply plugin: "maven-publish"
 
     archivesBaseName = "$rootProject.archives_base_name-${project.name}"
-    version = "${mod_version}"
+    version = rootProject.mod_version
     group = rootProject.maven_group
-
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
-    }
-
-    java {
-        withSourcesJar()
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
-    }
 }
