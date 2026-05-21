@@ -11,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.CreativeModeTab.TabVisibility;
 import net.minecraft.world.level.block.Block;
 
 import java.util.*;
@@ -38,7 +37,8 @@ public class ModCreativeTabs {
         throw new AssertionError();
     }
 
-    public static void register() {}
+    public static void register() {
+    }
 
     public enum Tabs {
         MAIN(ModCreativeTabs::getBaseTabKey);
@@ -55,7 +55,6 @@ public class ModCreativeTabs {
     }
 
     public static final class RegistrateDisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenerator {
-
         private final Tabs tab;
 
         public RegistrateDisplayItemsGenerator(Tabs tab) {
@@ -65,11 +64,11 @@ public class ModCreativeTabs {
         private static Predicate<Item> makeExclusionPredicate() {
             Set<Item> exclusions = new ReferenceOpenHashSet<>();
 
-            List<ItemProviderEntry<?>> simpleExclusions = List.of(
+            List<ItemProviderEntry<?, ?>> simpleExclusions = List.of(
                     //AllBlocks.REFINED_RADIANCE_CASING // just as an example
             );
 
-            for (ItemProviderEntry<?> entry : simpleExclusions) {
+            for (ItemProviderEntry<?, ?> entry : simpleExclusions) {
                 exclusions.add(entry.asItem());
             }
 
@@ -79,12 +78,12 @@ public class ModCreativeTabs {
         private static List<ItemOrdering> makeOrderings() {
             List<ItemOrdering> orderings = new ReferenceArrayList<>();
 
-            Map<ItemProviderEntry<?>, ItemProviderEntry<?>> simpleBeforeOrderings = Map.of(
+            Map<ItemProviderEntry<?, ?>, ItemProviderEntry<?, ?>> simpleBeforeOrderings = Map.of(
                     //AllItems.EMPTY_BLAZE_BURNER, AllBlocks.BLAZE_BURNER,
                     //AllItems.SCHEDULE, AllBlocks.TRACK_STATION
             );
 
-            Map<ItemProviderEntry<?>, ItemProviderEntry<?>> simpleAfterOrderings = Map.of(
+            Map<ItemProviderEntry<?, ?>, ItemProviderEntry<?, ?>> simpleAfterOrderings = Map.of(
                     //CRBlocks.CONDUCTOR_WHISTLE_FLAG, CRItems.ITEM_CONDUCTOR_CAP.get(DyeColor.RED),
                     //CRItems.REMOTE_LENS, CRBlocks.CONDUCTOR_WHISTLE_FLAG,
                     //CRBlocks.CONDUCTOR_VENT, CRItems.REMOTE_LENS,
@@ -106,7 +105,7 @@ public class ModCreativeTabs {
         private static Function<Item, ItemStack> makeStackFunc() {
             Map<Item, Function<Item, ItemStack>> factories = new Reference2ReferenceOpenHashMap<>();
 
-            Map<ItemProviderEntry<?>, Function<Item, ItemStack>> simpleFactories = Map.of(
+            Map<ItemProviderEntry<?, ?>, Function<Item, ItemStack>> simpleFactories = Map.of(
                 /*AllItems.COPPER_BACKTANK, item -> {
                     ItemStack stack = new ItemStack(item);
                     stack.getOrCreateTag().putInt("Air", BacktankUtil.maxAirWithoutEnchants());
@@ -132,10 +131,10 @@ public class ModCreativeTabs {
             };
         }
 
-        private static Function<Item, TabVisibility> makeVisibilityFunc() {
-            Map<Item, TabVisibility> visibilities = new Reference2ObjectOpenHashMap<>();
+        private static Function<Item, Boolean> makeVisibilityFunc() {
+            Map<Item, Boolean> visibilities = new Reference2ObjectOpenHashMap<>();
 
-            Map<ItemProviderEntry<?>, TabVisibility> simpleVisibilities = Map.of(
+            Map<ItemProviderEntry<?, ?>, Boolean> simpleVisibilities = Map.of(
                     //AllItems.BLAZE_CAKE_BASE, TabVisibility.SEARCH_TAB_ONLY
             );
 
@@ -144,9 +143,14 @@ public class ModCreativeTabs {
             });
 
             return item -> {
-                TabVisibility visibility = visibilities.get(item);
-                return Objects.requireNonNullElse(visibility, TabVisibility.PARENT_AND_SEARCH_TABS);
+                Boolean visibility = visibilities.get(item);
+                return Objects.requireNonNullElse(visibility, false);
+                // boolean = parentOnly
             };
+        }
+
+        @ExpectPlatform
+        public static void acceptOutput(CreativeModeTab.Output output, ItemStack item, boolean parentOnly) {
         }
 
         @Override
@@ -155,7 +159,6 @@ public class ModCreativeTabs {
             Predicate<Item> exclusionPredicate = makeExclusionPredicate();
             List<ItemOrdering> orderings = makeOrderings();
             Function<Item, ItemStack> stackFunc = makeStackFunc();
-            Function<Item, TabVisibility> visibilityFunc = makeVisibilityFunc();
             ResourceKey<CreativeModeTab> tab = this.tab.getKey();
 
             List<Item> items = new LinkedList<>();
@@ -168,16 +171,15 @@ public class ModCreativeTabs {
             items.addAll(collectItems(tab, is3d, false, exclusionPredicate));
 
             applyOrderings(items, orderings);
-            outputAll(output, items, stackFunc, visibilityFunc);
+            outputAll(output, items, stackFunc, makeVisibilityFunc());
         }
 
         private List<Item> collectBlocks(ResourceKey<CreativeModeTab> tab, Predicate<Item> exclusionPredicate) {
             List<Item> items = new ReferenceArrayList<>();
-            for (RegistryEntry<Block> entry : Missions.registrate().getAll(Registries.BLOCK)) {
+            for (RegistryEntry<Block, ?> entry : Missions.registrate().getAll(Registries.BLOCK)) {
                 if (!isInCreativeTab(entry, tab))
                     continue;
-                Item item = entry.get()
-                        .asItem();
+                Item item = getNonNullSupplierValue(entry).asItem();
                 if (item == Items.AIR)
                     continue;
                 if (!exclusionPredicate.test(item))
@@ -187,14 +189,14 @@ public class ModCreativeTabs {
             return items;
         }
 
-        private List<Item> collectItems(ResourceKey<CreativeModeTab> tab, Predicate<Item> is3d, boolean special,
-                                        Predicate<Item> exclusionPredicate) {
+        @ExpectPlatform
+        public static List<Item> collectItems(ResourceKey<CreativeModeTab> tab, Predicate<Item> is3d, boolean special, Predicate<Item> exclusionPredicate) {
             List<Item> items = new ReferenceArrayList<>();
 
-            for (RegistryEntry<Item> entry : Missions.registrate().getAll(Registries.ITEM)) {
+            for (RegistryEntry<Item, ?> entry : Missions.registrate().getAll(Registries.ITEM)) {
                 if (!isInCreativeTab(entry, tab))
                     continue;
-                Item item = entry.get();
+                Item item = getNonNullSupplierValue(entry);
                 if (item instanceof BlockItem)
                     continue;
                 if (is3d.test(item) != special)
@@ -206,7 +208,12 @@ public class ModCreativeTabs {
         }
 
         @ExpectPlatform
-        private static boolean isInCreativeTab(RegistryEntry<?> entry, ResourceKey<CreativeModeTab> tab) {
+        public static <T> T getNonNullSupplierValue(RegistryEntry<T, ?> a) {
+            throw new AssertionError();
+        }
+
+        @ExpectPlatform
+        private static boolean isInCreativeTab(RegistryEntry<?, ?> entry, ResourceKey<CreativeModeTab> tab) {
             throw new AssertionError();
         }
 
@@ -231,9 +238,9 @@ public class ModCreativeTabs {
             }
         }
 
-        private static void outputAll(CreativeModeTab.Output output, List<Item> items, Function<Item, ItemStack> stackFunc, Function<Item, TabVisibility> visibilityFunc) {
+        private static void outputAll(CreativeModeTab.Output output, List<Item> items, Function<Item, ItemStack> stackFunc, Function<Item, Boolean> visibilityFunc) {
             for (Item item : items) {
-                output.accept(stackFunc.apply(item), visibilityFunc.apply(item));
+                acceptOutput(output, stackFunc.apply(item), visibilityFunc.apply(item));
             }
         }
 

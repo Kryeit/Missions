@@ -38,7 +38,7 @@ dependencies {
     // dependencies must also be pulled in (transitively) for all classes to be remapped properly.
     // All dependencies except Flywheel and Registrate are NOT safe to use!
     // Flywheel and Registrate must also be used carefully due to differences across loaders.
-    modImplementation("com.simibubi.create:create-fabric:${create_fabric_version}")
+    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
 
     implementation 'net.luckperms:api:5.4'
 }

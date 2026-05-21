@@ -22,7 +22,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -85,7 +85,7 @@ public class MissionManager {
         UUID uuid = player.getUUID();
         Map<String, Integer> rewards = STORAGE.getUnclaimedRewards(uuid);
         for (Map.Entry<String, Integer> entry : rewards.entrySet()) {
-            ItemStack itemStack = Utils.getItem(new ResourceLocation(entry.getKey()));
+            ItemStack itemStack = Utils.getItem(ResourceLocation.parse(entry.getKey()));
             itemStack.setCount(entry.getValue());
             MinecraftServerSupplier.getServer().execute(() -> Utils.giveItem(itemStack, player));
             player.sendSystemMessage(Component.translatable("missions.menu.main.reward",

@@ -61,7 +61,7 @@ public class ConfigReader {
             JSONObject itemObj = jsonArray.getObject(i);
             itemObj.keySet().forEach(key -> {
                 int quantity = Integer.parseInt(itemObj.getString(key));
-                ResourceLocation location = new ResourceLocation(key);
+                ResourceLocation location = ResourceLocation.parse(key);
                 ItemStack itemStack = Utils.getItem(location, quantity);
                 items.add(itemStack);
             });

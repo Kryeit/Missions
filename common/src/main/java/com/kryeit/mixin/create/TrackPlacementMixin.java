@@ -24,6 +24,6 @@ public class TrackPlacementMixin {
         Player player = level.getNearestPlayer(targetPos1.getX(), targetPos1.getY(), targetPos1.getZ(), 10, false);
         if (player == null) return;
 
-        MissionManager.incrementMission(player.getUUID(), PlaceMission.class, new ResourceLocation("create", "track"), tracksPlaced);
+        MissionManager.incrementMission(player.getUUID(), PlaceMission.class, ResourceLocation.fromNamespaceAndPath("create", "track"), tracksPlaced);
     }
 }

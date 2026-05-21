@@ -5,10 +5,7 @@ import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
 import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.config.Range;
 import com.kryeit.utils.Utils;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtIo;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.LevelResource;
@@ -30,7 +27,7 @@ public class DataStorage implements AutoCloseable {
                 data = new CompoundTag();
                 save();
             } else {
-                data = NbtIo.readCompressed(FILE);
+                data = NbtIo.readCompressed(FILE.toPath(), NbtAccounter.unlimitedHeap());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -39,7 +36,7 @@ public class DataStorage implements AutoCloseable {
 
     public void save() {
         try {
-            NbtIo.writeCompressed(data, FILE);
+            NbtIo.writeCompressed(data, FILE.toPath());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -77,7 +74,7 @@ public class DataStorage implements AutoCloseable {
     public void setCompleted(UUID player, ResourceLocation item, String missionTypeID) {
         for (Tag tag : getActiveMissionsTag(player)) {
             CompoundTag compound = (CompoundTag) tag;
-            if (new ResourceLocation(compound.getString("item")).equals(item) && compound.getString("mission_id").equals(missionTypeID) && !compound.getBoolean("completed")) {
+            if (ResourceLocation.parse(compound.getString("item")).equals(item) && compound.getString("mission_id").equals(missionTypeID) && !compound.getBoolean("completed")) {
                 compound.putBoolean("completed", true);
                 break;
             }
@@ -257,7 +254,7 @@ public class DataStorage implements AutoCloseable {
         }
 
         private ActiveMission(CompoundTag tag) {
-            this(new ResourceLocation(tag.getString("item")),
+            this(ResourceLocation.parse(tag.getString("item")),
                     tag.getBoolean("completed"),
                     tag.getString("mission_id"),
                     tag.getInt("required_amount"),

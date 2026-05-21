@@ -71,7 +71,7 @@ public class Missions {
     }
 
     public static ResourceLocation asResource(String key) {
-        return new ResourceLocation(MOD_ID, key);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, key);
     }
 
     public static void handlePlayerLogin(Player player) {

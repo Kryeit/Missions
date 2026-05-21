@@ -7,10 +7,12 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.crafter.MechanicalCraftingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -27,8 +29,9 @@ public class MixinUtils {
     }
 
     public static boolean isCompactingRecipe(Recipe<?> recipe) {
+        ResourceLocation key = BuiltInRegistries.RECIPE_SERIALIZER.getKey(recipe.getSerializer());
         return (recipe instanceof CraftingRecipe && !(recipe instanceof MechanicalCraftingRecipe) && canCompress(recipe)
-                && !AllRecipeTypes.shouldIgnoreInAutomation(recipe))
+                && !AllRecipeTypes.shouldIgnoreInAutomation(new RecipeHolder<>(key, recipe)))
                || recipe.getType() == AllRecipeTypes.COMPACTING.getType();
     }
 

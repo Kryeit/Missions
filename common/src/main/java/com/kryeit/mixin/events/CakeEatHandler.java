@@ -21,6 +21,6 @@ public class CakeEatHandler {
     @Inject(method = "eat", at = @At("HEAD"))
     private static void onEat(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState, Player player, CallbackInfoReturnable<InteractionResult> cir) {
         if (!(player instanceof ServerPlayer serverPlayer)) return;
-        MissionManager.incrementMission(serverPlayer.getUUID(), EatMission.class, new ResourceLocation("minecraft", "cake"), 1);
+        MissionManager.incrementMission(serverPlayer.getUUID(), EatMission.class, ResourceLocation.fromNamespaceAndPath("minecraft", "cake"), 1);
     }
 }

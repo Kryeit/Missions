@@ -2,8 +2,9 @@ package com.kryeit.mixin;
 
 import com.kryeit.packet.ServerPacketHandler;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.game.ServerGamePacketListener;
-import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.ServerCommonPacketListener;
+import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
@@ -24,9 +25,13 @@ public abstract class ServerboundCustomPayloadMixin {
     @Final
     private ResourceLocation identifier;
 
-    @Inject(method = "handle(Lnet/minecraft/network/protocol/game/ServerGamePacketListener;)V", at = @At("HEAD"), cancellable = true)
-    public void handle(ServerGamePacketListener serverGamePacketListener, CallbackInfo ci) {
-        if (!(serverGamePacketListener instanceof ServerGamePacketListenerImpl packetListener)) return;
+    @Shadow
+    @Final
+    private CustomPacketPayload payload;
+
+    @Inject(method = "handle(Lnet/minecraft/network/protocol/common/ServerCommonPacketListener;)V", at = @At("HEAD"), cancellable = true)
+    public void handle(ServerCommonPacketListener serverCommonPacketListener, CallbackInfo ci) {
+        if (!(serverCommonPacketListener instanceof ServerGamePacketListenerImpl packetListener)) return;
         ServerPlayer player = packetListener.getPlayer();
 
         boolean handled = ServerPacketHandler.handle(identifier, player, data);

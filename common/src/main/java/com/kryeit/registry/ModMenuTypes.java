@@ -12,8 +12,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 
 public class ModMenuTypes {
 
-    public static final MenuEntry<MechanicalExchangerMenu> MECHANICAL_EXCHANGER_MENU =
-            register("mechanical_exchanger_menu", MechanicalExchangerMenu::new, () -> MechanicalExchangerScreen::new);
+    public static final MenuEntry<MechanicalExchangerMenu> MECHANICAL_EXCHANGER_MENU = register("mechanical_exchanger_menu", MechanicalExchangerMenu::new, () -> MechanicalExchangerScreen::new);
 
 
     private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> register(

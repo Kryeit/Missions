@@ -42,7 +42,7 @@ import java.util.function.Predicate;
 
 public class Utils {
     private static final Random RANDOM = new Random();
-    private static final ItemStack DEFAULT_SPAWN_EGG = BuiltInRegistries.ITEM.get(new ResourceLocation("player_head")).getDefaultInstance();
+    private static final ItemStack DEFAULT_SPAWN_EGG = BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace("player_head")).getDefaultInstance();
 
     public static int getDay() {
         return (int) (System.currentTimeMillis() / 86_400_000);
@@ -170,7 +170,7 @@ public class Utils {
         String itemName = BuiltInRegistries.ITEM.getKey(item.getItem()).toString();
         String liquidName = itemName.replace("_bucket", "");
 
-        return getFluidName(new ResourceLocation(liquidName));
+        return getFluidName(ResourceLocation.withDefaultNamespace(liquidName));
     }
 
     public static String getFluidName(ResourceLocation input) {
