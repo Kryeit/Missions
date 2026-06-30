@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=north,fill_level=0": { "model": "missions:block/jar_of_tips_empty" },
+    "facing=east,fill_level=0": { "model": "missions:block/jar_of_tips_empty", "y": 90 },
+    "facing=south,fill_level=0": { "model": "missions:block/jar_of_tips_empty", "y": 180 },
+    "facing=west,fill_level=0": { "model": "missions:block/jar_of_tips_empty", "y": 270 },
+
+    "facing=north,fill_level=1": { "model": "missions:block/jar_of_tips_filled_1" },
+    "facing=east,fill_level=1": { "model": "missions:block/jar_of_tips_filled_1", "y": 90 },
+    "facing=south,fill_level=1": { "model": "missions:block/jar_of_tips_filled_1", "y": 180 },
+    "facing=west,fill_level=1": { "model": "missions:block/jar_of_tips_filled_1", "y": 270 },
+
+    "facing=north,fill_level=2": { "model": "missions:block/jar_of_tips_filled_2" },
+    "facing=east,fill_level=2": { "model": "missions:block/jar_of_tips_filled_2", "y": 90 },
+    "facing=south,fill_level=2": { "model": "missions:block/jar_of_tips_filled_2", "y": 180 },
+    "facing=west,fill_level=2": { "model": "missions:block/jar_of_tips_filled_2", "y": 270 },
+
+    "facing=north,fill_level=3": { "model": "missions:block/jar_of_tips_filled_3" },
+    "facing=east,fill_level=3": { "model": "missions:block/jar_of_tips_filled_3", "y": 90 },
+    "facing=south,fill_level=3": { "model": "missions:block/jar_of_tips_filled_3", "y": 180 },
+    "facing=west,fill_level=3": { "model": "missions:block/jar_of_tips_filled_3", "y": 270 }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "com.kryeit.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "missions.refmap.json",
+  "mixins": [
+    "MinecraftServerMixin",
+    "StatsCounterMixin",
+    "FallingBlockEntityMixin",
+    "events.CakeEatHandler",
+    "events.EatHandler",
+    "events.FeedHandler",
+    "interfaces.BlockEntityAccessor",
+    "create.AbstractContraptionEntityMixin",
+    "create.BasinOperatingBlockEntityMixin",
+    "create.BeltMovementHandlerMixin",
+    "create.BlockBreakingKineticBlockEntityMixin",
+    "create.BlockBreakingMovementBehaviourMixin",
+    "create.CrushingWheelControllerBlockEntityMixin",
+    "create.DivingHelmetMixin",
+    "create.HarvesterMovementBehaviourMixin",
+    "create.MechanicalCrafterBlockEntityMixin",
+    "create.MechanicalPressBlockEntityMixin",
+    "create.MillstoneBlockEntityMixin",
+    "create.PlacementHelperMixin",
+    "create.SawBlockEntityMixin",
+    "create.TrackPlacementMixin",
+    "create.TrainMixin",
+    "create.TrainRelocationPacketMixin",
+    "create.TreeMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

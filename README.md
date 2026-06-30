@@ -16,7 +16,10 @@ Create: Missions is a Create addon focused for Create mod servers. It will also 
 
 # What's this addon?
 It works by giving 10 random missions per player per week. These missions can be vanilla missions like "Break X Veridium" or Create mod related like "Drive a train for 4 km with at least 2 passengers". You can also reroll the missions, and claim prices by completing them.
-**Open the mission GUI pressing H key (by default) or using `/missions` command**
+
+**Open the missions GUI with `/missions`. Convert coins with `/missions exchange`.**
+
+> **This branch targets NeoForge 1.21.1 and is fully server-sided.** It adds no blocks, items, keybinds or client code: everything happens through the `/missions` command and basic vanilla inventory GUIs, so **vanilla clients can join without installing anything**. Create (NeoForge) is required on the server. Optional integrations: Numismatics (currency) and LuckPerms (per-player free rerolls via the `missions.freerolls` permission).
 
 # Mission types:
 As time goes on, more missions will be added. Some missions can have lots of variation like breaking a block, while others are simpler like walking.
@@ -88,15 +91,22 @@ You can add as many item id's to the "missions" bracket, and add as many titles 
 
 </details>
 <details>
-<summary>Mechanical Exchanger</summary>
+<summary>Coin Exchange</summary>
 
-<p align="center">
-  <img width="200" src="https://cdn.modrinth.com/data/KN33kvHF/images/c3e00905e1082e33477a90274f27b09ec4919f3a.png">
+Run `/missions exchange` (or click the Coin Exchange button in the `/missions` GUI) to open a basic
+inventory GUI. Put coins in the input slot and click **▲ Combine to larger** / **▼ Split to smaller**
+to convert between denominations (e.g. 16 iron ⇄ 1 gold, using the rates from `currency.json`).
+Anything you placed is returned to you when the GUI closes.
 
-The Mechanical Exchanger doesn't have a crafting recipe, and can only be obtained with a 5% chance (default) after completing a hard mission.
+This replaces the old Mechanical Exchanger block, which required client-side rendering and so cannot
+exist on a server-only mod.
+</details>
 
-It lets you to exchange currencies from smaller to bigger currency. Depends on which rotation direction the shaft has. It also requires 100 rpm, and consumes much more SU.
-</p>
+<details>
+<summary>All-missions bonus</summary>
+
+When a player completes all 10 of their active missions, they receive a bonus item. Configure it in
+`config\missions\config.json` via `all-missions-reward` (default `minecraft:diamond_block`).
 </details>
 </details>
 

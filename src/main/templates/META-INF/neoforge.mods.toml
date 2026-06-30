@@ -1,0 +1,56 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+issueTrackerURL = "https://github.com/Kryeit/Missions/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+logoFile = "logo.png"
+description = '''
+Missions and rewards, a Create addon for NeoForge 1.21.1.
+Adds a weekly mission system with coin rewards, the Mechanical Exchanger and the Jar of Tips.
+'''
+
+# Server-side gameplay hooks (vanilla + Create internals).
+[[mixins]]
+config = "missions.mixins.json"
+
+[[dependencies.${mod_id}]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neo_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "create"
+type = "required"
+versionRange = "${create_version_range}"
+ordering = "AFTER"
+side = "BOTH"
+
+# Optional: when present, coin denominations are read from numismatics/currency.json.
+[[dependencies.${mod_id}]]
+modId = "numismatics"
+type = "optional"
+versionRange = "[0.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+# Optional: per-player free-reroll permissions via the `missions.freerolls` node.
+[[dependencies.${mod_id}]]
+modId = "luckperms"
+type = "optional"
+versionRange = "[${luckperms_version},)"
+ordering = "AFTER"
+side = "BOTH"
