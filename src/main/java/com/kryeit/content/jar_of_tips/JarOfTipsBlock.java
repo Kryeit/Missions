@@ -2,7 +2,7 @@ package com.kryeit.content.jar_of_tips;
 
 import com.kryeit.coins.Coins;
 import com.kryeit.registry.ModBlockEntities;
-import com.kryeit.registry.ModItems;
+import com.kryeit.registry.ModBlocks;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -171,7 +171,7 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
             return;
         }
 
-        ItemStack jarItem = new ItemStack(ModItems.JAR_OF_TIPS.get());
+        ItemStack jarItem = new ItemStack(ModBlocks.JAR_OF_TIPS.asItem());
         JarOfTipsItem.initInventory(jarItem, jar.inventory);
         if (jar.getCustomName() != null) {
             jarItem.set(DataComponents.CUSTOM_NAME, jar.getCustomName());
@@ -184,7 +184,7 @@ public class JarOfTipsBlock extends FallingBlock implements IBE<JarOfTipsBlockEn
         if (!world.isClientSide && player.isCreative()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof JarOfTipsBlockEntity jar && !jar.isEmpty()) {
-                ItemStack jarItem = new ItemStack(ModItems.JAR_OF_TIPS.get());
+                ItemStack jarItem = new ItemStack(ModBlocks.JAR_OF_TIPS.asItem());
                 JarOfTipsItem.initInventory(jarItem, jar.inventory);
                 if (jar.getCustomName() != null) {
                     jarItem.set(DataComponents.CUSTOM_NAME, jar.getCustomName());

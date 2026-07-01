@@ -18,8 +18,8 @@ public class RewardsButton extends Button {
     private static final ResourceLocation OPEN_CHEST_TEXTURE = Missions.asResource("textures/gui/open_christmas_chest.png");
     private boolean rewardsAvailable;
 
-    public RewardsButton(int x, int y, final boolean rewardsAvailable) {
-        super(x, y, 100, 20, REWARDS, button -> {}, DEFAULT_NARRATION);
+    public RewardsButton(int x, int y, int width, final boolean rewardsAvailable) {
+        super(x, y, width, 20, REWARDS, button -> {}, DEFAULT_NARRATION);
 
         this.rewardsAvailable = rewardsAvailable;
     }
@@ -34,7 +34,8 @@ public class RewardsButton extends Button {
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         super.renderWidget(guiGraphics, mouseX, mouseY, delta);
 
-        int textureX = getX() + width / 2 - 46;
+        // Left-anchored so the chest icon stays on the button at any (adaptive) width.
+        int textureX = getX() + 6;
         int textureY = getY() + height / 2 - 19;
         guiGraphics.blit(rewardsAvailable ? CHEST_TEXTURE : OPEN_CHEST_TEXTURE, textureX, textureY, 21, 28, 35, 3, 185, 250, 256, 256);
 

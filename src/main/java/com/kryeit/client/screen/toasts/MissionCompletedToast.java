@@ -1,6 +1,7 @@
 package com.kryeit.client.screen.toasts;
 
 import com.kryeit.client.ClientMissionData.ClientsideActiveMission;
+import com.kryeit.client.screen.button.MissionButton;
 import com.kryeit.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -52,16 +53,8 @@ public class MissionCompletedToast implements Toast {
     }
 
     public void renderItem(GuiGraphics guiGraphics) {
-        renderFrame(guiGraphics);
+        MissionButton.drawFrame(guiGraphics, 8, 8, mission.difficulty(), true);
         guiGraphics.renderItem(mission.previewItem(), 8, 8);
-    }
-
-    private void renderFrame(GuiGraphics guiGraphics) {
-        int color = 0xFF000000 | mission.difficulty().color();
-        guiGraphics.fill(7, 7, 25, 8, color);
-        guiGraphics.fill(7, 24, 25, 25, color);
-        guiGraphics.fill(7, 7, 8, 25, color);
-        guiGraphics.fill(24, 7, 25, 25, color);
     }
 
     public static void show(ClientsideActiveMission mission) {

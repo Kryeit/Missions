@@ -2,6 +2,7 @@ package com.kryeit.client.screen.button;
 
 import com.kryeit.client.ClientMissionData;
 import com.kryeit.client.screen.MissionScreen;
+import com.kryeit.missions.MissionDifficulty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -22,8 +23,8 @@ public class MissionButton extends Button {
 
     protected final ClientMissionData.ClientsideActiveMission mission;
 
-    public MissionButton(int x, int y, Component message, ClientMissionData.ClientsideActiveMission mission, OnPress onPress) {
-        super(x, y, 200, 20, message, onPress, Button.DEFAULT_NARRATION);
+    public MissionButton(int x, int y, int width, Component message, ClientMissionData.ClientsideActiveMission mission, OnPress onPress) {
+        super(x, y, width, 20, message, onPress, Button.DEFAULT_NARRATION);
         this.completed = mission.isCompleted();
         this.item = mission.previewItem();
         this.mission = mission;
@@ -41,7 +42,9 @@ public class MissionButton extends Button {
     public void drawText(GuiGraphics guiGraphics) {
         int color = completed ? 0x29413c : mission.difficulty().color();
         Font font = Minecraft.getInstance().font;
-        guiGraphics.drawCenteredString(font, this.getMessage(), this.getX() + this.width / 2 + 11, this.getY() + (this.height - 8) / 2, color);
+        // Center the title in the space to the right of the item frame (which ends around x=25).
+        int textCenterX = this.getX() + (27 + this.width) / 2;
+        guiGraphics.drawCenteredString(font, this.getMessage(), textCenterX, this.getY() + (this.height - 8) / 2, color);
     }
 
     public void renderButtonTexture(GuiGraphics guiGraphics) {
@@ -51,22 +54,24 @@ public class MissionButton extends Button {
     }
 
     public void renderItem(GuiGraphics guiGraphics) {
-        int itemX = getX() + width / 2 - 92;
+        // Fixed 8px from the left edge (independent of button width).
+        int itemX = getX() + 8;
         int itemY = getY() + height / 2 - 8;
-        renderFrame(guiGraphics, itemX, itemY);
+        drawFrame(guiGraphics, itemX, itemY, mission.difficulty(), isHovered || completed);
         guiGraphics.renderItem(item, itemX, itemY);
     }
 
-    /** Draws a thin difficulty-colored frame around the mission item (green once completed). */
-    private void renderFrame(GuiGraphics guiGraphics, int itemX, int itemY) {
-        int color = 0xFF000000 | (completed ? 0x29C95B : mission.difficulty().color());
-        int x0 = itemX - 1;
-        int y0 = itemY - 1;
-        int x1 = itemX + 17;
-        int y1 = itemY + 17;
-        guiGraphics.fill(x0, y0, x1, y0 + 1, color);
-        guiGraphics.fill(x0, y1 - 1, x1, y1, color);
-        guiGraphics.fill(x0, y0, x0 + 1, y1, color);
-        guiGraphics.fill(x1 - 1, y0, x1, y1, color);
+    /** Vanilla advancement frame around a 16x16 item: task=easy, goal=normal, challenge=hard. */
+    public static void drawFrame(GuiGraphics guiGraphics, int itemX, int itemY, MissionDifficulty difficulty, boolean obtained) {
+        guiGraphics.blitSprite(frameSprite(difficulty, obtained), itemX - 5, itemY - 5, 26, 26);
+    }
+
+    public static ResourceLocation frameSprite(MissionDifficulty difficulty, boolean obtained) {
+        String type = switch (difficulty) {
+            case EASY -> "task";
+            case NORMAL -> "goal";
+            case HARD -> "challenge";
+        };
+        return ResourceLocation.withDefaultNamespace("advancements/" + type + "_frame_" + (obtained ? "obtained" : "unobtained"));
     }
 }

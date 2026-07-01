@@ -49,12 +49,18 @@ public class MissionScreen extends Screen {
     }
 
     private void addMissions(ClientMissionData data) {
-        int buttonWidth = 200;
         int buttonHeight = 20;
-        int spacing = 5; // Space between buttons
+        int rowSpacing = 5;
+        int margin = 10;
+        int colGap = Math.max(6, this.width / 40);
 
-        int leftX = (this.width / 2 - buttonWidth - spacing);
-        int rightX = (this.width / 2 + spacing);
+        // Adaptive button width: caps at a comfortable 160 (so it is not huge) but shrinks to fit
+        // narrow screens, and the two-column group is centered, so it respects the GUI scale setting.
+        int avail = this.width - 2 * margin - colGap;
+        int buttonWidth = Math.max(80, Math.min(160, avail / 2));
+        int groupWidth = 2 * buttonWidth + colGap;
+        int leftX = Math.max(margin, (this.width - groupWidth) / 2);
+        int rightX = leftX + buttonWidth + colGap;
 
         List<ClientsideActiveMission> activeMissions = data.activeMissions();
 
@@ -64,16 +70,17 @@ public class MissionScreen extends Screen {
         }
 
         int missionsPerColumn = 5;
+        int totalH = missionsPerColumn * buttonHeight + (missionsPerColumn - 1) * rowSpacing;
 
         for (int i = 0; i < missionsPerColumn; i++) {
-            int y = (this.height - (missionsPerColumn * buttonHeight + (missionsPerColumn - 1) * spacing)) / 2 + i * (buttonHeight + spacing);
+            int y = (this.height - totalH) / 2 + i * (buttonHeight + rowSpacing);
 
             // Use the mission's item as the button's title
             ClientsideActiveMission leftColumnMission = activeMissions.get(i);
             Component leftColumnTitle = leftColumnMission.titleString();
 
             // Left column
-            this.addRenderableWidget(createMissionButton(leftX, y, leftColumnTitle, leftColumnMission, i, data.rerollPrice()));
+            this.addRenderableWidget(createMissionButton(leftX, y, buttonWidth, leftColumnTitle, leftColumnMission, i, data.rerollPrice()));
 
             if (i + missionsPerColumn < activeMissions.size()) {
                 // There's a mission for the right column
@@ -81,7 +88,7 @@ public class MissionScreen extends Screen {
                 Component rightColumnTitle = rightColumnMission.titleString();
 
                 // Right column
-                this.addRenderableWidget(createMissionButton(rightX, y, rightColumnTitle, rightColumnMission, i + missionsPerColumn, data.rerollPrice()));
+                this.addRenderableWidget(createMissionButton(rightX, y, buttonWidth, rightColumnTitle, rightColumnMission, i + missionsPerColumn, data.rerollPrice()));
             }
         }
 
@@ -89,8 +96,8 @@ public class MissionScreen extends Screen {
         createRewardButton(data.hasUnclaimedRewards());
     }
 
-    private MissionButton createMissionButton(int x, int y, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
-        return new MissionButton(x, y, title, mission, button -> {
+    private MissionButton createMissionButton(int x, int y, int width, Component title, ClientsideActiveMission mission, int index, ItemStack rerollPrice) {
+        return new MissionButton(x, y, width, title, mission, button -> {
             if(!mission.isCompleted() && rerollPrice.getItem() != Items.AIR) {
                 Minecraft.getInstance().setScreen(new MissionRerollScreen(index, rerollPrice, mission.difficulty()));
             }
@@ -110,7 +117,12 @@ public class MissionScreen extends Screen {
     }
 
     public void renderTitle(GuiGraphics guiGraphics) {
-        guiGraphics.blit(MISSIONS_TITLE, (this.width/2) - 100, this.height/35, 200, 44, 0, 0, 256, 56, 256, 256);
+        int margin = 10;
+        int titleW = Math.min(200, this.width - 2 * margin);
+        int titleH = titleW * 44 / 200; // preserve the 200x44 aspect
+        int titleX = (this.width - titleW) / 2;
+        int titleY = this.height / 35;
+        guiGraphics.blit(MISSIONS_TITLE, titleX, titleY, titleW, titleH, 0, 0, 256, 56, 256, 256);
     }
 
     public static List<Component> getTooltip(ClientsideActiveMission mission) {
@@ -185,16 +197,23 @@ public class MissionScreen extends Screen {
         return false;
     }
 
+    /** Width of the close/rewards buttons flanking the centered info button (shrinks on narrow screens). */
+    private int bottomSideButtonWidth() {
+        int margin = 10, gap = 6, infoW = 20;
+        return Math.max(70, Math.min(100, (this.width - 2 * margin - infoW - 2 * gap) / 2));
+    }
+
     public void createCloseButton() {
-        int spacing = 5;
-        int buttonWidth = 100;
+        int gap = 6;
+        int infoW = 20;
         int buttonHeight = 20;
         int bottomPadding = 20;
-        int x = (this.width / 2 - buttonWidth - spacing - 20);
+        int sideBtnW = bottomSideButtonWidth();
+        int x = this.width / 2 - infoW / 2 - gap - sideBtnW;
         int y = this.height - buttonHeight - bottomPadding;
 
         this.addRenderableWidget(Button.builder(CLOSE, button -> Minecraft.getInstance().setScreen(null))
-                .bounds(x, y, buttonWidth, buttonHeight)
+                .bounds(x, y, sideBtnW, buttonHeight)
                 .build());
     }
 
@@ -209,12 +228,14 @@ public class MissionScreen extends Screen {
     }
 
     public void createRewardButton(boolean rewardsAvailable) {
-        int spacing = 5;
+        int gap = 6;
+        int infoW = 20;
         int buttonHeight = 20;
         int bottomPadding = 20;
-        int x = this.width / 2 + spacing + 20;
+        int sideBtnW = bottomSideButtonWidth();
+        int x = this.width / 2 + infoW / 2 + gap;
         int y = this.height - buttonHeight - bottomPadding;
 
-        this.addRenderableWidget(new RewardsButton(x, y, rewardsAvailable));
+        this.addRenderableWidget(new RewardsButton(x, y, sideBtnW, rewardsAvailable));
     }
 }

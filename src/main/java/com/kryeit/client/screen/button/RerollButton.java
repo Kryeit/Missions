@@ -39,6 +39,7 @@ public class RerollButton extends Button {
     public void renderItem(GuiGraphics guiGraphics) {
         int x = getX() + width / 2 - 42;
         int y = getY() + height / 2 - 8;
+        MissionButton.drawFrame(guiGraphics, x, y, difficulty, false);
         guiGraphics.renderItem(rerollPrice, x, y);
         guiGraphics.renderItemDecorations(Minecraft.getInstance().font, rerollPrice, x, y);
     }

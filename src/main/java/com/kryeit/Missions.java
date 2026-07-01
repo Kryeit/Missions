@@ -26,7 +26,6 @@ import com.kryeit.registry.ModBlockEntities;
 import com.kryeit.registry.ModBlocks;
 import com.kryeit.registry.ModCreativeTabs;
 import com.kryeit.registry.ModEntityTypes;
-import com.kryeit.registry.ModItems;
 import com.kryeit.registry.ModMenuTypes;
 import com.kryeit.utils.Lang;
 import com.kryeit.utils.Utils;
@@ -76,7 +75,6 @@ public class Missions {
         REGISTRATE.defaultCreativeTab(ModCreativeTabs.getBaseTabKey());
         ModBlocks.register();
         ModBlockEntities.register();
-        ModItems.register();
         ModMenuTypes.register();
         ModEntityTypes.register();
         REGISTRATE.registerEventListeners(modEventBus);

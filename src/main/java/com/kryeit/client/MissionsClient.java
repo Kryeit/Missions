@@ -2,6 +2,7 @@ package com.kryeit.client;
 
 import com.kryeit.Missions;
 import com.kryeit.content.exchanger.MechanicalExchangerRenderer;
+import com.kryeit.content.jar_of_tips.JarOfTipsFallingBlockRenderer;
 import com.kryeit.content.jar_of_tips.JarOfTipsProjectileRenderer;
 import com.kryeit.content.jar_of_tips.JarOfTipsRenderer;
 import com.kryeit.registry.ModBlockEntities;
@@ -30,6 +31,7 @@ public class MissionsClient {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntityTypes.JAR_OF_TIPS_PROJECTILE.get(), JarOfTipsProjectileRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.JAR_OF_TIPS_FALLING_BLOCK.get(), JarOfTipsFallingBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.JAR_OF_TIPS.get(), JarOfTipsRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.MECHANICAL_EXCHANGER.get(), MechanicalExchangerRenderer::new);
     }

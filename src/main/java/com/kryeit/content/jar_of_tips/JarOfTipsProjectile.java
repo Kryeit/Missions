@@ -1,7 +1,7 @@
 package com.kryeit.content.jar_of_tips;
 
+import com.kryeit.registry.ModBlocks;
 import com.kryeit.registry.ModEntityTypes;
-import com.kryeit.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundEvents;
@@ -27,7 +27,7 @@ public class JarOfTipsProjectile extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return ModItems.JAR_OF_TIPS.get();
+        return ModBlocks.JAR_OF_TIPS.asItem();
     }
 
     public JarOfTipsProjectile(Player player, Level level) {
