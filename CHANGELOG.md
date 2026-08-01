@@ -1,3 +1,7 @@
+# 0.5.2
+- Added Chain Conveyor Ride mission
+- Support for Fabricators on the craft mission
+
 # 0.4.8
 - Fix feed mission crashing clients (by swzo)
 - Improved Belt mission performance (by swzo)
