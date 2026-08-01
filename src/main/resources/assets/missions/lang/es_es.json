@@ -34,6 +34,7 @@
   "missions.menu.main.tooltip.task.relocate": "Mover tu tren durante %s bloques... reubicándolo con una llave inglesa",
   "missions.menu.main.tooltip.task.feed": "Alimentar %s de %s a un animal",
   "missions.menu.main.tooltip.task.belt-walk": "Caminar en una cinta mecánica durante %s bloques",
+  "missions.menu.main.tooltip.task.chain-ride": "Monta en una cadena transportadora por %s metros",
   "missions.menu.main.tooltip.difficulty": "Dificultad: %s",
   "missions.menu.main.tooltip.itemRequired": "Objeto requerido: %s",
   "missions.menu.main.tooltip.reward": "Recompensa: %s %s(s)",

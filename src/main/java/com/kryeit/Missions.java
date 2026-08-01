@@ -8,6 +8,7 @@ import com.kryeit.missions.config.ConfigReader;
 import com.kryeit.missions.mission_types.StatisticMission;
 import com.kryeit.missions.mission_types.create.CrushMission;
 import com.kryeit.missions.mission_types.create.CutMission;
+import com.kryeit.missions.mission_types.create.ChainConveyorRideMission;
 import com.kryeit.missions.mission_types.create.MillMission;
 import com.kryeit.missions.mission_types.create.PressMission;
 import com.kryeit.missions.mission_types.create.basin.CompactMission;
@@ -125,6 +126,9 @@ public class Missions {
         // Basin
         MissionTypeRegistry.INSTANCE.register(new CompactMission());
         MissionTypeRegistry.INSTANCE.register(new MixMission());
+
+        // Chain conveyor (Create 6)
+        MissionTypeRegistry.INSTANCE.register(new ChainConveyorRideMission());
 
         // Train
         MissionTypeRegistry.INSTANCE.register(new TrainDriverMission());

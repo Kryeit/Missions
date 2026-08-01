@@ -720,6 +720,24 @@
             "amount": "20-40"
           }
         ]
+      },
+      {
+        "items": {
+          "crafter": "10-25",
+          "create:packager": "6-20",
+          "create:chain_conveyor": "10-30"
+        },
+        "titles": [
+          "Automated assembly",
+          "Logistics revolution",
+          "Autocrafter online"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "20-50"
+          }
+        ]
       }
     ]
   },
@@ -788,7 +806,8 @@
       },
       {
         "items": {
-          "create:dough": "200-600"
+          "create:dough": "200-600",
+          "create:pulp": "200-600"
         },
         "titles": [
           "Baker",
@@ -833,7 +852,9 @@
           "snow_block": "200-600",
           "clay": "40-120",
           "dried_kelp_block": "100-300",
-          "sandstone": "80-150"
+          "sandstone": "80-150",
+          "create:bar_of_chocolate": "40-120",
+          "create:blaze_cake_base": "20-60"
         },
         "titles": [
           "Resource compression",
@@ -893,7 +914,8 @@
           "create:iron_sheet": "150-350",
           "create:copper_sheet": "100-300",
           "create:brass_sheet": "20-60",
-          "create:golden_sheet": "30-80"
+          "create:golden_sheet": "30-80",
+          "create:cardboard": "100-300"
         },
         "titles": [
           "Pressing metals",
@@ -1279,6 +1301,23 @@
           {
             "item": "minecraft:diamond",
             "amount": "30-60"
+          }
+        ]
+      },
+      {
+        "items": {
+          "breeze": "8-20",
+          "bogged": "10-30"
+        },
+        "titles": [
+          "Trial chamber sweep",
+          "New blood",
+          "1.21 threats"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "50-80"
           }
         ]
       }
@@ -1817,6 +1856,27 @@
           {
             "item": "minecraft:diamond",
             "amount": "40-80"
+          }
+        ]
+      }
+    ]
+  },
+  "chain-ride": {
+    "weight": 1,
+    "missions": [
+      {
+        "items": {
+          "missions:distance": "500-1500"
+        },
+        "titles": [
+          "Hang in there",
+          "Ride the line",
+          "Conveyor commuter"
+        ],
+        "rewards": [
+          {
+            "item": "minecraft:diamond",
+            "amount": "60-110"
           }
         ]
       }
