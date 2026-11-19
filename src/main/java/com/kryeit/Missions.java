@@ -42,7 +42,10 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,6 +84,7 @@ public class Missions {
         REGISTRATE.registerEventListeners(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::registerCapabilities);
 
         // Server-side gameplay event handlers + the /missions command live on the game bus.
         NeoForge.EVENT_BUS.register(com.kryeit.event.MissionEvents.class);
@@ -91,6 +95,10 @@ public class Missions {
     private void commonSetup(final FMLCommonSetupEvent event) {
         readConfig();
         event.enqueueWork(ModBlocks::registerStresses);
+    }
+
+    private void registerCapabilities(final RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.MECHANICAL_EXCHANGER.get(), SidedInvWrapper::new);
     }
 
     public static ResourceLocation asResource(String key) {
