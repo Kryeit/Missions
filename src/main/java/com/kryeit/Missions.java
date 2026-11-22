@@ -1,5 +1,6 @@
 package com.kryeit;
 
+import com.kryeit.content.exchanger.MechanicalExchangerItemHandler;
 import com.kryeit.missions.MissionDifficulty;
 import com.kryeit.missions.MissionManager;
 import com.kryeit.missions.MissionType;
@@ -45,7 +46,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,7 +98,7 @@ public class Missions {
     }
 
     private void registerCapabilities(final RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.MECHANICAL_EXCHANGER.get(), SidedInvWrapper::new);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.MECHANICAL_EXCHANGER.get(), (be, side) -> new MechanicalExchangerItemHandler(be));
     }
 
     public static ResourceLocation asResource(String key) {
